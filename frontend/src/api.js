@@ -42,6 +42,10 @@ export const api = {
   deleteHistory:   (id)              => fetch('/api/ai/history/' + id, { method: 'DELETE' }).then(r => r.json()),
 }
 
+export function streamLinkSuggestions(slug, model, onChunk, onDone) {
+  return streamAI(`/ai/link-suggestions/${slug}`, { model }, onChunk, onDone)
+}
+
 export function streamChat(messages, model, withContext, onChunk, onDone, postSlug = '') {
   return streamAI('/ai/chat', { messages, model, with_context: withContext, post_slug: postSlug }, onChunk, onDone)
 }

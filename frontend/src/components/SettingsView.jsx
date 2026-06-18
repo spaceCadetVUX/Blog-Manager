@@ -100,27 +100,29 @@ const API_KEYS = [
 ]
 
 function ApiKeyRow({ cfg }) {
-  const [value, setValue]     = useState('')
+  const [input, setInput]     = useState('')
+  const [isSet, setIsSet]     = useState(false)
   const [saved, setSaved]     = useState(false)
   const [cleared, setCleared] = useState(false)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     api.getSetting(cfg.key)
-      .then(d => setValue(d.value || ''))
+      .then(d => setIsSet(d.is_set || false))
       .catch(() => {})
       .finally(() => setLoading(false))
   }, [cfg.key])
 
   const save = () => {
-    api.setSetting(cfg.key, value)
-      .then(() => { setSaved(true); setTimeout(() => setSaved(false), 2000) })
+    if (!input.trim()) return
+    api.setSetting(cfg.key, input.trim())
+      .then(d => { setIsSet(d.is_set); setInput(''); setSaved(true); setTimeout(() => setSaved(false), 2000) })
       .catch(() => {})
   }
 
   const clear = () => {
     api.setSetting(cfg.key, '')
-      .then(() => { setValue(''); setCleared(true); setTimeout(() => setCleared(false), 2000) })
+      .then(() => { setIsSet(false); setInput(''); setCleared(true); setTimeout(() => setCleared(false), 2000) })
       .catch(() => {})
   }
 
@@ -129,18 +131,30 @@ function ApiKeyRow({ cfg }) {
       background: 'var(--surface)', border: '1px solid var(--border)',
       borderRadius: 10, padding: '16px 18px', display: 'flex', flexDirection: 'column', gap: 8,
     }}>
-      <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 3 }}>{cfg.label}</div>
-        <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>
-          Nếu để trống, fallback sang <code style={{ fontFamily: 'monospace' }}>{cfg.envVar}</code> trong .env
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 3 }}>{cfg.label}</div>
+          <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>
+            Nếu để trống, fallback sang <code style={{ fontFamily: 'monospace' }}>{cfg.envVar}</code> trong .env
+          </div>
         </div>
+        {!loading && (
+          <span style={{
+            fontSize: 11, padding: '3px 10px', borderRadius: 20, flexShrink: 0,
+            background: isSet ? 'rgba(63,185,80,0.12)' : 'rgba(248,81,73,0.08)',
+            border: `1px solid ${isSet ? 'rgba(63,185,80,0.35)' : 'rgba(248,81,73,0.3)'}`,
+            color: isSet ? 'var(--success)' : 'var(--danger)',
+          }}>
+            {isSet ? '✓ Đã có key' : '✗ Chưa có key'}
+          </span>
+        )}
       </div>
       <input
         type="password"
-        value={loading ? '' : value}
-        onChange={e => { setValue(e.target.value); setSaved(false) }}
+        value={input}
+        onChange={e => { setInput(e.target.value); setSaved(false) }}
         disabled={loading}
-        placeholder={loading ? 'Đang tải...' : cfg.placeholder}
+        placeholder={loading ? 'Đang tải...' : isSet ? 'Nhập key mới để thay thế...' : cfg.placeholder}
         style={{
           fontSize: 12, background: 'var(--surface-2)', border: '1px solid var(--border)',
           borderRadius: 6, padding: '8px 10px', color: 'var(--text)',
@@ -148,15 +162,15 @@ function ApiKeyRow({ cfg }) {
         }}
       />
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-        <button onClick={save} disabled={loading}
-          style={{ padding: '6px 16px', borderRadius: 6, fontSize: 12, fontWeight: 500, cursor: loading ? 'not-allowed' : 'pointer', border: '1px solid rgba(139,92,246,0.5)', background: 'rgba(139,92,246,0.12)', color: '#a78bfa', transition: 'background 0.1s' }}
-          onMouseEnter={e => { if (!loading) e.currentTarget.style.background = 'rgba(139,92,246,0.22)' }}
-          onMouseLeave={e => { if (!loading) e.currentTarget.style.background = 'rgba(139,92,246,0.12)' }}
-        >Lưu</button>
-        <button onClick={clear} disabled={loading || !value}
-          style={{ padding: '6px 16px', borderRadius: 6, fontSize: 12, fontWeight: 500, cursor: (loading || !value) ? 'not-allowed' : 'pointer', border: '1px solid rgba(248,81,73,0.4)', background: 'rgba(248,81,73,0.08)', color: 'var(--danger)', transition: 'background 0.1s', opacity: (loading || !value) ? 0.5 : 1 }}
-          onMouseEnter={e => { if (!loading && value) e.currentTarget.style.background = 'rgba(248,81,73,0.16)' }}
-          onMouseLeave={e => { if (!loading && value) e.currentTarget.style.background = 'rgba(248,81,73,0.08)' }}
+        <button onClick={save} disabled={loading || !input.trim()}
+          style={{ padding: '6px 16px', borderRadius: 6, fontSize: 12, fontWeight: 500, cursor: (loading || !input.trim()) ? 'not-allowed' : 'pointer', border: '1px solid rgba(139,92,246,0.5)', background: 'rgba(139,92,246,0.12)', color: '#a78bfa', transition: 'background 0.1s', opacity: (loading || !input.trim()) ? 0.6 : 1 }}
+          onMouseEnter={e => { if (!loading && input.trim()) e.currentTarget.style.background = 'rgba(139,92,246,0.22)' }}
+          onMouseLeave={e => { if (!loading && input.trim()) e.currentTarget.style.background = 'rgba(139,92,246,0.12)' }}
+        >Lưu key</button>
+        <button onClick={clear} disabled={loading || !isSet}
+          style={{ padding: '6px 16px', borderRadius: 6, fontSize: 12, fontWeight: 500, cursor: (loading || !isSet) ? 'not-allowed' : 'pointer', border: '1px solid rgba(248,81,73,0.4)', background: 'rgba(248,81,73,0.08)', color: 'var(--danger)', transition: 'background 0.1s', opacity: (loading || !isSet) ? 0.5 : 1 }}
+          onMouseEnter={e => { if (!loading && isSet) e.currentTarget.style.background = 'rgba(248,81,73,0.16)' }}
+          onMouseLeave={e => { if (!loading && isSet) e.currentTarget.style.background = 'rgba(248,81,73,0.08)' }}
         >Xóa key</button>
         {saved   && <span style={{ fontSize: 11, color: 'var(--success)' }}>✓ Đã lưu</span>}
         {cleared && <span style={{ fontSize: 11, color: 'var(--danger)' }}>✓ Đã xóa</span>}

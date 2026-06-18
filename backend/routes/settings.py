@@ -4,6 +4,8 @@ from backend.db import get_conn
 
 router = APIRouter(prefix="/settings", tags=["settings"])
 
+SECRET_KEYS = {"anthropic_api_key", "openai_api_key", "deepseek_api_key", "google_api_key"}
+
 
 class SettingBody(BaseModel):
     value: str
@@ -13,7 +15,10 @@ class SettingBody(BaseModel):
 def get_setting(key: str):
     with get_conn() as conn:
         row = conn.execute("SELECT value FROM settings WHERE key = ?", [key]).fetchone()
-    return {"key": key, "value": row["value"] if row else ""}
+    value = row["value"] if row else ""
+    if key in SECRET_KEYS:
+        return {"key": key, "value": "", "is_set": bool(value)}
+    return {"key": key, "value": value, "is_set": bool(value)}
 
 
 @router.post("/{key}")
@@ -24,4 +29,6 @@ def set_setting(key: str, body: SettingBody):
             " ON CONFLICT(key) DO UPDATE SET value = excluded.value",
             [key, body.value],
         )
-    return {"key": key, "value": body.value}
+    if key in SECRET_KEYS:
+        return {"key": key, "value": "", "is_set": bool(body.value)}
+    return {"key": key, "value": body.value, "is_set": bool(body.value)}

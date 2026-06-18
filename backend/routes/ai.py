@@ -427,6 +427,102 @@ Trong danh sách trên, bài nào quan trọng nhất cần thêm inbound links 
                              headers={"X-Accel-Buffering": "no", "Cache-Control": "no-cache"})
 
 
+class LinkSuggestRequest(BaseModel):
+    model: str = "claude-haiku-4-5-20251001"
+
+
+@router.post("/link-suggestions/{slug}")
+def link_suggestions(slug: str, req: LinkSuggestRequest):
+    with get_conn() as conn:
+        post = conn.execute("SELECT * FROM posts WHERE slug = ?", [slug]).fetchone()
+        if not post:
+            def not_found():
+                yield sse(f"Không tìm thấy bài `{slug}`.")
+                yield "data: [DONE]\n\n"
+            return StreamingResponse(not_found(), media_type="text/event-stream")
+
+        # Lấy danh sách tất cả bài khác (ưu tiên cùng section)
+        candidates = conn.execute("""
+            SELECT p.slug, p.headline, p.description, p.article_section,
+                   p.word_count,
+                   (SELECT GROUP_CONCAT(kw.value) FROM json_each(p.keywords) kw LIMIT 5) AS kw_list,
+                   COUNT(DISTINCT il_in.from_slug) AS inbound
+            FROM posts p
+            LEFT JOIN internal_links il_in ON il_in.to_slug = p.slug
+            WHERE p.slug != ?
+            GROUP BY p.id
+            ORDER BY (p.article_section = ?) DESC, inbound DESC
+            LIMIT 60
+        """, [slug, post["article_section"] or ""]).fetchall()
+
+        # Links hiện có
+        existing_out = conn.execute(
+            "SELECT to_slug FROM internal_links WHERE from_slug = ?", [slug]
+        ).fetchall()
+        existing_in = conn.execute(
+            "SELECT from_slug FROM internal_links WHERE to_slug = ?", [slug]
+        ).fetchall()
+
+    p = dict(post)
+    existing_out_slugs = {r["to_slug"] for r in existing_out}
+    existing_in_slugs  = {r["from_slug"] for r in existing_in}
+
+    # Format danh sách ứng viên
+    candidates_text = "\n".join(
+        f"- [{c['article_section']}] **{c['slug']}**: {(c['headline'] or '')[:70]}"
+        f" | {c['word_count'] or 0} từ | keywords: {c['kw_list'] or '-'}"
+        f"{' ← đã có inbound từ bài target' if c['slug'] in existing_in_slugs else ''}"
+        f"{' ← bài target đã link đến' if c['slug'] in existing_out_slugs else ''}"
+        for c in candidates
+    )
+
+    keywords = json.loads(p.get("keywords") or "[]")
+
+    prompt = f"""Bạn là SEO specialist. Nhiệm vụ: chọn các bài viết cụ thể phù hợp nhất để thêm internal links cho bài target.
+
+## Bài target (cần được link)
+- **Slug:** {p['slug']}
+- **Title:** {p.get('headline') or '(trống)'}
+- **Section:** {p.get('article_section') or '(chưa có)'}
+- **Description:** {p.get('description') or '(trống)'}
+- **Keywords:** {', '.join(keywords) if keywords else '(không có)'}
+- **Word count:** {p.get('word_count') or 0} từ
+- **Inbound links hiện tại:** {len(existing_in_slugs)}
+- **Outbound links hiện tại:** {len(existing_out_slugs)}
+
+## Danh sách {len(candidates)} bài ứng viên
+{candidates_text}
+
+## Yêu cầu phân tích
+Dựa trên topic, keywords, section và nội dung, hãy chọn và trả lời bằng tiếng Việt:
+
+### 1. Các bài NÊN link ĐẾN bài target (thêm link trong các bài đó trỏ về bài này)
+Liệt kê 3-6 bài cụ thể theo format:
+- **slug-bài** — lý do ngắn gọn (anchor text gợi ý: "...")
+
+### 2. Các bài bài target NÊN link ĐẾN (thêm link trong bài target trỏ đến các bài đó)
+Liệt kê 3-6 bài cụ thể theo format:
+- **slug-bài** — lý do ngắn gọn (anchor text gợi ý: "...")
+
+### 3. Đánh giá nhanh
+1-2 câu về mức độ kết nối hiện tại và ưu tiên hành động.
+
+Chỉ chọn các bài THỰC SỰ liên quan về topic, không chọn bừa. Bỏ qua các bài đã có link."""
+
+    def generate():
+        try:
+            for text in stream_text(req.model, prompt):
+                yield sse(text)
+        except ValueError as e:
+            yield sse(f"**Lỗi:** {e}")
+        except Exception as e:
+            yield sse(f"**Lỗi API:** {e}")
+        yield "data: [DONE]\n\n"
+
+    return StreamingResponse(generate(), media_type="text/event-stream",
+                             headers={"X-Accel-Buffering": "no", "Cache-Control": "no-cache"})
+
+
 @router.post("/review/{slug}")
 def review_post(slug: str, req: ReviewRequest):
     with get_conn() as conn:

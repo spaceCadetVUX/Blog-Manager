@@ -46,7 +46,7 @@ export default function GraphView({ onSelectPost }) {
   const [hoveredNode, setHoveredNode] = useState(null)
 
   const [sections, setSections] = useState([])
-  const [minLinks, setMinLinks] = useState('2')
+  const [minLinks, setMinLinks] = useState('0')
   const [filterSection, setFilterSection] = useState('')
   const [showOrphansOnly, setShowOrphansOnly] = useState(false)
   const [loading, setLoading] = useState(true)

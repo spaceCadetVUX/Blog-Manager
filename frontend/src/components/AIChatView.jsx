@@ -37,14 +37,23 @@ function MessageBubble({ msg }) {
   )
 }
 
+const STORAGE_KEY = 'ai_chat_history'
+
 export default function AIChatView() {
-  const [messages, setMessages]     = useState([])
+  const [messages, setMessages]     = useState(() => {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]') } catch { return [] }
+  })
   const [input, setInput]           = useState('')
   const [loading, setLoading]       = useState(false)
   const [model, setModel]           = useState('claude-haiku-4-5-20251001')
   const [withContext, setWithContext] = useState(true)
   const bottomRef = useRef(null)
   const textareaRef = useRef(null)
+
+  useEffect(() => {
+    const saved = messages.filter(m => !m.streaming)
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(saved))
+  }, [messages])
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -118,7 +127,7 @@ export default function AIChatView() {
           </label>
           <ModelSelect value={model} onChange={setModel} disabled={loading} />
           <button
-            onClick={() => setMessages([])}
+            onClick={() => { setMessages([]); localStorage.removeItem(STORAGE_KEY) }}
             disabled={messages.length === 0}
             title="Xóa lịch sử"
             style={{
