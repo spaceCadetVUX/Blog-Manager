@@ -6,11 +6,432 @@ og_site_name: "KNX Store"
 image: "https://knxstore.vn/assets/image/post/knx-satel-ket-noi-an-ninh-hai-chieu-voi-module-int-knx-2.jpg"
 datePublished: "2025-11-14T10:41:58+07:00"
 dateModified: "2025-11-14T10:41:58+07:00"
+articleSection: "An ninh"
+word_count: 2032
+mentions: ["Aqara", "Apple Home"]
+breadcrumb:
+  - name: "Trang chủ"
+    url: "https://knxstore.vn/"
+  - name: "Blogs"
+    url: "https://knxstore.vn/blogs"
+  - name: "An ninh"
+    url: "https://knxstore.vn/blogs/an-ninh"
+  - name: "KNX & SATEL: Giải pháp kết nối an ninh hai chiều với module INT-KNX-2"
+    url: "https://knxstore.vn/knx-satel-ket-noi-an-ninh-hai-chieu-voi-module-int-knx-2.html"
+internal_links:
+  - url: "https://knxstore.vn/camera-chong-trom-la-gi.html"
+    slug: "camera-chong-trom-la-gi"
+    anchor: "Camera chống trộm là gì?"
+  - url: "https://knxstore.vn/khoa-cua-thong-minh-moorgen.html"
+    slug: "khoa-cua-thong-minh-moorgen"
+    anchor: "Khám phá 12 mẫu khóa cửa thông minh Moorgen ứng dụng vân tay tĩnh mạch hiện đại"
+  - url: "https://knxstore.vn/so-sanh-he-thong-bao-dong-co-day-va-khong-day.html"
+    slug: "so-sanh-he-thong-bao-dong-co-day-va-khong-day"
+    anchor: "So sánh hệ thống báo động có dây và không dây"
+  - url: "https://knxstore.vn/he-thong-chong-trom-la-gi.html"
+    slug: "he-thong-chong-trom-la-gi"
+    anchor: "Hệ thống chống trộm là gì? Những bộ phận nào cấu thành hệ thống?"
+  - url: "https://knxstore.vn/nhung-vi-tri-nen-lap-cam-bien-an-ninh-trong-nha.html"
+    slug: "nhung-vi-tri-nen-lap-cam-bien-an-ninh-trong-nha"
+    anchor: "Đặt cảm biến an ninh ở đâu là đúng? 7 vị trí bạn không thể bỏ qua"
+  - url: "https://knxstore.vn/thiet-bi-chong-trom-ngoai-troi.html"
+    slug: "thiet-bi-chong-trom-ngoai-troi"
+    anchor: "Thiết bị chống trộm ngoài trời"
+  - url: "https://knxstore.vn/chuong-cua-thong-minh.html"
+    slug: "chuong-cua-thong-minh"
+    anchor: "Chuông cửa thông minh"
+  - url: "https://knxstore.vn/cam-bien-chuyen-dong.html"
+    slug: "cam-bien-chuyen-dong"
+    anchor: "Tìm hiểu về cảm biến chuyển động từ thương hiệu Satel"
+  - url: "https://knxstore.vn/he-thong-an-ninh-perfecta.html"
+    slug: "he-thong-an-ninh-perfecta"
+    anchor: "Tìm hiểu về hệ thống an ninh Perfecta"
+  - url: "https://knxstore.vn/he-thong-chong-trom-an-ninh-gia-dinh.html"
+    slug: "he-thong-chong-trom-an-ninh-gia-dinh"
+    anchor: "Hệ thống an ninh gia đình: Lý do bạn cần lắp ngay hôm nay"
 ---
 
 # KNX & SATEL: Giải pháp kết nối an ninh hai chiều với module INT-KNX-2
 
 > Khám phá INT-KNX-2 kết nối 2 chiều hoàn chỉnh giữa SATEL INTEGRA và KNX. Nâng cao an ninh thông minh, điều khiển tập trung, giảm chi phí phần cứng.
+
+## Article Body
+
+Hệ thống điều khiển nhà thông minh KNX và hệ thống báo động an ninh SATEL INTEGRA là hai nền tảng hàng đầu, nhưng thường hoạt động độc lập. Module INT-KNX-2 của SATEL được thiết kế để thay đổi điều đó.
+
+Thiết bị này tạo ra một kết nối hai chiều hoàn chỉnh, cho phép hai hệ thống chia sẻ thông tin và điều khiển lẫn nhau. Nhờ vậy, bạn có thể tái sử dụng cảm biến SATEL (PIR, tiếp điểm cửa) làm đầu vào cho KNX, hoặc để KNX tự động phản ứng (bật đèn, khóa cửa) ngay khi SATEL phát tín hiệu báo động.
+
+INT-KNX-2 giúp bạn điều khiển tập trung cả an ninh và tiện nghi (ánh sáng, HVAC, rèm) chỉ trên một màn hình, đồng thời loại bỏ nhu cầu sử dụng gateway bên thứ ba. Đây là giải pháp tích hợp an ninh thông minh đồng bộ, hiệu quả và tiết kiệm chi phí cho mọi công trình hiện đại.
+
+
+
+Tại sao nên kết nối hệ thống báo động SATEL với KNX?
+
+Trong các công trình hiện đại, sự phân tách giữa hệ thống an ninh và hệ thống điều khiển tòa nhà thường dẫn đến bất tiện trong vận hành và tăng chi phí đầu tư cho phần cứng điều khiển. Tuy nhiên, khi hai hệ thống này được kết nối và đồng bộ, chúng sẽ tạo nên một hệ sinh thái thống nhất, thông minh và hiệu quả hơn về mặt vận hành lẫn chi phí.
+
+
+
+Nâng cao khả năng phản ứng an ninh thông minh
+
+Khi hệ thống báo động SATEL phát hiện sự xâm nhập, hệ thống KNX có thể:
+
+
+	Tự động bật đèn ngoài trời
+	Kéo rèm, khóa cửa, hoặc
+	Kích hoạt các kịch bản cảnh báo nâng cao
+
+
+Điều này giúp nâng cao tính răn đe và ngăn chặn ngay từ thời điểm phát hiện đầu tiên.
+
+Tận dụng thiết bị an ninh làm cảm biến điều khiển nhà thông minh
+
+Các cảm biến chuyển động, tiếp điểm cửa, cảm biến kính vỡ… từ hệ thống SATEL có thể tái sử dụng như đầu vào logic trong hệ KNX:
+
+
+	Phát hiện chuyển động => bật đèn
+	Mở cửa sổ => tắt điều hòa
+	Không phát hiện chuyển động => kích hoạt chế độ tiết kiệm điện
+
+
+Điều khiển tập trung và đơn giản hóa hệ thống
+
+Thay vì sử dụng 2 màn hình điều khiển riêng biệt cho KNX và báo động, người dùng có thể:
+
+
+	Điều khiển cả hai hệ thống từ cùng một màn hình cảm ứng SATEL (INT-TSI, TSH2...)
+	Sử dụng ứng dụng INTEGRA CONTROL trên smartphone để giám sát và điều khiển từ xa
+
+
+Giảm chi phí phần cứng và vận hành
+
+
+	Không cần thêm bộ gateway bên thứ ba – chỉ cần INT-KNX-2
+	Không cần đi lại dây – mô-đun có sẵn KNX Bus Coupling Unit
+	Tiết kiệm chi phí đầu tư và bảo trì trong suốt vòng đời hệ thống
+
+
+Linh hoạt mở rộng
+
+Dù hệ thống đã xây dựng từ trước hay đang triển khai mới, giải pháp này có thể:
+
+
+	Thêm vào mà không cần thay đổi cấu trúc hệ thống cũ
+	Mở rộng dễ dàng nhờ khả năng lập trình mềm bằng DLOADX và ETS
+
+
+Khái quát về chức năng của INT-KNX-2 SATEL
+
+Mô-đun INT-KNX-2 là một thiết bị mở rộng do SATEL phát triển nhằm mục đích tích hợp hệ thống báo động INTEGRA / INTEGRA Plus với hệ thống tự động hóa KNX. Đây là một giải pháp phần cứng nhỏ gọn, nhưng đóng vai trò vô cùng lớn trong việc kết nối hai nền tảng vốn hoạt động độc lập trở thành một hệ thống thống nhất.
+
+
+
+Chức năng chính của INT-KNX-2
+
+
+	Cho phép giao tiếp hai chiều giữa trung tâm báo động và thiết bị điều khiển KNX
+	Tối đa 64 đối tượng KNX có thể lập trình và gán chức năng tương ứng
+	Có thể điều khiển actuator KNX (đèn, rèm, HVAC, v.v.) từ các ngõ ra ảo của hệ thống báo động
+	Ngược lại, các thiết bị đầu vào KNX cũng có thể tác động lên vùng báo động như một cảm biến thông thường
+
+
+Cấu hình linh hoạt
+
+
+	Giao tiếp trực tiếp với KNX thông qua Bus Coupling Unit tích hợp
+	Cấu hình hệ thống báo động qua phần mềm DLOADX
+	Lập trình hệ thống KNX thông qua phần mềm ETS tiêu chuẩn
+	Dễ dàng mở rộng từ 8 đến 64 ngõ ra ảo bằng cách cấu hình DIP switch
+
+
+Điểm mạnh trong ứng dụng thực tế
+
+Không cần đi lại dây, dễ lắp đặt vào hệ thống có sẵn
+
+Có thể dùng một thiết bị điều khiển trung tâm (ví dụ: màn hình INT-TSI) cho cả báo động và KNX
+
+Tiết kiệm chi phí đầu tư cho hệ thống điều khiển riêng biệt
+
+Hỗ trợ lập trình kịch bản (macro) và hành vi tùy chỉnh cao
+
+Cơ chế giao tiếp và điều khiển giữa INTEGRA và KNX như thế nào?
+
+Việc kết nối giữa hệ thống báo động INTEGRA / INTEGRA Plus của SATEL với hệ thống tự động hóa KNX không chỉ đơn giản là truyền tín hiệu, mà là một cơ chế giao tiếp hai chiều đầy đủ, cho phép cả hai hệ thống chia sẻ thông tin trạng thái và điều khiển lẫn nhau một cách linh hoạt.
+
+
+
+Từ hệ thống báo động SATEL đến KNX
+
+Thông qua mô-đun INT-KNX-2, trung tâm báo động INTEGRA có thể:
+
+
+	Gửi tín hiệu logic từ các ngõ ra ảo (virtual outputs) tới actuator KNX (rèm cửa, đèn chiếu sáng, HVAC...)
+	Kích hoạt ngữ cảnh (scene) trên KNX khi:
+	
+		Báo động được kích hoạt
+		Có chuyển động từ cảm biến PIR
+		Một vùng cụ thể được bật/tắt
+		Người dùng thực hiện thao tác qua keypad
+	
+	
+
+
+Từ KNX đến hệ thống báo động SATEL
+
+Ngược lại, các thiết bị trong hệ thống KNX cũng có thể:
+
+
+	Kích hoạt vùng báo động, như một cảm biến đầu vào thông thường
+	Gửi tín hiệu trạng thái (ON/OFF, giá trị analog) đến INTEGRA thông qua các communication object
+	Điều khiển các macro hoặc kịch bản bảo vệ trong hệ thống báo động
+
+
+Cơ chế hoạt động giữa hai hệ thống
+
+
+	
+		
+			
+			Thành phần
+			
+			
+			Vai trò
+			
+		
+		
+			
+			Virtual outputs (SATEL)
+			
+			
+			Được ánh xạ tới KNX group address để điều khiển actuator
+			
+		
+		
+			
+			Communication objects (KNX)
+			
+			
+			Nhận tín hiệu từ SATEL hoặc gửi về trung tâm báo động
+			
+		
+		
+			
+			DIP switch trên INT-KNX-2
+			
+			
+			Cấu hình số lượng output cần ánh xạ
+			
+		
+		
+			
+			DLOADX (SATEL)
+			
+			
+			Cấu hình các ngõ ra, hành vi báo động, macro
+			
+		
+		
+			
+			ETS (KNX)
+			
+			
+			Gán địa chỉ nhóm, ánh xạ object, định nghĩa logic điều khiển
+			
+		
+	
+
+
+Sự kết nối hai chiều đảm bảo hệ thống phản ứng tức thì khi có sự kiện an ninh xảy ra.
+
+KNX không chỉ là nền tảng điều khiển, mà trở thành một công cụ phản ứng phối hợp với hệ thống báo động.
+
+Thành phần cấu hình và lập trình hệ thống: DLOADX và ETS
+
+Để thiết lập kết nối giữa hệ thống báo động INTEGRA / INTEGRA Plus và hệ thống KNX, kỹ sư triển khai cần làm việc với hai công cụ chính:
+
+
+	DLOADX – phần mềm cấu hình trung tâm báo động SATEL
+	ETS (Engineering Tool Software) – phần mềm cấu hình hệ thống KNX tiêu chuẩn
+
+
+Hai phần mềm này hoạt động độc lập nhưng phối hợp với nhau thông qua mô-đun INT-KNX-2, nơi các địa chỉ group (KNX) và ngõ ra ảo (SATEL) được ánh xạ tương ứng.
+
+
+
+Cấu hình bằng DLOADX (SATEL)
+
+Phần mềm DLOADX được sử dụng để:
+
+
+	Cấu hình mô-đun INT-KNX-2 trong hệ thống INTEGRA
+	Tạo và gán các ngõ ra ảo (virtual outputs) tương ứng với từng communication object trong KNX
+	Lập trình các macro hoặc logic hành vi để điều khiển thiết bị KNX
+
+
+Các bước cơ bản:
+
+
+	Vào chế độ SERVICE > STRUCTURE > HARDWARE > IDENTIFICATION > EXPANDERS ID. để nhận diện mô-đun INT-KNX-2
+	Gán số lượng output thông qua DIP switch trên phần cứng (từ 8 đến 64, bội số của 8)
+	Trong DLOADX, truy cập:
+	Structure > Hardware > Expansion Modules > [INT-KNX-2]
+	Cấu hình logic điều khiển: ví dụ khi vùng bị kích hoạt → bật output → gửi đến actuator KNX
+
+
+Cấu hình bằng ETS (KNX)
+
+Phần mềm ETS là công cụ tiêu chuẩn để lập trình và cấu hình các thiết bị KNX:
+
+
+	Nhập và ánh xạ Group Address tương ứng với các communication objects từ INT-KNX-2
+	Gán các group address này cho actuator (đèn, rèm, HVAC...) hoặc sensor (công tắc, nút nhấn, cảm biến...)
+	Xây dựng các ngữ cảnh (scenes) và logic điều khiển
+
+
+Các bước cơ bản:
+
+
+	Tạo project ETS mới hoặc mở project hiện tại
+	Nhập sản phẩm INT-KNX-2 (nếu có file KNX product database từ SATEL)
+	Gán Group Address tương ứng với ngõ ra từ SATEL
+	Thiết lập liên kết (bindings) giữa group address đó với thiết bị KNX cần điều khiển
+
+
+Yêu cầu kỹ thuật và lưu ý khi triển khai kết nối SATEL và KNX
+
+Việc triển khai kết nối giữa SATEL INTEGRA và KNX thông qua mô-đun INT-KNX-2 đòi hỏi kỹ sư hệ thống cần đảm bảo một số yêu cầu kỹ thuật nhất định để đảm bảo tính ổn định, đồng bộ và an toàn cho cả hai hệ thống.
+
+Yêu cầu về phần cứng
+
+
+	
+		
+			
+			Thành phần
+			
+			
+			Yêu cầu tối thiểu
+			
+		
+		
+			
+			INT-KNX-2
+			
+			
+			Mô-đun chính, kết nối đồng thời với bus INTEGRA (RS-485) và KNX bus
+			
+		
+		
+			
+			Trung tâm báo động
+			
+			
+			INTEGRA hoặc INTEGRA Plus, firmware ≥ v1.13 (từ 11/03/2015)
+			
+		
+		
+			
+			Nguồn cấp
+			
+			
+			12 VDC ±15%, tiêu thụ ~50 mA
+			
+		
+		
+			
+			Dây kết nối KNX
+			
+			
+			Chuẩn EIB (đã có KNX bus sẵn)
+			
+		
+		
+			
+			Dây kết nối RS-485 (CLK/DAT/COM)
+			
+			
+			Nên sử dụng cáp riêng, không dùng cặp xoắn cho CLK & DAT cùng cặp
+			
+		
+	
+
+
+Yêu cầu về phần mềm
+
+
+	
+		
+			
+			Phần mềm
+			
+			
+			Mục đích sử dụng chính
+			
+			
+			Chi tiết công việc
+			
+		
+		
+			
+			DLOADX (SATEL)
+			
+			
+			Cấu hình mô-đun INT-KNX-2 và lập trình logic điều khiển KNX.
+			
+			
+			Cấu hình mô-đun INT-KNX-2
+
+			Thiết lập số lượng virtual output (từ 8 đến 64).
+
+			Lập trình các hành vi logic và macro điều khiển KNX.
+			
+		
+		
+			
+			ETS (KNX)
+			
+			
+			Thiết lập địa chỉ nhóm và cấu hình các thiết bị KNX.
+			
+			
+			Thiết lập các group address (địa chỉ nhóm).
+
+			Gán communication object tương ứng với output của SATEL.
+
+			Cấu hình actuator/sensor KNX cần kết nối.
+			
+		
+	
+
+
+Lưu ý khi lập trình và ánh xạ
+
+
+	Địa chỉ module INT-KNX-2 trên bus SATEL phải là duy nhất
+	Số lượng output cần được thiết lập đúng qua DIP switch (6–8), tránh vượt quá số output còn trống trên hệ thống
+	Ánh xạ giữa output logic (SATEL) và group address (KNX) cần được ghi chú kỹ trong sơ đồ hệ thống
+	Nếu không đủ địa chỉ mở rộng, module sẽ không được hệ thống nhận diện
+
+
+Lưu ý về lắp đặt mô-đun INT-KNX-2
+
+
+	Chỉ sử dụng trong nhà, điều kiện môi trường nhiệt độ -10°C đến +55°C, dộ ẩm tối đa 93 ± 3%
+	Nếu khoảng cách từ INT-KNX-2 đến trung tâm > 300m:
+	Nên cấp nguồn riêng cho INT-KNX-2 (bằng PSU riêng hoặc expander có nguồn)
+	Kết nối tamper (TMP) phải được nối về COM nếu không sử dụng giám sát vỏ
+
+
+Kiểm tra và vận hành hệ thống
+
+Sau khi hoàn tất cài đặt, bạn có thể kiểm tra hệ thống như sau:
+
+
+	Sử dụng chức năng IDENTIFICATION trong DLOADX hoặc LCD keypad để nhận diện module.
+	Khi output SATEL được kích hoạt, kiểm tra xem thiết bị KNX có phản ứng hay không.
+	Kiểm tra lại liệu thiết bị KNX có điều khiển được vùng INTEGRA hay không.
+
+
+KNXStore là địa chỉ tin cậy dành cho các kỹ sư hệ thống, nhà tích hợp và đơn vị M&E khi tìm kiếm các giải pháp KNX chính hãng, sẵn sàng triển khai, trong đó có dòng sản phẩm tích hợp an ninh nổi bật: SATEL INT-KNX-2. INT-KNX-2 không chỉ là một mô-đun mở rộng – mà là giải pháp mở cánh cửa cho bạn tích hợp toàn bộ hệ thống an ninh vào nền tảng nhà thông minh KNX chuyên nghiệp, dễ triển khai và sẵn sàng cho tương lai.
 
 ## Raw JSON-LD
 

@@ -8,11 +8,351 @@ image: "https://knxstore.vn/assets/image/post/huong-dan-cap-nhat-firmware-va-mai
 datePublished: "2026-06-03T13:14:39+07:00"
 dateModified: "2026-06-03T13:14:39+07:00"
 author: "Lê Võ Quốc Huy"
+articleSection: "Hướng dẫn"
+word_count: 1509
+mentions: ["Aqara", "Apple Home"]
+breadcrumb:
+  - name: "Trang chủ"
+    url: "https://knxstore.vn/"
+  - name: "Blogs"
+    url: "https://knxstore.vn/blogs"
+  - name: "Hướng dẫn"
+    url: "https://knxstore.vn/blogs/huong-dan"
+  - name: "Hướng Dẫn Cập Nhật Firmware Và Main Program Kanonbus KAC005 Mới Nhất 2026 "
+    url: "https://knxstore.vn/huong-dan-cap-nhat-firmware-va-main-program-kanonbus-kac005-moi-nhat-2026.html"
+internal_links:
+  - url: "https://knxstore.vn/huong-dan-cau-hinh-thiet-bi-dali-gateway-abb-knx.html"
+    slug: "huong-dan-cau-hinh-thiet-bi-dali-gateway-abb-knx"
+    anchor: "Hướng dẫn cấu hình thiết bị DALI Gateway ABB KNX"
+  - url: "https://knxstore.vn/huong-dan-ket-noi-rem-cua-tu-dong-rs485.html"
+    slug: "huong-dan-ket-noi-rem-cua-tu-dong-rs485"
+    anchor: "Hướng dẫn kết nối rèm cửa tự động RS485"
+  - url: "https://knxstore.vn/huong-dan-ket-noi-dieu-hoa-khong-khi-dong-kac00x.html"
+    slug: "huong-dan-ket-noi-dieu-hoa-khong-khi-dong-kac00x"
+    anchor: "Hướng dẫn kết nối điều hòa không khí - Dòng KAC00X"
+  - url: "https://knxstore.vn/cac-phuong-an-dieu-khien-rem-cua-tu-dong-cho-smarthome-knx.html"
+    slug: "cac-phuong-an-dieu-khien-rem-cua-tu-dong-cho-smarthome-knx"
+    anchor: "Các phương án điều khiển rèm cửa tự động cho Smarthome KNX"
+  - url: "https://knxstore.vn/giai-phap-dieu-khien-hvac-vrv-vrf-tu-he-thong-smarthome-va-bms.html"
+    slug: "giai-phap-dieu-khien-hvac-vrv-vrf-tu-he-thong-smarthome-va-bms"
+    anchor: "Hệ thống điều khiển HVAC là gì? Giải pháp nào điều khiển VRV/VRF cho hệ thống Smarthome?"
 ---
 
 # Hướng Dẫn Cập Nhật Firmware Và Main Program Kanonbus KAC005 Mới Nhất 2026 
 
 > Hướng dẫn cập nhật 2 loại file firmware KAC005: Main Program qua Web UI  và file .res qua HosTools. Phân biệt rõ từng loại, tránh nhầm lẫn gây  mất cấu hình. Hỗ trợ kỹ thuật tại KNXStore.
+
+## Article Body
+
+Tại sao cần cập nhật firmware KA005? 
+
+Firmware cũ gây ra vấn đề gì? 
+
+Gateway Kanonbus KAC005 là thiết bị lập trình được firmware không phải thứ cố định sau khi xuất xưởng. Phiên bản firmware quyết định trực tiếp thiết bị hỗ trợ được những giao thức nào, tương thích với model máy lạnh nào và chạy ổn định ra sao trong dài hạn. Bỏ qua bước cập nhật đồng nghĩa với việc chấp nhận giới hạn mà hãng đã vá từ lâu.
+
+Phiên bản mới có gì khác biệt? 
+
+KAC005 mua về từ kho có thể mang firmware xuất xưởng từ nhiều tháng trước ngày lắp đặt. Thực tế ghi nhận từ các dự án: một số chức năng quan trọng như TCP Server, BACnet/IP, Modbus TCP chưa được kích hoạt hoặc chưa ổn định ở firmware cũ, dẫn đến tích hợp thất bại dù cấu hình đúng hoàn toàn. 
+
+{products:[42,51,974]}
+
+Ngoài ra, mỗi hãng máy lạnh VRV/VRF có đặc thù giao thức riêng. Daikin, Mitsubishi Electric, Hitachi, Midea mỗi thế hệ outdoor unit mới có thể thay đổi cách phản hồi lệnh HBS/XYE. Firmware cũ không có bản vá tương thích sẽ đọc sai trạng thái, điều khiển không phản hồi hoặc báo lỗi giả. 
+
+Hai Loại File Update Của Kanonbus Khác Nhau Hoàn Toàn 
+
+Kanonbus thiết kế KAC005 theo kiến trúc tách biệt giữa logic điều hành và firmware lõi. Hai thành phần này được cập nhật độc lập, qua hai phương thức khác nhau hoàn toàn — nhầm lẫn giữa hai loại là nguyên nhân phổ biến khiến quá trình update thất bại hoặc thiết bị hoạt động không đúng sau khi cập nhật.
+
+File Main Program 
+
+Main Program là tầng logic ứng dụng của KAC005 bao gồm giao diện web quản trị, xử lý lệnh KNX, TCP handler, lịch biểu và toàn bộ luồng điều phối giữa các giao thức.
+
+File được nhận diện qua cấu trúc tên:
+
+ 
+
+Điểm đặc biệt quan trọng: File này được hãng tạo ra gắn với đúng Serial Number của thiết bị. Không thể dùng file của KAC005 này để update cho thiết bị khác — hệ thống sẽ từ chối. Khi liên hệ hãng xin file update, bắt buộc phải cung cấp Device Code (SN) chính xác.
+
+Cập nhật Main Program thực hiện hoàn toàn qua trình duyệt web không cần cài thêm phần mềm, không cần kết nối USB hay serial. Kích thước nhỏ (~900KB), quá trình hoàn tất trong vòng 30–40 giây.
+
+File Firmware
+
+File .res là resource package firmware lõi chứa toàn bộ driver giao thức (BACnet/IP, Modbus TCP, TCP Socket), driver các hãng máy lạnh (Daikin HBS, Mitsubishi XYE, Hitachi, Midea...) và các module mở rộng. 
+
+Không gắn với SN một file dùng được cho tất cả thiết bị KAC005 cùng dòng. Kích thước lớn hơn đáng kể (~11.4MB) vì đóng gói đầy đủ driver của hàng chục hãng máy lạnh.
+
+Bắt buộc dùng phần mềm HosTools của Kanonbus để flash file này vào thiết bị. Web UI không hỗ trợ upload file .res. Quá trình flash firmware lõi có thể reset một phần cấu hình — backup toàn bộ trước khi thực hiện là bắt buộc.
+
+Bảng so sánh 2 loại file 
+
+ 
+
+
+	
+		
+			
+			Tiêu chí
+			
+			
+			Main Program ktstart.*
+			
+			
+			Firmware upEN.*.res
+			
+		
+		
+			
+			Chứa gì
+			
+			
+			Logic ứng dụng, web UI, TCP handler
+			
+			
+			Driver giao thức, driver máy lạnh, module mở rộng
+			
+		
+		
+			
+			Gắn Serial Number
+			
+			
+			✅ Có — dùng cho 1 thiết bị duy nhất
+			
+			
+			❌ Không — dùng chung mọi KAC005
+			
+		
+		
+			
+			Cách lấy file
+			
+			
+			Liên hệ hãng, cung cấp Device Code
+			
+			
+			Tải theo dòng thiết bị
+			
+		
+		
+			
+			Phương thức update
+			
+			
+			Web UI → Program Update
+			
+			
+			Phần mềm HosTools
+			
+		
+		
+			
+			Kích thước
+			
+			
+			~900 KB
+			
+			
+			~11.4 MB
+			
+		
+		
+			
+			Thời gian
+			
+			
+			30–60 giây
+			
+			
+			2–5 phút
+			
+		
+		
+			
+			Mất cấu hình
+			
+			
+			Không
+			
+			
+			Có thể — backup trước
+			
+		
+		
+			
+			Tần suất
+			
+			
+			Mỗi khi hãng phát hành bản mới
+			
+			
+			Khi cần thêm giao thức hoặc hỗ trợ model máy lạnh mới
+			
+		
+		
+			
+			Cần backup trước
+			
+			
+			Khuyến nghị
+			
+			
+			⚠️ Bắt buộc
+			
+		
+	
+
+
+ 
+
+Cập Nhật Cho KAC005
+
+Trước khi thực hiện bất kỳ thao tác update nào, cần xác nhận máy tính đang kết nối được vào KAC005. Đây là bước kiểm tra cơ bản nhất, nếu không vào được web UI thì cả hai phương thức update đều không thực hiện được. 
+
+IP mặc định xuất xưởng: 192.168.1.232 Nếu thiết bị đã được cấu hình lại cho phù hợp với hạ tầng mạng dự án dùng IP đã đổi. Không biết IP hiện tại: kiểm tra trong router DHCP lease, hoặc dùng công cụ scan mạng như Advanced IP Scanner. 
+
+ 
+
+
+	
+		
+			
+			Trường
+			
+			
+			Giá trị mặc định
+			
+		
+		
+			
+			Username (N)
+			
+			
+			admin
+			
+		
+		
+			
+			Password (P)
+			
+			
+			123
+			
+		
+	
+
+
+
+
+Bấm Submit. Đăng nhập thành công → màn hình Home hiển thị danh sách module đang chạy. 
+
+Nếu quên password đã đổi thì giữ nút Reset trên thân KAC005 đúng 6 giây cho đến khi đèn RUN nhấp nháy nhanh rồi sáng trở lại. Reset sẽ xóa toàn bộ cấu hình bao gồm IP network, serial port settings và boot mode  backup trước nếu còn vào được. 
+
+Cập Nhật Main Program Qua Web UI 
+
+Vào Trang Program Update 
+
+Sau khi đăng nhập thành công, màn hình Home hiển thị toàn bộ module đang chạy trên KAC005. Thiết bị trong ảnh đang có 6 module active với phiên bản tương ứng.
+
+Từ menu trái, vào Basic Setting → Program Update. 
+
+
+
+Chọn File ktstart 
+
+
+
+Bấm Choose File → hộp thoại Open xuất hiện → tìm đến thư mục chứa file nhận từ hãng. 
+
+Trong cùng thư mục có thể thấy cả file upEN.20260417.res không chọn file này tại đây, file .res dùng cho HosTools ở bước sau. 
+
+
+
+Xác nhận tên file hiển thị đúng Serial Number thiết bị trước khi tiếp tục → bấm Open. 
+
+Upload Và Xác Nhận 
+
+Tên file xuất hiện trong ô xác nhận bên cạnh nút Choose File: 
+
+
+
+Bấm UPLOAD.
+
+Không tắt trình duyệt, không ngắt nguồn, không rút mạng trong quá trình upload. Thiết bị đang nhận file và ghi vào bộ nhớ gián đoạn ở bước này có thể khiến firmware bị corrupt, cần reset và làm lại từ đầu.
+
+
+
+Upload hoàn tất → popup System Restart tự động hiện ra
+Bấm Reboot Now KAC005 khởi động lại, mất kết nối khoảng 20–30 giây. 
+
+Quan sát đèn LED trên thân thiết bị:
+
+
+	POWER đỏ solid sau khi có nguồn
+	RUN đỏ solid khi đang chạy, nhấp nháy khi xử lý data
+	BUS đỏ solid khi kết nối KNX bus thành công
+
+
+
+
+Khi cả 3 đèn sáng ổn định → truy cập lại web UI → vào About Me kiểm tra Version và Firmware date đã cập nhật.
+
+Cập Nhật Firmware Bằng Phần Mềm HosTools 
+
+HosTools tên đầy đủ trên giao diện là KanonBUS主机小工具 (KanonBUS Host Mini Tool) là phần mềm nhỏ gọn (~631KB) chạy trực tiếp, không cần cài đặt. Giao diện chỉ có 3 trường và 1 nút bấm đơn giản nhưng thực hiện đúng từng bước mới upload thành công. 
+
+
+
+Mở HosTools Và Nhập IP
+
+Double-click Hosttool.exe. Giao diện KanonBUS主机小工具 hiện ra với 3 trường
+
+
+
+Dịch nghĩa các nhãn:
+
+
+	主机IP = Host IP — địa chỉ IP của KAC005
+	文件选择 = File Selection — chọn file .res
+	进度 = Progress — thanh tiến trình upload
+	查找 = Search/Find
+	选择文件 = Choose File
+	上传 = Upload
+
+
+Nhập IP của KAC005 vào ô 主机IP
+
+Bấm 选择文件 → hộp thoại Open xuất hiện, mặc định lọc Files (*.res) chỉ hiển thị file .res, tránh chọn nhầm. 
+
+
+
+Tìm đến thư mục chứa file → chọn upEN.20260417.res → tên file hiển thị highlight xanh → bấm Open. 
+
+Sau khi chọn file xong, giao diện HosTools hiển thị đầy đủ.
+
+
+
+Kiểm tra lại lần cuối:
+
+
+	IP đúng với KAC005 cần update chưa?
+	File đúng phiên bản cần flash chưa?
+
+
+Bấm 上传 (Upload).
+
+Thanh 进度 (Progress) bắt đầu chạy quá trình transfer file ~11MB qua mạng LAN thường mất 20-40 giây tùy tốc độ mạng.
+
+Không đóng HosTools, không ngắt mạng, không tắt nguồn KAC005 trong suốt quá trình upload. Firmware đang được ghi trực tiếp vào flash memory của thiết bị gián đoạn có thể gây brick device, cần liên hệ hãng để khôi phục. 
+
+Sau Khi Update Kiểm Tra Và Khắc Phục Sự Cố
+
+Cập nhật firmware Kanonbus KAC005 không phức tạp nhưng đòi hỏi đúng file, đúng phương thức và đúng thứ tự. Nhầm file upEN.res upload lên web UI hay quên backup trước khi flash firmware là hai lỗi phổ biến nhất gây mất thời gian không đáng có trên công trình.
+
+Nguyên tắc thực tế: backup trước, verify sau, chỉ update những gì cần thiết. Main Program cập nhật thường xuyên khi hãng phát hành nhẹ, nhanh, không rủi ro. Firmware qua HosTools chỉ động đến khi có lý do cụ thể: thêm giao thức mới, hỗ trợ model máy lạnh chưa có, hoặc theo chỉ định của hãng.
+
+Xem thêm các dòng sản phẩm Gateway KNX của Kanonbus:
+{products:[1044,1045,1046,2578]}
+
+Cần hỗ trợ kỹ thuật hoặc tư vấn tích hợp KAC005 vào hệ thống KNX liên hệ đội ngũ KNXStore để được hỗ trợ trực tiếp.
 
 ## Raw JSON-LD
 

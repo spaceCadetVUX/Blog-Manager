@@ -6,11 +6,428 @@ og_site_name: "KNX Store"
 image: "https://knxstore.vn/assets/image/post/huong-dan-su-dung-thermostat-matter-wi-fi-model-81mtac012.jpg"
 datePublished: "2025-10-22T11:40:09+07:00"
 dateModified: "2025-10-22T11:40:09+07:00"
+articleSection: "HVAC"
+word_count: 1029
+mentions: ["Aqara", "Apple Home"]
+breadcrumb:
+  - name: "Trang chủ"
+    url: "https://knxstore.vn/"
+  - name: "Blogs"
+    url: "https://knxstore.vn/blogs"
+  - name: "HVAC"
+    url: "https://knxstore.vn/blogs/hvac"
+  - name: "Hướng dẫn sử dụng thermostat Matter Wi-Fi model 81mtac01"
+    url: "https://knxstore.vn/huong-dan-su-dung-thermostat-matter-wi-fi-model-81mtac01.html"
+internal_links:
+  - url: "https://knxstore.vn/vi-sao-dieu-hoa-inverter-tiet-kiem-dien-hon-dieu-hoa-binh-thuong.html"
+    slug: "vi-sao-dieu-hoa-inverter-tiet-kiem-dien-hon-dieu-hoa-binh-thuong"
+    anchor: "Vì sao điều hòa inverter tiết kiệm điện hơn điều hoà bình thường?"
+  - url: "https://knxstore.vn/10-meo-dung-may-lanh-an-toan-cho-suc-khoe-va-tiet-kiem-dien.html"
+    slug: "10-meo-dung-may-lanh-an-toan-cho-suc-khoe-va-tiet-kiem-dien"
+    anchor: "10 mẹo dùng máy lạnh an toàn cho sức khỏe và tiết kiệm điện"
+  - url: "https://knxstore.vn/cach-giao-tiep-modbus-voi-dieu-hoa-daikin-vrv-vrf-thong-qua-kac00x.html"
+    slug: "cach-giao-tiep-modbus-voi-dieu-hoa-daikin-vrv-vrf-thong-qua-kac00x"
+    anchor: "Cách giao tiếp Modbus với điều hòa Daikin VRV/VRF thông qua KAC00X"
+  - url: "https://knxstore.vn/chon-gateway-intesis-the-nao-cho-dung-loai-may-lanh-ban-dung.html"
+    slug: "chon-gateway-intesis-the-nao-cho-dung-loai-may-lanh-ban-dung"
+    anchor: "Chọn Gateway Intesis thế nào cho đúng loại máy lạnh bạn dùng?"
+  - url: "https://knxstore.vn/giai-phap-matter-thread-cho-dieu-hoa-da-thuong-hieu.html"
+    slug: "giai-phap-matter-thread-cho-dieu-hoa-da-thuong-hieu"
+    anchor: "Giải pháp Matter Thread cho điều hòa đa thương hiệu"
+  - url: "https://knxstore.vn/he-thong-dieu-hoa-vrv-va-vrf-la-gi.html"
+    slug: "he-thong-dieu-hoa-vrv-va-vrf-la-gi"
+    anchor: "Hệ thống điều hòa VRV và VRF là gì?"
+  - url: "https://knxstore.vn/so-sanh-dieu-khien-dieu-hoa-intesis-coolautomation-airzone.html"
+    slug: "so-sanh-dieu-khien-dieu-hoa-intesis-coolautomation-airzone"
+    anchor: "So sánh giải pháp HVAC: Intesis, CoolAutomation, Airzone"
+  - url: "https://knxstore.vn/he-thong-hvac-xanh.html"
+    slug: "he-thong-hvac-xanh"
+    anchor: "HVAC xanh giúp công trình tiết kiệm điện và sống khỏe thế nào?"
+  - url: "https://knxstore.vn/hvac-la-gi.html"
+    slug: "hvac-la-gi"
+    anchor: "Hệ thống  HVAC là gì? Các thiết bị nào cấu thành HVAC?"
+  - url: "https://knxstore.vn/cach-tiet-kiem-dieu-hoa-trong-mua-he.html"
+    slug: "cach-tiet-kiem-dieu-hoa-trong-mua-he"
+    anchor: "15 Cách tiết kiệm điện khi dùng điều hòa vào mùa hè"
 ---
 
 # Hướng dẫn sử dụng thermostat Matter Wi-Fi model 81mtac01
 
 > Hướng dẫn lắp đặt & sử dụng Thermostat Matter Wi-Fi HVAC Controller Model 81MTAC01, đấu nối VRF, kết nối Wi-Fi 2.4GHz, thiết lập Matter với Apple Home/Google Home. Xem chi tiết cách cài đặt.
+
+## Article Body
+
+Đây là hướng dẫn chi tiết và đầy đủ giúp người dùng lắp đặt, thiết lập và vận hành bộ điều khiển điều hòa thông minh Thermostat Matter Wi-Fi HVAC Controller Model 81MTAC01 do KNXStore phân phối.
+
+Giới thiệu thiết bị thermostat Matter Wi-Fi model 81mtac01
+
+Model 81MTAC01 là bộ điều khiển nhiệt độ thông minh cho hệ thống HVAC, tích hợp công nghệ Matter qua Wi-Fi. Thiết bị được thiết kế để thay thế bộ điều khiển treo tường truyền thống, cho phép người dùng kiểm soát các chức năng của điều hòa không khí (VRF, Multi-split, Duct, Central AC) qua màn hình cảm ứng 3.95 inch, ứng dụng di động (Gree+ hoặc GreeSmart) và các nền tảng nhà thông minh (Apple Home, Google Home, Alexa, Samsung SmartThings).
+
+{products:[2463,2464,2465,2466,2467,2468,2469,2470,2471,2472,2473,2474]}
+
+Cấu tạo mặt trước thermostat Matter Wi-Fi model 81mtac01
+
+Thiết bị có màn hình cảm ứng TFT màu 3.95 inch. Các thành phần trên màn hình như sau:
+
+
+	Vùng hiển thị nhiệt độ lớn: Hiển thị nhiệt độ phòng hiện tại.
+	Vùng cài đặt nhiệt độ: Hiển thị nhiệt độ mong muốn (Set Point).
+	Biểu tượng chế độ hoạt động: Hiển thị chế độ đang được chọn (Làm mát/Sưởi ấm/Hút ẩm/Quạt/Tự động).
+	Biểu tượng tốc độ quạt: Hiển thị cấp độ quạt (1–7 cấp).
+	Các nút cảm ứng: Cho phép truy cập nhanh để điều chỉnh nhiệt độ, tốc độ quạt, chế độ, và vào menu cài đặt.
+
+
+
+
+Hướng dẫn lắp đặt
+
+Lưu ý an toàn: Luôn ngắt nguồn điện chính (CB tổng) của hệ thống điều hòa trước khi thực hiện bất kỳ thao tác đấu nối điện nào.
+
+Các khâu cần chuẩn bị
+
+
+	Đảm bảo có sẵn hộp âm tường loại 86-type (tiêu chuẩn Việt Nam/Trung Quốc) hoặc European 60-type tại vị trí lắp đặt.
+	Xác định chính xác loại máy lạnh (hãng và model) để chọn cổng kết nối dây phù hợp.
+
+
+Hướng dẫn đấu nối dây với máy lạnh
+
+
+	Đưa dây tín hiệu từ dàn lạnh qua hộp âm tường đến vị trí lắp đặt bộ điều khiển.
+	Tháo mặt sau (Base Plate) của thiết bị 81MTAC01 và cố định vào hộp âm tường bằng vít.
+	Đấu nối 2 dây tín hiệu vào cổng kết nối tương ứng trên mặt sau thiết bị (Thường là cổng có ký hiệu giao tiếp như P1/P2, A/B, R1/R2, v.v.).
+
+
+
+
+Kết nối dây tín hiệu giữa bộ điều khiển 81MTAC01 và dàn lạnh (Indoor Unit) theo sơ đồ cổng kết nối tương ứng với từng hãng máy:
+
+
+	
+		
+			
+			Thương hiệu
+			
+			
+			Cổng kết nối trên dàn lạnh
+			
+			
+			Dây nối
+			
+		
+		
+			
+			Daikin
+			
+			
+			P1/P2
+			
+			
+			2 dây
+			
+		
+		
+			
+			Mitsubishi Electric
+			
+			
+			CN105
+			
+			
+			2–4 dây (tùy model)
+			
+		
+		
+			
+			Mitsubishi Heavy
+			
+			
+			A1B1
+			
+			
+			2 dây
+			
+		
+		
+			
+			Samsung
+			
+			
+			R1R2 (Indoor) / F1 (Outdoor)
+			
+			
+			2–3 dây
+			
+		
+		
+			
+			Panasonic
+			
+			
+			R1/R2
+			
+			
+			2 dây
+			
+		
+		
+			
+			Gree
+			
+			
+			A1B1 / P1P2 / CN2
+			
+			
+			2 dây
+			
+		
+		
+			
+			Midea
+			
+			
+			X1X2 / CN20 / CN40
+			
+			
+			2 dây
+			
+		
+		
+			
+			Toshiba
+			
+			
+			U1U2
+			
+			
+			2 dây
+			
+		
+		
+			
+			Haier
+			
+			
+			P Q
+			
+			
+			2 dây
+			
+		
+		
+			
+			Hisense
+			
+			
+			CN18
+			
+			
+			2 dây
+			
+		
+		
+			
+			Hitachi
+			
+			
+			A B / CN2
+			
+			
+			2 dây
+			
+		
+	
+
+
+Hoàn thiện lắp đặt
+
+
+	Gắn thân bộ điều khiển (màn hình) vào mặt sau đã cố định, đảm bảo khớp nối chắc chắn.
+	Bật lại nguồn điện chính (CB tổng) của hệ thống điều hòa.
+
+
+Hướng dẫn kết nối Wi-Fi thiết bị thermostat Matter
+
+Khởi động và chuẩn bị
+
+
+	Sau khi cấp nguồn, thiết bị sẽ tự khởi động và hiển thị màn hình chính.
+	Nếu thiết bị chưa được cài đặt, màn hình sẽ hiển thị trạng thái chờ kết nối Wi-Fi và Matter.
+
+
+
+
+Ghép nối Matter qua ứng dụng
+
+Thiết bị sử dụng chuẩn Matter qua Wi-Fi (2.4GHz) để tích hợp vào các hệ sinh thái nhà thông minh. Bạn có thể theo dõi và làm tuần tự theo các bước sau:
+
+
+	Mở ứng dụng quản lý nhà thông minh của bạn (ví dụ: Apple Home, Google Home, Samsung SmartThings hoặc ứng dụng Gree+).
+	Sử dụng camera của điện thoại hoặc chức năng "Thêm thiết bị" trong ứng dụng để quét Mã QR Matter (thường được dán trên hộp sản phẩm hoặc mặt sau thiết bị).
+	Ứng dụng sẽ tự động phát hiện thiết bị và yêu cầu nhập thông tin mạng Wi-Fi 2.4GHz.
+
+
+Lưu ý: Bạn cần phải đảm bảo điện thoại và thiết bị đang ở gần nhau và mạng Wi-Fi là 2.4GHz.
+
+
+
+
+
+Các lỗi thường gặp và cách xử lý
+
+
+	
+		
+			
+			Vấn đề
+			
+			
+			Nguyên nhân có thể
+			
+			
+			Cách xử lý
+			
+		
+		
+			
+			Không kết nối được Wi-Fi.
+			
+			
+			Thiết bị ở quá xa router, chỉ hỗ trợ 2.4GHz, sai mật khẩu Wi-Fi.
+			
+			
+			Đảm bảo Wi-Fi 2.4GHz đang hoạt động, đưa thiết bị lại gần router, kiểm tra lại mật khẩu.
+			
+		
+		
+			
+			App không nhận thiết bị sau khi Reset.
+			
+			
+			Matter link cũ chưa được xóa khỏi hệ sinh thái nhà thông minh.
+			
+			
+			Xóa thiết bị khỏi ứng dụng Matter (Apple Home/Google Home/Alexa) trước khi Reset, sau đó thực hiện ghép nối lại từ đầu.
+			
+		
+		
+			
+			Sai nhiệt độ hoặc không điều khiển được quạt.
+			
+			
+			Lỗi kết nối dây tín hiệu với dàn lạnh (VRF/AC).
+			
+			
+			Ngắt nguồn, kiểm tra lại việc đấu nối dây P1/P2, A/B, CN105, v.v. theo đúng cổng tương ứng với hãng máy.
+			
+		
+		
+			
+			Lỗi hiển thị màn hình (Đứng hình).
+			
+			
+			Lỗi phần mềm tạm thời hoặc nguồn điện không ổn định.
+			
+			
+			Thử Khởi động lại (Tắt và Bật lại nguồn) thiết bị. Nếu không được, thực hiện Khôi phục cài đặt gốc (Factory Reset).
+			
+		
+		
+			
+			Không sử dụng được chế độ Sưởi ấm (Heat).
+			
+			
+			Dàn lạnh không hỗ trợ chế độ Heat hoặc đang bị khóa.
+			
+			
+			Kiểm tra xem hệ thống điều hòa VRF/AC của bạn có hỗ trợ sưởi ấm không.
+			
+		
+	
+
+
+Thông số kỹ thuật
+
+
+	
+		
+			
+			Model
+			
+			
+			81MTAC01
+			
+		
+		
+			
+			Loại sản phẩm
+			
+			
+			Bộ điều khiển AC thông minh (Matter over Wi-Fi)
+			
+		
+		
+			
+			Màn hình
+			
+			
+			Cảm ứng TFT màu 3.95 inch, viền siêu mỏng, điều chỉnh độ sáng vô cấp
+			
+		
+		
+			
+			Kết nối
+			
+			
+			Wi-Fi IEEE 802.11 b/g/n 2.4GHz, Matter
+			
+		
+		
+			
+			Hệ thống tương thích
+			
+			
+			VRF, Multi-split, Ducted, Central AC (Đa số hãng lớn)
+			
+		
+		
+			
+			Kích thước
+			
+			
+			86 × 86 × 11 mm
+			
+		
+		
+			
+			Trọng lượng
+			
+			
+			130 g
+			
+		
+		
+			
+			Lắp đặt
+			
+			
+			Có dây, tương thích hộp âm tường 86-type hoặc European 60-type
+			
+		
+		
+			
+			Chế độ điều khiển
+			
+			
+			Nhiệt độ, Tốc độ quạt (1–7 cấp), Cool, Heat, Dry
+			
+		
+		
+			
+			Hỗ trợ giọng nói
+			
+			
+			Apple Home, Google Home, Alexa, Samsung SmartThings
 
 ## Raw JSON-LD
 

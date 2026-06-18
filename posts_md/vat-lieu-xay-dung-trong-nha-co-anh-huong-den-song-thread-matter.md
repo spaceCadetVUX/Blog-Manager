@@ -6,11 +6,268 @@ og_site_name: "KNX Store"
 image: "https://knxstore.vn/assets/image/post/vat-lieu-xay-dung-trong-nha-co-anh-huong-den-song-thread-matter.jpg"
 datePublished: "2025-09-26T11:47:26+07:00"
 dateModified: "2025-09-26T11:47:26+07:00"
+articleSection: "Kiến thức"
+word_count: 1641
+mentions: ["Aqara", "Apple Home"]
+breadcrumb:
+  - name: "Trang chủ"
+    url: "https://knxstore.vn/"
+  - name: "Blogs"
+    url: "https://knxstore.vn/blogs"
+  - name: "Kiến thức"
+    url: "https://knxstore.vn/blogs/kien-thuc"
+  - name: "Vật liệu xây dựng trong nhà có gây ảnh hưởng đến sóng Thread Matter?"
+    url: "https://knxstore.vn/vat-lieu-xay-dung-trong-nha-co-anh-huong-den-song-thread-matter.html"
+internal_links:
+  - url: "https://knxstore.vn/ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome.html"
+    slug: "ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome"
+    anchor: "IC là gì? Vai trò của IC trong thiết bị Smarthome"
+  - url: "https://knxstore.vn/nfc-la-gi-vi-sao-smarthome-hien-dai-deu-tich-hop-cong-nghe-nay.html"
+    slug: "nfc-la-gi-vi-sao-smarthome-hien-dai-deu-tich-hop-cong-nghe-nay"
+    anchor: "NFC là gì? Vì sao smarthome hiện đại đều tích hợp công nghệ này?"
+  - url: "https://knxstore.vn/spi-la-gi-ung-dung-spi-led-controller-trong-led-rgbw.html"
+    slug: "spi-la-gi-ung-dung-spi-led-controller-trong-led-rgbw"
+    anchor: "SPI là gì? Ứng dụng SPI LED Controller trong LED RGBW"
+  - url: "https://knxstore.vn/10-bi-quyet-de-so-huu-mang-thread-on-dinh-muot-ma-cho-smarthome.html"
+    slug: "10-bi-quyet-de-so-huu-mang-thread-on-dinh-muot-ma-cho-smarthome"
+    anchor: "10 bí quyết để sở hữu mạng Thread ổn định, mượt mà cho Smarthome"
+  - url: "https://knxstore.vn/5-buoc-thiet-lap-nha-thong-minh-theo-chuan-matter.html"
+    slug: "5-buoc-thiet-lap-nha-thong-minh-theo-chuan-matter"
+    anchor: "5 bước thiết lập nhà thông minh theo chuẩn Matter"
+  - url: "https://knxstore.vn/faq-giai-dap-cac-cau-hoi-thuong-gap-ve-tieu-chuan-matter.html"
+    slug: "faq-giai-dap-cac-cau-hoi-thuong-gap-ve-tieu-chuan-matter"
+    anchor: "FAQ: Giải đáp các câu hỏi thường gặp về tiêu chuẩn Matter"
+  - url: "https://knxstore.vn/vai-tro-cua-aes-128-ccm-trong-bao-ve-truyen-thong-knx-ip.html"
+    slug: "vai-tro-cua-aes-128-ccm-trong-bao-ve-truyen-thong-knx-ip"
+    anchor: "AES-128 CCM là gì? Cơ chế bảo mật tối ưu cho giao thức KNX/IP"
+  - url: "https://knxstore.vn/homey-gioi-thieu-phien-ban-self-hosted-server.html"
+    slug: "homey-gioi-thieu-phien-ban-self-hosted-server"
+    anchor: "Homey giới thiệu phiên bản Self-Hosted Server"
+  - url: "https://knxstore.vn/thiet-bi-nao-tuong-thich-voi-matter.html"
+    slug: "thiet-bi-nao-tuong-thich-voi-matter"
+    anchor: "Thiết bị nào tương thích với Matter?"
+  - url: "https://knxstore.vn/vi-sao-hien-tai-chua-co-camera-an-ninh-tuong-thich-matter.html"
+    slug: "vi-sao-hien-tai-chua-co-camera-an-ninh-tuong-thich-matter"
+    anchor: "Vì sao hiện tại chưa có camera an ninh tương thích Matter?"
 ---
 
 # Vật liệu xây dựng trong nhà có gây ảnh hưởng đến sóng Thread Matter?
 
 > Bê tông, kính Low-E, thép có làm suy hao sóng Thread Matter? Tìm hiểu ảnh hưởng của từng vật liệu và cách khắc phục bằng mesh.
+
+## Article Body
+
+Bạn thường nghĩ sóng không dây điều khiển trong nhà sẽ xuyên tường thoải mái? Nhưng thực tế chỉ cần một bức tường bê tông, kính Low-E hoặc khung thép, tín hiệu đã yếu hẳn, thiết bị chập chờn, app báo mất kết nối.
+
+Vậy câu hỏi đặt ra là: liệu các vật liệu xây dựng trong nhà có đang âm thầm cản trở sóng Thread Matter mà bạn chưa để ý?
+
+
+
+Vì sao sóng không dây Thread Matter dễ suy hao trong nhà và văn phòng?
+
+Trong bất kỳ hệ thống không dây nào, tín hiệu truyền đi đều sẽ yếu dần khi gặp vật cản. Đây là đặc tính tự nhiên của sóng vô tuyến, không chỉ riêng Thread, Wi-Fi hay Zigbee. Quá trình này gọi là suy hao sóng, và trong môi trường nhà ở hoặc văn phòng, nó chủ yếu đến từ:
+
+
+	Các vật liệu hấp thụ sóng như tường bê tông, gạch đặc giữ lại năng lượng, làm tín hiệu suy yếu.
+	Các vật liệu phản xạ sóng như bề mặt kim loại hoặc kính phủ khiến tín hiệu bật ngược, tạo vùng chết.
+	Các vật liệu tán xạ như bê tông cốt thép hoặc gạch block phân tán tín hiệu theo nhiều hướng, làm sóng kém tập trung.
+
+
+Chính những yếu tố này khiến sóng Thread Matter, dù chạy ở băng tần 2.4 GHz vốn tốt hơn 5 GHz hay 6 GHz, vẫn khó tránh khỏi hiện tượng suy hao trong môi trường thực tế.
+
+Đặc điểm tần số của Thread Matter so với Wi-Fi và Zigbee
+
+Các công nghệ không dây phổ biến trong smarthome đều dựa trên sóng vô tuyến, nhưng mỗi công nghệ lại chọn một dải tần khác nhau để tối ưu cho nhu cầu riêng. Việc hiểu rõ đặc điểm này giúp so sánh khả năng xuyên tường, độ ổn định và mức tiêu thụ năng lượng của từng công nghệ.
+
+
+
+Đặc điểm tần số Thread
+
+Hoạt động ở 2.4 GHz IEEE 802.15.4, cùng băng tần với Zigbee. Ưu điểm là độ phủ sóng khá tốt, xuyên tường ổn định, phù hợp cho cảm biến, công tắc, khóa cửa và thiết bị chạy pin. Nhược điểm là băng thông thấp, không phù hợp cho dữ liệu lớn (video, nhạc).
+
+Đặc điểm tần số Zigbee
+
+Cũng sử dụng 2.4 GHz, với cơ chế mesh tương tự. Tuy nhiên Zigbee không phải IP-based nên thường cần bridge riêng để kết nối với các hệ sinh thái lớn (Apple, Google, Amazon). Đây là điểm Thread vượt trội vì tích hợp trực tiếp với Matter mà không cần gateway riêng.
+
+Đặc điểm tần số Wi-Fi
+
+Thông dụng nhất trong nhà ở, dùng cả 2.4 GHz, 5 GHz và 6 GHz. Ưu điểm là băng thông lớn, phù hợp cho camera, TV, loa thông minh. Nhưng ở tần số cao (5 GHz, 6 GHz), tín hiệu dễ suy hao qua tường và tiêu thụ năng lượng nhiều, nên không tối ưu cho thiết bị nhỏ chạy pin.
+
+Mỗi loại vật liệu phổ biến ảnh hưởng đến sóng không dây Thread Matter như thế nào?
+
+Trong nhà ở và văn phòng, suy hao tín hiệu xảy ra khi sóng vô tuyến mất năng lượng vì bị vật liệu hấp thụ, phản xạ hoặc tán xạ.
+
+Mức suy hao thay đổi theo độ dày, khối lượng riêng của vật liệu và tần số; với Matter‑over‑Thread (hoạt động quanh 2,4 GHz), các vật liệu nặng và có kim loại gây suy hao mạnh hơn.
+
+
+	
+		
+			
+			Vật liệu & độ dày (2,4 GHz)
+			
+			
+			Mức suy hao & ghi chú
+			
+			
+			Giải thích
+			
+			
+			Nguồn
+			
+		
+		
+			
+			Tường bê tông / bê tông cốt thép
+			
+			
+			Tường bê tông 240 mm gây mất khoảng 25 dB; bê tông cốt thép (203 mm) trong bảng NIST cho thấy khoảng 31 dB suy hao. Cột chịu lực dày 500 mm cũng gây mất 25 dB.
+			
+			
+			Bê tông có khối lượng riêng và độ ẩm cao làm hấp thụ mạnh; cốt thép còn phản xạ tín hiệu. Các bài viết cảnh báo bê tông (đặc biệt có cốt thép) là “kẻ thù tệ nhất” của tín hiệu không dây.
+			
+			
+			Huawei 2025; Eye Networks 2019.
+			
+		
+		
+			
+			Tường gạch và khối xây
+			
+			
+			Tường gạch 120 mm mất khoảng 10 dB; tường gạch dày 240 mm khoảng 15 dB.
+			
+			
+			Vật liệu có lỗ rỗng và độ ẩm trung bình nên hấp thụ ít hơn bê tông nhưng vẫn đáng kể; NIST và Eye Networks xếp gạch và khối xây vào nhóm cản trở tín hiệu mạnh hơn gỗ hoặc kính.
+			
+			
+			Huawei 2025; Eye Networks 2019.
+			
+		
+		
+			
+			Thạch cao/gypsum board (8 mm)
+			
+			
+			Suy hao thấp, khoảng 3 dB.
+			
+			
+			Thạch cao nhẹ và xốp nên hấp thụ ít; bảng NIST cho thấy tấm drywall gần như không làm giảm cường độ Wi‑Fi.
+			
+			
+			Huawei 2025; Eye Networks 2019.
+			
+		
+		
+			
+			Gỗ
+			
+			
+			Gỗ rỗng 20 mm mất khoảng 2 dB và cánh cửa gỗ thường 40 mm mất 3 dB; cánh cửa gỗ đặc 40 mm có thể tới 10 dB.
+			
+			
+			Gỗ hấp thụ ít; vì vậy gỗ, nhựa và kính thường được xếp vào nhóm vật liệu có khả năng hấp thụ thấp. Tuy nhiên, gỗ đặc và dày có thể tăng suy hao.
+			
+			
+			Huawei 2025; Keenetic 2021.
+			
+		
+		
+			
+			Kính thường
+			
+			
+			Kính 8 mm mất khoảng 4 dB; kính dày 12 mm mất khoảng 8 dB.
+			
+			
+			Kính trong suốt chỉ hấp thụ nhẹ và phản xạ một phần tín hiệu nên suy hao nhỏ.
+			
+			
+			Huawei 2025; Keenetic 2021.
+			
+		
+		
+			
+			Kính low‑e / kính bọc kim loại (tinted, armored)
+			
+			
+			Kính bọc kim loại 30 mm gây suy hao khoảng 25 dB; cửa sổ có lớp phủ kim loại có thể thêm 5–8 dB so với kính thường.
+			
+			
+			Lớp phim kim loại phản xạ và hấp thụ mạnh, là nguyên nhân khiến “kính low‑e” được coi là một trong những vật liệu gây suy giảm Wi‑Fi/Thread nhiều nhất.
+			
+			
+			Huawei 2025; Keenetic 2021.
+			
+		
+		
+			
+			Kim loại và thép
+			
+			
+			Tấm sandwich thép màu 80 mm gây mất 30 dB; thang máy (khoang thép 80mm) cũng khoảng 30 dB.
+			
+			
+			Kim loại là “lồng Faraday” tự nhiên: phản xạ hầu hết tín hiệu và ngăn truyền đi. Do đó thang máy, lan can kim loại hoặc tủ đông sẽ chắn sóng Thread/Matter gần như hoàn toàn.
+			
+			
+			Huawei 2025; Keenetic 2021.
+			
+		
+		
+			
+			Vật liệu cách nhiệt, tường chống cháy
+			
+			
+			Các lớp cách nhiệt dày (1m) trong ngành công nghiệp ghi nhận suy hao ~100 dB – gần như cách ly hoàn toàn.
+			
+			
+			Các cấu kiện dày và chứa chất hấp thụ (bông khoáng, foaming) có thể triệt tiêu sóng, do đó Thread cần sử dụng các node trung gian hoặc chạy cáp Ethernet.
+			
+			
+			Huawei 2025.
+			
+		
+	
+
+
+Thread mesh có khắc phục được suy hao sóng?
+
+Các vật liệu như bê tông cốt thép, kính low-e hay thép gây suy hao mạnh là yếu tố vật lý không thể khắc phục hoàn toàn.
+
+
+
+Thread không làm thay đổi đặc tính xuyên sóng, nhưng nhờ kiến trúc mesh tự phục hồi, nó giảm đáng kể tác động của vật liệu bằng cách:
+
+
+	Tín hiệu có thể đi vòng qua nhiều nút trung gian (ổ cắm, công tắc, cảm biến hỗ trợ Thread) thay vì phụ thuộc vào một đường truyền xuyên tường.
+	Mạng mesh phân tán tải, tránh tình trạng một điểm nghẽn gây mất kết nối toàn hệ thống.
+	Khi một nút bị chắn sóng hoặc ngắt nguồn, các thiết bị còn lại sẽ tự động tìm đường mới.
+
+
+Kết quả là hệ thống Matter-over-Thread vẫn duy trì độ ổn định trong căn hộ nhiều vách bê tông hay văn phòng có nhiều vách ngăn, miễn là mật độ thiết bị trong mạng đủ dày.
+
+Tuy nhiên, trong các môi trường có vật liệu cực kỳ cản trở (thép, thang máy, tường bê tông dày đặc), giải pháp kết hợp bridge Thread-Wifi hoặc đặt thêm router Thread là cần thiết.
+
+Giải pháp cải tiến triển khai Matter-over-Thread trong môi trường nhiều bê tông
+
+Đặc thù của căn hộ và văn phòng hiện đại là nhiều vách ngăn và tường bê tông cốt thép, khiến tín hiệu Thread dễ bị suy hao.
+
+
+
+Để hệ thống Matter-over-Thread vận hành ổn định, cần áp dụng một số giải pháp kỹ thuật:
+
+
+	Tăng mật độ node Thread bằng cách lắp thêm công tắc, ổ cắm, cảm biến hỗ trợ Thread để tạo nhiều đường đi thay thế cho tín hiệu, tránh phụ thuộc vào một hướng xuyên tường.
+	Kết hợp có dây và không dây, sử dụng KNX hoặc Ethernet làm backbone cho các khu vực quan trọng, trong khi Thread đảm nhận kết nối linh hoạt cho thiết bị chạy pin.
+	Bổ sung Thread Border Router hoặc bridge Thread-Wifi, giải pháp này giúp tín hiệu vượt qua vùng chết sóng hoặc vật liệu kim loại cản trở mạnh.
+	Tính toán từ giai đoạn thiết kế, dự đoán vị trí tường chịu lực, cửa kính low-e và thang máy để bố trí router Thread, gateway hoặc node trung gian hợp lý.
+
+
+Nhờ kết hợp các giải pháp này, hệ thống smarthome không chỉ giảm ảnh hưởng của vật liệu xây dựng mà còn đảm bảo tính ổn định và khả năng mở rộng lâu dài.
+
+Tư vấn và thiết kế smarthome với Thread, Matter và KNX tại KNXStore
+
+Để hệ thống smarthome hoạt động ổn định trong môi trường nhiều vật liệu cản sóng như bê tông hoặc kính low-e, chỉ lựa chọn thiết bị hỗ trợ Matter hay Thread là chưa đủ. Quan trọng hơn là cách thiết kế mạng lưới, phân bố node, kết hợp có dây KNX với không dây Thread, và bổ sung bridge khi cần. KNXStore mang đến dịch vụ tư vấn và triển khai trọn gói, giúp bạn có một giải pháp tối ưu, vừa đảm bảo độ tin cậy của KNX, vừa khai thác sự linh hoạt của Matter-over-Thread.
 
 ## Raw JSON-LD
 

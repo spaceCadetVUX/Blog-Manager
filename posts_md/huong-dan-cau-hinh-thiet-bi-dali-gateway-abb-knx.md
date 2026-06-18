@@ -6,11 +6,367 @@ og_site_name: "KNX Store"
 image: "https://knxstore.vn/assets/image/post/huong-dan-cau-hinh-thiet-bi-dali-gateway-abb-knx.jpg"
 datePublished: "2025-05-07T22:47:08+07:00"
 dateModified: "2025-05-07T22:47:08+07:00"
+articleSection: "Hướng dẫn"
+word_count: 2244
+mentions: ["Aqara", "Apple Home"]
+breadcrumb:
+  - name: "Trang chủ"
+    url: "https://knxstore.vn/"
+  - name: "Blogs"
+    url: "https://knxstore.vn/blogs"
+  - name: "Hướng dẫn"
+    url: "https://knxstore.vn/blogs/huong-dan"
+  - name: "Hướng dẫn cấu hình thiết bị DALI Gateway ABB KNX"
+    url: "https://knxstore.vn/huong-dan-cau-hinh-thiet-bi-dali-gateway-abb-knx.html"
+internal_links:
+  - url: "https://knxstore.vn/huong-dan-cap-nhat-firmware-va-main-program-kanonbus-kac005-moi-nhat-2026.html"
+    slug: "huong-dan-cap-nhat-firmware-va-main-program-kanonbus-kac005-moi-nhat-2026"
+    anchor: "Hướng Dẫn Cập Nhật Firmware Và Main Program Kanonbus KAC005 Mới Nhất 2026"
+  - url: "https://knxstore.vn/huong-dan-ket-noi-rem-cua-tu-dong-rs485.html"
+    slug: "huong-dan-ket-noi-rem-cua-tu-dong-rs485"
+    anchor: "Hướng dẫn kết nối rèm cửa tự động RS485"
+  - url: "https://knxstore.vn/huong-dan-ket-noi-dieu-hoa-khong-khi-dong-kac00x.html"
+    slug: "huong-dan-ket-noi-dieu-hoa-khong-khi-dong-kac00x"
+    anchor: "Hướng dẫn kết nối điều hòa không khí - Dòng KAC00X"
+  - url: "https://knxstore.vn/cac-phuong-an-dieu-khien-rem-cua-tu-dong-cho-smarthome-knx.html"
+    slug: "cac-phuong-an-dieu-khien-rem-cua-tu-dong-cho-smarthome-knx"
+    anchor: "Các phương án điều khiển rèm cửa tự động cho Smarthome KNX"
+  - url: "https://knxstore.vn/giai-phap-dieu-khien-hvac-vrv-vrf-tu-he-thong-smarthome-va-bms.html"
+    slug: "giai-phap-dieu-khien-hvac-vrv-vrf-tu-he-thong-smarthome-va-bms"
+    anchor: "Hệ thống điều khiển HVAC là gì? Giải pháp nào điều khiển VRV/VRF cho hệ thống Smarthome?"
 ---
 
 # Hướng dẫn cấu hình thiết bị DALI Gateway ABB KNX
 
 > Xem ngay bài viết sau để tìm hiểu thêm về cách cấu hình thiết bị DALI Gateway ABB vào hệ thống KNX, giúp điều khiển chiếu sáng thông minh hiệu quả, tiết kiệm và linh hoạt.
+
+## Article Body
+
+Trong bài viết này, KNXStore sẽ cùng bạn tìm hiểu cách cấu hình DALI Gateway ABB tích hợp vào hệ thống KNX, giúp điều khiển chiếu sáng thông minh hiệu quả, tiết kiệm và linh hoạt. Đây là một tài liệu chuyên sâu nhưng sẽ được trình bày dễ hiểu cho cả người mới lẫn kỹ sư triển khai.
+
+Giới thiệu tổng quan về hệ thống DALI và KNX
+
+Hệ sinh thái nhà thông minh ngày càng phát triển, và việc tích hợp giữa chuẩn KNX và DALI đang mở ra nhiều cơ hội mới cho việc điều khiển hệ thống chiếu sáng thông minh.
+
+Việc tích hợp DALI vào mạng KNX giúp điều khiển đèn hiệu quả và đồng bộ với hệ thống cảm biến, nút nhấn, giao diện điều khiển,v.v.. Với tính năng DALI Gateway có trên ABB KNX Gateway, người dùng có thể:
+
+
+	Điều khiển trực tiếp các thiết bị chiếu sáng DALI từ hệ thống KNX.
+	Giao tiếp hai chiều giữa các group address KNX và ballast DALI.
+	Tối ưu hóa hiệu quả chiếu sáng tùy theo không gian sống và làm việc.
+
+
+
+
+Thiết bị sử dụng – ABB DALI Gateway DG/S2.64.5.1
+
+Thiết bị ABB DALI Gateway DG/S2.64.5.1 cho phép giao tiếp 2 chiều giữa hệ DALI và KNX. Thiết bị hỗ trợ tối đa 64 driver DALI, chia nhóm linh hoạt, tích hợp cảnh chiếu sáng, đổi màu, điều chỉnh độ sáng và phản hồi trạng thái.
+
+
+
+Bước 1- Cấu hình thiết bị bằng phần mềm i-bus® Tool
+
+Để bắt đầu, chúng ta sẽ sử dụng phần mềm i-bus® Tool của ABB để cấu hình thiết bị DALI Gateway. Đây là công cụ miễn phí, hỗ trợ bạn trong việc gán địa chỉ và cấu hình các driver đèn DALI.
+
+Các bước cấu hình như sau:
+
+
+	Cấp nguồn cho hệ thống. Bạn cần đảm bảo rằng thiết bị DALI Gateway và các driver đèn DALI đều được cấp nguồn đầy đủ.
+	Mở phần mềm i-bus® Tool sau khi đã kết nối thiết bị với hệ thống KNX. Lúc này bạn cần lưu ý chọn đúng thiết bị DALI Gateway (trong ví dụ này là DG/S2.64.5.1) trên phần mềm.
+	Tiếp theo cần gán địa chỉ cho các driver. Chuyển sang tab DALI, bạn sẽ thấy các ô vuông đại diện cho từng địa chỉ ballast (0-63). Nhấn nút "Start DALI Adressierung" để phần mềm tự động quét và gán địa chỉ cho các driver.
+	Sau đó bạn có thể tiến hành chọn từng đèn để xác định chính xác từng địa chỉ driver và nhóm chiếu sáng. Lúc này, trong thực tế, đèn được chọn sẽ sáng, và tất cả đèn trong bộ điều khiển sẽ tắt. Bạn có thể kéo từng driver vào các nhóm DALI (G0 đến G15) tuỳ theo cách chia khu vực chiếu sáng.
+	Sau khi hoàn tất việc cấu hình, hãy nhấn "Gateway-Werte übernehmen" để lưu lại cấu hình vào bộ nhớ thiết bị. Quay lại ETS, tiến hành mapping group address tương ứng cho việc dim, on/off, thay đổi nhiệt độ màu…
+
+
+Chú ý:
+
+
+	Khi cấu hình ở bước 3, các driver nào hoạt động tốt sẽ hiển thị với biểu tượng bóng đèn màu vàng hoặc trắng, nếu thấy dấu X đỏ có nghĩa là thiết bị đang gặp các vấn đề hư hỏng hoặc lỏng dây.
+	Bạn cần đảm bảo rằng tất cả các dây kết nối đều ổn định để tránh tình trạng lỗi.
+
+
+
+	Nếu gặp bất kỳ vấn đề nào trong quá trình gán địa chỉ, kiểm tra lại kết nối dây hoặc trạng thái của driver.
+
+
+
+
+Bước 2 - Cấu hình logic điều khiển trong ETS
+
+Sau khi đã gán địa chỉ và group DALI, bước tiếp theo là cấu hình logic điều khiển trong phần mềm ETS (Engineering Tool Software) của KNX. Đây chính là lúc chúng ta làm việc trực tiếp với Group Object của DALI Gateway.
+
+
+Trong hệ DALI tích hợp KNX, Group Address đóng vai trò là “ngôn ngữ giao tiếp” giữa các thiết bị điều khiển (nút bấm, cảm biến...) và đèn chiếu sáng thông qua Gateway. Mỗi group address tương ứng với một chức năng cụ thể như: bật/tắt, dim, đổi màu, trạng thái…
+
+Các nhóm Group Address cơ bản như sau (cho đèn dim DALI DT8):
+
+
+	Switch (1-bit). Có chức năng điều khiển bật/tắt đèn, lệnh đơn giản từ phím nhấn, cảm biến hoặc tự động hóa. Thường ứng dụng trong các không gian như phòng ngủ, hành lang, toilet.
+	Brightness Value Output (1 byte). Điều chỉnh các mức sáng một cách cụ thể (0–100%). Phù hợp khi điều khiển qua app, giao diện visualization, giúp người dùng chỉnh độ sáng chính xác hơn.
+	Relative Dimming (4-bit). Có chức năng tăng/ giảm độ sáng bằng cách nhấn giữ nút. Rất phù hợp với nút bấm vật lý dạng “press & hold”.
+	Set Color Temperature (2 byte – DPT 7.600) (Kelvin). Có chức năng điều khiển nhiệt độ màu (CCT) cho đèn DT8 Tunable White. Giá trị tính bằng Kelvin, ví dụ: 2700K (ấm), 4000K (trung tính), 6000K (lạnh).
+	RGB(W) Color Control (1 byte mỗi màu). Có thể điều khiển màu sắc cho đèn DT8 RGBW. Mỗi màu là một group riêng, điều khiển cường độ từ 0–255. Dùng cho led dây RGB, đèn hắt trần, ánh sáng trang trí.
+
+
+
+	
+		
+			
+			Chức năng
+			
+			
+			Group Object trong Gateway
+			
+			
+			Kiểu dữ liệu
+			
+			
+			Công dụng
+			
+		
+		
+			
+			Bật/Tắt đèn
+			
+			
+			Switch
+			
+			
+			1-bit
+			
+			
+			Điều khiển On/Off cho driver DALI
+			
+		
+		
+			
+			Điều chỉnh độ sáng (dimming)
+			
+			
+			Brightness Value Output
+			
+			
+			1 byte (0–100%)
+			
+			
+			Gửi giá trị phần trăm độ sáng đến driver
+			
+		
+		
+			
+			Dimming giữ nút (tăng/giảm)
+			
+			
+			Relative Dimming
+			
+			
+			4-bit
+			
+			
+			Nhấn giữ nút để tăng/giảm dần độ sáng
+			
+		
+		
+			
+			Đổi nhiệt độ màu (Tunable White)
+			
+			
+			Set color temperature (Kelvin)
+			
+			
+			2 byte (DPT 7.600)
+			
+			
+			Điều khiển đèn DT8 loại CCT (trắng ấm – trắng lạnh)
+			
+		
+		
+			
+			Đổi màu RGBW
+			
+			
+			RGB(W) Color Control
+			
+			
+			1 byte mỗi màu
+			
+			
+			Điều khiển đèn DT8 RGBW từng kênh màu (R, G, B, W)
+			
+		
+	
+
+
+Các thiết bị có những phản hồi trạng thái (status feedback) như sau:
+
+
+	Status Switch (1-bit). Trả về trạng thái bật/tắt của driver. Thường dùng để hiển thị trên app, visualization, hoặc đồng bộ với LED báo trên công tắc cảm ứng.
+	Status Brightness Value (1 byte). Gửi lại mức độ sáng hiện tại dưới dạng phần trăm. Cần thiết khi người dùng điều chỉnh đèn từ nhiều nguồn (phím bấm, cảm biến, app), đảm bảo UI luôn hiển thị đúng.
+	Status Color Temperature (2 byte – DPT 7.600). Trả về nhiệt độ màu thực tế (Kelvin) đang được driver sử dụng. Hữu ích khi dùng chế độ Tunable White, cần đồng bộ trạng thái trên giao diện người dùng.
+	Lamp/Ballast Fault (1-bit hoặc logic). Phát hiện lỗi phần cứng như: driver hỏng, bóng cháy, mất nguồn DALI. Có thể cấu hình để gửi cảnh báo lên BMS hoặc bật đèn cảnh báo trong hệ thống.
+
+
+
+	
+		
+			
+			Trạng thái
+			
+			
+			Group Object trong Gateway
+			
+			
+			Kiểu dữ liệu
+			
+			
+			Công dụng
+			
+		
+		
+			
+			Trạng thái On/Off
+			
+			
+			Status Switch
+			
+			
+			1-bit
+			
+			
+			Cho biết đèn đang bật hay tắt
+			
+		
+		
+			
+			Mức sáng hiện tại
+			
+			
+			Status Brightness Value
+			
+			
+			1 byte
+			
+			
+			Trả về % độ sáng thực tế
+			
+		
+		
+			
+			Nhiệt độ màu (Kelvin)
+			
+			
+			Status Color Temperature
+			
+			
+			2 byte (DPT 7.600)
+			
+			
+			Trả về giá trị nhiệt độ màu đang dùng (Kelvin)
+			
+		
+		
+			
+			Lỗi driver, lỗi nguồn, cháy bóng
+			
+			
+			Lamp/Ballast Fault
+			
+			
+			1-bit hoặc logic
+			
+			
+			Phát hiện lỗi đèn cháy, ballast hỏng, mất tín hiệu...
+			
+		
+	
+
+
+Dựa vào các group từ 2 loại nhóm trên, bạn có thể dùng để khai báo cho các hệ điều khiển dali khác thông qua các group KNX được gán trong cấu hình ETS5.
+
+Ngoài ra, KNX DALI còn có thể tích hợp với các hệ khác như Savant, Control4, Crestron, Lutron, Home Assistant, Apple Home,v.v..
+
+Cấu hình nâng cao và các thông số đặc biệt
+
+Cấu hình Parameters
+
+
+
+Ngay trong phần “Parameters”, bạn có thể thay đổi được các thông số cũng như số lượng driver đèn DALI mà chúng ta có thể điều khiển.
+
+
+
+Cấu hình General
+
+Tại mục General sẽ hiển thị các thông số cấu hình để đáp ứng mọi nhu cầu dự án như:
+
+
+	Inactive wait state on KNX recovery: Đặt thời gian chờ (tính bằng giây) sau khi kết nối KNX bị ngắt rồi phục hồi. Giúp hệ thống ổn định trước khi hoạt động lại.
+	Send stat. val. on inactive wait state: Gửi trạng thái của đèn trong lúc hệ thống đang chờ phục hồi (nên tắt để tránh sai trạng thái).
+	Limit number of KNX telegrams: Giới hạn số lượng telegram KNX gửi ra (bật để tránh spam mạng nếu có nhiều thiết bị cùng phản hồi).
+	Enable manual operation: Cho phép thao tác tay trên thiết bị Gateway (nút nhấn vật lý).
+	Brightness value on exiting manual operation: Chọn giữ lại mức sáng đã điều chỉnh bằng tay hoặc trả về trạng thái do KNX điều khiển trước đó.
+	Reset from manual operation to KNX operation: Chọn cách chuyển lại điều khiển về KNX sau khi có can thiệp tay: nhấn nút hoặc tự động.
+	Time for automatic reset: Nếu chọn reset tự động, đây là thời gian chờ trước khi chuyển lại điều khiển về KNX (ví dụ 60 phút).
+	Enable group object "In operation": Bật group object gửi trạng thái Gateway đang hoạt động (hữu ích cho giám sát hệ thống).
+	Enable group object "Request status values": Cho phép thiết bị khác gửi lệnh yêu cầu Gateway cập nhật trạng thái của các thiết bị DALI.
+	Enable group object "Gateway supply voltage fault": Bật báo lỗi nếu nguồn cấp của Gateway bị mất hay bất thường.
+
+
+Ngoài ra còn rất nhiều thông số chính trong bộ DG/S2.64.5.1 ABB để giúp nâng cao toàn bộ công dụng mà dali có thể mang lại.
+
+Cấu hình DALI configuration
+
+
+
+Tại mục “A DALI configuration”, có thể bật các tính năng DALI như nhóm (Group), từng đèn (Ballast), chiếu sáng khẩn cấp (Emergency), Scene, hiệu ứng (Sequence). Tùy chỉnh trước khi hệ thống tạo group object.
+
+Cài đặt “A Output” để tiến hành cấu hình các hành vi khi bật/tắt, dim đèn, fade time.
+
+
+	Status: Trả trạng thái On/Off, độ sáng, nhiệt độ màu.
+	Fault: Trả thông tin lỗi đèn, lỗi điện áp, lỗi driver.
+	Functions: Kích hoạt tính năng burn-in, slave offset, thời lượng sử dụng,...
+	Color functions: Điều khiển màu RGB, trắng ấm/lạnh (CCT), bao gồm HCL & Dim2Warm.
+
+
+Cài đặt trong “A Group/ballast x template” được dùng để tạo cấu hình mẫu cho nhiều ballast cùng loại.
+
+
+	Status template: Mẫu phản hồi trạng thái.
+	Fault template: Mẫu xử lý lỗi.
+	Functions template: Mẫu chức năng phụ trợ (runtime, standby,...).
+	Slave template: Gán đèn phụ đi theo đèn chính.
+	Staircase lighting template: Chiếu sáng theo thời gian như cầu thang, hành lang.
+	Color temperature Tc template: Giới hạn, định dạng, thời gian chuyển đổi nhiệt độ màu cho đèn Tunable White.
+	RGB(W) color control template: Gán thông số cho đèn RGBW như fade time, group, thứ tự kênh,...
+
+
+Cài đặt trong “A Groups > G1…”  được dùng để cấu hình riêng cho từng nhóm G1–G16 nếu bạn không dùng template.
+
+
+	Status: Trả trạng thái nhóm.
+	Fault: Trả lỗi cho nhóm.
+	Functions: Chức năng nâng cao cho nhóm.
+	Color temperature Tc: Điều chỉnh riêng nhiệt độ màu cho từng group.
+
+
+Sau khi hoàn tất mọi bước cấu hình và đảm bảo thiết bị hoạt động ổn định theo đúng yêu cầu sử dụng, hệ thống DALI Gateway ABB giờ đây đã sẵn sàng để hoạt động trong mạng lưới KNX.
+
+Việc tích hợp này sẽ giúp toàn bộ hệ thống chiếu sáng sử dụng DALI trở thành một mắt xích trong mạng lưới KNX Smarthome/Smart Building. Người dùng có thể dễ dàng điều khiển đèn bằng mọi phương tiện quen thuộc có sử dụng KNX: Từ nút nhấn cảm ứng, cảm biến chuyển động, màn hình điều khiển trung tâm cho đến điện thoại thông minh hoặc thậm chí là một câu lệnh với trợ lý ảo (Alexa, Google Assistant, Siri nếu có Matter Gateway).
+
+Điều kỳ diệu hơn cả là khả năng hệ thống tự cảm được bối cảnh và phản ứng theo những kịch bản ánh sáng được thiết kế tinh tế:
+
+
+	Khi có người vào phòng, ánh sáng tự động bật ở mức 70%, với sắc vàng ấm (3000K).
+	Vào buổi trưa, hệ thống giảm bớt cường độ sáng để tiết kiệm điện, chuyển sang tông trung tính.
+	Khi nhấn nút “Scene Relax”, ánh sáng dịu xuống còn 40%, nhiệt độ màu 2700K để tạo nên không gian thư giãn.
+
+
+Chính sự kết hợp giữa ABB DALI Gateway DG/S2.64.5.1 và giao thức KNX giúp lập trình viên, kỹ sư hay người vận hành dễ dàng tạo nên một hệ thống chiếu sáng vừa hiệu quả, dễ bảo trì, lại có khả năng mở rộng linh hoạt trong tương lai.
+
+Không chỉ dừng lại ở đèn chiếu sáng, toàn bộ hệ thống KNX còn có thể tích hợp thêm các thành phần khác như rèm cửa tự động, điều hòa không khí (HVAC), âm thanh đa vùng,v.v.. Tất cả sẽ được điều phối trong cùng một nền tảng thống nhất.
+
+Một lần triển khai đúng – sử dụng bền vững – mở rộng dễ dàng. Đó là lý do vì sao giải pháp KNX kết hợp DALI luôn là lựa chọn hàng đầu trong các công trình cao cấp, từ biệt thự hiện đại cho đến khách sạn, văn phòng thông minh.
 
 ## Raw JSON-LD
 

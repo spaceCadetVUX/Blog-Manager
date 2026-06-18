@@ -6,11 +6,145 @@ og_site_name: "KNX Store"
 image: "https://knxstore.vn/assets/image/post/homey-gioi-thieu-phien-ban-self-hosted-server.jpg"
 datePublished: "2025-12-26T14:33:13+07:00"
 dateModified: "2025-12-26T14:33:13+07:00"
+articleSection: "Kiến thức"
+word_count: 778
+mentions: ["Aqara", "Apple Home"]
+breadcrumb:
+  - name: "Trang chủ"
+    url: "https://knxstore.vn/"
+  - name: "Blogs"
+    url: "https://knxstore.vn/blogs"
+  - name: "Kiến thức"
+    url: "https://knxstore.vn/blogs/kien-thuc"
+  - name: "Homey giới thiệu phiên bản Self-Hosted Server"
+    url: "https://knxstore.vn/homey-gioi-thieu-phien-ban-self-hosted-server.html"
+internal_links:
+  - url: "https://knxstore.vn/ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome.html"
+    slug: "ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome"
+    anchor: "IC là gì? Vai trò của IC trong thiết bị Smarthome"
+  - url: "https://knxstore.vn/nfc-la-gi-vi-sao-smarthome-hien-dai-deu-tich-hop-cong-nghe-nay.html"
+    slug: "nfc-la-gi-vi-sao-smarthome-hien-dai-deu-tich-hop-cong-nghe-nay"
+    anchor: "NFC là gì? Vì sao smarthome hiện đại đều tích hợp công nghệ này?"
+  - url: "https://knxstore.vn/spi-la-gi-ung-dung-spi-led-controller-trong-led-rgbw.html"
+    slug: "spi-la-gi-ung-dung-spi-led-controller-trong-led-rgbw"
+    anchor: "SPI là gì? Ứng dụng SPI LED Controller trong LED RGBW"
+  - url: "https://knxstore.vn/10-bi-quyet-de-so-huu-mang-thread-on-dinh-muot-ma-cho-smarthome.html"
+    slug: "10-bi-quyet-de-so-huu-mang-thread-on-dinh-muot-ma-cho-smarthome"
+    anchor: "10 bí quyết để sở hữu mạng Thread ổn định, mượt mà cho Smarthome"
+  - url: "https://knxstore.vn/5-buoc-thiet-lap-nha-thong-minh-theo-chuan-matter.html"
+    slug: "5-buoc-thiet-lap-nha-thong-minh-theo-chuan-matter"
+    anchor: "5 bước thiết lập nhà thông minh theo chuẩn Matter"
+  - url: "https://knxstore.vn/faq-giai-dap-cac-cau-hoi-thuong-gap-ve-tieu-chuan-matter.html"
+    slug: "faq-giai-dap-cac-cau-hoi-thuong-gap-ve-tieu-chuan-matter"
+    anchor: "FAQ: Giải đáp các câu hỏi thường gặp về tiêu chuẩn Matter"
+  - url: "https://knxstore.vn/vai-tro-cua-aes-128-ccm-trong-bao-ve-truyen-thong-knx-ip.html"
+    slug: "vai-tro-cua-aes-128-ccm-trong-bao-ve-truyen-thong-knx-ip"
+    anchor: "AES-128 CCM là gì? Cơ chế bảo mật tối ưu cho giao thức KNX/IP"
+  - url: "https://knxstore.vn/thiet-bi-nao-tuong-thich-voi-matter.html"
+    slug: "thiet-bi-nao-tuong-thich-voi-matter"
+    anchor: "Thiết bị nào tương thích với Matter?"
+  - url: "https://knxstore.vn/vi-sao-hien-tai-chua-co-camera-an-ninh-tuong-thich-matter.html"
+    slug: "vi-sao-hien-tai-chua-co-camera-an-ninh-tuong-thich-matter"
+    anchor: "Vì sao hiện tại chưa có camera an ninh tương thích Matter?"
+  - url: "https://knxstore.vn/top-7-hub-matter-cho-nha-thong-minh.html"
+    slug: "top-7-hub-matter-cho-nha-thong-minh"
+    anchor: "Top 7 bộ điều khiển trung tâm nhà thông minh Matter"
 ---
 
 # Homey giới thiệu phiên bản Self-Hosted Server
 
 > Homey vừa ra mắt Self-Hosted Server, cho phép chạy nền tảng Homey trên phần cứng do bạn lựa chọn.
+
+## Article Body
+
+Homey vừa giới thiệu Homey Self-Hosted Server, một sản phẩm phần mềm mới cho phép người dùng chạy hệ điều hành của Homey Pro trực tiếp trên phần cứng riêng. Thay vì phụ thuộc hoàn toàn vào một hub vật lý cố định, người dùng có thêm lựa chọn triển khai Homey theo mô hình linh hoạt hơn, phù hợp với nhu cầu cá nhân hoặc hệ thống sẵn có.
+
+Các lựa chọn Homey hiện nay
+
+Theo định hướng của Homey, mục tiêu là đơn giản hóa trải nghiệm nhà thông minh cho nhiều nhóm người dùng khác nhau:
+
+
+	Homey Cloud hướng đến người dùng phổ thông, sử dụng hoàn toàn bằng ứng dụng, không cần phần cứng, vẫn có thể kết nối và điều khiển nhiều thiết bị smarthome.
+	Homey Pro mini là lựa chọn phần cứng ở mức cơ bản, tập trung vào xử lý cục bộ với chi phí thấp hơn.
+	Homey Pro là hub all-in-one, tích hợp đầy đủ phần cứng và anten để hỗ trợ nhiều chuẩn smarthome khác nhau.
+
+
+Với Homey Self-Hosted Server, Homey bổ sung thêm một hướng triển khai mới bên cạnh các sản phẩm hiện có.
+
+
+
+Ai nên chọn giải pháp Homey Self-Hosted Server?
+
+Homey Self-Hosted Server được giới thiệu như một giải pháp dành cho những người muốn chủ động hơn về hạ tầng, chẳng hạn người dùng có sẵn máy chủ gia đình, hệ thống homelab hoặc muốn kiểm soát môi trường vận hành của hệ smarthome.
+
+Phiên bản này vẫn giữ nguyên trải nghiệm phần mềm của Homey Pro, nhưng không gắn với một thiết bị phần cứng cụ thể do Homey cung cấp.
+
+Homey có thể chạy trên hạ tầng phần cứng sẵn có
+
+Homey Self-Hosted Server có thể chạy trên các hệ thống hỗ trợ Linux. Trên thực tế, Homey cho biết nếu thiết bị có thể chạy Linux thì gần như có thể triển khai Homey Self-Hosted Server.
+
+Để hỗ trợ người dùng, Homey cung cấp hướng dẫn cài đặt cho nhiều nền tảng phổ biến như:
+
+
+	Raspberry Pi
+	macOS
+	Windows
+	Synology
+	Docker
+	Unraid
+	QNAP
+	TrueNAS
+	Proxmox
+	Linux
+
+
+Điều này cho phép người dùng tận dụng phần cứng hiện có thay vì phải đầu tư thêm một hub mới.
+
+
+
+Kết nối không dây và vai trò của Homey Bridge
+
+Với Homey Self-Hosted Server, hệ thống có thể kết nối trực tiếp với thiết bị trong mạng LAN, các dịch vụ cloud và thiết bị hỗ trợ Matter. Các thiết bị Thread cũng được hỗ trợ nếu trong mạng có Thread Border Router.
+
+Đối với các chuẩn không dây khác như Zigbee, Z-Wave, Bluetooth LE, sóng 433 MHz hoặc hồng ngoại, Homey sử dụng Homey Bridge như một phần mở rộng. Khi ghép Homey Bridge với Homey Self-Hosted Server, các thiết bị không dây sẽ được đưa vào cùng hệ sinh thái.
+
+Trong trường hợp sử dụng nhiều Homey Bridge, hệ thống sẽ tự động kích hoạt Satellite Mode, giúp mở rộng vùng phủ sóng không dây trong nhà.
+
+
+
+Các tính năng quen thuộc của Homey
+
+Homey Self-Hosted Server sử dụng cùng hệ điều hành với Homey Pro, nên người dùng vẫn có đầy đủ các tính năng đã có trên nền tảng Homey, bao gồm:
+
+
+	Kết nối hàng chục nghìn thiết bị từ hơn 1.000 thương hiệu
+	Tạo kịch bản tự động hóa với Homey Flow và Advanced Flow
+	Thiết kế giao diện điều khiển với Homey Dashboards
+	Theo dõi tiêu thụ năng lượng thông qua Homey Energy
+	Sử dụng các công cụ như Insights, Logic và Experiments
+	Truy cập từ xa, Homey App Store và tích hợp trợ lý giọng nói thông qua dịch vụ cloud.
+
+
+
+
+Thời điểm phát hành và mô hình sử dụng
+
+Homey Self-Hosted Server hiện đã được mở cho người dùng trên toàn cầu.
+
+Mỗi cài đặt mới được dùng thử miễn phí trong tháng đầu tiên. Sau đó, người dùng có thể lựa chọn:
+
+
+	Gói thuê bao 4,99 € mỗi tháng
+	Hoặc mua license trọn đời với giá 149 €
+
+
+Các dịch vụ cloud vẫn được bao gồm trong cả hai hình thức.
+
+
+
+Homey Self-Hosted Server đã mở ra thêm một lựa chọn triển khai Homey bên cạnh các hub phần cứng truyền thống. Với những người đã có sẵn hạ tầng máy chủ hoặc muốn chủ động hơn trong cách vận hành hệ thống, đây là một hướng tiếp cận đáng chú ý.
+
+Tuy nhiên, việc lựa chọn giữa Homey Cloud, Homey Pro, Homey Pro mini hay Homey Self-Hosted Server vẫn phụ thuộc vào nhu cầu thực tế, mức độ phức tạp của hệ smarthome và khả năng quản lý hệ thống của từng người dùng.
 
 ## Raw JSON-LD
 

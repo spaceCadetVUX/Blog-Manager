@@ -6,11 +6,128 @@ og_site_name: "KNX Store"
 image: "https://knxstore.vn/assets/image/post/gioi-thieu-ung-dung-matter-bridge-danh-cho-homey-pro.jpg"
 datePublished: "2025-11-22T15:11:48+07:00"
 dateModified: "2025-11-22T15:11:48+07:00"
+articleSection: "Kiến thức"
+word_count: 569
+mentions: ["Aqara", "Apple Home"]
+breadcrumb:
+  - name: "Trang chủ"
+    url: "https://knxstore.vn/"
+  - name: "Blogs"
+    url: "https://knxstore.vn/blogs"
+  - name: "Kiến thức"
+    url: "https://knxstore.vn/blogs/kien-thuc"
+  - name: "Giới thiệu ứng dụng Matter Bridge dành cho Homey Pro"
+    url: "https://knxstore.vn/gioi-thieu-ung-dung-matter-bridge-danh-cho-homey-pro.html"
+internal_links:
+  - url: "https://knxstore.vn/ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome.html"
+    slug: "ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome"
+    anchor: "IC là gì? Vai trò của IC trong thiết bị Smarthome"
+  - url: "https://knxstore.vn/nfc-la-gi-vi-sao-smarthome-hien-dai-deu-tich-hop-cong-nghe-nay.html"
+    slug: "nfc-la-gi-vi-sao-smarthome-hien-dai-deu-tich-hop-cong-nghe-nay"
+    anchor: "NFC là gì? Vì sao smarthome hiện đại đều tích hợp công nghệ này?"
+  - url: "https://knxstore.vn/spi-la-gi-ung-dung-spi-led-controller-trong-led-rgbw.html"
+    slug: "spi-la-gi-ung-dung-spi-led-controller-trong-led-rgbw"
+    anchor: "SPI là gì? Ứng dụng SPI LED Controller trong LED RGBW"
+  - url: "https://knxstore.vn/10-bi-quyet-de-so-huu-mang-thread-on-dinh-muot-ma-cho-smarthome.html"
+    slug: "10-bi-quyet-de-so-huu-mang-thread-on-dinh-muot-ma-cho-smarthome"
+    anchor: "10 bí quyết để sở hữu mạng Thread ổn định, mượt mà cho Smarthome"
+  - url: "https://knxstore.vn/5-buoc-thiet-lap-nha-thong-minh-theo-chuan-matter.html"
+    slug: "5-buoc-thiet-lap-nha-thong-minh-theo-chuan-matter"
+    anchor: "5 bước thiết lập nhà thông minh theo chuẩn Matter"
+  - url: "https://knxstore.vn/faq-giai-dap-cac-cau-hoi-thuong-gap-ve-tieu-chuan-matter.html"
+    slug: "faq-giai-dap-cac-cau-hoi-thuong-gap-ve-tieu-chuan-matter"
+    anchor: "FAQ: Giải đáp các câu hỏi thường gặp về tiêu chuẩn Matter"
+  - url: "https://knxstore.vn/vai-tro-cua-aes-128-ccm-trong-bao-ve-truyen-thong-knx-ip.html"
+    slug: "vai-tro-cua-aes-128-ccm-trong-bao-ve-truyen-thong-knx-ip"
+    anchor: "AES-128 CCM là gì? Cơ chế bảo mật tối ưu cho giao thức KNX/IP"
+  - url: "https://knxstore.vn/homey-gioi-thieu-phien-ban-self-hosted-server.html"
+    slug: "homey-gioi-thieu-phien-ban-self-hosted-server"
+    anchor: "Homey giới thiệu phiên bản Self-Hosted Server"
+  - url: "https://knxstore.vn/thiet-bi-nao-tuong-thich-voi-matter.html"
+    slug: "thiet-bi-nao-tuong-thich-voi-matter"
+    anchor: "Thiết bị nào tương thích với Matter?"
+  - url: "https://knxstore.vn/vi-sao-hien-tai-chua-co-camera-an-ninh-tuong-thich-matter.html"
+    slug: "vi-sao-hien-tai-chua-co-camera-an-ninh-tuong-thich-matter"
+    anchor: "Vì sao hiện tại chưa có camera an ninh tương thích Matter?"
 ---
 
 # Giới thiệu ứng dụng Matter Bridge dành cho Homey Pro
 
 > Homey Pro bổ sung tính năng Matter Bridge, cho phép đưa thiết bị Zigbee, Z-Wave, 433 MHz và IR vào Apple Home, Google Home và Alexa một cách tự nhiên.
+
+## Article Body
+
+Homey Pro và Homey Pro mini của Athom vốn đã hoạt động như Matter Controller, cho phép thêm thiết bị Matter trực tiếp vào hệ sinh thái Homey. Mới đây, Athom tiếp tục phát hành một tiện ích phần mềm mới, giúp biến hai hub này thành Matter Bridge – tức là có thể phiên dịch tín hiệu từ các thiết bị không hỗ trợ Matter sang ngôn ngữ Matter.
+
+Tiện ích này được cài đặt như mọi ứng dụng Homey khác và hoàn toàn miễn phí trên Homey App Store.
+
+Lưu ý: Homey gọi các tiện ích mở rộng của hub là app, nên dễ gây hiểu nhầm với ứng dụng Homey trên điện thoại. Ở đây, chúng ta đang nói đến ứng dụng chạy trên hub Homey, không phải app quản lý trên smartphone.
+
+
+
+Kết nối nhiều giao thức không dây về chung một chuẩn Matter
+
+Với Matter Bridge, thiết bị sử dụng Infrared, Z-Wave, Zigbee hoặc 433 MHz đều có thể được “bridge” sang các nền tảng hỗ trợ Matter như: Apple Home, Google Home, Amazon Alexa, Samsung SmartThings, Home Assistant…
+
+Khi đó, các thiết bị Homey sẽ xuất hiện tự nhiên trong app của nền tảng kia và có thể được điều khiển bằng tự động hóa, scene, hoặc giọng nói.
+
+Ví dụ:
+
+
+	Động cơ rèm cũ dùng 433 MHz
+	Ổ cắm không hỗ trợ Matter
+	Thermostat Z-Wave
+
+
+Tất cả các thiết bị trên đều có thể đưa vào Apple Home thông qua Homey Pro.
+
+Theo Athom, Homey tương thích hơn 1.000 thương hiệu và hỗ trợ hơn 50.000 thiết bị – nhưng chỉ một phần trong số này hiện đã có cluster Matter tương ứng.
+
+Những nhóm thiết bị được hỗ trợ qua Matter Bridge
+
+Tiện ích này hỗ trợ các nhóm thiết bị quan trọng sau:
+
+
+	Đèn (bật/tắt, dim, đổi màu, tunable white)
+	Ổ cắm thông minh
+	Thermostat
+	Khóa cửa
+	Rèm/mành
+	Cảm biến cửa – cửa sổ
+	Nhiệt độ – độ ẩm
+	Chuyển động – hiện diện
+	Chất lượng không khí
+	Cảm biến CO₂, khói
+
+
+
+
+Đây là những loại thiết bị Matter đã có chuẩn hóa tốt, nên Homey có thể bridge ổn định.
+
+Cách cài đặt và ghép nối
+
+Bạn có thể cài đặt tiện ích Matter Bridge bằng:
+
+
+	Homey App cho Android/iOS
+	Homey Web App qua trình duyệt
+
+
+Sau khi cài đặt, mục Matter Bridge sẽ xuất hiện trong Settings của Homey Pro.
+
+Tại đây, hub sẽ hiển thị mã pairing Matter gồm số 11 chữ số và QR code.
+
+
+
+Quét mã này bằng Apple Home, Google Home hoặc nền tảng Matter khác để thêm bridge vào hệ sinh thái tương ứng.
+
+Vì bridge này chưa được chứng nhận chính thức, một số nền tảng sẽ cảnh báo khi ghép nối, nhưng vẫn có thể thêm và sử dụng bình thường. Sau khi thêm, bạn chỉ việc chọn thiết bị nào muốn chia sẻ qua Matter.
+
+Ý nghĩa thực tế cho hệ thống chiếu sáng
+
+Tiện ích Matter Bridge giúp Homey Pro trở thành điểm kết nối trung tâm, gom thiết bị đa giao thức về một chỗ, rồi xuất chúng sang Apple Home, Google Home, Alexa hoặc SmartThings như thiết bị Matter bản địa.
+
+Đây là bước tiến lớn cho những ai muốn dùng Homey làm trung tâm, nhưng vẫn tận dụng tối đa tiện ích của các hệ sinh thái khác như Siri, Google Assistant hoặc automation cao cấp.
 
 ## Raw JSON-LD
 

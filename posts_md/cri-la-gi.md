@@ -6,11 +6,120 @@ og_site_name: "KNX Store"
 image: "https://knxstore.vn/assets/image/post/cri-la-gi.jpg"
 datePublished: "2025-06-12T22:32:44+07:00"
 dateModified: "2025-06-12T22:32:44+07:00"
+articleSection: "Driver LED"
+word_count: 469
+mentions: ["Aqara", "Apple Home"]
+breadcrumb:
+  - name: "Trang chủ"
+    url: "https://knxstore.vn/"
+  - name: "Blogs"
+    url: "https://knxstore.vn/blogs"
+  - name: "Driver LED"
+    url: "https://knxstore.vn/blogs/driver-led"
+  - name: "Chỉ số CRI là gì? Vai trò của CRI trong thiết bị chiếu sáng"
+    url: "https://knxstore.vn/cri-la-gi.html"
+internal_links:
+  - url: "https://knxstore.vn/chieu-sang-cong-nghe-hcl.html"
+    slug: "chieu-sang-cong-nghe-hcl"
+    anchor: "Tìm hiểu về chiếu sáng công nghệ HCL"
+  - url: "https://knxstore.vn/mua-den-led.html"
+    slug: "mua-den-led"
+    anchor: "Tips chọn mua đèn Led phù hợp cho nhà thông minh"
+  - url: "https://knxstore.vn/den-cam-ung-cau-thang.html"
+    slug: "den-cam-ung-cau-thang"
+    anchor: "Đèn cảm ứng cầu thang"
+  - url: "https://knxstore.vn/cong-tac-dao-chieu.html"
+    slug: "cong-tac-dao-chieu"
+    anchor: "Công tắc đảo chiều là gì?"
+  - url: "https://knxstore.vn/thong-so-ky-thuat-cua-den-led.html"
+    slug: "thong-so-ky-thuat-cua-den-led"
+    anchor: "Các thông số kỹ thuật của đèn LED cần lưu ý khi chọn mua"
+  - url: "https://knxstore.vn/anh-sang-xanh.html"
+    slug: "anh-sang-xanh"
+    anchor: "Ánh sáng xanh là gì? Cách bảo vệ mắt trước ánh sáng xanh"
+  - url: "https://knxstore.vn/chi-so-ip-la-gi.html"
+    slug: "chi-so-ip-la-gi"
+    anchor: "Chỉ số IP là gì?"
+  - url: "https://knxstore.vn/he-thong-dieu-khien-chieu-sang.html"
+    slug: "he-thong-dieu-khien-chieu-sang"
+    anchor: "8 Lợi ích của hệ thống điều khiển chiếu sáng thông minh"
+  - url: "https://knxstore.vn/dieu-khien-chieu-sang-casambi.html"
+    slug: "dieu-khien-chieu-sang-casambi"
+    anchor: "Top 4 điều khiển chiếu sáng Casambi bán chạy nhất hiện nay"
+  - url: "https://knxstore.vn/cong-nghe-chieu-sang-tunable-white.html"
+    slug: "cong-nghe-chieu-sang-tunable-white"
+    anchor: "Ứng dụng của công nghệ Tunable White trong ngành chiếu sáng"
+  - url: "https://knxstore.vn/dieu-khien-chieu-sang-dali.html"
+    slug: "dieu-khien-chieu-sang-dali"
+    anchor: "Khám phá công nghệ điều khiển chiếu sáng tiên tiến DALI"
 ---
 
 # Chỉ số CRI là gì? Vai trò của CRI trong thiết bị chiếu sáng
 
 > Tìm hiểu chỉ số CRI là gì, vai trò của chỉ số CRI trong chiếu sáng và cách lựa chọn đèn LED có chỉ số CRI phù hợp để đảm bảo ánh sáng trung thực.
+
+## Article Body
+
+Chỉ số CRI là gì và nó ảnh hưởng như thế nào đến chất lượng chiếu sáng trong đời sống hằng ngày? Trong bài viết này, KNXStore sẽ giúp bạn hiểu rõ chỉ số CRI trong chiếu sáng, đặc biệt là chỉ số CRI của đèn LED – yếu tố quan trọng trong việc lựa chọn giải pháp chiếu sáng hiệu quả và an toàn cho mắt.
+
+Chỉ số CRI là gì? Tìm hiểu về chỉ số hoàn màu trong chiếu sáng đèn LED
+
+CRI là gì? Đây là viết tắt của Color Rendering Index – hay còn gọi là chỉ số hoàn màu. Chỉ số này được dùng để phản ánh độ trung thực của màu sắc khi một vật thể được chiếu sáng bởi nguồn sáng nhân tạo như đèn LED, đèn huỳnh quang, v.v.. Với các mỗi thiết bị chiếu sáng khác nhau, CRI sẽ khác nhau. CRI càng cao thì màu sắc của vật thể được chiếu sáng càng chính xác.
+
+
+
+Phân loại các cấp độ chỉ số CRI
+
+Việc phân loại các cấp của chỉ số hoàn màu CRI là gì cũng giúp ích rất nhiều cho công việc. Người ta phân CRI thành 6 nhóm để dễ áp dụng trong cuộc sống:
+
+
+	
+		
+			
+			Chỉ số CRI
+			
+			
+			Đặc điểm
+			
+			
+			Chất lượng ánh sáng
+			
+			
+			Ứng dụng
+			
+		
+		
+			
+			0
+			
+			Các màu đơn sắc
+			
+			Làm thay đổi màu sắc của vật thể khi chiếu sáng theo màu đèn như: xanh, đỏ, tím, vàng,…
+			
+			
+			Trang trí tiệc, lễ hội, công viên, đèn ngủ, sân khấu,…
+			
+		
+		
+			
+			>>Xem thêm: Tìm hiểu về chiếu sáng công nghệ HCL
+
+
+Ứng dụng của chỉ số hoàn màu CRI là gì? 
+
+Để phân biệt màu sắc, độ chân thực, độ đậm nhạt, chúng ta phải cần đến chỉ số hoàn màu CRI để phân biệt. Vì vậy khi lựa chọn đèn LED để sử dụng bạn nên xác định từng nguồn sáng khác nhau để ứng dụng phù hợp với không gian thiết kế chiếu sáng.
+
+
+
+Ở những nơi cần độ chính xác của ánh sáng cao như bệnh viện, studio, trung tâm triển lãm, cửa hàng thời trang, rạp chiếu phim,...bạn nên chọn bóng đèn có chỉ số CRI từ 90 trở lên. 
+
+
+	Chỉ số CPI dưới 80 được coi là "kém" đối với đèn của các hộ gia đình hoặc đèn văn phòng. 
+	CRI trong khoảng 70-89 là ở mức tốt. 
+	Với CRI >>Xem thêm: Tips chọn mua đèn Led phù hợp cho nhà thông minh
+
+
+Nếu bạn vẫn băn khoăn chỉ số CRI là gì, hoặc chưa biết nên chọn đèn LED có chỉ số cri trong chiếu sáng như thế nào, hãy liên hệ ngay với KNXStore để được tư vấn và lựa chọn sản phẩm chiếu sáng phù hợp. Ánh sáng chất lượng bắt đầu từ chỉ số CRI đúng chuẩn!
 
 ## Raw JSON-LD
 

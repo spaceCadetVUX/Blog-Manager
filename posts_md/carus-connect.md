@@ -6,11 +6,96 @@ og_site_name: "KNX Store"
 image: "https://knxstore.vn/assets/image/post/carus-connect.jpg"
 datePublished: "2025-02-19T22:56:49+07:00"
 dateModified: "2025-02-19T22:56:49+07:00"
+articleSection: "Chiếu sáng"
+word_count: 660
+mentions: ["Aqara", "Apple Home"]
+breadcrumb:
+  - name: "Trang chủ"
+    url: "https://knxstore.vn/"
+  - name: "Blogs"
+    url: "https://knxstore.vn/blogs"
+  - name: "Chiếu sáng"
+    url: "https://knxstore.vn/blogs/chieu-sang"
+  - name: "Khám phá đèn led thông minh Carus Connect tiêu chuẩn Đức"
+    url: "https://knxstore.vn/carus-connect.html"
+internal_links:
+  - url: "https://knxstore.vn/casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap.html"
+    slug: "casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap"
+    anchor: "Casambi không kết nối HomeKit? MTB10 Matter Bridge là giải pháp"
+  - url: "https://knxstore.vn/nfc-trong-he-thong-chieu-sang-thong-minh-hoat-dong-nhu-the-nao.html"
+    slug: "nfc-trong-he-thong-chieu-sang-thong-minh-hoat-dong-nhu-the-nao"
+    anchor: "NFC có được sử dụng trong hệ thống chiếu sáng thông minh không?"
+  - url: "https://knxstore.vn/thiet-ke-he-chieu-sang-dali-mo-rong-bang-casambi-se-nhu-the-nao.html"
+    slug: "thiet-ke-he-chieu-sang-dali-mo-rong-bang-casambi-se-nhu-the-nao"
+    anchor: "Thiết kế hệ chiếu sáng DALI mở rộng bằng Casambi sẽ như thế nào?"
+  - url: "https://knxstore.vn/casambi-case-study-chieu-sang-dali-trong-cong-trinh-di-san-giardino-palazzo-pfanner.html"
+    slug: "casambi-case-study-chieu-sang-dali-trong-cong-trinh-di-san-giardino-palazzo-pfanner"
+    anchor: "Casambi Case Study | Chiếu sáng DALI trong công trình di sản Giardino Palazzo Pfanner"
+  - url: "https://knxstore.vn/casambi-case-study-chieu-sang-khong-gian-showroom-blum-experience-center.html"
+    slug: "casambi-case-study-chieu-sang-khong-gian-showroom-blum-experience-center"
+    anchor: "Casambi Case Study | Chiếu sáng không gian showroom Blum Experience Center"
+  - url: "https://knxstore.vn/cct-la-gi-trong-chieu-sang.html"
+    slug: "cct-la-gi-trong-chieu-sang"
+    anchor: "CCT là gì trong chiếu sáng?"
+  - url: "https://knxstore.vn/chi-so-ugr-la-gi.html"
+    slug: "chi-so-ugr-la-gi"
+    anchor: "Chỉ số UGR là gì"
+  - url: "https://knxstore.vn/su-khac-biet-giua-cong-nghe-dmx512-va-spi-la-gi.html"
+    slug: "su-khac-biet-giua-cong-nghe-dmx512-va-spi-la-gi"
+    anchor: "LED Dây Pixel SPI vs DMX512 Khác Nhau Thế Nào?"
+  - url: "https://knxstore.vn/6-loai-cam-bien-quan-trong-trong-he-thong-chieu-sang-thong-minh.html"
+    slug: "6-loai-cam-bien-quan-trong-trong-he-thong-chieu-sang-thong-minh"
+    anchor: "6 loại cảm biến quan trọng trong hệ thống chiếu sáng thông minh"
+  - url: "https://knxstore.vn/vi-sao-tinh-tuong-tac-quyet-dinh-hieu-qua-cua-he-thong-chieu-sang-thong-minh.html"
+    slug: "vi-sao-tinh-tuong-tac-quyet-dinh-hieu-qua-cua-he-thong-chieu-sang-thong-minh"
+    anchor: "Vì sao tính tương tác quyết định hiệu quả của hệ thống chiếu sáng thông minh?"
 ---
 
 # Khám phá đèn led thông minh Carus Connect tiêu chuẩn Đức
 
 > Đèn led thông minh Carus Connect sản xuất tại Đức, tuổi thọ 25000 giờ, CRI 95.
+
+## Article Body
+
+Bạn đang tìm kiếm một chiếc đèn led thông minh, có thể điều khiển bằng điện thoại và tùy biến được ánh sáng theo ý thích của bạn? Bạn muốn sở hữu một sản phẩm chất lượng cao, bền bỉ và tiết kiệm năng lượng? Hãy cùng KnxStore khám phá đèn led thông minh Carus Connect - một dòng bóng đèn thông minh mới đang được tin dùng nhất tại thị trường Châu Âu.
+
+Đèn led điều khiển thông minh Carus Connect
+
+Đèn led thông minh Carus Connect là một sản phẩm của hãng Carus - một công ty chuyên về công nghệ chiếu sáng của Đức. Carus được biết đến là một trong những hãng đèn led hàng đầu thế giới, với các sản phẩm đạt tiêu chuẩn chất lượng cao, an toàn và thân thiện với môi trường. Đèn led thông minh Carus Connect có tuổi thọ lên đến 25.000 giờ, gấp 25 lần so với bóng đèn truyền thống. Điều này giúp bạn tiết kiệm được chi phí thay thế và bảo trì, cũng như giảm lượng rác thải sinh ra từ bóng đèn.
+Điểm nổi bật của đèn led thông minh Carus Connect là khả năng điều khiển thông minh bằng thiết bị di động có cài đặt ứng dụng Casambi App. Bạn chỉ cần kết nối đèn với điện thoại qua bluetooth 4.0 và điều khiển đèn trong phạm vi 30m đến 50m. Nếu có việc phải ra ngoài, bạn vẫn có thể điều khiển đèn qua mạng internet, miễn là điện thoại của bạn có kết nối với đèn qua bluetooth trước đó.
+
+
+
+Các tính năng thú vị của đèn led thông minh Carus Connect
+
+Tùy biến ánh sáng
+
+
+	
+	Với bộ điều khiển đèn thông minh của hãng Phillip Hue, thiết bị đèn có thể điều chỉnh độ sáng từ 0-100 khi làm việc, học tập, đọc sách, hoặc giảm độ sáng khi xem phim, ngủ nghỉ, để tiết kiệm năng lượng và bảo vệ mắt.
+	
+	
+	Bạn còn có thể thay đổi nhiệt độ màu của đèn từ 2200 đến 4500 K. Điều này giúp bạn có thể thay đổi được từ ánh sáng vàng qua ánh sáng trắng (ánh sáng mô phỏng y hệt ánh sáng từ thiên nhiên). Điều này giúp ngăn chặn ánh sáng xanh từ các thiết bị điện tử gây hại cho mắt, ngoài ra cũng giảm nguy cơ mắc các bệnh về mắt như loạn thị, cận thị.
+	
+
+
+Tùy biến tạo ra các giải pháp thông minh khác
+
+
+	
+	Thêm nữa, bạn có thể cài đặt sẵn được các bối cảnh như Relax, Working, Sleep... để mỗi lần sử dụng bạn chỉ cần bấm vào công tắc đèn thông minh hay ấn vào điện thoại là sẽ có không gian thoải mái nhất cho bạn.
+	
+	
+	Ngoài ra bạn có thể cài đặt được Timer, giả dụ như bạn đi làm về muộn, không muốn bước vào nhà trong tình trạng tối om, bạn có thể cài đặt Timer là 18h tối đèn sẽ mở, giúp bạn có cảm giác yên tâm khi vào nhà.
+	
+	
+	Trường hợp ngoại lệ, đối với giới trẻ việc đeo tai nghe để xem phim hay nghe nhạc tại nhà đang là một tình trạng phổ biến, các phụ huynh khi muốn nói chuyện hay gọi con mình thường rất khó. Bạn chỉ cần mở điện thoại, tắt và mở đèn 1 vài lần để con trẻ có thể nhận ra rằng ba mẹ chúng đang tìm chúng có việc.
+	
+
+
+
+
+Nhìn chung đây là một sản phẩm đáng để bạn sở hữu cho ngôi nhà của mình. Nó không chỉ mang lại ánh sáng chất lượng, tiết kiệm năng lượng, mà còn cho bạn khả năng điều khiển hệ thống đèn thông minh và tùy biến ánh sáng theo ý thích của bạn. Nếu muốn biết thêm thông tin về các loại đèn led thông minh khác, hãy liên hệ với KNXStore ngay hôm nay.
 
 ## Raw JSON-LD
 

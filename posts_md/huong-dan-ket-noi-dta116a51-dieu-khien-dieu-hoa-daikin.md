@@ -7,11 +7,168 @@ og_site_name: "KNX Store"
 image: "https://knxstore.vn/assets/image/post/huong-dan-ket-noi-dta116a51-dieu-khien-dieu-hoa-daikin.jpg"
 datePublished: "2026-03-23T12:01:06+07:00"
 dateModified: "2026-03-23T12:01:06+07:00"
+articleSection: "HVAC"
+word_count: 1177
+mentions: ["Aqara", "Apple Home"]
+breadcrumb:
+  - name: "Trang chủ"
+    url: "https://knxstore.vn/"
+  - name: "Blogs"
+    url: "https://knxstore.vn/blogs"
+  - name: "HVAC"
+    url: "https://knxstore.vn/blogs/hvac"
+  - name: "Hướng dẫn kết nối DTA116A51 điều khiển điều hòa Daikin một cách thông minh"
+    url: "https://knxstore.vn/huong-dan-ket-noi-dta116a51-dieu-khien-dieu-hoa-daikin.html"
+internal_links:
+  - url: "https://knxstore.vn/vi-sao-dieu-hoa-inverter-tiet-kiem-dien-hon-dieu-hoa-binh-thuong.html"
+    slug: "vi-sao-dieu-hoa-inverter-tiet-kiem-dien-hon-dieu-hoa-binh-thuong"
+    anchor: "Vì sao điều hòa inverter tiết kiệm điện hơn điều hoà bình thường?"
+  - url: "https://knxstore.vn/10-meo-dung-may-lanh-an-toan-cho-suc-khoe-va-tiet-kiem-dien.html"
+    slug: "10-meo-dung-may-lanh-an-toan-cho-suc-khoe-va-tiet-kiem-dien"
+    anchor: "10 mẹo dùng máy lạnh an toàn cho sức khỏe và tiết kiệm điện"
+  - url: "https://knxstore.vn/cach-giao-tiep-modbus-voi-dieu-hoa-daikin-vrv-vrf-thong-qua-kac00x.html"
+    slug: "cach-giao-tiep-modbus-voi-dieu-hoa-daikin-vrv-vrf-thong-qua-kac00x"
+    anchor: "Cách giao tiếp Modbus với điều hòa Daikin VRV/VRF thông qua KAC00X"
+  - url: "https://knxstore.vn/huong-dan-su-dung-thermostat-matter-wi-fi-model-81mtac01.html"
+    slug: "huong-dan-su-dung-thermostat-matter-wi-fi-model-81mtac01"
+    anchor: "Hướng dẫn sử dụng thermostat Matter Wi-Fi model 81mtac01"
+  - url: "https://knxstore.vn/chon-gateway-intesis-the-nao-cho-dung-loai-may-lanh-ban-dung.html"
+    slug: "chon-gateway-intesis-the-nao-cho-dung-loai-may-lanh-ban-dung"
+    anchor: "Chọn Gateway Intesis thế nào cho đúng loại máy lạnh bạn dùng?"
+  - url: "https://knxstore.vn/giai-phap-matter-thread-cho-dieu-hoa-da-thuong-hieu.html"
+    slug: "giai-phap-matter-thread-cho-dieu-hoa-da-thuong-hieu"
+    anchor: "Giải pháp Matter Thread cho điều hòa đa thương hiệu"
+  - url: "https://knxstore.vn/he-thong-dieu-hoa-vrv-va-vrf-la-gi.html"
+    slug: "he-thong-dieu-hoa-vrv-va-vrf-la-gi"
+    anchor: "Hệ thống điều hòa VRV và VRF là gì?"
+  - url: "https://knxstore.vn/so-sanh-dieu-khien-dieu-hoa-intesis-coolautomation-airzone.html"
+    slug: "so-sanh-dieu-khien-dieu-hoa-intesis-coolautomation-airzone"
+    anchor: "So sánh giải pháp HVAC: Intesis, CoolAutomation, Airzone"
+  - url: "https://knxstore.vn/he-thong-hvac-xanh.html"
+    slug: "he-thong-hvac-xanh"
+    anchor: "HVAC xanh giúp công trình tiết kiệm điện và sống khỏe thế nào?"
+  - url: "https://knxstore.vn/hvac-la-gi.html"
+    slug: "hvac-la-gi"
+    anchor: "Hệ thống  HVAC là gì? Các thiết bị nào cấu thành HVAC?"
 ---
 
 # Hướng dẫn kết nối DTA116A51 điều khiển điều hòa Daikin một cách thông minh
 
 > Tham khảo ngay giải pháp kết nối và điều khiển điều hòa từ xa qua giao thức Modbus RTU với thiết bị điều khiển module DTA116A51
+
+## Article Body
+
+Việc tự động hóa và điều khiển thiết bị trong ngôi nhà ngày càng trở nên phổ biến. Nhiều người tiêu dùng lựa chọn hệ thống điều hòa không khí Daikin nhờ vào chất lượng và độ tin cậy cao.
+
+Để tận hưởng tối đa sự tiện nghi, bộ phận kỹ thuật cần khai thác tối đa tiềm năng của hệ thống này. Hiểu được điều đó, KNXStore mang đến giải pháp kết nối và điều khiển điều hòa từ xa qua giao thức Modbus RTU, nhờ sử dụng thiết bị điều khiển module DTA116A51 - thiết bị sẽ giúp việc quản lý điều hòa thêm dễ dàng và hiệu quả.
+
+Vì sao nên chọn DTA116A51 để điều khiển điều hòa Daikin
+
+Thiết bị DTA116A51 là một bộ chuyển đổi giao thức DIII-Net sang Modbus, giúp kết nối và điều khiển hệ thống điều hòa VRV của Daikin thông qua các giao thức tự động hóa tòa nhà phổ biến như Modbus RTU. Thiết bị là công nghệ riêng của Daikin, có khả năng hỗ trợ lên đến 16 dàn lạnh và 2 dàn nóng. Có thể nói đây là giải pháp lý tưởng cho việc quản lý năng lượng và điều khiển điều hòa trong các tòa nhà thương mại.
+
+Tham khảo thêm thiết bị module Điều Khiển Modbus RTU/DIII-Net - DTA116A51:
+
+{products:[1251]}
+
+Tính năng nổi bật của DTA116A51
+
+
+	DTA116A51 có thể kết nối và điều khiển tối đa 16 dàn lạnh và 2 dàn nóng, phù hợp cho các hệ thống điều hòa lớn, đặc biệt là trong các tòa nhà thương mại.
+	Thiết bị hỗ trợ giao thức Modbus RTU (RS485), giúp tích hợp dễ dàng với các hệ thống quản lý tòa nhà (BMS) thông qua Modbus. Tốc độ giao tiếp có thể được cài đặt từ 9600 đến 19200 bps.
+	DTA116A51 cho phép giám sát trạng thái hoạt động, nhiệt độ, chế độ vận hành của từng dàn lạnh, từ đó tối ưu hóa việc sử dụng năng lượng.
+	Với kích thước chỉ 100x100mm và trọng lượng nhẹ 0,18kg, DTA116A51 có thể được gắn trên các thanh DIN rail tiêu chuẩn, giúp tiết kiệm không gian và thời gian lắp đặt.
+
+
+Thông số kỹ thuật cơ bản của DTA116A51
+
+
+	
+		
+			Số lượng kết nối
+			Tối đa 16 dàn lạnh, 2 dàn nóng
+		
+		
+			Tổng chiều dài dây điện
+			500m cho cả kết nối DIII-Net và Modbus
+		
+		
+			Điện áp hoạt động
+			16VDC, được cung cấp từ dàn nóng
+		
+		
+			Nhiệt độ hoạt động
+			-20°C đến 65°C, độ ẩm dưới 95% RH không ngưng tụ
+		
+		
+			Giao thức hỗ trợ
+			Modbus RTU, DIII-Net
+		
+		
+			Kích thước
+			100x100x40mm
+		
+		
+			Trọng lượng
+			0,18kg
+		
+	
+
+
+Cách tích hợp DTA116A51 với hệ thống HVAC và thiết bị KTS-D1 của Kanonbus
+
+Để kết nối DTA116A51 với các hệ thống điều khiển trung tâm khác như KNX, thông thường sẽ sử dụng một bộ điều khiển như KTS-D1.
+
+{products:[1044]}
+
+Thiết bị KTS-D1 đóng vai trò như một cầu nối, chuyển đổi tín hiệu từ giao thức Modbus RTU của DTA116A51 sang giao thức KNX. Dưới đây là quy trình tích hợp DTA116A51 với hệ thống HVAC qua các bước cụ thể:
+
+
+	Kết nối vật lý: DTA116A51 được lắp đặt giữa dàn nóng và dàn lạnh của hệ thống điều hòa VRV, kết nối với các thiết bị điều khiển qua giao thức Modbus RTU.
+	Sử dụng thiết bị KTS-D1: Thiết bị KTS-D1 của Kanonbus hỗ trợ DTA116A51 trong việc giám sát và điều khiển hệ thống HVAC một cách dễ dàng. KTS-D1 cho phép giám sát các thông số nhiệt độ, độ ẩm, và trạng thái hoạt động của hệ thống điều hòa.
+	Kết nối với Thermostat KNX: DTA116A51 có thể kết nối với các thiết bị Thermostat KNX thông qua Modbus RTU, giúp kiểm soát và điều chỉnh nhiệt độ chính xác, mang lại sự thoải mái tối ưu cho người sử dụng.
+
+
+Có thể bạn quan tâm thiết bị gateway Intesis 700series tương thích với Daikin:
+
+{products:[1089]}
+
+Xem thêm các bộ nguồn tương thích với Daikin:
+
+{products:[42,974,51]}
+
+Tính năng hỗ trợ của DTA116A51 trong hệ thống HVAC
+
+Thiết bị module điều khiển DTA116A51 đặc biệt hữu ích trong việc quản lý tập trung và tiện lợi. Cụ thể, người dùng có thể điều khiển toàn bộ hệ thống điều hòa từ xa, mà không cần phải thao tác trực tiếp tại từng dàn lạnh. Điều này đặc biệt hữu ích cho các tòa nhà thương mại, văn phòng, khách sạn có quy mô lớn.
+
+
+	Thông qua hệ thống BMS, bạn có thể giám sát trạng thái hoạt động và điều khiển điều hòa từ xa, giúp quản lý hệ thống hiệu quả hơn.
+	DTA116A51 sẽ gửi các thông báo lỗi của hệ thống điều hòa tới BMS hoặc máy chủ giám sát, giúp phát hiện và xử lý sự cố kịp thời.
+	Thiết bị còn giúp tối ưu hóa việc tiêu thụ năng lượng của hệ thống điều hòa, giảm chi phí vận hành và nâng cao hiệu suất.
+
+
+Cách kết nối DTA116A51 với hệ thống Thermostat KNX
+
+Để tích hợp DTA116A51 với hệ thống Thermostat KNX, bạn cần kết nối Modbus RTU của DTA116A51 tới bộ chuyển đổi giao thức KNX/Modbus. Sau đó, thiết lập cấu hình tương ứng trên hệ thống KNX và kết nối với Thermostat KNX để điều khiển các chức năng như cài đặt nhiệt độ, chế độ làm lạnh/sưởi và tốc độ quạt của dàn lạnh VRV.
+
+Bước 1: Kết nối vật lý
+
+
+	Lắp đặt DTA116A51: Thiết bị DTA116A51 được cài đặt giữa dàn nóng và dàn lạnh của hệ thống điều hòa VRV, đảm nhận vai trò chuyển đổi dữ liệu từ hệ thống điều hòa sang giao thức Modbus RTU.
+	Kết nối Modbus RTU: Từ DTA116A51, sử dụng dây Modbus RTU để kết nối với Thermostat KNX. Việc kết nối này cho phép Thermostat KNX truy cập và điều chỉnh các thông số như nhiệt độ, chế độ vận hành và tốc độ quạt của dàn lạnh.
+
+
+Bước 2: Cấu hình hệ thống
+
+
+	Thiết lập địa chỉ Modbus: Trên DTA116A51, cấu hình địa chỉ Modbus và các tham số truyền thông tương ứng với Thermostat KNX. Địa chỉ Modbus này giúp định danh chính xác từng dàn lạnh VRV trong hệ thống.
+	Cài đặt trên Thermostat KNX: Trên Thermostat KNX, cấu hình các đối tượng điều khiển (control objects) để điều chỉnh các thông số từ xa như nhiệt độ, chế độ làm lạnh/sưởi, và tốc độ quạt.
+
+
+Quý khách hàng có thể dễ dàng tìm thấy các thiết bị Thermostat KNX chất lượng cao tại KNXStore. Chúng tôi cung cấp đa dạng sản phẩm từ các thương hiệu hàng đầu như Legrand, Kanonbus, Moorgen, và nhiều hãng danh tiếng khác. Với thiết kế tinh tế, dễ dàng tích hợp vào hệ thống hiện có, các thiết bị này không chỉ mang lại sự tiện nghi tối ưu mà còn nâng cao hiệu quả quản lý năng lượng cho ngôi nhà thông minh của bạn.
+
+Xem thêm các thiết bị bảng điều khiển Thermostat tại KNXStore:
+
+{products:[118,1107,3298,872,1130,1120]}
 
 ## Raw JSON-LD
 

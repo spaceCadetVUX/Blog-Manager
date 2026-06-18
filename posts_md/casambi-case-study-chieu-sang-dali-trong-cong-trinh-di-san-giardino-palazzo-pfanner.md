@@ -6,11 +6,192 @@ og_site_name: "KNX Store"
 image: "https://knxstore.vn/assets/image/post/casambi-case-study-chieu-sang-dali-trong-cong-trinh-di-san-giardino-palazzo-pfanner.jpg"
 datePublished: "2025-12-29T11:05:19+07:00"
 dateModified: "2025-12-29T11:05:19+07:00"
+articleSection: "Chiếu sáng"
+word_count: 890
+mentions: ["Aqara", "Apple Home"]
+breadcrumb:
+  - name: "Trang chủ"
+    url: "https://knxstore.vn/"
+  - name: "Blogs"
+    url: "https://knxstore.vn/blogs"
+  - name: "Chiếu sáng"
+    url: "https://knxstore.vn/blogs/chieu-sang"
+  - name: "Casambi Case Study | Chiếu sáng DALI trong công trình di sản Giardino Palazzo Pfanner"
+    url: "https://knxstore.vn/casambi-case-study-chieu-sang-dali-trong-cong-trinh-di-san-giardino-palazzo-pfanner.html"
+internal_links:
+  - url: "https://knxstore.vn/casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap.html"
+    slug: "casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap"
+    anchor: "Casambi không kết nối HomeKit? MTB10 Matter Bridge là giải pháp"
+  - url: "https://knxstore.vn/nfc-trong-he-thong-chieu-sang-thong-minh-hoat-dong-nhu-the-nao.html"
+    slug: "nfc-trong-he-thong-chieu-sang-thong-minh-hoat-dong-nhu-the-nao"
+    anchor: "NFC có được sử dụng trong hệ thống chiếu sáng thông minh không?"
+  - url: "https://knxstore.vn/thiet-ke-he-chieu-sang-dali-mo-rong-bang-casambi-se-nhu-the-nao.html"
+    slug: "thiet-ke-he-chieu-sang-dali-mo-rong-bang-casambi-se-nhu-the-nao"
+    anchor: "Thiết kế hệ chiếu sáng DALI mở rộng bằng Casambi sẽ như thế nào?"
+  - url: "https://knxstore.vn/casambi-case-study-chieu-sang-khong-gian-showroom-blum-experience-center.html"
+    slug: "casambi-case-study-chieu-sang-khong-gian-showroom-blum-experience-center"
+    anchor: "Casambi Case Study | Chiếu sáng không gian showroom Blum Experience Center"
+  - url: "https://knxstore.vn/cct-la-gi-trong-chieu-sang.html"
+    slug: "cct-la-gi-trong-chieu-sang"
+    anchor: "CCT là gì trong chiếu sáng?"
+  - url: "https://knxstore.vn/chi-so-ugr-la-gi.html"
+    slug: "chi-so-ugr-la-gi"
+    anchor: "Chỉ số UGR là gì"
+  - url: "https://knxstore.vn/su-khac-biet-giua-cong-nghe-dmx512-va-spi-la-gi.html"
+    slug: "su-khac-biet-giua-cong-nghe-dmx512-va-spi-la-gi"
+    anchor: "LED Dây Pixel SPI vs DMX512 Khác Nhau Thế Nào?"
+  - url: "https://knxstore.vn/6-loai-cam-bien-quan-trong-trong-he-thong-chieu-sang-thong-minh.html"
+    slug: "6-loai-cam-bien-quan-trong-trong-he-thong-chieu-sang-thong-minh"
+    anchor: "6 loại cảm biến quan trọng trong hệ thống chiếu sáng thông minh"
+  - url: "https://knxstore.vn/vi-sao-tinh-tuong-tac-quyet-dinh-hieu-qua-cua-he-thong-chieu-sang-thong-minh.html"
+    slug: "vi-sao-tinh-tuong-tac-quyet-dinh-hieu-qua-cua-he-thong-chieu-sang-thong-minh"
+    anchor: "Vì sao tính tương tác quyết định hiệu quả của hệ thống chiếu sáng thông minh?"
+  - url: "https://knxstore.vn/so-sanh-anh-sang-truc-tiep-va-anh-sang-gian-tiep.html"
+    slug: "so-sanh-anh-sang-truc-tiep-va-anh-sang-gian-tiep"
+    anchor: "So sánh ánh sáng trực tiếp và ánh sáng gián tiếp"
 ---
 
 # Casambi Case Study | Chiếu sáng DALI trong công trình di sản Giardino Palazzo Pfanner
 
 > Case study ứng dụng Casambi trên nền DALI trong công trình di sản, nâng cấp chiếu sáng mà không xâm phạm kiến trúc và hạ tầng nguyên bản.
+
+## Article Body
+
+Giardino Palazzo Pfanner nằm trong trung tâm lịch sử của Lucca, ngay gần hệ thống tường thành cổ của thành phố. Khu vườn được thiết kế lại vào đầu thế kỷ 18 theo phong cách vườn Ý cổ điển, với bố cục hình học rõ ràng, nhiều lớp cảnh quan và mối liên kết chặt chẽ giữa kiến trúc, cây xanh và không gian mở.
+
+Đây là một công trình có giá trị di sản cao, nơi mọi can thiệp kỹ thuật đều phải được cân nhắc cẩn trọng để không làm ảnh hưởng đến cấu trúc, cảnh quan và tinh thần nguyên bản của khu vườn.
+
+
+
+Thông tin dự án chiếu sáng Casambi tại Giardino Palazzo Pfanner
+
+
+	
+		
+			
+			Địa điểm
+			
+			
+			Giardino Palazzo Pfanner, thành phố Lucca, Tuscany, Ý
+			
+		
+		
+			
+			Quy mô
+			
+			
+			Khu vườn lịch sử với nhiều phân khu cảnh quan và khu vực façade (diện tích tổng thể lớn, trải dài theo trục trung tâm và các lối dạo)
+			
+		
+		
+			
+			Thiết bị sử dụng
+			
+			
+			Salvador 1000/16
+			CBU A2D
+			CBU TED
+			Dalcnet Controller 4 kênh LED Dimmer 24Vdc RGBW
+			Các driver DALI và nguồn ON/OFF 230V
+			
+		
+		
+			
+			Khu vực ứng dụng
+			
+			
+			Chiếu sáng cảnh quan khu vườn
+			Chiếu sáng tượng và yếu tố kiến trúc
+			Chiếu sáng lối đi và thảm thực vật
+			Chiếu sáng façade tòa nhà Palazzo với DALI Tunable White
+			
+		
+	
+
+
+Bài toán chiếu sáng đặt ra cho công trình
+
+Với Giardino Palazzo Pfanner, bài toán đặt ra là làm sao nâng cao trải nghiệm ánh sáng trong khi vẫn giữ được sự tinh tế và tính lịch sử của không gian.
+
+Cụ thể, dự án phải đáp ứng đồng thời nhiều yêu cầu:
+
+
+	Chiếu sáng cảnh quan, lối đi, cây xanh và tượng điêu khắc một cách nhẹ nhàng, có chiều sâu
+	Kết hợp chiếu sáng khu vườn với hệ façade chiếu sáng DALI Tunable White của tòa nhà Palazzo
+	Tránh bố trí đèn và thiết bị một cách cứng nhắc, lộ liễu
+	Hạn chế kéo mới dây dẫn và can thiệp vào kiến trúc hiện hữu
+	Có khả năng thay đổi scene cho vận hành hàng ngày và các sự kiện đặc biệt
+
+
+Đây là dạng bài toán rất quen thuộc với nhiều công trình cải tạo, resort sinh thái và không gian cảnh quan tại Việt Nam.
+
+
+
+Giải pháp chiếu sáng được lựa chọn tại Giardino Palazzo Pfanner
+
+Hệ thống chiếu sáng của khu vườn được thiết kế theo nguyên tắc phân lớp ánh sáng và nhấn chọn lọc, thay vì chiếu sáng đồng đều toàn bộ không gian.
+
+Các giải pháp được áp dụng bao gồm:
+
+
+	Đèn chiếu điểm để làm nổi bật tượng và các yếu tố kiến trúc
+	Đèn tuyến tính âm đất để nhấn façade và các đường nét kiến trúc
+	Đèn cảnh quan được ngụy trang trong thảm cây thấp và lối đi
+	Bố trí không đối xứng, tránh khoảng cách đều nhau để giữ cảm giác tự nhiên
+
+
+
+
+Casambi được triển khai trong hệ thống như thế nào?
+
+Toàn bộ hệ thống chiếu sáng được điều khiển thông qua nền tảng Casambi, cho phép quản lý tập trung các nhóm đèn, mức sáng và kịch bản chiếu sáng khác nhau.
+
+Các thiết bị Casambi được đặt trong các mini tower thiết kế riêng, vừa đảm bảo tính thẩm mỹ, vừa bảo vệ thiết bị khỏi tác động môi trường ngoài trời. Hệ thống bao gồm:
+
+
+	Điều khiển các driver DALI 24V cho chiếu sáng cảnh quan
+	Quản lý các nguồn 230V ON/OFF thông qua relay
+	Sử dụng repeater Casambi để đảm bảo vùng phủ sóng ổn định
+	Điều khiển qua ứng dụng Casambi và nút nhấn gắn tường tương thích
+
+
+Toàn bộ hệ thống vận hành trên mạng không dây, giúp giảm thiểu việc kéo cáp và can thiệp vào hạ tầng có sẵn.
+
+
+
+Vai trò của Salvador 1000/16 trong dự án
+
+Một điểm then chốt của dự án là kết nối hệ façade DALI Tunable White của Palazzo Pfanner với hệ chiếu sáng cảnh quan không dây.
+
+Để thực hiện điều này, dự án sử dụng Salvador 1000/16 – bộ điều khiển DALI của Casambi. Thiết bị này đóng vai trò cầu nối giữa:
+
+
+	Hệ DALI có dây của façade
+	Nền tảng điều khiển Casambi không dây
+
+
+Nhờ Salvador, toàn bộ hệ chiếu sáng façade và khu vườn có thể được:
+
+
+	Điều khiển trong cùng một ứng dụng
+	Đồng bộ scene và nhiệt độ màu
+	Dễ dàng điều chỉnh cho các sự kiện hoặc vận hành theo mùa
+
+
+Quan trọng hơn, giải pháp này không yêu cầu thay đổi hạ tầng DALI hiện hữu, phù hợp với các công trình cải tạo hoặc có giá trị bảo tồn.
+
+
+
+Từ góc nhìn triển khai thực tế, mô hình tại Giardino Palazzo Pfanner có nhiều điểm tương đồng với các công trình tại Việt Nam như:
+
+
+	Resort và khu nghỉ dưỡng sinh thái
+	Biệt thự cổ hoặc công trình cải tạo
+	Không gian cảnh quan kết hợp chiếu sáng façade
+	Dự án yêu cầu thẩm mỹ cao nhưng hạn chế can thiệp kiến trúc
+
+
+Casambi kết hợp Salvador cho phép giữ nguyên hệ DALI có dây, đồng thời bổ sung khả năng điều khiển linh hoạt, dễ vận hành và dễ mở rộng – đúng với nhu cầu thực tế của nhiều chủ đầu tư và đơn vị vận hành tại Việt Nam.
 
 ## Raw JSON-LD
 

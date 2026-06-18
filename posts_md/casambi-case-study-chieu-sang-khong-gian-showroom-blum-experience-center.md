@@ -6,11 +6,180 @@ og_site_name: "KNX Store"
 image: "https://knxstore.vn/assets/image/post/casambi-case-study-chieu-sang-khong-gian-showroom-blum-experience-center.jpg"
 datePublished: "2025-12-29T11:05:45+07:00"
 dateModified: "2025-12-29T11:05:45+07:00"
+articleSection: "Chiếu sáng"
+word_count: 920
+mentions: ["Aqara", "Apple Home"]
+breadcrumb:
+  - name: "Trang chủ"
+    url: "https://knxstore.vn/"
+  - name: "Blogs"
+    url: "https://knxstore.vn/blogs"
+  - name: "Chiếu sáng"
+    url: "https://knxstore.vn/blogs/chieu-sang"
+  - name: "Casambi Case Study | Chiếu sáng không gian showroom Blum Experience Center"
+    url: "https://knxstore.vn/casambi-case-study-chieu-sang-khong-gian-showroom-blum-experience-center.html"
+internal_links:
+  - url: "https://knxstore.vn/casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap.html"
+    slug: "casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap"
+    anchor: "Casambi không kết nối HomeKit? MTB10 Matter Bridge là giải pháp"
+  - url: "https://knxstore.vn/nfc-trong-he-thong-chieu-sang-thong-minh-hoat-dong-nhu-the-nao.html"
+    slug: "nfc-trong-he-thong-chieu-sang-thong-minh-hoat-dong-nhu-the-nao"
+    anchor: "NFC có được sử dụng trong hệ thống chiếu sáng thông minh không?"
+  - url: "https://knxstore.vn/thiet-ke-he-chieu-sang-dali-mo-rong-bang-casambi-se-nhu-the-nao.html"
+    slug: "thiet-ke-he-chieu-sang-dali-mo-rong-bang-casambi-se-nhu-the-nao"
+    anchor: "Thiết kế hệ chiếu sáng DALI mở rộng bằng Casambi sẽ như thế nào?"
+  - url: "https://knxstore.vn/casambi-case-study-chieu-sang-dali-trong-cong-trinh-di-san-giardino-palazzo-pfanner.html"
+    slug: "casambi-case-study-chieu-sang-dali-trong-cong-trinh-di-san-giardino-palazzo-pfanner"
+    anchor: "Casambi Case Study | Chiếu sáng DALI trong công trình di sản Giardino Palazzo Pfanner"
+  - url: "https://knxstore.vn/cct-la-gi-trong-chieu-sang.html"
+    slug: "cct-la-gi-trong-chieu-sang"
+    anchor: "CCT là gì trong chiếu sáng?"
+  - url: "https://knxstore.vn/chi-so-ugr-la-gi.html"
+    slug: "chi-so-ugr-la-gi"
+    anchor: "Chỉ số UGR là gì"
+  - url: "https://knxstore.vn/su-khac-biet-giua-cong-nghe-dmx512-va-spi-la-gi.html"
+    slug: "su-khac-biet-giua-cong-nghe-dmx512-va-spi-la-gi"
+    anchor: "LED Dây Pixel SPI vs DMX512 Khác Nhau Thế Nào?"
+  - url: "https://knxstore.vn/6-loai-cam-bien-quan-trong-trong-he-thong-chieu-sang-thong-minh.html"
+    slug: "6-loai-cam-bien-quan-trong-trong-he-thong-chieu-sang-thong-minh"
+    anchor: "6 loại cảm biến quan trọng trong hệ thống chiếu sáng thông minh"
+  - url: "https://knxstore.vn/vi-sao-tinh-tuong-tac-quyet-dinh-hieu-qua-cua-he-thong-chieu-sang-thong-minh.html"
+    slug: "vi-sao-tinh-tuong-tac-quyet-dinh-hieu-qua-cua-he-thong-chieu-sang-thong-minh"
+    anchor: "Vì sao tính tương tác quyết định hiệu quả của hệ thống chiếu sáng thông minh?"
+  - url: "https://knxstore.vn/so-sanh-anh-sang-truc-tiep-va-anh-sang-gian-tiep.html"
+    slug: "so-sanh-anh-sang-truc-tiep-va-anh-sang-gian-tiep"
+    anchor: "So sánh ánh sáng trực tiếp và ánh sáng gián tiếp"
 ---
 
 # Casambi Case Study | Chiếu sáng không gian showroom Blum Experience Center
 
 > Case study chiếu sáng showroom với Casambi tại Blum Experience Center, tập trung trải nghiệm ánh sáng, scene linh hoạt và điều khiển không dây.
+
+## Article Body
+
+Blum Experience Center tọa lạc tại trung tâm Singapore, là không gian trải nghiệm chủ lực của Blum – thương hiệu nổi tiếng toàn cầu trong lĩnh vực phụ kiện nội thất, cơ cấu chuyển động và giải pháp bếp thông minh. Đây là nơi các kiến trúc sư, nhà thiết kế và khách hàng có thể trực tiếp trải nghiệm sản phẩm trong bối cảnh thực tế.
+
+Không gian được thiết kế theo hướng cân bằng giữa tính mở và sự riêng tư, cho phép mỗi khu vực kể một câu chuyện riêng về sản phẩm. Trong bối cảnh đó, ánh sáng không chỉ đóng vai trò chiếu sáng thuần túy, mà trở thành một phần quan trọng của trải nghiệm trưng bày và vận hành hàng ngày.
+
+
+
+Thông tin dự án chiếu sáng Casambi tại Blum Experience Center
+
+
+	
+		
+			
+			Địa điểm
+			
+			
+			Blum Experience Center, Singapore
+			
+		
+		
+			
+			Quy mô
+			
+			
+			Không gian showroom và trung tâm trải nghiệm với nhiều khu vực trưng bày và phòng chức năng
+			
+		
+		
+			
+			Thiết bị sử dụng
+			
+			
+			Salvador 1000
+
+			CBU-A2D
+
+			TCI DALI Casambi 4CH Interface
+
+			TCI DALI Casambi 8CH Interface
+			
+		
+		
+			
+			Khu vực ứng dụng
+			
+			
+			Khu trưng bày sản phẩm
+
+			Phòng họp và khu vực làm việc
+
+			Không gian sự kiện và trải nghiệm
+
+			Các zone chiếu sáng kiến trúc và điểm nhấn
+			
+		
+	
+
+
+Bài toán chiếu sáng của không gian trải nghiệm
+
+Yêu cầu chiếu sáng của dự án này cần phải đáp ứng đồng thời nhiều mục tiêu sau:
+
+
+	Làm nổi bật chi tiết vật liệu, chuyển động và hoàn thiện của sản phẩm
+	Tạo bầu không khí phù hợp cho các hoạt động khác nhau như trưng bày, hội họp, sự kiện
+	Dễ dàng thay đổi kịch bản ánh sáng theo thời gian trong ngày
+	Cho phép đội ngũ vận hành điều chỉnh nhanh mà không cần can thiệp kỹ thuật phức tạp
+
+
+Đây là bài toán rất quen thuộc với showroom cao cấp, sales gallery bất động sản và trung tâm trải nghiệm thương hiệu tại Việt Nam.
+
+Giải pháp chiếu sáng và điều khiển được lựa chọn tại Blum Experience Center
+
+Để giải quyết bài toán trên, Blum Singapore đã hợp tác cùng Illum-tec – đơn vị thiết kế và cung cấp giải pháp chiếu sáng có nhiều kinh nghiệm trong hệ sinh thái Casambi – để triển khai một hệ thống điều khiển ánh sáng dựa trên Casambi, kết hợp DALI.
+
+Hệ thống sử dụng 57 node Casambi, cho phép điều khiển không dây toàn bộ không gian, đồng thời vẫn tận dụng các driver DALI cho chiếu sáng kiến trúc. Cách tiếp cận này giúp hệ thống vừa linh hoạt trong điều khiển, vừa đảm bảo độ ổn định và tính mở rộng cho không gian thương mại.
+
+
+
+Vai trò của Salvador 1000 trong hệ thống chiếu sáng Blum Experience Center là gì?
+
+Trung tâm của hệ thống điều khiển là Salvador 1000 – bộ điều khiển DALI của Casambi. Thiết bị này cho phép tích hợp các driver DALI có dây vào nền tảng Casambi, khiến các đèn DALI xuất hiện như các đèn ảo (virtual luminaires) trong cùng một mạng điều khiển không dây.
+
+Nhờ Salvador 1000, hệ thống tại Blum Experience Center có thể:
+
+
+	Quản lý nhiều loại thiết bị chiếu sáng trong cùng một nền tảng
+	Tạo và chỉnh sửa các scene phức tạp trực tiếp trên ứng dụng Casambi
+	Duy trì sự đơn giản trong commissioning và vận hành, phù hợp với môi trường thương mại
+
+
+
+
+Chiếu sáng kiến trúc và trải nghiệm thị giác
+
+Các bộ đèn sử dụng trong dự án bao gồm FLOS Atom 120 spotlight, một dòng đèn kiến trúc nổi bật với khả năng kiểm soát quang học chính xác và thiết kế tinh tế. Ánh sáng tập trung, sắc nét giúp làm nổi bật vật liệu, kết cấu và chuyển động của sản phẩm, đồng thời phù hợp với ngôn ngữ kiến trúc hiện đại của Blum.
+
+Sự kết hợp giữa đèn kiến trúc chất lượng cao và hệ điều khiển Casambi giúp ánh sáng có khả năng kể câu chuyện sản phẩm một cách nhất quán và linh hoạt.
+
+Vận hành theo kịch bản: ánh sáng thích nghi với nhịp hoạt động
+
+Hệ thống chiếu sáng tại Blum Experience Center được tổ chức theo scene dựa trên thời gian và thao tác thủ công, cho phép không gian tự động thay đổi trạng thái trong ngày:
+
+
+	Trước giờ mở cửa: tạo bầu không khí chuẩn bị
+	Trong giờ hoạt động: ánh sáng tối ưu cho trưng bày và tiếp khách
+	Trước và sau giờ đóng cửa: chuyển tiếp nhẹ nhàng
+	Các scene thủ công cho phòng họp, khu vực đặc biệt hoặc nhu cầu kỹ thuật
+
+
+Cách tổ chức này giúp đội ngũ Blum tập trung vào công việc và khách hàng, trong khi ánh sáng tự động thích nghi hoặc có thể điều chỉnh ngay khi cần.
+
+
+
+Mô hình tại Blum Experience Center cho thấy Casambi kết hợp Salvador rất phù hợp với các công trình tại Việt Nam như:
+
+
+	Showroom nội thất, vật liệu hoàn thiện
+	Sales gallery và trung tâm trải nghiệm thương hiệu
+	Văn phòng kết hợp trưng bày sản phẩm
+	Không gian thương mại cần vận hành linh hoạt theo lịch trình
+
+
+Khả năng tận dụng hạ tầng DALI hiện có, cùng với điều khiển không dây linh hoạt, giúp chủ đầu tư giảm phụ thuộc vào cấu hình kỹ thuật phức tạp và dễ dàng điều chỉnh theo nhu cầu vận hành thực tế.
 
 ## Raw JSON-LD
 
