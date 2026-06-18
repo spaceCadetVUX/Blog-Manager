@@ -5,29 +5,218 @@ import os
 from fastapi import APIRouter
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
-import anthropic
 
 from backend.db import get_conn
 
 router = APIRouter(prefix="/ai", tags=["ai"])
 
-def get_client():
-    api_key = os.environ.get("ANTHROPIC_API_KEY", "")
-    if not api_key or api_key == "sk-ant-your-key-here":
-        raise ValueError("ANTHROPIC_API_KEY chưa được cấu hình trong .env")
-    return anthropic.Anthropic(api_key=api_key)
+
+def _get_setting(key: str) -> str:
+    with get_conn() as conn:
+        row = conn.execute("SELECT value FROM settings WHERE key = ?", [key]).fetchone()
+    return (row["value"] if row else "").strip()
+
+
+def stream_text(model: str, prompt, system: str = ""):
+    """Unified streaming generator. prompt = str hoặc list[{role,content}]."""
+    # Chuẩn hoá về messages list
+    if isinstance(prompt, str):
+        messages = [{"role": "user", "content": prompt}]
+    else:
+        messages = prompt
+
+    # ── Anthropic ──────────────────────────────────────────────────────────────
+    if model.startswith("claude"):
+        import anthropic
+        api_key = _get_setting("anthropic_api_key") or os.environ.get("ANTHROPIC_API_KEY", "")
+        if not api_key:
+            raise ValueError("Anthropic API key chưa được cấu hình")
+        client = anthropic.Anthropic(api_key=api_key)
+        kwargs = dict(model=model, max_tokens=2000, messages=messages)
+        if system:
+            kwargs["system"] = system
+        with client.messages.stream(**kwargs) as stream:
+            for text in stream.text_stream:
+                yield text
+
+    # ── OpenAI ─────────────────────────────────────────────────────────────────
+    elif model.startswith(("gpt-", "o1", "o3", "o4")):
+        from openai import OpenAI
+        api_key = _get_setting("openai_api_key") or os.environ.get("OPENAI_API_KEY", "")
+        if not api_key:
+            raise ValueError("OpenAI API key chưa được cấu hình")
+        client = OpenAI(api_key=api_key)
+        all_messages = ([{"role": "system", "content": system}] if system else []) + messages
+        stream = client.chat.completions.create(model=model, stream=True, messages=all_messages)
+        for chunk in stream:
+            text = chunk.choices[0].delta.content
+            if text:
+                yield text
+
+    # ── DeepSeek (OpenAI-compatible) ───────────────────────────────────────────
+    elif model.startswith("deepseek"):
+        from openai import OpenAI
+        api_key = _get_setting("deepseek_api_key") or os.environ.get("DEEPSEEK_API_KEY", "")
+        if not api_key:
+            raise ValueError("DeepSeek API key chưa được cấu hình")
+        client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
+        all_messages = ([{"role": "system", "content": system}] if system else []) + messages
+        stream = client.chat.completions.create(model=model, stream=True, messages=all_messages)
+        for chunk in stream:
+            text = chunk.choices[0].delta.content
+            if text:
+                yield text
+
+    # ── Google Gemini ──────────────────────────────────────────────────────────
+    elif model.startswith("gemini"):
+        from google import genai
+        from google.genai import types as gtypes
+        api_key = _get_setting("google_api_key") or os.environ.get("GOOGLE_API_KEY", "")
+        if not api_key:
+            raise ValueError("Google API key chưa được cấu hình")
+        client = genai.Client(api_key=api_key)
+        # Gemini: ghép system vào message đầu nếu có
+        contents = []
+        if system:
+            contents.append({"role": "user", "parts": [{"text": f"[System] {system}"}]})
+            contents.append({"role": "model", "parts": [{"text": "Đã hiểu."}]})
+        for m in messages:
+            role = "model" if m["role"] == "assistant" else "user"
+            contents.append({"role": role, "parts": [{"text": m["content"]}]})
+        for chunk in client.models.generate_content_stream(model=model, contents=contents):
+            if chunk.text:
+                yield chunk.text
+
+    else:
+        raise ValueError(f"Model không được hỗ trợ: {model}")
+
+
+class ChatMessage(BaseModel):
+    role: str
+    content: str
+
+class ChatRequest(BaseModel):
+    messages: list[ChatMessage]
+    model: str = "claude-haiku-4-5-20251001"
+    with_context: bool = True
+    post_slug: str = ""
+
+
+@router.post("/chat")
+def chat(req: ChatRequest):
+    system = ""
+    if req.post_slug:
+        with get_conn() as conn:
+            post = conn.execute("SELECT * FROM posts WHERE slug = ?", [req.post_slug]).fetchone()
+            inbound = conn.execute("SELECT COUNT(*) FROM internal_links WHERE to_slug = ?", [req.post_slug]).fetchone()[0]
+            outbound = conn.execute("SELECT COUNT(*) FROM internal_links WHERE from_slug = ?", [req.post_slug]).fetchone()[0]
+        if post:
+            p = dict(post)
+            chat_instructions = _get_setting("chat_instructions")
+            system = (
+                f"Bạn là SEO assistant cho blog knxstore.vn.\n"
+                f"Người dùng đang xem bài viết:\n"
+                f"- Title: {p.get('headline','')}\n"
+                f"- Slug: {p.get('slug','')}\n"
+                f"- Section: {p.get('article_section','')}\n"
+                f"- Word count: {p.get('word_count',0)} từ\n"
+                f"- Description: {p.get('description','')}\n"
+                f"- Inbound links: {inbound} | Outbound links: {outbound}\n"
+                f"Trả lời bằng tiếng Việt, tập trung vào bài viết này."
+                + (f"\n\n---\n{chat_instructions}" if chat_instructions else "")
+            )
+    elif req.with_context:
+        with get_conn() as conn:
+            total = conn.execute("SELECT COUNT(*) FROM posts").fetchone()[0]
+            total_links = conn.execute("SELECT COUNT(*) FROM internal_links").fetchone()[0]
+            sections = conn.execute("""
+                SELECT article_section, COUNT(*) as cnt FROM posts
+                WHERE article_section != '' AND article_section IS NOT NULL
+                GROUP BY article_section ORDER BY cnt DESC
+            """).fetchall()
+        sec_text = ", ".join(f"{s['article_section']} ({s['cnt']})" for s in sections)
+        system = (
+            f"Bạn là SEO assistant cho blog knxstore.vn — chuyên về tự động hóa tòa nhà "
+            f"(KNX, DALI-2, BACnet, Modbus, Matter Smarthome).\n"
+            f"Blog hiện có {total} bài viết, {total_links} internal links.\n"
+            f"Sections: {sec_text}.\n"
+            f"Trả lời bằng tiếng Việt, ngắn gọn và thực tế."
+        )
+
+    messages = [{"role": m.role, "content": m.content} for m in req.messages]
+
+    def generate():
+        try:
+            for text in stream_text(req.model, messages, system=system):
+                yield sse(text)
+        except ValueError as e:
+            yield sse(f"**Lỗi:** {e}")
+        except Exception as e:
+            yield sse(f"**Lỗi API:** {e}")
+        yield "data: [DONE]\n\n"
+
+    return StreamingResponse(generate(), media_type="text/event-stream",
+                             headers={"X-Accel-Buffering": "no", "Cache-Control": "no-cache"})
+
+
+class SaveHistoryRequest(BaseModel):
+    type: str
+    section: str = ""
+    model: str = ""
+    content: str
+
+
+@router.post("/history")
+def save_history(req: SaveHistoryRequest):
+    with get_conn() as conn:
+        conn.execute(
+            "INSERT INTO analysis_history (type, section, model, content) VALUES (?,?,?,?)",
+            [req.type, req.section, req.model, req.content],
+        )
+        row = conn.execute("SELECT last_insert_rowid() as id").fetchone()
+    return {"id": row["id"]}
+
+
+@router.get("/history")
+def get_history(limit: int = 50):
+    with get_conn() as conn:
+        rows = conn.execute("""
+            SELECT id, type, section, model, created_at,
+                   substr(content, 1, 120) AS preview
+            FROM analysis_history
+            ORDER BY created_at DESC LIMIT ?
+        """, [limit]).fetchall()
+    return [dict(r) for r in rows]
+
+
+@router.get("/history/{id}")
+def get_history_item(id: int):
+    with get_conn() as conn:
+        row = conn.execute("SELECT * FROM analysis_history WHERE id = ?", [id]).fetchone()
+    if not row:
+        return {"error": "Not found"}
+    return dict(row)
+
+
+@router.delete("/history/{id}")
+def delete_history_item(id: int):
+    with get_conn() as conn:
+        conn.execute("DELETE FROM analysis_history WHERE id = ?", [id])
+    return {"ok": True}
 
 
 class ClusterRequest(BaseModel):
     section: str
     model: str = "claude-haiku-4-5-20251001"
-
+    extra_instructions: str = ""
 
 class ReviewRequest(BaseModel):
     model: str = "claude-haiku-4-5-20251001"
+    extra_instructions: str = ""
 
 class OverallRequest(BaseModel):
     model: str = "claude-haiku-4-5-20251001"
+    extra_instructions: str = ""
 
 
 def sse(text: str) -> str:
@@ -103,16 +292,13 @@ Top 3-5 bài nên update sớm nhất và tại sao.
 
 Đi thẳng vào phân tích, không cần mở đầu chung chung."""
 
+    if req.extra_instructions.strip():
+        prompt += f"\n\n---\n**Yêu cầu thêm:** {req.extra_instructions.strip()}"
+
     def generate():
         try:
-            client = get_client()
-            with client.messages.stream(
-                model=req.model,
-                max_tokens=1500,
-                messages=[{"role": "user", "content": prompt}],
-            ) as stream:
-                for text in stream.text_stream:
-                    yield sse(text)
+            for text in stream_text(req.model, prompt):
+                yield sse(text)
         except ValueError as e:
             yield sse(f"**Lỗi:** {e}")
         except Exception as e:
@@ -224,16 +410,13 @@ Trong danh sách trên, bài nào quan trọng nhất cần thêm inbound links 
 
 Đi thẳng vào phân tích, số liệu cụ thể."""
 
+    if req.extra_instructions.strip():
+        prompt += f"\n\n---\n**Yêu cầu thêm:** {req.extra_instructions.strip()}"
+
     def generate():
         try:
-            client = get_client()
-            with client.messages.stream(
-                model=req.model,
-                max_tokens=2000,
-                messages=[{"role": "user", "content": prompt}],
-            ) as stream:
-                for text in stream.text_stream:
-                    yield sse(text)
+            for text in stream_text(req.model, prompt):
+                yield sse(text)
         except ValueError as e:
             yield sse(f"**Lỗi:** {e}")
         except Exception as e:
@@ -301,16 +484,13 @@ Nhận xét inbound/outbound. Gợi ý bài nào trong section nên link đến 
 ## Ưu tiên action
 3 việc cụ thể nên làm ngay."""
 
+    if req.extra_instructions.strip():
+        prompt += f"\n\n---\n**Yêu cầu thêm:** {req.extra_instructions.strip()}"
+
     def generate():
         try:
-            client = get_client()
-            with client.messages.stream(
-                model=req.model,
-                max_tokens=800,
-                messages=[{"role": "user", "content": prompt}],
-            ) as stream:
-                for text in stream.text_stream:
-                    yield sse(text)
+            for text in stream_text(req.model, prompt):
+                yield sse(text)
         except ValueError as e:
             yield sse(f"**Lỗi:** {e}")
         except Exception as e:

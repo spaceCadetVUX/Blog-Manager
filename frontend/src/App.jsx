@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { LayoutDashboard, GitBranch, FileText, ShieldCheck, Lightbulb, BrainCircuit } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { LayoutDashboard, GitBranch, FileText, ShieldCheck, Lightbulb, BrainCircuit, MessageSquare, Settings } from 'lucide-react'
 import Sidebar from './components/Sidebar'
 import Dashboard from './components/Dashboard'
 import GraphView from './components/GraphView'
@@ -9,7 +9,10 @@ import PostDetail from './components/PostDetail'
 import CrawlModal from './components/CrawlModal'
 import SuggestionsView from './components/SuggestionsView'
 import AIView from './components/AIView'
+import AIChatView from './components/AIChatView'
+import SettingsView from './components/SettingsView'
 import useBreakpoint from './hooks/useBreakpoint'
+import LoginView from './components/LoginView'
 
 const VIEWS = {
   dashboard:   Dashboard,
@@ -18,6 +21,8 @@ const VIEWS = {
   audit:       AuditView,
   suggestions: SuggestionsView,
   ai:          AIView,
+  chat:        AIChatView,
+  settings:    SettingsView,
 }
 
 const BOTTOM_NAV = [
@@ -26,10 +31,12 @@ const BOTTOM_NAV = [
   { id: 'posts',       label: 'Bài viết',  icon: FileText },
   { id: 'audit',       label: 'Audit',     icon: ShieldCheck },
   { id: 'suggestions', label: 'Gợi ý',     icon: Lightbulb },
-  { id: 'ai',          label: 'AI',         icon: BrainCircuit },
+  { id: 'ai',          label: 'AI Analysis', icon: BrainCircuit },
+  { id: 'chat',        label: 'AI Chat',    icon: MessageSquare },
+  { id: 'settings',   label: 'Settings',   icon: Settings },
 ]
 
-export default function App() {
+function AppShell() {
   const [view, setView]           = useState('graph')
   const [selectedSlug, setSelectedSlug] = useState(null)
   const [navList, setNavList]     = useState([])
@@ -130,4 +137,17 @@ export default function App() {
       )}
     </div>
   )
+}
+
+export default function App() {
+  const [token, setToken] = useState(() => localStorage.getItem('app_token') || '')
+
+  useEffect(() => {
+    const onStorage = () => setToken(localStorage.getItem('app_token') || '')
+    window.addEventListener('storage', onStorage)
+    return () => window.removeEventListener('storage', onStorage)
+  }, [])
+
+  if (!token) return <LoginView onLogin={t => setToken(t)} />
+  return <AppShell />
 }

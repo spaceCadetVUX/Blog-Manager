@@ -1,9 +1,17 @@
 import { X, Loader } from 'lucide-react'
 
 const MODEL_OPTIONS = [
-  { value: 'claude-haiku-4-5-20251001', label: 'Haiku (nhanh)' },
-  { value: 'claude-sonnet-4-6',         label: 'Sonnet (sâu)' },
+  { group: 'Anthropic', value: 'claude-haiku-4-5-20251001', label: 'Claude Haiku (nhanh)' },
+  { group: 'Anthropic', value: 'claude-sonnet-4-6',         label: 'Claude Sonnet (sâu)' },
+  { group: 'OpenAI',    value: 'gpt-4o-mini',               label: 'GPT-4o Mini' },
+  { group: 'OpenAI',    value: 'gpt-4o',                    label: 'GPT-4o' },
+  { group: 'DeepSeek',  value: 'deepseek-chat',             label: 'DeepSeek Chat' },
+  { group: 'DeepSeek',  value: 'deepseek-reasoner',         label: 'DeepSeek Reasoner' },
+  { group: 'Google',    value: 'gemini-2.0-flash',          label: 'Gemini 2.0 Flash' },
+  { group: 'Google',    value: 'gemini-2.5-pro',            label: 'Gemini 2.5 Pro' },
 ]
+
+const MODEL_GROUPS = [...new Set(MODEL_OPTIONS.map(o => o.group))]
 
 // Simple markdown renderer — chỉ xử lý ## heading, **bold**, bullet
 function Markdown({ text }) {
@@ -72,7 +80,13 @@ export function ModelSelect({ value, onChange, disabled }) {
         opacity: disabled ? 0.6 : 1,
       }}
     >
-      {MODEL_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+      {MODEL_GROUPS.map(g => (
+        <optgroup key={g} label={g}>
+          {MODEL_OPTIONS.filter(o => o.group === g).map(o => (
+            <option key={o.value} value={o.value}>{o.label}</option>
+          ))}
+        </optgroup>
+      ))}
     </select>
   )
 }

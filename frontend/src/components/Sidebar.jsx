@@ -1,4 +1,4 @@
-import { LayoutDashboard, GitBranch, FileText, ShieldCheck, RefreshCw, Lightbulb, BrainCircuit } from 'lucide-react'
+import { LayoutDashboard, GitBranch, FileText, ShieldCheck, RefreshCw, Lightbulb, BrainCircuit, MessageSquare, Settings } from 'lucide-react'
 
 const NAV = [
   { id: 'dashboard',   label: 'Dashboard',     icon: LayoutDashboard },
@@ -7,6 +7,8 @@ const NAV = [
   { id: 'audit',       label: 'SEO Audit',     icon: ShieldCheck },
   { id: 'suggestions', label: 'Gợi ý links',   icon: Lightbulb },
   { id: 'ai',          label: 'AI Analysis',   icon: BrainCircuit },
+  { id: 'chat',        label: 'AI Chat',       icon: MessageSquare },
+  { id: 'settings',    label: 'Settings',      icon: Settings },
 ]
 
 export default function Sidebar({ active, onChange, onCrawl, collapsed = false }) {
@@ -33,18 +35,14 @@ export default function Sidebar({ active, onChange, onCrawl, collapsed = false }
         justifyContent: collapsed ? 'center' : 'flex-start',
         gap: 10,
       }}>
-        <div style={{
-          width: 32, height: 32,
-          background: 'var(--accent)',
-          borderRadius: 8,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 14, fontWeight: 700, color: '#fff', flexShrink: 0,
-        }}>K</div>
         {!collapsed && (
           <div>
-            <div style={{ fontWeight: 600, fontSize: 14, color: 'var(--text)' }}>KNX SEO</div>
+            <img src="/logo.png" alt="KNXStore" style={{ height: 20, objectFit: 'contain', display: 'block' }} />
             <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>Blog Manager</div>
           </div>
+        )}
+        {collapsed && (
+          <img src="/logo.png" alt="KNXStore" style={{ height: 24, objectFit: 'contain' }} />
         )}
       </div>
 

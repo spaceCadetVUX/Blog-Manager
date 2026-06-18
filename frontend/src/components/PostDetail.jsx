@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
-import { X, ExternalLink, AlertTriangle, ChevronLeft, ChevronRight } from 'lucide-react'
-import { api, streamAI } from '../api'
+import { useEffect, useRef, useState } from 'react'
+import { X, ExternalLink, AlertTriangle, ChevronLeft, ChevronRight, Send, Trash2 } from 'lucide-react'
+import { api, streamAI, streamChat } from '../api'
 import { sectionColor } from '../sectionColors.js'
 import AIPanel, { ModelSelect } from './AIPanel.jsx'
 
@@ -48,19 +48,30 @@ function LinkItem({ link, onNavigate }) {
   )
 }
 
-function ArticleBody({ text }) {
-  if (!text) return (
-    <div style={{ color: 'var(--text-subtle)', fontSize: 12, fontStyle: 'italic', padding: '20px 0' }}>
-      Không có nội dung bài viết trong database
-    </div>
+function ArticleHTML({ slug }) {
+  const [html, setHtml]       = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError]     = useState(null)
+
+  useEffect(() => {
+    setHtml(null); setError(null); setLoading(true)
+    api.postHtml(slug)
+      .then(d => setHtml(d.html))
+      .catch(e => setError(e.message))
+      .finally(() => setLoading(false))
+  }, [slug])
+
+  if (loading) return (
+    <div style={{ color: 'var(--text-muted)', fontSize: 12, padding: '24px 0' }}>Đang tải nội dung...</div>
   )
-  const paragraphs = text.split(/\n{2,}/).filter(Boolean)
+  if (error) return (
+    <div style={{ color: 'var(--danger)', fontSize: 12, padding: '12px 0' }}>⚠ {error}</div>
+  )
   return (
-    <div style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.8 }}>
-      {paragraphs.map((p, i) => (
-        <p key={i} style={{ marginBottom: 14 }}>{p.trim()}</p>
-      ))}
-    </div>
+    <div
+      className="article-render"
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
   )
 }
 
@@ -89,11 +100,27 @@ export default function PostDetail({ slug, onClose, onNavigate, navList = [], bp
   const [loading, setLoading]   = useState(true)
   const [visible, setVisible]   = useState(false)
   const [activeTab, setActiveTab] = useState('content') // mobile tabs
+  const [rightTab, setRightTab]   = useState('links')   // desktop right panel tabs
 
-  const [aiModel, setAiModel]     = useState('claude-haiku-4-5-20251001')
-  const [aiContent, setAiContent] = useState('')
-  const [aiLoading, setAiLoading] = useState(false)
-  const [showAI, setShowAI]       = useState(false)
+  const [aiModel, setAiModel]         = useState('claude-haiku-4-5-20251001')
+  const [aiContent, setAiContent]     = useState('')
+  const [aiLoading, setAiLoading]     = useState(false)
+  const [showAI, setShowAI]           = useState(false)
+  const [instructions, setInstructions] = useState('')
+
+  const [chatMessages, setChatMessages] = useState([])
+  const [chatInput, setChatInput]       = useState('')
+  const [chatLoading, setChatLoading]   = useState(false)
+  const chatBottomRef = useRef(null)
+  const chatInputRef  = useRef(null)
+
+  useEffect(() => {
+    api.getSetting('review_instructions').then(d => setInstructions(d.value || '')).catch(() => {})
+  }, [])
+
+  const saveInstructions = (val) => {
+    api.setSetting('review_instructions', val).catch(() => {})
+  }
 
   const runReview = async () => {
     if (aiLoading) return
@@ -103,7 +130,7 @@ export default function PostDetail({ slug, onClose, onNavigate, navList = [], bp
     try {
       await streamAI(
         `/ai/review/${slug}`,
-        { model: aiModel },
+        { model: aiModel, extra_instructions: instructions },
         chunk => setAiContent(prev => prev + chunk),
         () => setAiLoading(false),
       )
@@ -148,7 +175,7 @@ export default function PostDetail({ slug, onClose, onNavigate, navList = [], bp
   const panelW = '100vw'
   const maxW   = undefined
 
-  const Header = () => (
+  const header = (
     <div style={{
       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       padding: '12px 16px', borderBottom: '1px solid var(--border)',
@@ -186,7 +213,7 @@ export default function PostDetail({ slug, onClose, onNavigate, navList = [], bp
   )
 
   // Right panel: metadata + links + AI
-  const RightPanel = () => (
+  const rightPanel = post && (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 0, padding: '16px 16px 24px' }}>
       {/* Orphan warning */}
       {(!post.inbound_links || post.inbound_links.length === 0) && (
@@ -298,6 +325,20 @@ export default function PostDetail({ slug, onClose, onNavigate, navList = [], bp
 
       {/* AI Review */}
       <SectionLabel>AI Review</SectionLabel>
+      <textarea
+        value={instructions}
+        onChange={e => setInstructions(e.target.value)}
+        onBlur={e => saveInstructions(e.target.value)}
+        placeholder="Yêu cầu thêm cho AI (tùy chọn)..."
+        rows={2}
+        style={{
+          width: '100%', resize: 'vertical', fontSize: 11,
+          background: 'var(--surface-2)', border: '1px solid var(--border)',
+          borderRadius: 6, padding: '6px 8px', color: 'var(--text)',
+          marginBottom: 8, boxSizing: 'border-box', fontFamily: 'inherit',
+          outline: 'none',
+        }}
+      />
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10, flexWrap: 'wrap' }}>
         <ModelSelect value={aiModel} onChange={setAiModel} disabled={aiLoading} />
         <button
@@ -328,6 +369,183 @@ export default function PostDetail({ slug, onClose, onNavigate, navList = [], bp
     </div>
   )
 
+  const metaPanel = post && (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 0, padding: '16px 16px 24px' }}>
+      <SectionLabel>Meta Title</SectionLabel>
+      <span style={{ fontSize: 12, color: 'var(--text)', lineHeight: 1.5, marginBottom: 2 }}>
+        {post.headline || <em style={{ color: 'var(--text-subtle)' }}>(trống)</em>}
+      </span>
+      <span style={{ fontSize: 10, color: post.headline?.length > 60 ? 'var(--danger)' : post.headline?.length < 30 ? 'var(--warning)' : 'var(--success)' }}>
+        {post.headline?.length || 0} ký tự {post.headline?.length > 60 ? '(quá dài)' : post.headline?.length < 30 ? '(quá ngắn)' : '(OK)'}
+      </span>
+
+      <SectionLabel>Meta Description</SectionLabel>
+      <span style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: 2 }}>
+        {post.description || <em style={{ color: 'var(--text-subtle)' }}>(trống)</em>}
+      </span>
+      <span style={{ fontSize: 10, color: post.description?.length > 160 ? 'var(--danger)' : post.description?.length < 70 ? 'var(--warning)' : 'var(--success)' }}>
+        {post.description?.length || 0} ký tự {post.description?.length > 160 ? '(quá dài)' : post.description?.length < 70 ? '(quá ngắn)' : '(OK)'}
+      </span>
+
+      <SectionLabel>Robots</SectionLabel>
+      <span style={{
+        fontSize: 12, color: post.robots ? 'var(--danger)' : 'var(--success)',
+        background: post.robots ? 'rgba(248,81,73,0.08)' : 'rgba(63,185,80,0.08)',
+        border: `1px solid ${post.robots ? 'rgba(248,81,73,0.25)' : 'rgba(63,185,80,0.25)'}`,
+        borderRadius: 6, padding: '4px 10px', alignSelf: 'flex-start',
+      }}>{post.robots || 'index, follow (mặc định)'}</span>
+
+      <SectionLabel>Publisher</SectionLabel>
+      <span style={{ fontSize: 12, color: post.publisher ? 'var(--text)' : 'var(--text-subtle)', fontStyle: post.publisher ? 'normal' : 'italic' }}>
+        {post.publisher || '(trống)'}
+      </span>
+
+      <SectionLabel>Mentions ({post.mentions?.length || 0})</SectionLabel>
+      {post.mentions?.length > 0 ? (
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+          {post.mentions.map(m => (
+            <span key={m} style={{
+              fontSize: 11, color: 'var(--accent-2)', background: 'var(--accent-dim)',
+              border: '1px solid rgba(6,182,212,0.3)', borderRadius: 4, padding: '2px 7px',
+            }}>{m}</span>
+          ))}
+        </div>
+      ) : (
+        <span style={{ fontSize: 12, color: 'var(--text-subtle)', fontStyle: 'italic' }}>(không có)</span>
+      )}
+
+      <SectionLabel>Breadcrumb</SectionLabel>
+      {post.breadcrumb?.length > 0 ? (
+        <ol style={{ margin: 0, padding: '0 0 0 16px', display: 'flex', flexDirection: 'column', gap: 4 }}>
+          {post.breadcrumb.map((b, i) => (
+            <li key={i} style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.5 }}>
+              <a href={b.url} target="_blank" rel="noopener noreferrer"
+                style={{ color: 'var(--accent-2)', textDecoration: 'none' }}
+                onMouseEnter={e => e.currentTarget.style.textDecoration = 'underline'}
+                onMouseLeave={e => e.currentTarget.style.textDecoration = 'none'}
+              >{b.name}</a>
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <span style={{ fontSize: 12, color: 'var(--text-subtle)', fontStyle: 'italic' }}>(không có)</span>
+      )}
+
+      <SectionLabel>Last Crawled</SectionLabel>
+      <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>
+        {post.updated_at ? new Date(post.updated_at).toLocaleString('vi-VN') : '(không rõ)'}
+      </span>
+
+      <SectionLabel>Slug / ID</SectionLabel>
+      <span style={{ fontSize: 11, color: 'var(--text-subtle)', fontFamily: 'monospace', wordBreak: 'break-all' }}>
+        {post.slug}
+      </span>
+      <span style={{ fontSize: 11, color: 'var(--text-subtle)', marginTop: 2 }}>ID: {post.id}</span>
+    </div>
+  )
+
+  const sendChat = async () => {
+    const text = chatInput.trim()
+    if (!text || chatLoading) return
+    setChatInput('')
+    const userMsg = { role: 'user', content: text }
+    const history = [...chatMessages, userMsg]
+    setChatMessages([...history, { role: 'assistant', content: '', streaming: true }])
+    setChatLoading(true)
+    try {
+      await streamChat(
+        history, aiModel, false,
+        chunk => setChatMessages(prev => {
+          const next = [...prev]
+          next[next.length - 1] = { ...next[next.length - 1], content: next[next.length - 1].content + chunk }
+          return next
+        }),
+        () => {
+          setChatMessages(prev => { const n = [...prev]; n[n.length-1] = {...n[n.length-1], streaming: false}; return n })
+          setChatLoading(false)
+          setTimeout(() => chatBottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 50)
+        },
+        slug,
+      )
+    } catch (e) {
+      setChatMessages(prev => { const n = [...prev]; n[n.length-1] = { role:'assistant', content:`Lỗi: ${e.message}`, streaming:false }; return n })
+      setChatLoading(false)
+    }
+  }
+
+  const chatPanel = (
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+      {/* Messages */}
+      <div style={{ flex: 1, overflowY: 'auto', padding: '12px 14px', display: 'flex', flexDirection: 'column' }}>
+        {chatMessages.length === 0 && (
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 8, color: 'var(--text-subtle)', padding: 20 }}>
+            <div style={{ fontSize: 28, opacity: 0.35 }}>💬</div>
+            <div style={{ fontSize: 12, color: 'var(--text-muted)', textAlign: 'center' }}>Hỏi AI về bài viết này</div>
+            {['Viết lại meta description cho bài này', 'Gợi ý internal links phù hợp', 'Đề xuất cải thiện title'].map(s => (
+              <button key={s} onClick={() => { setChatInput(s); chatInputRef.current?.focus() }}
+                style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', borderRadius: 14, padding: '4px 12px', fontSize: 11, color: 'var(--text-muted)', cursor: 'pointer' }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(139,92,246,0.5)'}
+                onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
+              >{s}</button>
+            ))}
+          </div>
+        )}
+        {chatMessages.map((msg, i) => (
+          <div key={i} style={{ display: 'flex', justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start', marginBottom: 8 }}>
+            <div style={{
+              maxWidth: '85%', padding: '7px 11px', fontSize: 12, lineHeight: 1.55,
+              borderRadius: msg.role === 'user' ? '12px 12px 3px 12px' : '12px 12px 12px 3px',
+              background: msg.role === 'user' ? 'rgba(139,92,246,0.16)' : 'var(--surface-2)',
+              border: `1px solid ${msg.role === 'user' ? 'rgba(139,92,246,0.3)' : 'var(--border)'}`,
+              color: 'var(--text)', whiteSpace: 'pre-wrap', wordBreak: 'break-word',
+            }}>
+              {msg.content}
+              {msg.streaming && <span style={{ display:'inline-block', width:5, height:12, background:'var(--accent-2)', marginLeft:2, animation:'blink 0.8s step-end infinite', verticalAlign:'text-bottom' }} />}
+            </div>
+          </div>
+        ))}
+        <div ref={chatBottomRef} />
+      </div>
+      {/* Input */}
+      <div style={{ borderTop: '1px solid var(--border)', padding: '8px 10px', display: 'flex', flexDirection: 'column', gap: 6, flexShrink: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <ModelSelect value={aiModel} onChange={setAiModel} disabled={chatLoading} />
+          {chatMessages.length > 0 && (
+            <button onClick={() => setChatMessages([])} title="Xóa chat"
+              style={{ background: 'none', border: 'none', color: 'var(--text-subtle)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4, fontSize: 11 }}
+            ><Trash2 size={11} /> Xóa</button>
+          )}
+        </div>
+        <div style={{ display: 'flex', gap: 6, alignItems: 'flex-end' }}>
+          <textarea
+            ref={chatInputRef}
+            value={chatInput}
+            onChange={e => setChatInput(e.target.value)}
+            onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat() } }}
+            placeholder="Hỏi về bài này... (Enter gửi)"
+            rows={1}
+            style={{
+              flex: 1, resize: 'none', fontSize: 12, background: 'var(--surface-2)',
+              border: '1px solid var(--border)', borderRadius: 8, padding: '7px 10px',
+              color: 'var(--text)', fontFamily: 'inherit', outline: 'none',
+              maxHeight: 80, overflowY: 'auto',
+            }}
+            onInput={e => { e.target.style.height = 'auto'; e.target.style.height = Math.min(e.target.scrollHeight, 80) + 'px' }}
+          />
+          <button onClick={sendChat} disabled={!chatInput.trim() || chatLoading}
+            style={{
+              width: 32, height: 32, borderRadius: 8, border: '1px solid rgba(139,92,246,0.5)', flexShrink: 0,
+              background: (!chatInput.trim() || chatLoading) ? 'rgba(139,92,246,0.06)' : 'rgba(139,92,246,0.18)',
+              color: (!chatInput.trim() || chatLoading) ? 'rgba(167,139,250,0.4)' : '#a78bfa',
+              cursor: (!chatInput.trim() || chatLoading) ? 'not-allowed' : 'pointer',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}
+          ><Send size={13} /></button>
+        </div>
+      </div>
+    </div>
+  )
+
   return (
     <>
       <div onClick={handleClose} style={{
@@ -344,7 +562,7 @@ export default function PostDetail({ slug, onClose, onNavigate, navList = [], bp
         transform: visible ? 'translateX(0)' : 'translateX(100%)',
         transition: 'transform 0.25s cubic-bezier(0.4,0,0.2,1)',
       }}>
-        <Header />
+        {header}
 
         {loading && (
           <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)' }}>
@@ -375,12 +593,29 @@ export default function PostDetail({ slug, onClose, onNavigate, navList = [], bp
                   <h2 style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', lineHeight: 1.4, marginBottom: 16 }}>
                     {post.headline}
                   </h2>
-                  <ArticleBody text={post.article_body} />
+                  <ArticleHTML slug={slug} />
                 </div>
 
-                {/* RIGHT — metadata */}
-                <div style={{ width: 340, minWidth: 300, overflowY: 'auto', flexShrink: 0 }}>
-                  <RightPanel />
+                {/* RIGHT — tabs: Links/AI | SEO Meta */}
+                <div style={{ width: 340, minWidth: 300, display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
+                  <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', background: 'var(--surface)', flexShrink: 0 }}>
+                    {[['links', 'Links & AI'], ['meta', 'SEO Meta'], ['chat', 'Chat']].map(([id, label]) => (
+                      <button key={id} onClick={() => setRightTab(id)} style={{
+                        flex: 1, padding: '8px 0', fontSize: 12, fontWeight: rightTab === id ? 600 : 400,
+                        background: 'none', border: 'none', cursor: 'pointer',
+                        color: rightTab === id ? 'var(--accent-2)' : 'var(--text-muted)',
+                        borderBottom: `2px solid ${rightTab === id ? 'var(--accent)' : 'transparent'}`,
+                        transition: 'all 0.15s',
+                      }}>{label}</button>
+                    ))}
+                  </div>
+                  <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                    {rightTab === 'chat' ? chatPanel : (
+                      <div style={{ flex: 1, overflowY: 'auto' }}>
+                        {rightTab === 'links' ? rightPanel : metaPanel}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             )}
@@ -392,7 +627,7 @@ export default function PostDetail({ slug, onClose, onNavigate, navList = [], bp
                   display: 'flex', borderBottom: '1px solid var(--border)',
                   background: 'var(--surface)', flexShrink: 0,
                 }}>
-                  {[['content', 'Bài viết'], ['stats', 'Thống kê']].map(([id, label]) => (
+                  {[['content', 'Bài viết'], ['stats', 'Links & AI'], ['meta', 'SEO Meta'], ['chat', 'Chat']].map(([id, label]) => (
                     <button key={id} onClick={() => setActiveTab(id)} style={{
                       flex: 1, padding: '9px 0', fontSize: 12, fontWeight: activeTab === id ? 600 : 400,
                       background: 'none', border: 'none', cursor: 'pointer',
@@ -414,10 +649,12 @@ export default function PostDetail({ slug, onClose, onNavigate, navList = [], bp
                       <h2 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', lineHeight: 1.4, marginBottom: 14 }}>
                         {post.headline}
                       </h2>
-                      <ArticleBody text={post.article_body} />
+                      <ArticleHTML slug={slug} />
                     </div>
                   )}
-                  {activeTab === 'stats' && <RightPanel />}
+                  {activeTab === 'stats' && rightPanel}
+                  {activeTab === 'meta' && metaPanel}
+                  {activeTab === 'chat' && chatPanel}
                 </div>
               </>
             )}

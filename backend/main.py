@@ -1,5 +1,7 @@
-from fastapi import FastAPI
+import os
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -10,6 +12,7 @@ from backend.routes.audit import router as audit_router
 from backend.routes.crawl import router as crawl_router
 from backend.routes.suggestions import router as suggestions_router
 from backend.routes.ai import router as ai_router
+from backend.routes.settings import router as settings_router
 
 app = FastAPI(title="KNXStore Blog SEO API", version="0.1.0")
 
@@ -20,12 +23,26 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+@app.middleware("http")
+async def auth_middleware(request: Request, call_next):
+    password = os.getenv("APP_PASSWORD", "").strip()
+    if not password:
+        return await call_next(request)
+    if request.method == "OPTIONS":
+        return await call_next(request)
+    auth = request.headers.get("Authorization", "")
+    if auth == f"Bearer {password}":
+        return await call_next(request)
+    return JSONResponse(status_code=401, content={"detail": "Unauthorized"})
+
 app.include_router(posts_router)
 app.include_router(graph_router)
 app.include_router(audit_router)
 app.include_router(crawl_router)
 app.include_router(suggestions_router)
 app.include_router(ai_router)
+app.include_router(settings_router)
 
 
 @app.on_event("startup")

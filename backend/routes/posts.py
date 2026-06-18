@@ -1,4 +1,6 @@
 import json
+import httpx
+from bs4 import BeautifulSoup
 from fastapi import APIRouter, Query, HTTPException
 from backend.db import get_conn
 
@@ -116,3 +118,30 @@ def get_post(slug: str):
     post["outbound_links"] = [dict(r) for r in outbound]
     post["inbound_links"]  = [dict(r) for r in inbound]
     return post
+
+
+@router.get("/{slug}/html")
+def get_post_html(slug: str):
+    with get_conn() as conn:
+        row = conn.execute("SELECT url FROM posts WHERE slug = ?", (slug,)).fetchone()
+    if not row or not row["url"]:
+        raise HTTPException(404, "URL not found")
+
+    try:
+        r = httpx.get(row["url"], timeout=10, follow_redirects=True,
+                      headers={"User-Agent": "Mozilla/5.0 (compatible; KNXStoreSEO/1.0)"})
+        r.raise_for_status()
+    except Exception as e:
+        raise HTTPException(502, f"Fetch failed: {e}")
+
+    soup = BeautifulSoup(r.text, "html.parser")
+
+    # Xóa nav, footer, sidebar, script, style khỏi kết quả
+    for tag in soup.select("script, style, nav, footer, header, .sidebar, .widget, .related-posts, .comments, [class*='swiper'], [class*='breadcrumb']"):
+        tag.decompose()
+
+    content = soup.select_one(".main-content") or soup.select_one("main") or soup.select_one("article")
+    if not content:
+        raise HTTPException(422, "Không tìm thấy nội dung bài viết")
+
+    return {"html": str(content)}

@@ -98,3 +98,28 @@ body {
 
 @keyframes spin  { to { transform: rotate(360deg); } }
 @keyframes blink { 50% { opacity: 0; } }
+
+/* Article HTML renderer */
+.article-render { font-size: 14px; line-height: 1.8; color: var(--text-muted); }
+.article-render h1 { font-size: 22px; font-weight: 700; color: var(--text); margin: 28px 0 12px; line-height: 1.35; }
+.article-render h2 { font-size: 18px; font-weight: 600; color: var(--text); margin: 24px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+.article-render h3 { font-size: 15px; font-weight: 600; color: var(--text); margin: 18px 0 8px; }
+.article-render h4, .article-render h5 { font-size: 13px; font-weight: 600; color: var(--text-muted); margin: 14px 0 6px; }
+.article-render p  { margin-bottom: 14px; }
+.article-render ul, .article-render ol { padding-left: 20px; margin-bottom: 14px; }
+.article-render li { margin-bottom: 5px; }
+.article-render img { max-width: 480px; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); margin: 16px 0; display: block; object-fit: contain; background: var(--surface-2); }
+.article-render p:has(> img:only-child) { margin: 0; }
+.article-render p > img:only-child { margin: 16px 0; }
+.article-render table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 13px; }
+.article-render th { background: var(--surface-2); color: var(--text); font-weight: 600; padding: 8px 12px; border: 1px solid var(--border); text-align: left; }
+.article-render td { padding: 7px 12px; border: 1px solid var(--border-2); color: var(--text-muted); }
+.article-render tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+.article-render a  { color: var(--accent-2); text-decoration: none; }
+.article-render a:hover { text-decoration: underline; }
+.article-render blockquote { border-left: 3px solid var(--accent); margin: 16px 0; padding: 8px 16px; background: var(--surface-2); border-radius: 0 6px 6px 0; color: var(--text-muted); font-style: italic; }
+.article-render code { background: var(--surface-2); border: 1px solid var(--border); border-radius: 3px; padding: 1px 5px; font-size: 12px; font-family: monospace; }
+.article-render pre  { background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 12px 16px; overflow-x: auto; margin-bottom: 14px; }
+.article-render strong, .article-render b { color: var(--text); font-weight: 600; }
+/* Ẩn các phần không cần thiết của site */
+.article-render .breadcrumb, .article-render [class*="swiper"], .article-render .d-none { display: none !important; }

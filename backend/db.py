@@ -46,7 +46,22 @@ def init_db():
             UNIQUE(from_slug, to_slug)
         );
 
+        CREATE TABLE IF NOT EXISTS settings (
+            key   TEXT PRIMARY KEY,
+            value TEXT NOT NULL DEFAULT ''
+        );
+
+        CREATE TABLE IF NOT EXISTS analysis_history (
+            id         INTEGER PRIMARY KEY AUTOINCREMENT,
+            type       TEXT NOT NULL,
+            section    TEXT DEFAULT '',
+            model      TEXT DEFAULT '',
+            content    TEXT NOT NULL,
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP
+        );
+
         CREATE INDEX IF NOT EXISTS idx_posts_section ON posts(article_section);
         CREATE INDEX IF NOT EXISTS idx_links_from   ON internal_links(from_slug);
         CREATE INDEX IF NOT EXISTS idx_links_to     ON internal_links(to_slug);
+        CREATE INDEX IF NOT EXISTS idx_history_type ON analysis_history(type, created_at);
         """)

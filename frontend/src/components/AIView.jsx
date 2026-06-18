@@ -1,14 +1,50 @@
 import { useEffect, useState } from 'react'
+import { Trash2, Clock } from 'lucide-react'
 import { api, streamAI } from '../api'
 import { sectionColor } from '../sectionColors.js'
 import AIPanel, { ModelSelect } from './AIPanel.jsx'
 
+function HistoryItem({ item, onView, onDelete }) {
+  const label = item.type === 'overall' ? '🌐 Toàn bộ blog' : `📂 ${item.section || item.type}`
+  const date = item.created_at ? new Date(item.created_at).toLocaleString('vi-VN', { dateStyle: 'short', timeStyle: 'short' }) : ''
+  const preview = item.content ? item.content.slice(0, 120).replace(/#+\s*/g, '').replace(/\*\*/g, '') + '...' : ''
+  return (
+    <div style={{
+      background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8,
+      padding: '10px 14px', display: 'flex', flexDirection: 'column', gap: 4,
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>{label}</span>
+          <span style={{ fontSize: 10, color: 'var(--text-subtle)', background: 'var(--surface-2)', border: '1px solid var(--border)', borderRadius: 4, padding: '1px 5px' }}>{item.model}</span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
+          <span style={{ fontSize: 10, color: 'var(--text-subtle)' }}>{date}</span>
+          <button
+            onClick={onView}
+            style={{ fontSize: 11, padding: '2px 8px', borderRadius: 5, border: '1px solid rgba(139,92,246,0.4)', background: 'rgba(139,92,246,0.1)', color: '#a78bfa', cursor: 'pointer' }}
+          >Xem</button>
+          <button
+            onClick={onDelete}
+            style={{ padding: '2px 5px', borderRadius: 5, border: '1px solid rgba(248,81,73,0.3)', background: 'transparent', color: 'var(--danger)', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+          ><Trash2 size={11} /></button>
+        </div>
+      </div>
+      <div style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.4 }}>{preview}</div>
+    </div>
+  )
+}
+
 export default function AIView({ bp = 'desktop' }) {
-  const [sections, setSections]       = useState([])
-  const [selected, setSelected]       = useState(null)
-  const [aiModel, setAiModel]         = useState('claude-haiku-4-5-20251001')
-  const [aiContent, setAiContent]     = useState('')
-  const [aiLoading, setAiLoading]     = useState(false)
+  const [sections, setSections]           = useState([])
+  const [selected, setSelected]           = useState(null)
+  const [aiModel, setAiModel]             = useState('claude-haiku-4-5-20251001')
+  const [aiContent, setAiContent]         = useState('')
+  const [aiLoading, setAiLoading]         = useState(false)
+  const [instructions, setInstructions]   = useState('')
+  const [showHistory, setShowHistory]     = useState(false)
+  const [history, setHistory]             = useState([])
+  const [historyLoading, setHistoryLoading] = useState(false)
   const isMobile = bp === 'mobile'
   const isCompact = bp === 'mobile' || bp === 'tablet'
 
@@ -19,20 +55,49 @@ export default function AIView({ bp = 'desktop' }) {
       setSections(rows)
       setSelected(ALL_KEY)
     }).catch(console.error)
+    api.getSetting('cluster_instructions').then(d => setInstructions(d.value || '')).catch(() => {})
   }, [])
+
+  const loadHistory = () => {
+    setHistoryLoading(true)
+    api.getHistory(50).then(rows => setHistory(rows)).catch(() => {}).finally(() => setHistoryLoading(false))
+  }
+
+  const toggleHistory = () => {
+    if (!showHistory) loadHistory()
+    setShowHistory(h => !h)
+    setAiContent('')
+  }
+
+  const saveInstructions = (val) => {
+    api.setSetting('cluster_instructions', val).catch(() => {})
+  }
 
   const runAnalysis = async (section = selected) => {
     if (!section || aiLoading) return
     setAiContent('')
+    setShowHistory(false)
     setAiLoading(true)
+    let fullContent = ''
+    const isAll = section === ALL_KEY
     try {
-      const isAll = section === ALL_KEY
-
       await streamAI(
         isAll ? '/ai/overall' : '/ai/cluster',
-        isAll ? { model: aiModel } : { section, model: aiModel },
-        chunk => setAiContent(prev => prev + chunk),
-        () => setAiLoading(false),
+        isAll
+          ? { model: aiModel, extra_instructions: instructions }
+          : { section, model: aiModel, extra_instructions: instructions },
+        chunk => { fullContent += chunk; setAiContent(prev => prev + chunk) },
+        () => {
+          setAiLoading(false)
+          if (fullContent && !fullContent.startsWith('**Lỗi')) {
+            api.saveHistory({
+              type: isAll ? 'overall' : 'cluster',
+              section: isAll ? '' : section,
+              model: aiModel,
+              content: fullContent,
+            }).catch(() => {})
+          }
+        },
       )
     } catch (e) {
       setAiContent(`**Lỗi:** ${e.message}`)
@@ -43,6 +108,7 @@ export default function AIView({ bp = 'desktop' }) {
   const handleSelect = (name) => {
     setSelected(name)
     setAiContent('')
+    setShowHistory(false)
   }
 
   const selectedInfo = sections.find(s => s.article_section === selected)
@@ -63,7 +129,20 @@ export default function AIView({ bp = 'desktop' }) {
             Phân tích cấu trúc nội dung theo section
           </span>
         </div>
-        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8 }}>
+        <textarea
+          value={instructions}
+          onChange={e => setInstructions(e.target.value)}
+          onBlur={e => saveInstructions(e.target.value)}
+          placeholder="Yêu cầu thêm cho AI (tùy chọn)..."
+          rows={1}
+          style={{
+            flex: 1, minWidth: 160, maxWidth: 320, resize: 'none', fontSize: 11,
+            background: 'var(--surface-2)', border: '1px solid var(--border)',
+            borderRadius: 6, padding: '5px 8px', color: 'var(--text)',
+            fontFamily: 'inherit', outline: 'none',
+          }}
+        />
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <ModelSelect value={aiModel} onChange={setAiModel} disabled={aiLoading} />
           <button
             onClick={() => runAnalysis()}
@@ -82,6 +161,16 @@ export default function AIView({ bp = 'desktop' }) {
           >
             {aiLoading ? '⏳ Đang phân tích...' : selected === ALL_KEY ? '🔍 Phân tích toàn bộ' : `🔍 Phân tích "${selected}"`}
           </button>
+          <button
+            onClick={toggleHistory}
+            title="Lịch sử phân tích"
+            style={{
+              padding: '5px 10px', borderRadius: 6, fontSize: 12, display: 'flex', alignItems: 'center', gap: 5,
+              cursor: 'pointer', border: `1px solid ${showHistory ? 'rgba(6,182,212,0.6)' : 'var(--border)'}`,
+              background: showHistory ? 'rgba(6,182,212,0.12)' : 'transparent',
+              color: showHistory ? 'var(--accent-2)' : 'var(--text-muted)', transition: 'all 0.1s',
+            }}
+          ><Clock size={13} /> {!isCompact && 'Lịch sử'}</button>
         </div>
       </div>
 
@@ -220,7 +309,48 @@ export default function AIView({ bp = 'desktop' }) {
 
         {/* Main content */}
         <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-          {!aiContent && !aiLoading && selected && (
+
+          {/* History panel */}
+          {showHistory && (
+            <div style={{ flex: 1, overflowY: 'auto', padding: isCompact ? 10 : 20 }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
+                <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
+                  <Clock size={13} style={{ marginRight: 6, verticalAlign: 'middle' }} />
+                  Lịch sử phân tích
+                </span>
+                <button
+                  onClick={loadHistory}
+                  style={{ fontSize: 11, color: 'var(--text-muted)', background: 'none', border: 'none', cursor: 'pointer', padding: '2px 6px' }}
+                >↻ Tải lại</button>
+              </div>
+              {historyLoading && (
+                <div style={{ fontSize: 12, color: 'var(--text-muted)', textAlign: 'center', padding: 32 }}>Đang tải...</div>
+              )}
+              {!historyLoading && history.length === 0 && (
+                <div style={{ fontSize: 12, color: 'var(--text-muted)', textAlign: 'center', padding: 32 }}>Chưa có lịch sử nào.</div>
+              )}
+              {!historyLoading && history.length > 0 && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  {history.map(item => (
+                    <HistoryItem
+                      key={item.id}
+                      item={item}
+                      onView={() => {
+                        setAiContent(item.content)
+                        setShowHistory(false)
+                      }}
+                      onDelete={() => {
+                        api.deleteHistory(item.id).then(() => setHistory(h => h.filter(x => x.id !== item.id))).catch(() => {})
+                      }}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Analysis result / empty state */}
+          {!showHistory && !aiContent && !aiLoading && selected && (
             <div style={{
               flex: 1, display: 'flex', flexDirection: 'column',
               alignItems: 'center', justifyContent: 'center', gap: 16,
@@ -270,7 +400,7 @@ export default function AIView({ bp = 'desktop' }) {
             </div>
           )}
 
-          {(aiContent || aiLoading) && (
+          {!showHistory && (aiContent || aiLoading) && (
             <div style={{ flex: 1, overflowY: 'auto', padding: isCompact ? 12 : 24 }}>
               <AIPanel
                 title={selected === ALL_KEY ? 'Phân tích toàn bộ blog' : `Cluster: ${selected}`}
