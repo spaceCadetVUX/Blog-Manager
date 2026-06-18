@@ -179,9 +179,9 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
           const a = secList[i], b = secList[j]
           const dx = b.x - a.x, dy = b.y - a.y
           const dist = Math.max(1, Math.hypot(dx, dy))
-          const minDist = 500
+          const minDist = 320
           if (dist < minDist) {
-            const force = (minDist - dist) / minDist * alpha * 2.5
+            const force = (minDist - dist) / minDist * alpha * 1.2
             const fx = (dx / dist) * force, fy = (dy / dist) * force
             a.nodes.forEach(n => { n.vx = (n.vx||0) - fx; n.vy = (n.vy||0) - fy })
             b.nodes.forEach(n => { n.vx = (n.vx||0) + fx; n.vy = (n.vy||0) + fy })
