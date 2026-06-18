@@ -638,23 +638,26 @@ export default function PostDetail({ slug, onClose, onNavigate, navList = [], bp
                   ))}
                 </div>
 
-                <div style={{ flex: 1, overflowY: 'auto' }}>
-                  {activeTab === 'content' && (
-                    <div style={{ padding: '16px 16px 24px' }}>
-                      {post.image && (
-                        <div style={{ marginBottom: 14, borderRadius: 8, overflow: 'hidden', border: '1px solid var(--border)' }}>
-                          <img src={post.image} alt="" style={{ width: '100%', height: 'auto', display: 'block' }} />
+                <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                  {activeTab === 'chat' ? chatPanel : (
+                    <div style={{ flex: 1, overflowY: 'auto' }}>
+                      {activeTab === 'content' && (
+                        <div style={{ padding: '16px 16px 24px' }}>
+                          {post.image && (
+                            <div style={{ marginBottom: 14, borderRadius: 8, overflow: 'hidden', border: '1px solid var(--border)' }}>
+                              <img src={post.image} alt="" style={{ width: '100%', height: 'auto', display: 'block' }} />
+                            </div>
+                          )}
+                          <h2 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', lineHeight: 1.4, marginBottom: 14 }}>
+                            {post.headline}
+                          </h2>
+                          <ArticleHTML slug={slug} />
                         </div>
                       )}
-                      <h2 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', lineHeight: 1.4, marginBottom: 14 }}>
-                        {post.headline}
-                      </h2>
-                      <ArticleHTML slug={slug} />
+                      {activeTab === 'stats' && rightPanel}
+                      {activeTab === 'meta' && metaPanel}
                     </div>
                   )}
-                  {activeTab === 'stats' && rightPanel}
-                  {activeTab === 'meta' && metaPanel}
-                  {activeTab === 'chat' && chatPanel}
                 </div>
               </>
             )}
