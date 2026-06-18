@@ -59,6 +59,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
   const rawGraphData  = useRef({ nodes: [], links: [] })
   const [rawDataVersion, setRawDataVersion] = useState(0)
 
+  const [showLegend, setShowLegend] = useState(true)
   const [aiModel, setAiModel]     = useState('claude-haiku-4-5-20251001')
   const [aiContent, setAiContent] = useState('')
   const [aiLoading, setAiLoading] = useState(false)
@@ -716,41 +717,51 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
             <div style={{
               fontSize: 10, fontWeight: 600, color: 'var(--text-muted)',
               textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 8,
-            }}>Sections (click để lọc)</div>
-            {presentSections.map(name => {
-              const color = sectionColor(name)
-              const isActive = filterSection === name
-              return (
-                <div
-                  key={name}
-                  onClick={() => setFilterSection(isActive ? '' : name)}
-                  style={{
-                    display: 'flex', alignItems: 'center', gap: 7, marginBottom: 5,
-                    cursor: 'pointer', borderRadius: 4, padding: '2px 4px', margin: '0 -4px 3px',
-                    background: isActive ? color + '20' : 'transparent',
-                    transition: 'background 0.1s',
-                  }}
-                  onMouseEnter={e => { if (!isActive) e.currentTarget.style.background = 'rgba(255,255,255,0.06)' }}
-                  onMouseLeave={e => { if (!isActive) e.currentTarget.style.background = 'transparent' }}
-                >
-                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: color, flexShrink: 0, opacity: isActive ? 1 : 0.7 }} />
-                  <span style={{ fontSize: 11, color: isActive ? 'var(--text)' : 'var(--text-muted)', fontWeight: isActive ? 600 : 400 }}>{name}</span>
-                  {isActive && <span style={{ fontSize: 9, color, marginLeft: 'auto' }}>✕</span>}
-                </div>
-              )
-            })}
-            {/* Edge color legend */}
-            <div style={{ borderTop: '1px solid rgba(48,54,61,0.6)', marginTop: 8, paddingTop: 8 }}>
-              <div style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>Links</div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 5 }}>
-                <div style={{ width: 16, height: 2, background: '#22d3ee', borderRadius: 1, flexShrink: 0 }} />
-                <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>Outbound</span>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-                <div style={{ width: 16, height: 2, background: '#34d399', borderRadius: 1, flexShrink: 0 }} />
-                <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>Inbound</span>
-              </div>
+              display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8,
+            }}>
+              <span>Sections (click để lọc)</span>
+              <button
+                onClick={() => setShowLegend(v => !v)}
+                style={{ background: 'none', border: 'none', color: 'var(--text-subtle)', cursor: 'pointer', fontSize: 12, lineHeight: 1, padding: 0 }}
+              >{showLegend ? '▲' : '▼'}</button>
             </div>
+            {showLegend && (
+              <>
+                {presentSections.map(name => {
+                  const color = sectionColor(name)
+                  const isActive = filterSection === name
+                  return (
+                    <div
+                      key={name}
+                      onClick={() => setFilterSection(isActive ? '' : name)}
+                      style={{
+                        display: 'flex', alignItems: 'center', gap: 7, marginBottom: 5,
+                        cursor: 'pointer', borderRadius: 4, padding: '2px 4px', margin: '0 -4px 3px',
+                        background: isActive ? color + '20' : 'transparent',
+                        transition: 'background 0.1s',
+                      }}
+                      onMouseEnter={e => { if (!isActive) e.currentTarget.style.background = 'rgba(255,255,255,0.06)' }}
+                      onMouseLeave={e => { if (!isActive) e.currentTarget.style.background = 'transparent' }}
+                    >
+                      <div style={{ width: 8, height: 8, borderRadius: '50%', background: color, flexShrink: 0, opacity: isActive ? 1 : 0.7 }} />
+                      <span style={{ fontSize: 11, color: isActive ? 'var(--text)' : 'var(--text-muted)', fontWeight: isActive ? 600 : 400 }}>{name}</span>
+                      {isActive && <span style={{ fontSize: 9, color, marginLeft: 'auto' }}>✕</span>}
+                    </div>
+                  )
+                })}
+                <div style={{ borderTop: '1px solid rgba(48,54,61,0.6)', marginTop: 8, paddingTop: 8 }}>
+                  <div style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>Links</div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 5 }}>
+                    <div style={{ width: 16, height: 2, background: '#22d3ee', borderRadius: 1, flexShrink: 0 }} />
+                    <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>Outbound</span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+                    <div style={{ width: 16, height: 2, background: '#34d399', borderRadius: 1, flexShrink: 0 }} />
+                    <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>Inbound</span>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         )}
 
