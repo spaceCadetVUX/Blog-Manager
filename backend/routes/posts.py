@@ -21,7 +21,7 @@ def list_posts(
     section: str = Query("", description="Filter by articleSection"),
     sort: str = Query("date_modified", description="date_modified|word_count|headline|inbound_links"),
     order: str = Query("desc"),
-    limit: int = Query(100, le=500),
+    limit: int = Query(500, le=500),
     offset: int = Query(0),
 ):
     order_sql = "DESC" if order.lower() == "desc" else "ASC"

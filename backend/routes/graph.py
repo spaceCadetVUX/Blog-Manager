@@ -11,14 +11,21 @@ from backend.db import get_conn
 router = APIRouter(prefix="/graph", tags=["graph"])
 
 SECTION_COLORS = {
-    "Kiến thức":   "#6366f1",
-    "Matter":      "#8b5cf6",
-    "Casambi":     "#06b6d4",
-    "Chiếu sáng":  "#f59e0b",
-    "DALI":        "#10b981",
-    "KNX":         "#3b82f6",
-    "HVAC":        "#ef4444",
-    "Smarthome":   "#ec4899",
+    "Kiến thức":  "#a78bfa",  # violet-400
+    "Matter":     "#e879f9",  # fuchsia-400
+    "Casambi":    "#38bdf8",  # sky-400
+    "Chiếu sáng": "#fbbf24",  # amber-400
+    "DALI":       "#34d399",  # emerald-400
+    "KNX":        "#60a5fa",  # blue-400
+    "HVAC":       "#f87171",  # red-400
+    "Smarthome":  "#f472b6",  # pink-400
+    "An ninh":    "#fb923c",  # orange-400
+    "Cảm biến":   "#22d3ee",  # cyan-400
+    "Driver LED": "#a3e635",  # lime-400
+    "Tin tức":    "#94a3b8",  # slate-400
+    "Hướng dẫn":  "#c084fc",  # purple-400
+    "News":       "#9ca3af",  # gray-400
+    "Dự án":      "#2dd4bf",  # teal-400
 }
 DEFAULT_COLOR = "#94a3b8"
 
