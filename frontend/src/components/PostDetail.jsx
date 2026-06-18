@@ -1,5 +1,5 @@
 ﻿import { useEffect, useState, useRef } from 'react'
-import { X, ExternalLink, ArrowLeft, AlertTriangle } from 'lucide-react'
+import { X, ExternalLink, AlertTriangle, ChevronLeft, ChevronRight } from 'lucide-react'
 import { api } from '../api'
 import { sectionColor } from '../sectionColors.js'
 
@@ -58,7 +58,13 @@ function LinkItem({ link, onNavigate }) {
   )
 }
 
-export default function PostDetail({ slug, onClose, onNavigate }) {
+export default function PostDetail({ slug, onClose, onNavigate, navList = [], bp = 'desktop' }) {
+  const panelWidth  = bp === 'mobile' ? '100vw' : bp === 'tablet' ? 420 : 480
+  const navIdx      = navList.indexOf(slug)
+  const hasPrev     = navIdx > 0
+  const hasNext     = navIdx >= 0 && navIdx < navList.length - 1
+  const goToPrev    = () => hasPrev  && onNavigate(navList[navIdx - 1])
+  const goToNext    = () => hasNext  && onNavigate(navList[navIdx + 1])
   const [post, setPost] = useState(null)
   const [loading, setLoading] = useState(true)
   const [visible, setVisible] = useState(false)
@@ -71,6 +77,16 @@ export default function PostDetail({ slug, onClose, onNavigate }) {
     requestAnimationFrame(() => setVisible(true))
     return () => setVisible(false)
   }, [slug])
+
+  useEffect(() => {
+    const handler = e => {
+      if (e.key === 'Escape')                        handleClose()
+      if (e.key === 'ArrowLeft'  || e.key === 'h')   goToPrev()
+      if (e.key === 'ArrowRight' || e.key === 'l')   goToNext()
+    }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  })
 
   const handleClose = () => {
     setVisible(false)
@@ -107,7 +123,7 @@ export default function PostDetail({ slug, onClose, onNavigate }) {
         top: 0,
         right: 0,
         height: '100vh',
-        width: 480,
+        width: panelWidth,
         background: 'var(--surface)',
         borderLeft: '1px solid var(--border)',
         zIndex: 101,
@@ -129,7 +145,42 @@ export default function PostDetail({ slug, onClose, onNavigate }) {
           background: 'var(--surface)',
           zIndex: 1,
         }}>
-          <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Post Detail</span>
+          {/* Prev / Next */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <button
+              onClick={goToPrev}
+              disabled={!hasPrev}
+              title="Bài trước (← hoặc H)"
+              style={{
+                background: 'transparent', border: 'none', cursor: hasPrev ? 'pointer' : 'default',
+                color: hasPrev ? 'var(--text-muted)' : 'var(--border)',
+                padding: '3px 5px', borderRadius: 4, display: 'flex', alignItems: 'center',
+                transition: 'color 0.1s',
+              }}
+              onMouseEnter={e => { if (hasPrev) e.currentTarget.style.color = 'var(--text)' }}
+              onMouseLeave={e => { if (hasPrev) e.currentTarget.style.color = 'var(--text-muted)' }}
+            ><ChevronLeft size={16} /></button>
+            {navList.length > 0 && (
+              <span style={{ fontSize: 10, color: 'var(--text-subtle)', minWidth: 36, textAlign: 'center' }}>
+                {navIdx + 1}/{navList.length}
+              </span>
+            )}
+            <button
+              onClick={goToNext}
+              disabled={!hasNext}
+              title="Bài sau (→ hoặc L)"
+              style={{
+                background: 'transparent', border: 'none', cursor: hasNext ? 'pointer' : 'default',
+                color: hasNext ? 'var(--text-muted)' : 'var(--border)',
+                padding: '3px 5px', borderRadius: 4, display: 'flex', alignItems: 'center',
+                transition: 'color 0.1s',
+              }}
+              onMouseEnter={e => { if (hasNext) e.currentTarget.style.color = 'var(--text)' }}
+              onMouseLeave={e => { if (hasNext) e.currentTarget.style.color = 'var(--text-muted)' }}
+            ><ChevronRight size={16} /></button>
+          </div>
+
+          <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', flex: 1, textAlign: 'center' }}>Post Detail</span>
           <button
             onClick={handleClose}
             style={{
@@ -243,10 +294,10 @@ export default function PostDetail({ slug, onClose, onNavigate }) {
                     padding: '6px 12px',
                     background: 'var(--accent-dim)',
                     borderRadius: 6,
-                    border: '1px solid rgba(124,58,237,0.3)',
+                    border: '1px solid rgba(6,182,212,0.3)',
                     transition: 'background 0.1s',
                   }}
-                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(124,58,237,0.25)'}
+                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(6,182,212,0.15)'}
                   onMouseLeave={e => e.currentTarget.style.background = 'var(--accent-dim)'}
                 >
                   <ExternalLink size={13} />

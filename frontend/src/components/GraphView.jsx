@@ -47,11 +47,14 @@ export default function GraphView({ onSelectPost }) {
   const [sections, setSections] = useState([])
   const [minLinks, setMinLinks] = useState('2')
   const [filterSection, setFilterSection] = useState('')
+  const [showOrphansOnly, setShowOrphansOnly] = useState(false)
   const [loading, setLoading] = useState(true)
   const [statsInfo, setStatsInfo] = useState({ nodes: 0, edges: 0 })
   const [search, setSearch] = useState('')
   const [showResults, setShowResults] = useState(false)
   const searchRef = useRef('')
+  const rawGraphData  = useRef({ nodes: [], links: [] })
+  const [rawDataVersion, setRawDataVersion] = useState(0)
 
   // Theo dõi kích thước container
   useEffect(() => {
@@ -90,17 +93,67 @@ export default function GraphView({ onSelectPost }) {
         source: e.source,
         target: e.target,
       }))
-      setGraphData({ nodes, links })
-      setStatsInfo({ nodes: nodes.length, edges: links.length })
+      rawGraphData.current = { nodes, links }
+      setRawDataVersion(v => v + 1)  // trigger orphan effect khi data mới về
     }).catch(console.error).finally(() => setLoading(false))
   }, [minLinks, filterSection])
+
+  // Áp dụng orphan filter mỗi khi data thay đổi HOẶC toggle thay đổi
+  useEffect(() => {
+    const { nodes, links } = rawGraphData.current
+    if (!nodes.length) return
+
+    // Normalize source/target về string ID (ForceGraph mutate chúng thành objects)
+    const norm = links.map(l => ({
+      source: typeof l.source === 'object' ? l.source.id : l.source,
+      target: typeof l.target === 'object' ? l.target.id : l.target,
+    }))
+
+    if (!showOrphansOnly) {
+      setGraphData({ nodes, links: norm })
+      setStatsInfo({ nodes: nodes.length, edges: norm.length })
+      return
+    }
+
+    const hasInbound = new Set(norm.map(l => l.target))
+    const filtered   = nodes.filter(n => !hasInbound.has(n.id))
+    const nodeIds    = new Set(filtered.map(n => n.id))
+    const filtLinks  = norm.filter(l => nodeIds.has(l.source) && nodeIds.has(l.target))
+    setGraphData({ nodes: filtered, links: filtLinks })
+    setStatsInfo({ nodes: filtered.length, edges: filtLinks.length })
+  }, [showOrphansOnly, rawDataVersion])
 
   // Tăng lực đẩy sau khi data load để nodes xa nhau hơn
   useEffect(() => {
     if (!fgRef.current || graphData.nodes.length === 0) return
     const fg = fgRef.current
-    fg.d3Force('charge').strength(-280)
-    fg.d3Force('link').distance(90)
+    fg.d3Force('charge').strength(-350)
+    fg.d3Force('link').distance(100)
+
+    // Clustering force: kéo nodes cùng section về centroid của nhau
+    const nodes = graphData.nodes
+    fg.d3Force('cluster', alpha => {
+      // Tính centroid từng section
+      const centroids = {}
+      nodes.forEach(n => {
+        if (!n.section) return
+        if (!centroids[n.section]) centroids[n.section] = { x: 0, y: 0, count: 0 }
+        centroids[n.section].x     += n.x || 0
+        centroids[n.section].y     += n.y || 0
+        centroids[n.section].count += 1
+      })
+      Object.values(centroids).forEach(c => { c.x /= c.count; c.y /= c.count })
+
+      // Kéo mỗi node về centroid của section nó
+      const strength = 0.12
+      nodes.forEach(n => {
+        const c = centroids[n.section]
+        if (!c) return
+        n.vx = (n.vx || 0) + (c.x - (n.x || 0)) * strength * alpha
+        n.vy = (n.vy || 0) + (c.y - (n.y || 0)) * strength * alpha
+      })
+    })
+
     fg.d3ReheatSimulation()
   }, [graphData])
 
@@ -143,89 +196,108 @@ export default function GraphView({ onSelectPost }) {
     if (onSelectPost) onSelectPost(node.id)
   }, [onSelectPost])
 
+  // Size: sqrt scaling — hub pages rõ rệt to hơn
+  const nodeRadius = (node) => Math.max(4, Math.min(30, 4 + Math.sqrt(node.inbound || 0) * 5))
+
   // Canvas custom rendering
   const paintNode = useCallback((node, ctx, globalScale) => {
-    const h = hoveredRef.current
-    const isHovered = h?.id === node.id
+    const h          = hoveredRef.current
+    const isHovered  = h?.id === node.id
     const isNeighbor = h?.__neighbors?.has(node.id)
-    const q = searchRef.current.trim().toLowerCase()
-    const matchesSearch = q ? node.label.toLowerCase().includes(q) : false
-    const isDimmed = (h && !isHovered && !isNeighbor) || (q && !matchesSearch)
+    const q          = searchRef.current.trim().toLowerCase()
+    const matchSearch = q ? node.label.toLowerCase().includes(q) : false
+    const isDimmed   = (h && !isHovered && !isNeighbor) || (q && !matchSearch)
 
-    const r = Math.max(4, Math.min(18, 4 + node.inbound * 2))
+    // Node chưa có vị trí (frame đầu simulation) — skip
+    if (node.x == null || !isFinite(node.x) || !isFinite(node.y)) return
+
+    const r   = nodeRadius(node)
+    const isHub = r >= 13   // nodes có ≥4 inbound
     const rgb = hex2rgb(node.color)
 
-    // Glow effect cho hovered node
-    if (isHovered) {
+    // Dimmed: chỉ chấm mờ, skip rest
+    if (isDimmed) {
       ctx.beginPath()
-      ctx.arc(node.x, node.y, r + 6, 0, 2 * Math.PI)
-      ctx.fillStyle = `rgba(${rgb},0.15)`
+      ctx.arc(node.x, node.y, Math.max(2, r * 0.5), 0, 2 * Math.PI)
+      ctx.fillStyle = `rgba(${rgb},0.05)`
+      ctx.fill()
+      return
+    }
+
+    // Radial glow — hub nodes + hovered
+    if (isHub || isHovered) {
+      const glowR = r + (isHovered ? 14 : isHub ? Math.min(10, r * 0.7) : 6)
+      const grd   = ctx.createRadialGradient(node.x, node.y, r * 0.4, node.x, node.y, glowR)
+      grd.addColorStop(0, `rgba(${rgb},${isHovered ? 0.3 : 0.14})`)
+      grd.addColorStop(1, `rgba(${rgb},0)`)
+      ctx.beginPath()
+      ctx.arc(node.x, node.y, glowR, 0, 2 * Math.PI)
+      ctx.fillStyle = grd
       ctx.fill()
     }
 
-    // Vòng tròn chính
+    // Main circle
     ctx.beginPath()
     ctx.arc(node.x, node.y, r, 0, 2 * Math.PI)
-    if (isDimmed) {
-      ctx.fillStyle = `rgba(${rgb},0.06)`
-      ctx.strokeStyle = `rgba(${rgb},0.18)`
-      ctx.lineWidth = 1
-    } else if (isHovered) {
-      ctx.fillStyle = `rgba(${rgb},0.55)`
-      ctx.strokeStyle = node.color
-      ctx.lineWidth = 3
-    } else if (isNeighbor) {
-      ctx.fillStyle = `rgba(${rgb},0.45)`
-      ctx.strokeStyle = node.color
-      ctx.lineWidth = 2
-    } else {
-      ctx.fillStyle = `rgba(${rgb},0.38)`
-      ctx.strokeStyle = node.color
-      ctx.lineWidth = 2
-    }
+    const fillOp   = isHovered ? 0.85 : isNeighbor ? 0.68 : isHub ? 0.58 : 0.44
+    const strokeOp = isHovered ? 1    : isNeighbor ? 0.95 : 0.75
+    const lw       = isHovered ? 2.5  : r > 12 ? 2 : 1.5
+    ctx.fillStyle   = `rgba(${rgb},${fillOp})`
+    ctx.strokeStyle = `rgba(${rgb},${strokeOp})`
+    ctx.lineWidth   = lw
     ctx.fill()
     ctx.stroke()
 
-    // Label: hiện khi zoom đủ lớn hoặc khi là hovered/neighbor
-    const showLabel = globalScale > 1.2 || isHovered || isNeighbor
-    if (showLabel && !isDimmed) {
-      const label = node.label || node.id
-      const short = label.length > 24 ? label.slice(0, 24) + '…' : label
-      const fontSize = isHovered
-        ? Math.min(13, 11 / globalScale)
-        : Math.min(11, 9 / globalScale)
+    // Bright inner core cho hub nodes
+    if (isHub) {
+      ctx.beginPath()
+      ctx.arc(node.x, node.y, r * 0.32, 0, 2 * Math.PI)
+      ctx.fillStyle = `rgba(${rgb},0.92)`
+      ctx.fill()
+    }
 
-      ctx.font = `${isHovered ? 500 : 400} ${fontSize}px system-ui, sans-serif`
-      ctx.textAlign = 'center'
-      ctx.textBaseline = 'top'
+    // Label: luôn hiện cho hub, còn lại cần zoom hoặc hover
+    const showLabel = isHub || globalScale > 1.4 || isHovered || isNeighbor
+    if (showLabel) {
+      const label  = node.label || node.id
+      const maxCh  = isHub ? 28 : 22
+      const short  = label.length > maxCh ? label.slice(0, maxCh) + '…' : label
+      const fsize  = isHovered
+        ? Math.min(13, 12 / globalScale)
+        : isHub
+          ? Math.min(12, 10 / globalScale)
+          : Math.min(11, 9  / globalScale)
 
-      // Background pill for hovered label
-      if (isHovered) {
-        const tw = ctx.measureText(short).width
-        const pad = 4
-        ctx.fillStyle = 'rgba(13,17,23,0.85)'
+      ctx.font          = `${isHovered || isHub ? 600 : 400} ${fsize}px system-ui,sans-serif`
+      ctx.textAlign     = 'center'
+      ctx.textBaseline  = 'top'
+
+      const labelY = node.y + r + 5
+      const tw     = ctx.measureText(short).width
+      const pad    = 3
+
+      // Background pill
+      if (isHovered || isHub) {
+        ctx.fillStyle = 'rgba(13,17,23,0.84)'
         ctx.beginPath()
-        const lx = node.x - tw / 2 - pad
-        const ly = node.y + r + 5
-        const lw = tw + pad * 2
-        const lh = fontSize + 5
-        ctx.roundRect(lx, ly, lw, lh, 3)
+        ctx.roundRect(node.x - tw / 2 - pad, labelY - 1, tw + pad * 2, fsize + 5, 3)
         ctx.fill()
       }
 
       ctx.fillStyle = isHovered
-        ? 'rgba(230,237,243,0.95)'
-        : isNeighbor
-          ? 'rgba(230,237,243,0.75)'
-          : 'rgba(230,237,243,0.45)'
-
-      ctx.fillText(short, node.x, node.y + r + 6)
+        ? 'rgba(230,237,243,1)'
+        : isHub
+          ? 'rgba(230,237,243,0.92)'
+          : isNeighbor
+            ? 'rgba(230,237,243,0.78)'
+            : 'rgba(230,237,243,0.5)'
+      ctx.fillText(short, node.x, labelY)
     }
   }, [])
 
-  // Vùng click = đúng bằng vòng tròn
+  // Vùng click khớp với node radius
   const paintNodePointerArea = useCallback((node, color, ctx) => {
-    const r = Math.max(4, Math.min(18, 4 + node.inbound * 2))
+    const r = nodeRadius(node)
     ctx.beginPath()
     ctx.arc(node.x, node.y, r + 4, 0, 2 * Math.PI)
     ctx.fillStyle = color
@@ -286,6 +358,21 @@ export default function GraphView({ onSelectPost }) {
           <option value="">Tất cả sections</option>
           {sections.map(s => <option key={s} value={s}>{s}</option>)}
         </select>
+
+        <div style={{ width: 1, height: 18, background: 'var(--border)' }} />
+
+        <button
+          onClick={() => setShowOrphansOnly(v => !v)}
+          style={{
+            padding: '4px 10px', borderRadius: 6, fontSize: 12, cursor: 'pointer',
+            border: `1px solid ${showOrphansOnly ? 'var(--danger)' : 'var(--border)'}`,
+            background: showOrphansOnly ? 'rgba(248,81,73,0.12)' : 'transparent',
+            color: showOrphansOnly ? 'var(--danger)' : 'var(--text-muted)',
+            transition: 'all 0.15s',
+          }}
+        >
+          {showOrphansOnly ? '⚠ Orphans' : 'Orphans'}
+        </button>
 
         <div style={{ width: 1, height: 18, background: 'var(--border)' }} />
 
@@ -399,10 +486,26 @@ export default function GraphView({ onSelectPost }) {
             onNodeClick={onNodeClick}
             linkColor={getLinkColor}
             linkWidth={getLinkWidth}
-            linkDirectionalParticles={0}
-            cooldownTicks={120}
-            d3AlphaDecay={0.025}
-            d3VelocityDecay={0.3}
+            linkDirectionalParticles={link => {
+              const h = hoveredRef.current
+              if (!h) return 0
+              const s = typeof link.source === 'object' ? link.source.id : link.source
+              const t = typeof link.target === 'object' ? link.target.id : link.target
+              return (s === h.id || t === h.id) ? 2 : 0
+            }}
+            linkDirectionalParticleWidth={2}
+            linkDirectionalParticleColor={link => {
+              const s = typeof link.source === 'object' ? link.source.id : link.source
+              const t = typeof link.target === 'object' ? link.target.id : link.target
+              const h = hoveredRef.current
+              if (h && s === h.id) return 'rgba(34,211,238,0.9)'
+              if (h && t === h.id) return 'rgba(52,211,153,0.9)'
+              return 'rgba(255,255,255,0.4)'
+            }}
+            linkDirectionalParticleSpeed={0.006}
+            cooldownTicks={150}
+            d3AlphaDecay={0.022}
+            d3VelocityDecay={0.28}
             enableNodeDrag={true}
             enableZoomInteraction={true}
             enablePanInteraction={true}
@@ -435,13 +538,26 @@ export default function GraphView({ onSelectPost }) {
             <div style={{
               fontSize: 10, fontWeight: 600, color: 'var(--text-muted)',
               textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 8,
-            }}>Sections</div>
+            }}>Sections (click để lọc)</div>
             {presentSections.map(name => {
               const color = sectionColor(name)
+              const isActive = filterSection === name
               return (
-                <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 5 }}>
-                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: color, flexShrink: 0 }} />
-                  <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>{name}</span>
+                <div
+                  key={name}
+                  onClick={() => setFilterSection(isActive ? '' : name)}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: 7, marginBottom: 5,
+                    cursor: 'pointer', borderRadius: 4, padding: '2px 4px', margin: '0 -4px 3px',
+                    background: isActive ? color + '20' : 'transparent',
+                    transition: 'background 0.1s',
+                  }}
+                  onMouseEnter={e => { if (!isActive) e.currentTarget.style.background = 'rgba(255,255,255,0.06)' }}
+                  onMouseLeave={e => { if (!isActive) e.currentTarget.style.background = 'transparent' }}
+                >
+                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: color, flexShrink: 0, opacity: isActive ? 1 : 0.7 }} />
+                  <span style={{ fontSize: 11, color: isActive ? 'var(--text)' : 'var(--text-muted)', fontWeight: isActive ? 600 : 400 }}>{name}</span>
+                  {isActive && <span style={{ fontSize: 9, color, marginLeft: 'auto' }}>✕</span>}
                 </div>
               )
             })}

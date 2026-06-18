@@ -25,4 +25,5 @@ export const api = {
   audit:       ()                    => get('/audit'),
   crawlStart:  (sitemap_url, mode)   => post('/crawl', { sitemap_url, mode }),
   crawlStatus: (job_id)              => get(`/crawl/${job_id}`),
+  suggestions: ()                    => get('/suggestions'),
 }

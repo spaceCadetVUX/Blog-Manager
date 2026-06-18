@@ -25,8 +25,34 @@ def get_audit():
                 FROM internal_links GROUP BY from_slug
             """).fetchall()
         }
+        # Broken internal links: to_slug không tồn tại trong posts
+        broken_rows = conn.execute("""
+            SELECT il.from_slug, il.to_slug, il.anchor,
+                   p.headline AS from_headline
+            FROM internal_links il
+            LEFT JOIN posts p ON p.slug = il.from_slug
+            WHERE il.to_slug NOT IN (SELECT slug FROM posts)
+            ORDER BY il.from_slug
+        """).fetchall()
+
+        stale_6m = conn.execute("""
+            SELECT slug, headline, date_modified FROM posts
+            WHERE date_modified != '' AND date_modified IS NOT NULL
+            AND date_modified < date('now', '-6 months')
+            ORDER BY date_modified ASC
+        """).fetchall()
+
+        stale_1y = conn.execute("""
+            SELECT slug, headline, date_modified FROM posts
+            WHERE date_modified != '' AND date_modified IS NOT NULL
+            AND date_modified < date('now', '-12 months')
+            ORDER BY date_modified ASC
+        """).fetchall()
+
+    broken_links = [dict(r) for r in broken_rows]
 
     issues = {
+        "broken_links":         broken_links,
         "orphan_posts":         [],  # 0 inbound links
         "no_outbound":          [],  # 0 outbound links
         "short_description":    [],  # description < 50 chars
@@ -36,6 +62,8 @@ def get_audit():
         "no_keywords":          [],  # keywords rỗng
         "low_word_count":       [],  # < 300 words
         "missing_section":      [],  # articleSection rỗng
+        "stale_6m":             [{"slug": r["slug"], "headline": (r["headline"] or "")[:80], "date_modified": r["date_modified"]} for r in stale_6m],
+        "stale_1y":             [{"slug": r["slug"], "headline": (r["headline"] or "")[:80], "date_modified": r["date_modified"]} for r in stale_1y],
     }
 
     for row in posts:

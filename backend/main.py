@@ -6,6 +6,7 @@ from backend.routes.posts import router as posts_router
 from backend.routes.graph import router as graph_router
 from backend.routes.audit import router as audit_router
 from backend.routes.crawl import router as crawl_router
+from backend.routes.suggestions import router as suggestions_router
 
 app = FastAPI(title="KNXStore Blog SEO API", version="0.1.0")
 
@@ -20,6 +21,7 @@ app.include_router(posts_router)
 app.include_router(graph_router)
 app.include_router(audit_router)
 app.include_router(crawl_router)
+app.include_router(suggestions_router)
 
 
 @app.on_event("startup")

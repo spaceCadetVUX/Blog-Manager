@@ -103,7 +103,9 @@ function TopLinkedRow({ rank, post, onSelectPost }) {
   )
 }
 
-export default function Dashboard({ onSelectPost }) {
+export default function Dashboard({ onSelectPost, bp = 'desktop' }) {
+  const isMobile = bp === 'mobile'
+  const isTablet = bp === 'tablet'
   const [stats, setStats]   = useState(null)
   const [orphans, setOrphans] = useState([])
   const [loading, setLoading] = useState(true)
@@ -142,7 +144,7 @@ export default function Dashboard({ onSelectPost }) {
       </div>
 
       {/* Stat cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12, marginBottom: 20 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : isTablet ? 'repeat(3, 1fr)' : 'repeat(5, 1fr)', gap: 12, marginBottom: 20 }}>
         <StatCard
           label="Tổng bài viết"
           value={stats.total_posts?.toLocaleString() || 0}
@@ -183,7 +185,7 @@ export default function Dashboard({ onSelectPost }) {
       </div>
 
       {/* Main panels */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 14 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : isTablet ? '1fr 1fr' : '1fr 1fr 1fr', gap: 14 }}>
 
         {/* Section distribution */}
         <div style={{
