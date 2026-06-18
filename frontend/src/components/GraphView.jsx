@@ -3,6 +3,7 @@ import ForceGraph2D from 'react-force-graph-2d'
 import { api, streamAI } from '../api'
 import SECTION_COLORS, { sectionColor } from '../sectionColors.js'
 import AIPanel, { ModelSelect } from './AIPanel.jsx'
+import TreeView from './TreeView.jsx'
 
 const MIN_LINK_OPTIONS = [
   { value: '0', label: 'Tất cả' },
@@ -37,7 +38,8 @@ function ToolbarBtn({ active, onClick, children }) {
   )
 }
 
-export default function GraphView({ onSelectPost }) {
+export default function GraphView({ onSelectPost, bp = 'desktop' }) {
+  const [activeTab, setActiveTab] = useState('graph')
   const containerRef = useRef(null)
   const fgRef = useRef(null)
   const [dimensions, setDimensions] = useState({ w: 900, h: 600 })
@@ -349,8 +351,45 @@ export default function GraphView({ onSelectPost }) {
   // Sections hiện tại để vẽ legend
   const presentSections = [...new Set(graphData.nodes.map(n => n.section).filter(Boolean))]
 
+  if (activeTab === 'tree') {
+    return (
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+        <div style={{
+          display: 'flex', borderBottom: '1px solid var(--border)',
+          background: 'var(--surface)', flexShrink: 0,
+        }}>
+          {[['graph', '🕸 Link Graph'], ['tree', '🌲 Tree View']].map(([id, label]) => (
+            <button key={id} onClick={() => setActiveTab(id)} style={{
+              padding: '9px 20px', fontSize: 12, fontWeight: activeTab === id ? 600 : 400,
+              background: 'none', border: 'none', cursor: 'pointer',
+              color: activeTab === id ? 'var(--accent-2)' : 'var(--text-muted)',
+              borderBottom: `2px solid ${activeTab === id ? 'var(--accent)' : 'transparent'}`,
+              transition: 'all 0.15s',
+            }}>{label}</button>
+          ))}
+        </div>
+        <TreeView onSelectPost={onSelectPost} bp={bp} />
+      </div>
+    )
+  }
+
   return (
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+      {/* Tab bar */}
+      <div style={{
+        display: 'flex', borderBottom: '1px solid var(--border)',
+        background: 'var(--surface)', flexShrink: 0,
+      }}>
+        {[['graph', '🕸 Link Graph'], ['tree', '🌲 Tree View']].map(([id, label]) => (
+          <button key={id} onClick={() => setActiveTab(id)} style={{
+            padding: '9px 20px', fontSize: 12, fontWeight: activeTab === id ? 600 : 400,
+            background: 'none', border: 'none', cursor: 'pointer',
+            color: activeTab === id ? 'var(--accent-2)' : 'var(--text-muted)',
+            borderBottom: `2px solid ${activeTab === id ? 'var(--accent)' : 'transparent'}`,
+            transition: 'all 0.15s',
+          }}>{label}</button>
+        ))}
+      </div>
       {/* Toolbar */}
       <div style={{
         padding: '9px 16px',
