@@ -1,7 +1,8 @@
 import { useEffect, useState, useCallback, useRef, useMemo } from 'react'
 import ForceGraph2D from 'react-force-graph-2d'
-import { api } from '../api'
+import { api, streamAI } from '../api'
 import SECTION_COLORS, { sectionColor } from '../sectionColors.js'
+import AIPanel, { ModelSelect } from './AIPanel.jsx'
 
 const MIN_LINK_OPTIONS = [
   { value: '0', label: 'Tất cả' },
@@ -55,6 +56,11 @@ export default function GraphView({ onSelectPost }) {
   const searchRef = useRef('')
   const rawGraphData  = useRef({ nodes: [], links: [] })
   const [rawDataVersion, setRawDataVersion] = useState(0)
+
+  const [aiModel, setAiModel]     = useState('claude-haiku-4-5-20251001')
+  const [aiContent, setAiContent] = useState('')
+  const [aiLoading, setAiLoading] = useState(false)
+  const [showAI, setShowAI]       = useState(false)
 
   // Theo dõi kích thước container
   useEffect(() => {
@@ -322,6 +328,24 @@ export default function GraphView({ onSelectPost }) {
     return (s === h.id || t === h.id) ? 2 : 0.5
   }, [hoveredNode])
 
+  const runClusterAI = useCallback(async () => {
+    if (!filterSection || aiLoading) return
+    setAiContent('')
+    setAiLoading(true)
+    setShowAI(true)
+    try {
+      await streamAI(
+        '/ai/cluster',
+        { section: filterSection, model: aiModel },
+        chunk => setAiContent(prev => prev + chunk),
+        () => setAiLoading(false),
+      )
+    } catch (e) {
+      setAiContent(`**Lỗi:** ${e.message}`)
+      setAiLoading(false)
+    }
+  }, [filterSection, aiModel, aiLoading])
+
   // Sections hiện tại để vẽ legend
   const presentSections = [...new Set(graphData.nodes.map(n => n.section).filter(Boolean))]
 
@@ -458,6 +482,31 @@ export default function GraphView({ onSelectPost }) {
           ⊡ Recenter
         </button>
 
+        {/* AI cluster — chỉ hiện khi đang filter 1 section */}
+        {filterSection && (
+          <>
+            <div style={{ width: 1, height: 18, background: 'var(--border)' }} />
+            <ModelSelect value={aiModel} onChange={setAiModel} disabled={aiLoading} />
+            <button
+              onClick={runClusterAI}
+              disabled={aiLoading}
+              style={{
+                padding: '4px 12px', borderRadius: 6, fontSize: 12,
+                cursor: aiLoading ? 'not-allowed' : 'pointer',
+                border: '1px solid rgba(139,92,246,0.6)',
+                background: aiLoading ? 'rgba(139,92,246,0.08)' : 'rgba(139,92,246,0.12)',
+                color: aiLoading ? 'rgba(167,139,250,0.5)' : '#a78bfa',
+                display: 'flex', alignItems: 'center', gap: 6,
+                transition: 'all 0.12s',
+              }}
+              onMouseEnter={e => { if (!aiLoading) e.currentTarget.style.background = 'rgba(139,92,246,0.2)' }}
+              onMouseLeave={e => { if (!aiLoading) e.currentTarget.style.background = 'rgba(139,92,246,0.12)' }}
+            >
+              🤖 {aiLoading ? 'Đang phân tích...' : `Phân tích "${filterSection}"`}
+            </button>
+          </>
+        )}
+
         <div style={{ display: 'flex', gap: 14, fontSize: 12, color: 'var(--text-muted)', alignItems: 'center' }}>
           <span><span style={{ color: 'var(--text)', fontWeight: 500 }}>{statsInfo.nodes}</span> nodes</span>
           <span><span style={{ color: 'var(--text)', fontWeight: 500 }}>{statsInfo.edges}</span> edges</span>
@@ -525,7 +574,7 @@ export default function GraphView({ onSelectPost }) {
         </div>
 
         {/* Legend */}
-        {presentSections.length > 0 && (
+        {presentSections.length > 0 && !showAI && (
           <div style={{
             position: 'absolute', top: 12, right: 12,
             background: 'rgba(22,27,34,0.92)',
@@ -574,6 +623,21 @@ export default function GraphView({ onSelectPost }) {
               </div>
             </div>
           </div>
+        )}
+
+        {/* AI Panel */}
+        {showAI && (
+          <AIPanel
+            title={`Cluster: ${filterSection}`}
+            content={aiContent}
+            loading={aiLoading}
+            onClose={() => { setShowAI(false); setAiContent('') }}
+            style={{
+              position: 'absolute', top: 12, right: 12,
+              width: 340, maxHeight: 'calc(100% - 24px)',
+              zIndex: 20,
+            }}
+          />
         )}
 
         {/* Hover tooltip */}

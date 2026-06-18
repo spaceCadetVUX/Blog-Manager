@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+load_dotenv()
 
 from backend.db import init_db
 from backend.routes.posts import router as posts_router
@@ -7,6 +9,7 @@ from backend.routes.graph import router as graph_router
 from backend.routes.audit import router as audit_router
 from backend.routes.crawl import router as crawl_router
 from backend.routes.suggestions import router as suggestions_router
+from backend.routes.ai import router as ai_router
 
 app = FastAPI(title="KNXStore Blog SEO API", version="0.1.0")
 
@@ -22,6 +25,7 @@ app.include_router(graph_router)
 app.include_router(audit_router)
 app.include_router(crawl_router)
 app.include_router(suggestions_router)
+app.include_router(ai_router)
 
 
 @app.on_event("startup")

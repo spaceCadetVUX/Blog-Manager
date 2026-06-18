@@ -95,3 +95,6 @@ body {
 .react-flow__minimap-mask { fill: rgba(13,17,23,0.7) !important; }
 
 .react-flow__node { cursor: pointer; }
+
+@keyframes spin  { to { transform: rotate(360deg); } }
+@keyframes blink { 50% { opacity: 0; } }

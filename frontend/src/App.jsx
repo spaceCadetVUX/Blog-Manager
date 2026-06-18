@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { LayoutDashboard, GitBranch, FileText, ShieldCheck, Lightbulb } from 'lucide-react'
+import { LayoutDashboard, GitBranch, FileText, ShieldCheck, Lightbulb, BrainCircuit } from 'lucide-react'
 import Sidebar from './components/Sidebar'
 import Dashboard from './components/Dashboard'
 import GraphView from './components/GraphView'
@@ -8,6 +8,7 @@ import AuditView from './components/AuditView'
 import PostDetail from './components/PostDetail'
 import CrawlModal from './components/CrawlModal'
 import SuggestionsView from './components/SuggestionsView'
+import AIView from './components/AIView'
 import useBreakpoint from './hooks/useBreakpoint'
 
 const VIEWS = {
@@ -16,6 +17,7 @@ const VIEWS = {
   posts:       PostsList,
   audit:       AuditView,
   suggestions: SuggestionsView,
+  ai:          AIView,
 }
 
 const BOTTOM_NAV = [
@@ -24,6 +26,7 @@ const BOTTOM_NAV = [
   { id: 'posts',       label: 'Bài viết',  icon: FileText },
   { id: 'audit',       label: 'Audit',     icon: ShieldCheck },
   { id: 'suggestions', label: 'Gợi ý',     icon: Lightbulb },
+  { id: 'ai',          label: 'AI',         icon: BrainCircuit },
 ]
 
 export default function App() {

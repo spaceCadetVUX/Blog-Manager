@@ -1,4 +1,4 @@
-import { LayoutDashboard, GitBranch, FileText, ShieldCheck, RefreshCw, Lightbulb } from 'lucide-react'
+import { LayoutDashboard, GitBranch, FileText, ShieldCheck, RefreshCw, Lightbulb, BrainCircuit } from 'lucide-react'
 
 const NAV = [
   { id: 'dashboard',   label: 'Dashboard',     icon: LayoutDashboard },
@@ -6,6 +6,7 @@ const NAV = [
   { id: 'posts',       label: 'Bài viết',      icon: FileText },
   { id: 'audit',       label: 'SEO Audit',     icon: ShieldCheck },
   { id: 'suggestions', label: 'Gợi ý links',   icon: Lightbulb },
+  { id: 'ai',          label: 'AI Analysis',   icon: BrainCircuit },
 ]
 
 export default function Sidebar({ active, onChange, onCrawl, collapsed = false }) {
