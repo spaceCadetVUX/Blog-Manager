@@ -3,16 +3,16 @@ import { api } from '../api'
 import { FileText, Link2, AlertTriangle, TrendingUp, ArrowUpRight, ExternalLink } from 'lucide-react'
 import { sectionColor } from '../sectionColors.js'
 
-function StatCard({ label, value, sub, icon: Icon, color = 'var(--accent)', warn }) {
+function StatCard({ label, value, sub, icon: Icon, color = 'var(--accent)', warn, compact }) {
   return (
     <div style={{
       background: 'var(--surface)',
       border: `1px solid ${warn ? 'rgba(248,81,73,0.3)' : 'var(--border)'}`,
       borderRadius: 'var(--radius)',
-      padding: '18px 20px',
+      padding: compact ? '10px 12px' : '18px 20px',
       display: 'flex',
       alignItems: 'flex-start',
-      gap: 14,
+      gap: compact ? 10 : 14,
       position: 'relative',
       overflow: 'hidden',
     }}>
@@ -22,17 +22,17 @@ function StatCard({ label, value, sub, icon: Icon, color = 'var(--accent)', warn
         opacity: 0.7,
       }} />
       <div style={{
-        width: 40, height: 40, borderRadius: 10,
+        width: compact ? 32 : 40, height: compact ? 32 : 40, borderRadius: compact ? 8 : 10,
         background: color + '18',
         display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
       }}>
-        <Icon size={18} color={color} strokeWidth={1.8} />
+        <Icon size={compact ? 15 : 18} color={color} strokeWidth={1.8} />
       </div>
       <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontSize: 22, fontWeight: 700, color: 'var(--text)', lineHeight: 1.2 }}>{value}</div>
-        <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 2 }}>{label}</div>
+        <div style={{ fontSize: compact ? 18 : 22, fontWeight: 700, color: 'var(--text)', lineHeight: 1.2 }}>{value}</div>
+        <div style={{ fontSize: compact ? 10 : 11, color: 'var(--text-muted)', marginTop: 2 }}>{label}</div>
         {sub && (
-          <div style={{ fontSize: 10, color: warn ? 'var(--danger)' : 'var(--text-subtle)', marginTop: 4 }}>{sub}</div>
+          <div style={{ fontSize: 9, color: warn ? 'var(--danger)' : 'var(--text-subtle)', marginTop: 3, lineHeight: 1.3 }}>{sub}</div>
         )}
       </div>
     </div>
@@ -44,18 +44,18 @@ function SectionBar({ name, count, total, max }) {
   const pctAll = total > 0 ? Math.round((count / total) * 100) : 0
   const color  = sectionColor(name)
   return (
-    <div style={{ marginBottom: 11 }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 5 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+    <div style={{ marginBottom: 10 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, minWidth: 0, flex: 1 }}>
           <div style={{ width: 7, height: 7, borderRadius: '50%', background: color, flexShrink: 0 }} />
-          <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>{name}</span>
+          <span style={{ fontSize: 11, color: 'var(--text-muted)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{name}</span>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
           <span style={{ fontSize: 10, color: 'var(--text-subtle)' }}>{pctAll}%</span>
           <span style={{ fontSize: 12, color: 'var(--text)', fontWeight: 500, minWidth: 20, textAlign: 'right' }}>{count}</span>
         </div>
       </div>
-      <div style={{ height: 5, background: 'var(--border)', borderRadius: 3, overflow: 'hidden' }}>
+      <div style={{ height: 4, background: 'var(--border)', borderRadius: 3, overflow: 'hidden' }}>
         <div style={{
           height: '100%', width: pct + '%', background: color, borderRadius: 3,
           transition: 'width 0.7s cubic-bezier(0.4,0,0.2,1)',
@@ -71,8 +71,8 @@ function TopLinkedRow({ rank, post, onSelectPost }) {
     <div
       onClick={() => onSelectPost && onSelectPost(post.slug)}
       style={{
-        display: 'flex', alignItems: 'center', gap: 10,
-        padding: '7px 10px', borderRadius: 6, cursor: 'pointer',
+        display: 'flex', alignItems: 'center', gap: 8,
+        padding: '7px 8px', borderRadius: 6, cursor: 'pointer',
         marginBottom: 2, transition: 'background 0.1s',
       }}
       onMouseEnter={e => e.currentTarget.style.background = 'var(--surface-2)'}
@@ -80,7 +80,7 @@ function TopLinkedRow({ rank, post, onSelectPost }) {
     >
       <span style={{
         fontSize: 10, fontWeight: 700, color: rank <= 3 ? 'var(--accent-2)' : 'var(--text-subtle)',
-        minWidth: 16, textAlign: 'right',
+        minWidth: 16, textAlign: 'right', flexShrink: 0,
       }}>{rank}</span>
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{
@@ -135,22 +135,33 @@ export default function Dashboard({ onSelectPost, bp = 'desktop' }) {
   const noOutPct  = stats.total_posts > 0 ? Math.round((stats.no_outbound  / stats.total_posts) * 100) : 0
   const avgLinks  = stats.total_posts > 0 ? (stats.total_links / stats.total_posts).toFixed(1) : 0
 
+  const pad = isMobile ? '12px 12px 16px' : 24
+  const panelPad = isMobile ? 12 : 18
+
   return (
-    <div style={{ flex: 1, overflow: 'auto', padding: 24 }}>
+    <div style={{ flex: 1, overflow: 'auto', padding: pad }}>
       {/* Header */}
-      <div style={{ marginBottom: 22 }}>
-        <h1 style={{ fontSize: 18, fontWeight: 600, color: 'var(--text)' }}>Dashboard</h1>
-        <p style={{ color: 'var(--text-muted)', fontSize: 12, marginTop: 3 }}>Tổng quan SEO nội dung knxstore.vn</p>
+      <div style={{ marginBottom: isMobile ? 14 : 22 }}>
+        <h1 style={{ fontSize: isMobile ? 16 : 18, fontWeight: 600, color: 'var(--text)' }}>Dashboard</h1>
+        {!isMobile && (
+          <p style={{ color: 'var(--text-muted)', fontSize: 12, marginTop: 3 }}>Tổng quan SEO nội dung knxstore.vn</p>
+        )}
       </div>
 
-      {/* Stat cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : isTablet ? 'repeat(3, 1fr)' : 'repeat(5, 1fr)', gap: 12, marginBottom: 20 }}>
+      {/* Stat cards — 2 col mobile, 3 col tablet, 5 col desktop */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : isTablet ? 'repeat(3, 1fr)' : 'repeat(5, 1fr)',
+        gap: isMobile ? 8 : 12,
+        marginBottom: isMobile ? 12 : 20,
+      }}>
         <StatCard
           label="Tổng bài viết"
           value={stats.total_posts?.toLocaleString() || 0}
           sub={`${sectionEntries.length} danh mục`}
           icon={FileText}
           color="var(--accent)"
+          compact={isMobile}
         />
         <StatCard
           label="Internal links"
@@ -158,41 +169,48 @@ export default function Dashboard({ onSelectPost, bp = 'desktop' }) {
           sub={`~${avgLinks} link/bài`}
           icon={Link2}
           color="var(--info)"
+          compact={isMobile}
         />
         <StatCard
           label="Orphan posts"
           value={stats.orphan_posts || 0}
-          sub={`${orphanPct}% tổng bài — cần thêm link vào`}
+          sub={`${orphanPct}% — cần thêm link`}
           icon={AlertTriangle}
           color="var(--danger)"
           warn={stats.orphan_posts > 0}
+          compact={isMobile}
         />
         <StatCard
-          label="Không có outbound"
+          label="Không outbound"
           value={stats.no_outbound || 0}
-          sub={`${noOutPct}% tổng bài — chưa link sang bài khác`}
+          sub={`${noOutPct}% — chưa link đi`}
           icon={ArrowUpRight}
           color="var(--warning)"
           warn={stats.no_outbound > 0}
+          compact={isMobile}
         />
-        <StatCard
-          label="Avg word count"
-          value={(stats.avg_word_count || 0).toLocaleString()}
-          sub={stats.avg_word_count >= 800 ? 'Đạt chuẩn SEO' : 'Nên tăng lên ≥800 từ'}
-          icon={TrendingUp}
-          color="var(--success)"
-        />
+        {/* 5th card: span full width on mobile so it doesn't sit alone */}
+        <div style={isMobile ? { gridColumn: 'span 2' } : {}}>
+          <StatCard
+            label="Avg word count"
+            value={(stats.avg_word_count || 0).toLocaleString()}
+            sub={stats.avg_word_count >= 800 ? 'Đạt chuẩn SEO' : 'Nên tăng ≥800 từ'}
+            icon={TrendingUp}
+            color="var(--success)"
+            compact={isMobile}
+          />
+        </div>
       </div>
 
       {/* Main panels */}
-      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : isTablet ? '1fr 1fr' : '1fr 1fr 1fr', gap: 14 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : isTablet ? '1fr 1fr' : '1fr 1fr 1fr', gap: isMobile ? 10 : 14 }}>
 
         {/* Section distribution */}
         <div style={{
           background: 'var(--surface)', border: '1px solid var(--border)',
-          borderRadius: 'var(--radius)', padding: 18,
+          borderRadius: 'var(--radius)', padding: panelPad,
         }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
             <h2 style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Phân bố danh mục</h2>
             <span style={{ fontSize: 11, color: 'var(--text-subtle)' }}>{sectionEntries.length} mục</span>
           </div>
@@ -207,9 +225,9 @@ export default function Dashboard({ onSelectPost, bp = 'desktop' }) {
         {/* Top linked posts */}
         <div style={{
           background: 'var(--surface)', border: '1px solid var(--border)',
-          borderRadius: 'var(--radius)', padding: 18,
+          borderRadius: 'var(--radius)', padding: panelPad,
         }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
             <h2 style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Hub pages</h2>
             <span style={{ fontSize: 10, color: 'var(--text-subtle)' }}>nhiều inbound nhất</span>
           </div>
@@ -226,10 +244,10 @@ export default function Dashboard({ onSelectPost, bp = 'desktop' }) {
         {/* Orphan posts */}
         <div style={{
           background: 'var(--surface)', border: '1px solid var(--border)',
-          borderRadius: 'var(--radius)', padding: 18,
+          borderRadius: 'var(--radius)', padding: panelPad,
           display: 'flex', flexDirection: 'column',
         }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
             <h2 style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Orphan posts</h2>
             <span style={{
               background: orphans.length > 0 ? 'rgba(248,81,73,0.15)' : 'rgba(63,185,80,0.15)',
@@ -241,7 +259,7 @@ export default function Dashboard({ onSelectPost, bp = 'desktop' }) {
           {orphans.length === 0 ? (
             <div style={{
               flex: 1, display: 'flex', flexDirection: 'column',
-              alignItems: 'center', justifyContent: 'center', gap: 8,
+              alignItems: 'center', justifyContent: 'center', gap: 8, padding: '12px 0',
             }}>
               <div style={{ fontSize: 28 }}>✓</div>
               <p style={{ color: 'var(--success)', fontSize: 13, fontWeight: 500 }}>Không có orphan posts!</p>
@@ -251,18 +269,18 @@ export default function Dashboard({ onSelectPost, bp = 'desktop' }) {
             <>
               <div style={{
                 background: 'rgba(248,81,73,0.07)', border: '1px solid rgba(248,81,73,0.2)',
-                borderRadius: 6, padding: '7px 10px', marginBottom: 12, fontSize: 11, color: 'var(--danger)',
+                borderRadius: 6, padding: '7px 10px', marginBottom: 10, fontSize: 11, color: 'var(--danger)',
               }}>
                 {orphans.length} bài chưa được bài nào link đến — Google khó crawl
               </div>
-              <div style={{ flex: 1, overflow: 'auto' }}>
+              <div style={{ maxHeight: isMobile ? 240 : undefined, overflow: 'auto' }}>
                 {orphans.map(post => (
                   <div
                     key={post.slug}
                     onClick={() => onSelectPost && onSelectPost(post.slug)}
                     style={{
                       display: 'flex', alignItems: 'center', gap: 8,
-                      padding: '6px 10px', borderRadius: 6, cursor: 'pointer',
+                      padding: '7px 8px', borderRadius: 6, cursor: 'pointer',
                       marginBottom: 2, transition: 'background 0.1s',
                     }}
                     onMouseEnter={e => e.currentTarget.style.background = 'var(--surface-2)'}

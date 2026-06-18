@@ -4,7 +4,7 @@ import { api } from '../api'
 
 const DEFAULT_SITEMAP = 'https://knxstore.vn/sitemap-post.xml'
 
-export default function CrawlModal({ onClose, onDone }) {
+export default function CrawlModal({ onClose, onDone, bp = 'desktop' }) {
   const [sitemapUrl, setSitemapUrl] = useState(DEFAULT_SITEMAP)
   const [mode, setMode] = useState('incremental')
   const [jobId, setJobId] = useState(null)
@@ -12,8 +12,8 @@ export default function CrawlModal({ onClose, onDone }) {
   const [starting, setStarting] = useState(false)
   const [error, setError] = useState(null)
   const pollRef = useRef(null)
+  const isMobile = bp === 'mobile'
 
-  // Poll status mỗi 2s khi job đang chạy
   useEffect(() => {
     if (!jobId) return
     pollRef.current = setInterval(async () => {
@@ -61,6 +61,36 @@ export default function CrawlModal({ onClose, onDone }) {
     error:           'Lỗi',
   }[job?.status] ?? ''
 
+  // Mobile: bottom sheet style
+  const modalStyle = isMobile ? {
+    position: 'fixed',
+    bottom: 56,  // above bottom nav
+    left: 0,
+    right: 0,
+    top: 'auto',
+    borderRadius: '14px 14px 0 0',
+    background: 'var(--surface)',
+    border: '1px solid var(--border)',
+    borderBottom: 'none',
+    zIndex: 201,
+    boxShadow: '0 -8px 40px rgba(0,0,0,0.5)',
+    maxHeight: '85vh',
+    overflowY: 'auto',
+  } : {
+    position: 'fixed',
+    top: '50%', left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 480,
+    background: 'var(--surface)',
+    border: '1px solid var(--border)',
+    borderRadius: 12,
+    zIndex: 201,
+    boxShadow: '0 20px 60px rgba(0,0,0,0.7)',
+    overflow: 'hidden',
+  }
+
+  const bodyPad = isMobile ? 16 : 20
+
   return (
     <>
       {/* Overlay */}
@@ -74,23 +104,19 @@ export default function CrawlModal({ onClose, onDone }) {
         }}
       />
 
-      {/* Modal */}
-      <div style={{
-        position: 'fixed',
-        top: '50%', left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 480,
-        background: 'var(--surface)',
-        border: '1px solid var(--border)',
-        borderRadius: 12,
-        zIndex: 201,
-        boxShadow: '0 20px 60px rgba(0,0,0,0.7)',
-        overflow: 'hidden',
-      }}>
+      {/* Modal / Bottom sheet */}
+      <div style={modalStyle}>
+        {/* Drag handle — mobile only */}
+        {isMobile && (
+          <div style={{ display: 'flex', justifyContent: 'center', padding: '10px 0 4px' }}>
+            <div style={{ width: 36, height: 4, borderRadius: 2, background: 'var(--border)' }} />
+          </div>
+        )}
+
         {/* Header */}
         <div style={{
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          padding: '16px 20px',
+          padding: isMobile ? '8px 16px 12px' : '16px 20px',
           borderBottom: '1px solid var(--border)',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -105,9 +131,9 @@ export default function CrawlModal({ onClose, onDone }) {
         </div>
 
         {/* Body */}
-        <div style={{ padding: '20px' }}>
+        <div style={{ padding: bodyPad }}>
           {/* Sitemap URL */}
-          <div style={{ marginBottom: 16 }}>
+          <div style={{ marginBottom: 14 }}>
             <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 6 }}>
               Sitemap URL
             </label>
@@ -123,7 +149,7 @@ export default function CrawlModal({ onClose, onDone }) {
                 borderRadius: 6,
                 padding: '8px 12px',
                 color: 'var(--text)',
-                fontSize: 13,
+                fontSize: isMobile ? 14 : 13,
                 outline: 'none',
                 boxSizing: 'border-box',
                 opacity: jobId ? 0.6 : 1,
@@ -134,7 +160,7 @@ export default function CrawlModal({ onClose, onDone }) {
           </div>
 
           {/* Mode toggle */}
-          <div style={{ marginBottom: 20 }}>
+          <div style={{ marginBottom: 18 }}>
             <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 8 }}>
               Chế độ
             </label>
@@ -148,7 +174,7 @@ export default function CrawlModal({ onClose, onDone }) {
                   onClick={() => !jobId && setMode(opt.val)}
                   disabled={!!jobId}
                   style={{
-                    flex: 1, padding: '10px 12px', borderRadius: 8, cursor: jobId ? 'default' : 'pointer',
+                    flex: 1, padding: isMobile ? '10px 10px' : '10px 12px', borderRadius: 8, cursor: jobId ? 'default' : 'pointer',
                     border: mode === opt.val ? '1px solid var(--accent)' : '1px solid var(--border)',
                     background: mode === opt.val ? 'var(--accent-dim)' : 'var(--surface-2)',
                     textAlign: 'left', opacity: jobId ? 0.6 : 1,
@@ -166,11 +192,10 @@ export default function CrawlModal({ onClose, onDone }) {
             <div style={{
               background: 'var(--surface-2)',
               border: '1px solid var(--border)',
-              borderRadius: 8, padding: '14px 16px',
-              marginBottom: 16,
+              borderRadius: 8, padding: '12px 14px',
+              marginBottom: 14,
             }}>
-              {/* Status header */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
                 {isRunning && <Loader size={14} color="var(--warning)" style={{ animation: 'spin 1s linear infinite' }} />}
                 {isDone    && <CheckCircle size={14} color="var(--success)" />}
                 {isError   && <AlertCircle size={14} color="var(--danger)" />}
@@ -179,7 +204,6 @@ export default function CrawlModal({ onClose, onDone }) {
                 </span>
               </div>
 
-              {/* Progress bar */}
               {job.total > 0 && !job.importing && (
                 <>
                   <div style={{ height: 4, background: 'var(--border)', borderRadius: 2, overflow: 'hidden', marginBottom: 8 }}>
@@ -190,7 +214,7 @@ export default function CrawlModal({ onClose, onDone }) {
                       transition: 'width 0.4s ease',
                     }} />
                   </div>
-                  <div style={{ display: 'flex', gap: 16, fontSize: 11, color: 'var(--text-muted)' }}>
+                  <div style={{ display: 'flex', gap: 12, fontSize: 11, color: 'var(--text-muted)', flexWrap: 'wrap' }}>
                     <span><span style={{ color: 'var(--success)', fontWeight: 500 }}>{job.crawled}</span> crawled</span>
                     <span><span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>{job.skipped}</span> skipped</span>
                     {job.failed > 0 && <span><span style={{ color: 'var(--danger)', fontWeight: 500 }}>{job.failed}</span> failed</span>}
@@ -199,14 +223,12 @@ export default function CrawlModal({ onClose, onDone }) {
                 </>
               )}
 
-              {/* Current URL */}
               {job.current && !isDone && (
                 <div style={{ marginTop: 8, fontSize: 11, color: 'var(--text-subtle)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   → {job.current}
                 </div>
               )}
 
-              {/* Error */}
               {isError && job.error && (
                 <div style={{ marginTop: 8, fontSize: 11, color: 'var(--danger)', wordBreak: 'break-all' }}>
                   {job.error}
@@ -220,26 +242,30 @@ export default function CrawlModal({ onClose, onDone }) {
           )}
 
           {/* Buttons */}
-          <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
+          <div style={{ display: 'flex', gap: 8, justifyContent: isMobile ? 'stretch' : 'flex-end' }}>
             {!isRunning && !isDone && (
               <>
-                <button
-                  onClick={onClose}
-                  style={{
-                    padding: '8px 16px', borderRadius: 6, cursor: 'pointer',
-                    border: '1px solid var(--border)', background: 'transparent',
-                    color: 'var(--text-muted)', fontSize: 13,
-                  }}
-                >Hủy</button>
+                {!isMobile && (
+                  <button
+                    onClick={onClose}
+                    style={{
+                      padding: '8px 16px', borderRadius: 6, cursor: 'pointer',
+                      border: '1px solid var(--border)', background: 'transparent',
+                      color: 'var(--text-muted)', fontSize: 13,
+                    }}
+                  >Hủy</button>
+                )}
                 <button
                   onClick={handleStart}
                   disabled={starting || !sitemapUrl.trim()}
                   style={{
-                    padding: '8px 20px', borderRadius: 6, cursor: 'pointer',
+                    flex: isMobile ? 1 : undefined,
+                    padding: isMobile ? '12px 16px' : '8px 20px',
+                    borderRadius: 6, cursor: 'pointer',
                     border: 'none', background: 'var(--accent)',
                     color: '#fff', fontSize: 13, fontWeight: 500,
                     opacity: (starting || !sitemapUrl.trim()) ? 0.6 : 1,
-                    display: 'flex', alignItems: 'center', gap: 6,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
                   }}
                 >
                   {starting
@@ -253,9 +279,12 @@ export default function CrawlModal({ onClose, onDone }) {
               <button
                 onClick={onClose}
                 style={{
-                  padding: '8px 20px', borderRadius: 6, cursor: 'pointer',
+                  flex: isMobile ? 1 : undefined,
+                  padding: isMobile ? '12px 16px' : '8px 20px',
+                  borderRadius: 6, cursor: 'pointer',
                   border: 'none', background: 'var(--success)',
                   color: '#fff', fontSize: 13, fontWeight: 500,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}
               >Đóng</button>
             )}

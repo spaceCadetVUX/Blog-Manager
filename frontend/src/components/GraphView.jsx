@@ -60,6 +60,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
   const [rawDataVersion, setRawDataVersion] = useState(0)
 
   const [showLegend, setShowLegend] = useState(true)
+  const [showFilters, setShowFilters] = useState(true)
   const [aiModel, setAiModel]     = useState('claude-haiku-4-5-20251001')
   const [aiContent, setAiContent] = useState('')
   const [aiLoading, setAiLoading] = useState(false)
@@ -481,166 +482,132 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
         ))}
       </div>
       {/* Toolbar */}
-      <div style={{
-        padding: '9px 16px',
-        background: 'var(--surface)',
-        borderBottom: '1px solid var(--border)',
-        display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap',
-        flexShrink: 0,
-      }}>
-        <span style={{ fontSize: 11, color: 'var(--text-muted)', fontWeight: 500 }}>Min links:</span>
-        <div style={{ display: 'flex', gap: 4 }}>
-          {MIN_LINK_OPTIONS.map(opt => (
-            <ToolbarBtn key={opt.value} active={minLinks === opt.value} onClick={() => setMinLinks(opt.value)}>
-              {opt.label}
-            </ToolbarBtn>
-          ))}
-        </div>
+      <div style={{ background: 'var(--surface)', borderBottom: '1px solid var(--border)', flexShrink: 0 }}>
 
-        <div style={{ width: 1, height: 18, background: 'var(--border)' }} />
-
-        <select
-          value={filterSection}
-          onChange={e => setFilterSection(e.target.value)}
-          style={{
-            background: 'var(--surface-2)', border: '1px solid var(--border)',
-            color: 'var(--text)', borderRadius: 6, padding: '4px 10px',
-            fontSize: 12, cursor: 'pointer', outline: 'none',
-          }}
-        >
-          <option value="">Tất cả sections</option>
-          {sections.map(s => <option key={s} value={s}>{s}</option>)}
-        </select>
-
-        <div style={{ width: 1, height: 18, background: 'var(--border)' }} />
-
-        <button
-          onClick={() => setShowOrphansOnly(v => !v)}
-          style={{
-            padding: '4px 10px', borderRadius: 6, fontSize: 12, cursor: 'pointer',
-            border: `1px solid ${showOrphansOnly ? 'var(--danger)' : 'var(--border)'}`,
-            background: showOrphansOnly ? 'rgba(248,81,73,0.12)' : 'transparent',
-            color: showOrphansOnly ? 'var(--danger)' : 'var(--text-muted)',
-            transition: 'all 0.15s',
-          }}
-        >
-          {showOrphansOnly ? '⚠ Orphans' : 'Orphans'}
-        </button>
-
-        <div style={{ width: 1, height: 18, background: 'var(--border)' }} />
-
-        {/* Search box */}
-        <div style={{ position: 'relative' }}>
-          <input
-            value={search}
-            onChange={e => { setSearch(e.target.value); setShowResults(true) }}
-            onFocus={() => setShowResults(true)}
-            onBlur={() => setTimeout(() => setShowResults(false), 150)}
-            onKeyDown={e => {
-              if (e.key === 'Escape') { setSearch(''); setShowResults(false) }
-              if (e.key === 'Enter' && searchResults.length > 0) zoomToNode(searchResults[0])
-            }}
-            placeholder="Tìm node..."
-            style={{
-              background: 'var(--surface-2)', border: '1px solid var(--border)',
-              borderRadius: 6, padding: '4px 28px 4px 10px',
-              color: 'var(--text)', fontSize: 12, outline: 'none', width: 180,
-            }}
-            onFocusCapture={e => e.target.style.borderColor = 'var(--accent)'}
-            onBlurCapture={e => e.target.style.borderColor = 'var(--border)'}
-          />
-          {search && (
-            <button
-              onMouseDown={() => { setSearch(''); setShowResults(false) }}
-              style={{
-                position: 'absolute', right: 6, top: '50%', transform: 'translateY(-50%)',
-                background: 'none', border: 'none', color: 'var(--text-muted)',
-                cursor: 'pointer', fontSize: 14, lineHeight: 1, padding: 0,
+        {/* Row 1: Search + Recenter + Stats */}
+        <div style={{ padding: '7px 12px', display: 'flex', alignItems: 'center', gap: 8 }}>
+          {/* Search */}
+          <div style={{ position: 'relative', flex: 1, maxWidth: bp === 'mobile' ? '100%' : 220 }}>
+            <input
+              value={search}
+              onChange={e => { setSearch(e.target.value); setShowResults(true) }}
+              onFocus={() => setShowResults(true)}
+              onBlur={() => setTimeout(() => setShowResults(false), 150)}
+              onKeyDown={e => {
+                if (e.key === 'Escape') { setSearch(''); setShowResults(false) }
+                if (e.key === 'Enter' && searchResults.length > 0) zoomToNode(searchResults[0])
               }}
-            >×</button>
-          )}
-
-          {/* Dropdown kết quả */}
-          {showResults && searchResults.length > 0 && (
-            <div style={{
-              position: 'absolute', top: '100%', left: 0, marginTop: 4,
-              background: 'var(--surface)', border: '1px solid var(--border)',
-              borderRadius: 8, zIndex: 50, minWidth: 280,
-              boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
-              overflow: 'hidden',
-            }}>
-              {searchResults.map(node => (
-                <div
-                  key={node.id}
-                  onMouseDown={() => zoomToNode(node)}
-                  style={{
-                    padding: '8px 12px', cursor: 'pointer',
-                    display: 'flex', alignItems: 'center', gap: 8,
-                    borderBottom: '1px solid var(--border-2)',
-                  }}
-                  onMouseEnter={e => e.currentTarget.style.background = 'var(--surface-2)'}
-                  onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
-                >
-                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: node.color, flexShrink: 0 }} />
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: 12, color: 'var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{node.label}</div>
-                    <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 1 }}>{node.section} · {node.inbound} inbound</div>
+              placeholder="Tìm node..."
+              style={{
+                width: '100%', boxSizing: 'border-box',
+                background: 'var(--surface-2)', border: '1px solid var(--border)',
+                borderRadius: 6, padding: '5px 28px 5px 10px',
+                color: 'var(--text)', fontSize: 12, outline: 'none',
+              }}
+              onFocusCapture={e => e.target.style.borderColor = 'var(--accent)'}
+              onBlurCapture={e => e.target.style.borderColor = 'var(--border)'}
+            />
+            {search && (
+              <button onMouseDown={() => { setSearch(''); setShowResults(false) }}
+                style={{ position: 'absolute', right: 6, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: 14, lineHeight: 1, padding: 0 }}
+              >×</button>
+            )}
+            {showResults && searchResults.length > 0 && (
+              <div style={{
+                position: 'absolute', top: '100%', left: 0, marginTop: 4,
+                background: 'var(--surface)', border: '1px solid var(--border)',
+                borderRadius: 8, zIndex: 50, minWidth: 260, maxWidth: '90vw',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.5)', overflow: 'hidden',
+              }}>
+                {searchResults.map(node => (
+                  <div key={node.id} onMouseDown={() => zoomToNode(node)}
+                    style={{ padding: '8px 12px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, borderBottom: '1px solid var(--border-2)' }}
+                    onMouseEnter={e => e.currentTarget.style.background = 'var(--surface-2)'}
+                    onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                  >
+                    <div style={{ width: 8, height: 8, borderRadius: '50%', background: node.color, flexShrink: 0 }} />
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: 12, color: 'var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{node.label}</div>
+                      <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 1 }}>{node.section} · {node.inbound} inbound</div>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+                ))}
+              </div>
+            )}
+          </div>
 
-        <button
-          onClick={() => fgRef.current?.zoomToFit(400)}
-          style={{
-            marginLeft: 'auto',
-            padding: '4px 12px',
-            borderRadius: 6,
-            border: '1px solid var(--border)',
-            background: 'transparent',
-            color: 'var(--text-muted)',
-            fontSize: 12, cursor: 'pointer',
-            display: 'flex', alignItems: 'center', gap: 6,
-            transition: 'all 0.12s',
-          }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--text-muted)'; e.currentTarget.style.color = 'var(--text)' }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-muted)' }}
-        >
-          ⊡ Recenter
-        </button>
-
-        {/* AI cluster — chỉ hiện khi đang filter 1 section */}
-        {filterSection && (
-          <>
-            <div style={{ width: 1, height: 18, background: 'var(--border)' }} />
-            <ModelSelect value={aiModel} onChange={setAiModel} disabled={aiLoading} />
-            <button
-              onClick={runClusterAI}
-              disabled={aiLoading}
-              style={{
-                padding: '4px 12px', borderRadius: 6, fontSize: 12,
-                cursor: aiLoading ? 'not-allowed' : 'pointer',
-                border: '1px solid rgba(139,92,246,0.6)',
-                background: aiLoading ? 'rgba(139,92,246,0.08)' : 'rgba(139,92,246,0.12)',
-                color: aiLoading ? 'rgba(167,139,250,0.5)' : '#a78bfa',
-                display: 'flex', alignItems: 'center', gap: 6,
-                transition: 'all 0.12s',
-              }}
-              onMouseEnter={e => { if (!aiLoading) e.currentTarget.style.background = 'rgba(139,92,246,0.2)' }}
-              onMouseLeave={e => { if (!aiLoading) e.currentTarget.style.background = 'rgba(139,92,246,0.12)' }}
+          {/* Section select — desktop only */}
+          {bp !== 'mobile' && (
+            <select value={filterSection} onChange={e => setFilterSection(e.target.value)}
+              style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text)', borderRadius: 6, padding: '5px 10px', fontSize: 12, cursor: 'pointer', outline: 'none' }}
             >
-              🤖 {aiLoading ? 'Đang phân tích...' : `Phân tích "${filterSection}"`}
-            </button>
-          </>
-        )}
+              <option value="">Tất cả sections</option>
+              {sections.map(s => <option key={s} value={s}>{s}</option>)}
+            </select>
+          )}
 
-        <div style={{ display: 'flex', gap: 14, fontSize: 12, color: 'var(--text-muted)', alignItems: 'center' }}>
-          <span><span style={{ color: 'var(--text)', fontWeight: 500 }}>{statsInfo.nodes}</span> nodes</span>
-          <span><span style={{ color: 'var(--text)', fontWeight: 500 }}>{statsInfo.edges}</span> edges</span>
-          {loading && <span style={{ color: 'var(--warning)', fontSize: 11 }}>Loading...</span>}
+          {/* Recenter */}
+          <button onClick={() => fgRef.current?.zoomToFit(400)}
+            title="Recenter"
+            style={{ padding: '5px 10px', borderRadius: 6, border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-muted)', fontSize: 12, cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0 }}
+          >⊡{bp !== 'mobile' && ' Recenter'}</button>
+
+          {/* Stats */}
+          <div style={{ fontSize: 11, color: 'var(--text-subtle)', whiteSpace: 'nowrap', flexShrink: 0 }}>
+            {loading ? <span style={{ color: 'var(--warning)' }}>…</span> : <>{statsInfo.nodes}N · {statsInfo.edges}E</>}
+          </div>
+
+          {/* Toggle filters */}
+          <button
+            onClick={() => setShowFilters(v => !v)}
+            title={showFilters ? 'Ẩn filters' : 'Hiện filters'}
+            style={{
+              padding: '4px 8px', borderRadius: 6, fontSize: 11, flexShrink: 0,
+              border: `1px solid ${showFilters ? 'var(--accent)' : 'var(--border)'}`,
+              background: showFilters ? 'var(--accent-dim)' : 'transparent',
+              color: showFilters ? 'var(--accent-2)' : 'var(--text-subtle)',
+              cursor: 'pointer', transition: 'all 0.12s',
+            }}
+          >{showFilters ? '▲' : '▼ Filters'}{showFilters && bp !== 'mobile' ? ' Filters' : ''}</button>
         </div>
+
+        {/* Row 2: Filters */}
+        {showFilters && <div style={{ padding: '0 12px 7px', display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+          {/* Min links chips */}
+          <span style={{ fontSize: 10, color: 'var(--text-subtle)', flexShrink: 0 }}>Min:</span>
+          <div style={{ display: 'flex', gap: 3 }}>
+            {MIN_LINK_OPTIONS.map(opt => (
+              <ToolbarBtn key={opt.value} active={minLinks === opt.value} onClick={() => setMinLinks(opt.value)}>
+                {opt.label}
+              </ToolbarBtn>
+            ))}
+          </div>
+
+          {/* Section select — mobile only */}
+          {bp === 'mobile' && (
+            <select value={filterSection} onChange={e => setFilterSection(e.target.value)}
+              style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text)', borderRadius: 6, padding: '4px 8px', fontSize: 11, cursor: 'pointer', outline: 'none', maxWidth: 130 }}
+            >
+              <option value="">All sections</option>
+              {sections.map(s => <option key={s} value={s}>{s}</option>)}
+            </select>
+          )}
+
+          {/* Orphans */}
+          <button onClick={() => setShowOrphansOnly(v => !v)}
+            style={{ padding: '4px 9px', borderRadius: 6, fontSize: 11, cursor: 'pointer', border: `1px solid ${showOrphansOnly ? 'var(--danger)' : 'var(--border)'}`, background: showOrphansOnly ? 'rgba(248,81,73,0.12)' : 'transparent', color: showOrphansOnly ? 'var(--danger)' : 'var(--text-muted)', transition: 'all 0.15s', whiteSpace: 'nowrap' }}
+          >{showOrphansOnly ? '⚠ Orphans' : 'Orphans'}</button>
+
+          {/* AI — khi filter section */}
+          {filterSection && (
+            <>
+              {bp !== 'mobile' && <ModelSelect value={aiModel} onChange={setAiModel} disabled={aiLoading} />}
+              <button onClick={runClusterAI} disabled={aiLoading}
+                style={{ padding: '4px 10px', borderRadius: 6, fontSize: 11, cursor: aiLoading ? 'not-allowed' : 'pointer', border: '1px solid rgba(139,92,246,0.6)', background: aiLoading ? 'rgba(139,92,246,0.08)' : 'rgba(139,92,246,0.12)', color: aiLoading ? 'rgba(167,139,250,0.5)' : '#a78bfa', whiteSpace: 'nowrap' }}
+              >🤖 {aiLoading ? '…' : bp === 'mobile' ? 'AI' : `Phân tích "${filterSection}"`}</button>
+            </>
+          )}
+        </div>}
       </div>
 
       {/* Graph canvas */}
