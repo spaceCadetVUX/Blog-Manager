@@ -135,13 +135,12 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
   useEffect(() => {
     if (!fgRef.current || graphData.nodes.length === 0) return
     const fg = fgRef.current
-    fg.d3Force('charge').strength(-350)
-    fg.d3Force('link').distance(100)
+    fg.d3Force('charge').strength(-600)
+    fg.d3Force('link').distance(140)
 
-    // Clustering force: kéo nodes cùng section về centroid của nhau
+    // Clustering force: kéo nodes cùng section về centroid
     const nodes = graphData.nodes
     fg.d3Force('cluster', alpha => {
-      // Tính centroid từng section
       const centroids = {}
       nodes.forEach(n => {
         if (!n.section) return
@@ -152,14 +151,43 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
       })
       Object.values(centroids).forEach(c => { c.x /= c.count; c.y /= c.count })
 
-      // Kéo mỗi node về centroid của section nó
-      const strength = 0.12
+      const clusterStrength = 0.14
       nodes.forEach(n => {
         const c = centroids[n.section]
         if (!c) return
-        n.vx = (n.vx || 0) + (c.x - (n.x || 0)) * strength * alpha
-        n.vy = (n.vy || 0) + (c.y - (n.y || 0)) * strength * alpha
+        n.vx = (n.vx || 0) + (c.x - (n.x || 0)) * clusterStrength * alpha
+        n.vy = (n.vy || 0) + (c.y - (n.y || 0)) * clusterStrength * alpha
       })
+    })
+
+    // Galaxy repulsion: đẩy các section ra xa nhau
+    fg.d3Force('galaxyRepulsion', alpha => {
+      const centroids = {}
+      nodes.forEach(n => {
+        if (!n.section) return
+        if (!centroids[n.section]) centroids[n.section] = { x: 0, y: 0, count: 0, nodes: [] }
+        centroids[n.section].x += n.x || 0
+        centroids[n.section].y += n.y || 0
+        centroids[n.section].count += 1
+        centroids[n.section].nodes.push(n)
+      })
+      Object.values(centroids).forEach(c => { c.x /= c.count; c.y /= c.count })
+
+      const secList = Object.values(centroids)
+      for (let i = 0; i < secList.length; i++) {
+        for (let j = i + 1; j < secList.length; j++) {
+          const a = secList[i], b = secList[j]
+          const dx = b.x - a.x, dy = b.y - a.y
+          const dist = Math.max(1, Math.hypot(dx, dy))
+          const minDist = 500
+          if (dist < minDist) {
+            const force = (minDist - dist) / minDist * alpha * 2.5
+            const fx = (dx / dist) * force, fy = (dy / dist) * force
+            a.nodes.forEach(n => { n.vx = (n.vx||0) - fx; n.vy = (n.vy||0) - fy })
+            b.nodes.forEach(n => { n.vx = (n.vx||0) + fx; n.vy = (n.vy||0) + fy })
+          }
+        }
+      }
     })
 
     fg.d3ReheatSimulation()
@@ -302,6 +330,67 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
       ctx.fillText(short, node.x, labelY)
     }
   }, [])
+
+  // Galaxy halos — vẽ trước nodes
+  const drawGalaxyHalos = useCallback((ctx) => {
+    const nodes = graphData.nodes
+    if (!nodes.length) return
+
+    // Tính centroid + spread từng section
+    const bySection = {}
+    nodes.forEach(n => {
+      if (!n.section || n.x == null || !isFinite(n.x)) return
+      if (!bySection[n.section]) bySection[n.section] = []
+      bySection[n.section].push(n)
+    })
+
+    Object.entries(bySection).forEach(([section, sNodes]) => {
+      if (sNodes.length < 2) return
+      const cx = sNodes.reduce((s, n) => s + n.x, 0) / sNodes.length
+      const cy = sNodes.reduce((s, n) => s + n.y, 0) / sNodes.length
+      const spread = Math.max(
+        60,
+        sNodes.reduce((max, n) => Math.max(max, Math.hypot(n.x - cx, n.y - cy)), 0)
+      )
+      const r = spread + 40
+
+      const color = sectionColor(section)
+      const rgb = hex2rgb(color)
+
+      // Outer nebula glow
+      const grd = ctx.createRadialGradient(cx, cy, spread * 0.1, cx, cy, r)
+      grd.addColorStop(0, `rgba(${rgb},0.07)`)
+      grd.addColorStop(0.5, `rgba(${rgb},0.04)`)
+      grd.addColorStop(1, `rgba(${rgb},0)`)
+      ctx.beginPath()
+      ctx.arc(cx, cy, r, 0, 2 * Math.PI)
+      ctx.fillStyle = grd
+      ctx.fill()
+
+      // Subtle border ring
+      ctx.beginPath()
+      ctx.arc(cx, cy, r * 0.88, 0, 2 * Math.PI)
+      ctx.strokeStyle = `rgba(${rgb},0.08)`
+      ctx.lineWidth = 1
+      ctx.setLineDash([4, 8])
+      ctx.stroke()
+      ctx.setLineDash([])
+
+      // Section label ở centroid
+      const label = section.length > 20 ? section.slice(0, 20) + '…' : section
+      const fsize = Math.max(10, Math.min(16, spread * 0.12))
+      ctx.font = `600 ${fsize}px system-ui,sans-serif`
+      ctx.textAlign = 'center'
+      ctx.textBaseline = 'middle'
+      const tw = ctx.measureText(label).width
+      ctx.fillStyle = 'rgba(13,17,23,0.6)'
+      ctx.beginPath()
+      ctx.roundRect(cx - tw / 2 - 6, cy - fsize / 2 - 3, tw + 12, fsize + 6, 4)
+      ctx.fill()
+      ctx.fillStyle = `rgba(${rgb},0.75)`
+      ctx.fillText(label, cx, cy)
+    })
+  }, [graphData.nodes])
 
   // Vùng click khớp với node radius
   const paintNodePointerArea = useCallback((node, color, ctx) => {
@@ -568,6 +657,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
             height={dimensions.h}
             graphData={graphData}
             backgroundColor="#0d1117"
+            onRenderFramePre={drawGalaxyHalos}
             nodeCanvasObject={paintNode}
             nodePointerAreaPaint={paintNodePointerArea}
             onNodeHover={onNodeHover}
