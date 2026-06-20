@@ -22,6 +22,10 @@ export default function PostsList({ onSelectPost, bp = 'desktop' }) {
   const [sortKey, setSortKey]           = useState('date_modified')
   const [sortDir, setSortDir]           = useState('desc')
   const [total, setTotal]               = useState(0)
+  const [page, setPage]                 = useState(0)
+  const [dateFrom, setDateFrom]         = useState('')
+  const [dateTo, setDateTo]             = useState('')
+  const PAGE_SIZE = 20
 
   const isMobile = bp === 'mobile'
   const isTablet = bp === 'tablet'
@@ -51,20 +55,30 @@ export default function PostsList({ onSelectPost, bp = 'desktop' }) {
     api.sections().then(rows => setSections(rows.map(r => r.article_section))).catch(console.error)
   }, [])
 
+  useEffect(() => { setPage(0) }, [filterSection, sortKey, sortDir, search, dateFrom, dateTo])
+
   useEffect(() => {
     setLoading(true)
-    const params = { sort: sortKey, order: sortDir }
+    const params = { sort: sortKey, order: sortDir, limit: PAGE_SIZE, offset: page * PAGE_SIZE }
     if (filterSection) params.section = filterSection
     api.posts(params)
       .then(data => { setPosts(data.items || []); setTotal(data.total ?? (data.items || []).length) })
       .catch(console.error)
       .finally(() => setLoading(false))
-  }, [filterSection, sortKey, sortDir])
+  }, [filterSection, sortKey, sortDir, page])
 
   const filtered = posts.filter(p => {
-    if (!search) return true
-    const q = search.toLowerCase()
-    return (p.headline || '').toLowerCase().includes(q) || (p.slug || '').toLowerCase().includes(q)
+    if (search) {
+      const q = search.toLowerCase()
+      if (!(p.headline || '').toLowerCase().includes(q) && !(p.slug || '').toLowerCase().includes(q)) return false
+    }
+    if (dateFrom || dateTo) {
+      const iso = (p.date_modified || '').slice(0, 10)
+      if (!iso) return false
+      if (dateFrom && iso < dateFrom) return false
+      if (dateTo   && iso > dateTo)   return false
+    }
+    return true
   })
 
   const handleSort = key => {
@@ -134,8 +148,33 @@ export default function PostsList({ onSelectPost, bp = 'desktop' }) {
           </select>
         )}
 
+        {/* Date range */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+          <span style={{ fontSize: 10, color: 'var(--text-subtle)', whiteSpace: 'nowrap' }}>Sửa:</span>
+          {[['from', dateFrom, setDateFrom], ['to', dateTo, setDateTo]].map(([which, val, setVal]) => (
+            <input
+              key={which}
+              type="date"
+              value={val}
+              onChange={e => setVal(e.target.value)}
+              style={{
+                padding: '4px 6px', fontSize: 11, borderRadius: 6,
+                border: `1px solid ${val ? 'var(--accent)' : 'var(--border)'}`,
+                background: val ? 'rgba(6,182,212,0.06)' : 'var(--surface-2)',
+                color: val ? 'var(--accent-2)' : 'var(--text-muted)',
+                outline: 'none', colorScheme: 'dark', cursor: 'pointer',
+              }}
+            />
+          ))}
+          {(dateFrom || dateTo) && (
+            <button onClick={() => { setDateFrom(''); setDateTo('') }}
+              style={{ fontSize: 13, padding: '1px 5px', borderRadius: 4, border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-muted)', cursor: 'pointer', lineHeight: 1 }}
+            >×</button>
+          )}
+        </div>
+
         <div style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>
-          {search ? `${filtered.length} / ${total}` : total} bài
+          {(search || dateFrom || dateTo) ? `${filtered.length} / ${total}` : total} bài
         </div>
 
         <button
@@ -198,20 +237,23 @@ export default function PostsList({ onSelectPost, bp = 'desktop' }) {
           /* Table view on desktop/tablet */
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{
-                background: 'var(--surface)', borderBottom: '1px solid var(--border)',
-                position: 'sticky', top: 0, zIndex: 1,
-              }}>
-                <th style={{ padding: '10px 16px', textAlign: 'left', fontSize: 11, color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Tiêu đề</th>
-                <th style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>Section</th>
-                {!isTablet && (
-                  <th style={{ padding: '10px 12px', textAlign: 'right' }}><SortBtn k="word_count" label="Từ" /></th>
-                )}
-                <th style={{ padding: '10px 12px', textAlign: 'right' }}><SortBtn k="inbound_links" label="Inbound" /></th>
-                <th style={{ padding: '10px 12px', textAlign: 'right', fontSize: 11, color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Out</th>
-                {!isTablet && (
-                  <th style={{ padding: '10px 16px', textAlign: 'right' }}><SortBtn k="date_modified" label="Ngày" /></th>
-                )}
+              <tr style={{ background: 'var(--surface)', borderBottom: '1px solid var(--border)', position: 'sticky', top: 0, zIndex: 1 }}>
+                {[
+                  { label: 'Tiêu đề',  align: 'left',  pad: '10px 16px', sortKey: null },
+                  { label: 'Section',  align: 'left',  pad: '10px 12px', sortKey: null },
+                  ...(!isTablet ? [{ label: 'Từ',      align: 'right', pad: '10px 12px', sortKey: 'word_count' }] : []),
+                  { label: 'Inbound',  align: 'right', pad: '10px 12px', sortKey: 'inbound_links' },
+                  { label: 'Out',      align: 'right', pad: '10px 12px', sortKey: null },
+                  ...(!isTablet ? [{ label: 'Ngày',    align: 'right', pad: '10px 16px', sortKey: 'date_modified' }] : []),
+                ].map(({ label, align, pad, sortKey: sk }) => (
+                  <th key={label} style={{ padding: pad, textAlign: align, fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>
+                    {sk ? (
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: align === 'right' ? 'flex-end' : 'flex-start' }}>
+                        <SortBtn k={sk} label={label} />
+                      </div>
+                    ) : label}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
@@ -230,32 +272,46 @@ export default function PostsList({ onSelectPost, bp = 'desktop' }) {
                   onMouseEnter={e => e.currentTarget.style.background = 'var(--surface-2)'}
                   onMouseLeave={e => e.currentTarget.style.background = i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.015)'}
                 >
-                  <td style={{ padding: '9px 16px', maxWidth: isTablet ? 220 : 340 }}>
-                    <div style={{ fontSize: 12, color: 'var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                      {post.headline}
+                  <td style={{ padding: '12px 16px', maxWidth: isTablet ? 220 : 380 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                      {/* Thumbnail */}
+                      <div style={{
+                        width: 72, height: 56, borderRadius: 5, flexShrink: 0, overflow: 'hidden',
+                        background: 'var(--surface-2)', border: '1px solid var(--border-2)',
+                      }}>
+                        {post.image
+                          ? <img src={post.image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} onError={e => { e.target.style.display = 'none' }} />
+                          : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, color: 'var(--border)' }}>✦</div>
+                        }
+                      </div>
+                      <div style={{ minWidth: 0 }}>
+                        <div style={{ fontSize: 12, color: 'var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontWeight: 500 }}>
+                          {post.headline}
+                        </div>
+                        {!isTablet && (
+                          <div style={{ fontSize: 11, color: 'var(--text-subtle)', marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{post.slug}</div>
+                        )}
+                      </div>
                     </div>
-                    {!isTablet && (
-                      <div style={{ fontSize: 11, color: 'var(--text-subtle)', marginTop: 1 }}>{post.slug}</div>
-                    )}
                   </td>
-                  <td style={{ padding: '9px 12px' }}>
+                  <td style={{ padding: '12px 12px', verticalAlign: 'middle' }}>
                     {post.article_section && <SectionBadge section={post.article_section} />}
                   </td>
                   {!isTablet && (
-                    <td style={{ padding: '9px 12px', textAlign: 'right', fontSize: 12, color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>
+                    <td style={{ padding: '12px 12px', textAlign: 'right', fontSize: 12, color: 'var(--text-muted)', whiteSpace: 'nowrap', verticalAlign: 'middle' }}>
                       {post.word_count ? post.word_count.toLocaleString() : '-'}
                     </td>
                   )}
-                  <td style={{ padding: '9px 12px', textAlign: 'right' }}>
+                  <td style={{ padding: '12px 12px', textAlign: 'right', verticalAlign: 'middle' }}>
                     <span style={{ fontSize: 12, fontWeight: 600, color: (post.inbound || 0) > 0 ? 'var(--success)' : 'var(--danger)' }}>
                       {post.inbound || 0}
                     </span>
                   </td>
-                  <td style={{ padding: '9px 12px', textAlign: 'right', fontSize: 12, color: 'var(--text-muted)' }}>
+                  <td style={{ padding: '12px 12px', textAlign: 'right', fontSize: 12, color: 'var(--text-muted)', verticalAlign: 'middle' }}>
                     {post.outbound || 0}
                   </td>
                   {!isTablet && (
-                    <td style={{ padding: '9px 16px', textAlign: 'right', fontSize: 11, color: 'var(--text-subtle)', whiteSpace: 'nowrap' }}>
+                    <td style={{ padding: '12px 16px', textAlign: 'right', fontSize: 11, color: 'var(--text-subtle)', whiteSpace: 'nowrap', verticalAlign: 'middle' }}>
                       {post.date_modified ? new Date(post.date_modified).toLocaleDateString('vi-VN') : '-'}
                     </td>
                   )}
@@ -268,6 +324,55 @@ export default function PostsList({ onSelectPost, bp = 'desktop' }) {
           </table>
         )}
       </div>
+
+      {/* Pagination */}
+      {(() => {
+        const totalPages = Math.ceil(total / PAGE_SIZE)
+        if (totalPages <= 1) return null
+        return (
+          <div style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4,
+            padding: '10px 16px', borderTop: '1px solid var(--border)',
+            background: 'var(--surface)', flexShrink: 0,
+          }}>
+            <button
+              onClick={() => setPage(0)} disabled={page === 0}
+              style={{ padding: '4px 8px', borderRadius: 5, border: '1px solid var(--border)', background: 'transparent', color: page === 0 ? 'var(--text-subtle)' : 'var(--text-muted)', cursor: page === 0 ? 'default' : 'pointer', fontSize: 12 }}
+            >«</button>
+            <button
+              onClick={() => setPage(p => Math.max(0, p - 1))} disabled={page === 0}
+              style={{ padding: '4px 8px', borderRadius: 5, border: '1px solid var(--border)', background: 'transparent', color: page === 0 ? 'var(--text-subtle)' : 'var(--text-muted)', cursor: page === 0 ? 'default' : 'pointer', fontSize: 12 }}
+            >‹</button>
+
+            {Array.from({ length: totalPages }, (_, i) => i)
+              .filter(i => Math.abs(i - page) <= 2)
+              .map(i => (
+                <button key={i} onClick={() => setPage(i)}
+                  style={{
+                    padding: '4px 9px', borderRadius: 5, fontSize: 12, cursor: 'pointer',
+                    border: `1px solid ${i === page ? 'var(--accent)' : 'var(--border)'}`,
+                    background: i === page ? 'rgba(6,182,212,0.12)' : 'transparent',
+                    color: i === page ? 'var(--accent-2)' : 'var(--text-muted)',
+                    fontWeight: i === page ? 600 : 400,
+                  }}
+                >{i + 1}</button>
+              ))}
+
+            <button
+              onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))} disabled={page >= totalPages - 1}
+              style={{ padding: '4px 8px', borderRadius: 5, border: '1px solid var(--border)', background: 'transparent', color: page >= totalPages - 1 ? 'var(--text-subtle)' : 'var(--text-muted)', cursor: page >= totalPages - 1 ? 'default' : 'pointer', fontSize: 12 }}
+            >›</button>
+            <button
+              onClick={() => setPage(totalPages - 1)} disabled={page >= totalPages - 1}
+              style={{ padding: '4px 8px', borderRadius: 5, border: '1px solid var(--border)', background: 'transparent', color: page >= totalPages - 1 ? 'var(--text-subtle)' : 'var(--text-muted)', cursor: page >= totalPages - 1 ? 'default' : 'pointer', fontSize: 12 }}
+            >»</button>
+
+            <span style={{ fontSize: 11, color: 'var(--text-subtle)', marginLeft: 4 }}>
+              Trang {page + 1} / {totalPages}
+            </span>
+          </div>
+        )
+      })()}
     </div>
   )
 }
