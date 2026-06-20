@@ -63,6 +63,11 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
   const rawGraphData  = useRef({ nodes: [], links: [] })
   const [rawDataVersion, setRawDataVersion] = useState(0)
 
+  const [dateFrom, setDateFrom] = useState('')
+  const [dateTo, setDateTo]     = useState('')
+  const dateFromRef = useRef('')
+  const dateToRef   = useRef('')
+  const nodeMapRef  = useRef({})
   const [showProducts, setShowProducts] = useState(true)
   const [productFilter, setProductFilter] = useState('all') // 'all' | 'has' | 'none'
   const [showLegend, setShowLegend] = useState(true)
@@ -109,6 +114,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
         nodeType: n.type || 'postNode',
         hasProducts: n.data?.hasProducts || false,
         productsCount: n.data?.productsCount || 0,
+        dateModified: n.data?.dateModified || '',
       }))
       const links = (data.edges || []).map(e => ({
         source: e.source,
@@ -241,6 +247,21 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
 
   // Sync searchRef để dùng trong canvas callback (tránh stale closure)
   useEffect(() => { searchRef.current = search }, [search])
+  useEffect(() => { dateFromRef.current = dateFrom }, [dateFrom])
+  useEffect(() => { dateToRef.current = dateTo }, [dateTo])
+  // Giữ render loop chạy liên tục khi date filter active
+  useEffect(() => {
+    if (!dateFrom && !dateTo) return
+    const kick = () => fgRef.current?.resumeAnimation()
+    kick()
+    const id = setInterval(kick, 500)
+    return () => clearInterval(id)
+  }, [dateFrom, dateTo])
+  useEffect(() => {
+    const m = {}
+    graphData.nodes.forEach(n => { m[n.id] = n })
+    nodeMapRef.current = m
+  }, [graphData.nodes])
 
   // Kết quả tìm kiếm
   const searchResults = useMemo(() => {
@@ -330,7 +351,18 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
     const isNeighbor = h?.__neighbors?.has(node.id)
     const q          = searchRef.current.trim().toLowerCase()
     const matchSearch = q ? node.label.toLowerCase().includes(q) : false
-    const isDimmed   = (h && !isHovered && !isNeighbor) || (q && !matchSearch)
+
+    const df = dateFromRef.current, dt = dateToRef.current
+    const dateActive = df || dt
+    const inDateRange = !dateActive || (() => {
+      if (!node.dateModified) return false
+      const iso = node.dateModified.slice(0, 10)
+      if (df && iso < df) return false
+      if (dt && iso > dt) return false
+      return true
+    })()
+
+    const isDimmed   = (h && !isHovered && !isNeighbor) || (q && !matchSearch) || (dateActive && !inDateRange)
 
     // Node chưa có vị trí (frame đầu simulation) — skip
     if (node.x == null || !isFinite(node.x) || !isFinite(node.y)) return
@@ -385,6 +417,22 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
       ctx.fillStyle = `rgba(${rgb},0.15)`
       ctx.fill()
       return
+    }
+
+    // Wave ripple: date-filtered nodes hoặc hovered/neighbor
+    if ((dateActive && inDateRange) || isHovered || isNeighbor) {
+      const period = 1800 // ms mỗi vòng
+      const maxExpand = 28
+      for (let i = 0; i < 2; i++) {
+        const t = ((performance.now() + i * period * 0.5) % period) / period
+        const wr = r + t * maxExpand
+        const op = (1 - t) * 0.6
+        ctx.beginPath()
+        ctx.arc(node.x, node.y, wr, 0, 2 * Math.PI)
+        ctx.strokeStyle = `rgba(${rgb},${op})`
+        ctx.lineWidth = 1.5
+        ctx.stroke()
+      }
     }
 
     // Outer radial glow — tất cả nodes đều có, hub + hovered mạnh hơn
@@ -470,7 +518,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
             : 'rgba(230,237,243,0.5)'
       ctx.fillText(short, node.x, labelY)
     }
-  }, [hoveredNode, pinnedNode])
+  }, [hoveredNode, pinnedNode, dateFrom, dateTo])
 
   // Tính centroid + spread một lần, dùng chung cho halos và labels
   const getSectionGeometry = useCallback(() => {
@@ -578,23 +626,41 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
     ctx.fill()
   }, [])
 
+  const isNodeInDateRange = (nodeId) => {
+    const df = dateFromRef.current, dt = dateToRef.current
+    if (!df && !dt) return true
+    const n = nodeMapRef.current[nodeId]
+    if (!n) return false
+    if (!n.dateModified) return false
+    const iso = n.dateModified.slice(0, 10)
+    if (df && iso < df) return false
+    if (dt && iso > dt) return false
+    return true
+  }
+
   const getLinkColor = useCallback((link) => {
+    const s = typeof link.source === 'object' ? link.source.id : link.source
+    const t = typeof link.target === 'object' ? link.target.id : link.target
+    const df = dateFromRef.current, dt = dateToRef.current
+    const dateDimmed = (df || dt) && !isNodeInDateRange(s) && !isNodeInDateRange(t)
+    if (dateDimmed) return 'rgba(255,255,255,0.03)'
     const h = pinnedRef.current || hoveredRef.current
     if (!h) return 'rgba(255,255,255,0.13)'
-    const s = typeof link.source === 'object' ? link.source.id : link.source
-    const t = typeof link.target === 'object' ? link.target.id : link.target
-    if (s === h.id) return 'rgba(34,211,238,0.9)'   // outbound → cyan
-    if (t === h.id) return 'rgba(52,211,153,0.9)'   // inbound  → green
+    if (s === h.id) return 'rgba(34,211,238,0.9)'
+    if (t === h.id) return 'rgba(52,211,153,0.9)'
     return 'rgba(255,255,255,0.04)'
-  }, [hoveredNode, pinnedNode])
+  }, [hoveredNode, pinnedNode, dateFrom, dateTo])
 
   const getLinkWidth = useCallback((link) => {
-    const h = pinnedRef.current || hoveredRef.current
-    if (!h) return 0.8
     const s = typeof link.source === 'object' ? link.source.id : link.source
     const t = typeof link.target === 'object' ? link.target.id : link.target
+    const df = dateFromRef.current, dt = dateToRef.current
+    const dateDimmed = (df || dt) && !isNodeInDateRange(s) && !isNodeInDateRange(t)
+    if (dateDimmed) return 0.3
+    const h = pinnedRef.current || hoveredRef.current
+    if (!h) return 0.8
     return (s === h.id || t === h.id) ? 2 : 0.5
-  }, [hoveredNode, pinnedNode])
+  }, [hoveredNode, pinnedNode, dateFrom, dateTo])
 
   const runClusterAI = useCallback(async () => {
     if (!filterSection || aiLoading) return
@@ -898,9 +964,34 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
             ))}
           </div>
 
+          {/* Date range filter — calendar picker */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0 }}>
+            <span style={{ fontSize: 10, color: 'var(--text-subtle)', whiteSpace: 'nowrap' }}>Sửa:</span>
+            {[['from', dateFrom, setDateFrom], ['to', dateTo, setDateTo]].map(([which, val, setVal]) => (
+              <input
+                key={which}
+                type="date"
+                value={val}
+                onChange={e => setVal(e.target.value)}
+                style={{
+                  padding: '3px 6px', fontSize: 11, borderRadius: 6,
+                  border: `1px solid ${val ? 'var(--accent)' : 'var(--border)'}`,
+                  background: val ? 'rgba(6,182,212,0.06)' : 'var(--surface-2)',
+                  color: val ? 'var(--accent-2)' : 'var(--text-muted)',
+                  outline: 'none', colorScheme: 'dark', cursor: 'pointer',
+                }}
+              />
+            ))}
+            {(dateFrom || dateTo) && (
+              <button onClick={() => { setDateFrom(''); setDateTo('') }}
+                style={{ fontSize: 12, padding: '2px 6px', borderRadius: 4, border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-muted)', cursor: 'pointer' }}
+              >×</button>
+            )}
+          </div>
+
           {/* AI — khi filter section */}
           {filterSection && (
-            <>
+<>
               {bp !== 'mobile' && <ModelSelect value={aiModel} onChange={setAiModel} disabled={aiLoading} />}
               <button onClick={runClusterAI} disabled={aiLoading}
                 style={{ padding: '4px 10px', borderRadius: 6, fontSize: 11, cursor: aiLoading ? 'not-allowed' : 'pointer', border: '1px solid rgba(139,92,246,0.6)', background: aiLoading ? 'rgba(139,92,246,0.08)' : 'rgba(139,92,246,0.12)', color: aiLoading ? 'rgba(167,139,250,0.5)' : '#a78bfa', whiteSpace: 'nowrap' }}
