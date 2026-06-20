@@ -10,7 +10,7 @@ const NAV = [
   { id: 'settings',    label: 'Settings',      icon: Settings },
 ]
 
-export default function Sidebar({ active, onChange, onCrawl, collapsed = false }) {
+export default function Sidebar({ active, onChange, onCrawl, collapsed = false, onToggleCollapse }) {
   const w = collapsed ? 56 : 220
 
   return (
@@ -106,6 +106,31 @@ export default function Sidebar({ active, onChange, onCrawl, collapsed = false }
           {!collapsed && 'Crawl bài viết'}
         </button>
         {!collapsed && <div style={{ fontSize: 10, color: 'var(--text-subtle)' }}>knxstore.vn · v1.0.0</div>}
+
+        {/* Collapse toggle */}
+        {onToggleCollapse && (
+          <button
+            onClick={onToggleCollapse}
+            title={collapsed ? 'Mở rộng sidebar' : 'Thu gọn sidebar'}
+            style={{
+              display: 'flex', alignItems: 'center', justifyContent: collapsed ? 'center' : 'flex-start',
+              gap: 6, padding: collapsed ? '7px' : '7px 10px',
+              borderRadius: 6, border: '1px solid var(--border-2)',
+              background: 'transparent', color: 'var(--text-subtle)',
+              cursor: 'pointer', fontSize: 11,
+              width: collapsed ? 32 : '100%', height: collapsed ? 32 : undefined,
+              transition: 'all 0.15s',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.04)'; e.currentTarget.style.color = 'var(--text-muted)' }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--text-subtle)' }}
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+              style={{ transform: collapsed ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s', flexShrink: 0 }}>
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+            {!collapsed && 'Thu gọn'}
+          </button>
+        )}
       </div>
     </aside>
   )

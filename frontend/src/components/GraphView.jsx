@@ -5,13 +5,6 @@ import SECTION_COLORS, { sectionColor } from '../sectionColors.js'
 import AIPanel, { ModelSelect } from './AIPanel.jsx'
 import TreeView from './TreeView.jsx'
 
-const MIN_LINK_OPTIONS = [
-  { value: '0', label: 'Tất cả' },
-  { value: '1', label: '1+' },
-  { value: '2', label: '2+' },
-  { value: '3', label: '3+' },
-  { value: '5', label: '5+' },
-]
 
 function hex2rgb(hex) {
   const r = parseInt(hex.slice(1, 3), 16)
@@ -44,8 +37,9 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
   const fgRef = useRef(null)
   const [dimensions, setDimensions] = useState({ w: 900, h: 600 })
   const [graphData, setGraphData] = useState({ nodes: [], links: [] })
-  const hoveredRef = useRef(null)         // hover tạm thời (chuột)
-  const pinnedRef  = useRef(null)         // pinned bởi single click
+  const hoveredRef = useRef(null)
+  const pinnedRef  = useRef(null)
+  const danceRafRef = useRef(null)
   const [hoveredNode, setHoveredNode] = useState(null)
   const [pinnedNode, setPinnedNode]   = useState(null)
 
@@ -68,9 +62,12 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
   const dateFromRef = useRef('')
   const dateToRef   = useRef('')
   const nodeMapRef  = useRef({})
+  const [hideLinks, setHideLinks] = useState(false)
+  const [showSectionDrop, setShowSectionDrop] = useState(false)
+  const [danceMode, setDanceMode] = useState(false)
+  const danceModeRef = useRef(false)
   const [showProducts, setShowProducts] = useState(true)
   const [productFilter, setProductFilter] = useState('all') // 'all' | 'has' | 'none'
-  const [showLegend, setShowLegend] = useState(true)
   const [showFilters, setShowFilters] = useState(true)
   const [aiModel, setAiModel]     = useState('claude-haiku-4-5-20251001')
   const [aiContent, setAiContent] = useState('')
@@ -257,6 +254,81 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
     const id = setInterval(kick, 500)
     return () => clearInterval(id)
   }, [dateFrom, dateTo])
+
+  useEffect(() => { danceModeRef.current = danceMode }, [danceMode])
+
+  useEffect(() => {
+    const nodes = graphData.nodes
+    if (!danceMode) {
+      if (danceRafRef.current) { cancelAnimationFrame(danceRafRef.current); danceRafRef.current = null }
+      nodes.forEach(n => { delete n.fx; delete n.fy; delete n._hx; delete n._hy })
+      fgRef.current?.d3ReheatSimulation()
+      return
+    }
+    if (!fgRef.current || !nodes.length) return
+
+    // Chụp home position
+    nodes.forEach(n => { n._hx = n.x || 0; n._hy = n.y || 0 })
+
+    // Tính centroids từ home
+    const centroids = {}
+    nodes.forEach(n => {
+      if (!n.section) return
+      if (!centroids[n.section]) centroids[n.section] = { x: 0, y: 0, count: 0 }
+      centroids[n.section].x += n._hx; centroids[n.section].y += n._hy; centroids[n.section].count++
+    })
+    Object.values(centroids).forEach(c => { c.x /= c.count; c.y /= c.count })
+
+    // Lưu góc + khoảng cách ban đầu từ centroid
+    nodes.forEach(n => {
+      const c = centroids[n.section]
+      if (!c) return
+      const dx = n._hx - c.x, dy = n._hy - c.y
+      n._angle0 = Math.atan2(dy, dx)
+      n._dist   = Math.hypot(dx, dy)
+    })
+
+    const animate = () => {
+      if (!danceModeRef.current) return
+      const t = performance.now() / 1000  // seconds
+
+      nodes.forEach(n => {
+        const c = centroids[n.section]
+        if (c && n._dist != null) {
+          // Xoay quanh centroid — mỗi galaxy 1 tốc độ nhẹ khác nhau
+          const speed = 0.08 + (n._dist * 0.00008) // node xa trung tâm xoay chậm hơn chút
+          const angle = n._angle0 + t * speed
+          n.fx = c.x + Math.cos(angle) * n._dist
+          n.fy = c.y + Math.sin(angle) * n._dist
+        } else {
+          // Product nodes: float theo wave riêng
+          n.fx = n._hx + Math.sin(t * 0.6 + n._hx * 0.005) * 12
+          n.fy = n._hy + Math.cos(t * 0.5 + n._hy * 0.005) * 10
+        }
+        // Wave nhẹ toàn cục
+        n.fx += Math.sin(t * 0.5 + n._hx * 0.004) * 7
+        n.fy += Math.cos(t * 0.4 + n._hy * 0.004) * 5
+      })
+
+      fgRef.current?.resumeAnimation()
+      danceRafRef.current = requestAnimationFrame(animate)
+    }
+
+    danceRafRef.current = requestAnimationFrame(animate)
+
+    // d3ReheatSimulation reset cooldownTicks counter để render loop không dừng
+    // nodes không bị di chuyển vì đã pin bằng fx/fy
+    const keepAlive = setInterval(() => {
+      if (danceModeRef.current) fgRef.current?.d3ReheatSimulation()
+    }, 1500)
+
+    return () => {
+      cancelAnimationFrame(danceRafRef.current)
+      danceRafRef.current = null
+      clearInterval(keepAlive)
+      nodes.forEach(n => { delete n.fx; delete n.fy; delete n._hx; delete n._hy; delete n._angle0; delete n._dist })
+    }
+  }, [danceMode, graphData.nodes])
   useEffect(() => {
     const m = {}
     graphData.nodes.forEach(n => { m[n.id] = n })
@@ -645,11 +717,11 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
     const dateDimmed = (df || dt) && !isNodeInDateRange(s) && !isNodeInDateRange(t)
     if (dateDimmed) return 'rgba(255,255,255,0.03)'
     const h = pinnedRef.current || hoveredRef.current
-    if (!h) return 'rgba(255,255,255,0.13)'
+    if (!h) return hideLinks ? 'rgba(255,255,255,0)' : 'rgba(255,255,255,0.13)'
     if (s === h.id) return 'rgba(34,211,238,0.9)'
     if (t === h.id) return 'rgba(52,211,153,0.9)'
-    return 'rgba(255,255,255,0.04)'
-  }, [hoveredNode, pinnedNode, dateFrom, dateTo])
+    return hideLinks ? 'rgba(255,255,255,0)' : 'rgba(255,255,255,0.04)'
+  }, [hoveredNode, pinnedNode, dateFrom, dateTo, hideLinks])
 
   const getLinkWidth = useCallback((link) => {
     const s = typeof link.source === 'object' ? link.source.id : link.source
@@ -658,9 +730,9 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
     const dateDimmed = (df || dt) && !isNodeInDateRange(s) && !isNodeInDateRange(t)
     if (dateDimmed) return 0.3
     const h = pinnedRef.current || hoveredRef.current
-    if (!h) return 0.8
-    return (s === h.id || t === h.id) ? 2 : 0.5
-  }, [hoveredNode, pinnedNode, dateFrom, dateTo])
+    if (!h) return hideLinks ? 0 : 0.8
+    return (s === h.id || t === h.id) ? 2 : (hideLinks ? 0 : 0.5)
+  }, [hoveredNode, pinnedNode, dateFrom, dateTo, hideLinks])
 
   const runClusterAI = useCallback(async () => {
     if (!filterSection || aiLoading) return
@@ -681,7 +753,6 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
   }, [filterSection, aiModel, aiLoading])
 
   // Sections hiện tại để vẽ legend
-  const presentSections = [...new Set(graphData.nodes.map(n => n.section).filter(Boolean))]
 
   if (activeTab === 'tree') {
     return (
@@ -884,21 +955,98 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
             )}
           </div>
 
-          {/* Section select — desktop only */}
-          {bp !== 'mobile' && (
-            <select value={filterSection} onChange={e => setFilterSection(e.target.value)}
-              style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text)', borderRadius: 6, padding: '5px 10px', fontSize: 12, cursor: 'pointer', outline: 'none' }}
-            >
-              <option value="">Tất cả sections</option>
-              {sections.map(s => <option key={s} value={s}>{s}</option>)}
-            </select>
-          )}
+          {/* Section dropdown */}
+          {(() => {
+            const SECTION_COLORS = { 'Kiến thức':'#a78bfa','Matter':'#e879f9','Casambi':'#38bdf8','Chiếu sáng':'#fbbf24','DALI':'#34d399','KNX':'#60a5fa','HVAC':'#f87171','Smarthome':'#f472b6','An ninh':'#fb923c','Cảm biến':'#22d3ee','Driver LED':'#a3e635','Tin tức':'#94a3b8','Hướng dẫn':'#c084fc','News':'#9ca3af','Dự án':'#2dd4bf' }
+            const dotColor = filterSection ? (SECTION_COLORS[filterSection] || '#94a3b8') : null
+            return (
+              <div style={{ position: 'relative', flexShrink: 0 }}>
+                <button
+                  onClick={() => setShowSectionDrop(v => !v)}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: 6,
+                    padding: '5px 10px', borderRadius: 6, fontSize: 12, cursor: 'pointer', whiteSpace: 'nowrap',
+                    border: `1px solid ${filterSection ? 'rgba(255,255,255,0.25)' : 'var(--border)'}`,
+                    background: filterSection ? 'rgba(255,255,255,0.07)' : 'transparent',
+                    color: filterSection ? 'var(--text)' : 'var(--text-muted)',
+                    transition: 'all 0.15s',
+                  }}
+                >
+                  {dotColor && <span style={{ width: 8, height: 8, borderRadius: '50%', background: dotColor, flexShrink: 0, display: 'inline-block' }} />}
+                  {filterSection || 'Sections'}
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ transform: showSectionDrop ? 'rotate(180deg)' : 'none', transition: 'transform 0.15s' }}><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+
+                {showSectionDrop && (
+                  <div
+                    onMouseLeave={() => setShowSectionDrop(false)}
+                    style={{
+                      position: 'absolute', top: 'calc(100% + 4px)', left: 0, zIndex: 60,
+                      background: '#161b22', border: '1px solid var(--border)',
+                      borderRadius: 10, boxShadow: '0 12px 32px rgba(0,0,0,0.6)',
+                      minWidth: 180, overflow: 'hidden',
+                    }}
+                  >
+                    {[{ name: '', label: 'Tất cả sections', color: '#6b7280' }, ...sections.map(s => ({ name: s, label: s, color: SECTION_COLORS[s] || '#94a3b8' }))].map(({ name, label, color }) => {
+                      const isActive = filterSection === name
+                      return (
+                        <button key={name}
+                          onClick={() => { setFilterSection(name); setShowSectionDrop(false) }}
+                          style={{
+                            width: '100%', display: 'flex', alignItems: 'center', gap: 8,
+                            padding: '7px 12px', fontSize: 12, border: 'none', cursor: 'pointer', textAlign: 'left',
+                            background: isActive ? 'rgba(255,255,255,0.07)' : 'transparent',
+                            color: isActive ? 'var(--text)' : 'var(--text-muted)',
+                            transition: 'background 0.1s',
+                          }}
+                          onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.05)'}
+                          onMouseLeave={e => e.currentTarget.style.background = isActive ? 'rgba(255,255,255,0.07)' : 'transparent'}
+                        >
+                          <span style={{ width: 8, height: 8, borderRadius: '50%', background: color, flexShrink: 0 }} />
+                          {label}
+                          {isActive && <span style={{ marginLeft: 'auto', color: 'var(--accent-2)', fontSize: 10 }}>✓</span>}
+                        </button>
+                      )
+                    })}
+                  </div>
+                )}
+              </div>
+            )
+          })()}
 
           {/* Recenter */}
           <button onClick={() => fgRef.current?.zoomToFit(400)}
             title="Recenter"
             style={{ padding: '5px 10px', borderRadius: 6, border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-muted)', fontSize: 12, cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0 }}
           >⊡{bp !== 'mobile' && ' Recenter'}</button>
+
+          {/* Hide links */}
+          <button
+            onClick={() => setHideLinks(v => !v)}
+            title={hideLinks ? 'Hiện đường nối' : 'Ẩn đường nối'}
+            style={{
+              padding: '5px 10px', borderRadius: 6, fontSize: 12, cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0,
+              border: `1px solid ${hideLinks ? 'rgba(251,191,36,0.6)' : 'var(--border)'}`,
+              background: hideLinks ? 'rgba(251,191,36,0.1)' : 'transparent',
+              color: hideLinks ? '#fbbf24' : 'var(--text-muted)',
+              transition: 'all 0.15s',
+            }}
+          >{hideLinks ? '⋯' : '—'}{bp !== 'mobile' && (hideLinks ? ' Ẩn link' : ' Links')}</button>
+
+          {/* Dance mode */}
+          <button
+            onClick={() => setDanceMode(v => !v)}
+            title="Dance mode"
+            style={{
+              padding: '5px 10px', borderRadius: 6, fontSize: 12, cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0,
+              border: `1px solid ${danceMode ? 'rgba(167,139,250,0.7)' : 'var(--border)'}`,
+              background: danceMode ? 'rgba(139,92,246,0.15)' : 'transparent',
+              color: danceMode ? '#c4b5fd' : 'var(--text-muted)',
+              transition: 'all 0.15s',
+              animation: danceMode ? 'dancePulse 1.2s ease-in-out infinite' : 'none',
+            }}
+          >✦{bp !== 'mobile' && (danceMode ? ' Dancing…' : ' Dance')}</button>
+          <style>{`@keyframes dancePulse { 0%,100%{box-shadow:0 0 0 0 rgba(139,92,246,0)} 50%{box-shadow:0 0 8px 2px rgba(139,92,246,0.5)} }`}</style>
 
           {/* Stats */}
           <div style={{ fontSize: 11, color: 'var(--text-subtle)', whiteSpace: 'nowrap', flexShrink: 0 }}>
@@ -921,25 +1069,30 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
 
         {/* Row 2: Filters */}
         {showFilters && <div style={{ padding: '0 12px 7px', display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
-          {/* Min links chips */}
+          {/* Min links */}
           <span style={{ fontSize: 10, color: 'var(--text-subtle)', flexShrink: 0 }}>Min:</span>
-          <div style={{ display: 'flex', gap: 3 }}>
-            {MIN_LINK_OPTIONS.map(opt => (
-              <ToolbarBtn key={opt.value} active={minLinks === opt.value} onClick={() => setMinLinks(opt.value)}>
-                {opt.label}
-              </ToolbarBtn>
-            ))}
+          <div style={{ display: 'flex', gap: 3, alignItems: 'center' }}>
+            <ToolbarBtn active={minLinks === '0'} onClick={() => setMinLinks('0')}>Tất cả</ToolbarBtn>
+            <input
+              type="number"
+              min="1"
+              value={minLinks === '0' ? '' : minLinks}
+              onChange={e => {
+                const v = e.target.value
+                if (v === '' || v === '0') { setMinLinks('0'); return }
+                const n = parseInt(v)
+                if (!isNaN(n) && n > 0) setMinLinks(String(n))
+              }}
+              placeholder="≥ N"
+              style={{
+                width: 54, padding: '3px 7px', fontSize: 11, borderRadius: 6,
+                border: `1px solid ${minLinks !== '0' ? 'var(--accent)' : 'var(--border)'}`,
+                background: minLinks !== '0' ? 'rgba(6,182,212,0.06)' : 'var(--surface-2)',
+                color: minLinks !== '0' ? 'var(--accent-2)' : 'var(--text-muted)',
+                outline: 'none', fontFamily: 'inherit',
+              }}
+            />
           </div>
-
-          {/* Section select — mobile only */}
-          {bp === 'mobile' && (
-            <select value={filterSection} onChange={e => setFilterSection(e.target.value)}
-              style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text)', borderRadius: 6, padding: '4px 8px', fontSize: 11, cursor: 'pointer', outline: 'none', maxWidth: 130 }}
-            >
-              <option value="">All sections</option>
-              {sections.map(s => <option key={s} value={s}>{s}</option>)}
-            </select>
-          )}
 
           {/* Orphans */}
           <button onClick={() => setShowOrphansOnly(v => !v)}
@@ -1068,67 +1221,6 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
           <span style={{ color: '#22d3ee' }}>━</span> Outbound &nbsp;·&nbsp; <span style={{ color: '#34d399' }}>━</span> Inbound &nbsp;·&nbsp; Hover node · Click để xem chi tiết
         </div>
 
-        {/* Legend */}
-        {presentSections.length > 0 && !showAI && (
-          <div style={{
-            position: 'absolute', top: 12, right: 12,
-            background: 'rgba(22,27,34,0.92)',
-            border: '1px solid rgba(48,54,61,0.8)',
-            borderRadius: 8, padding: '10px 14px',
-            zIndex: 10, minWidth: 130,
-            boxShadow: '0 4px 16px rgba(0,0,0,0.6)',
-            backdropFilter: 'blur(4px)',
-          }}>
-            <div style={{
-              fontSize: 10, fontWeight: 600, color: 'var(--text-muted)',
-              textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 8,
-              display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8,
-            }}>
-              <span>Sections (click để lọc)</span>
-              <button
-                onClick={() => setShowLegend(v => !v)}
-                style={{ background: 'none', border: 'none', color: 'var(--text-subtle)', cursor: 'pointer', fontSize: 12, lineHeight: 1, padding: 0 }}
-              >{showLegend ? '▲' : '▼'}</button>
-            </div>
-            {showLegend && (
-              <>
-                {presentSections.map(name => {
-                  const color = sectionColor(name)
-                  const isActive = filterSection === name
-                  return (
-                    <div
-                      key={name}
-                      onClick={() => setFilterSection(isActive ? '' : name)}
-                      style={{
-                        display: 'flex', alignItems: 'center', gap: 7, marginBottom: 5,
-                        cursor: 'pointer', borderRadius: 4, padding: '2px 4px', margin: '0 -4px 3px',
-                        background: isActive ? color + '20' : 'transparent',
-                        transition: 'background 0.1s',
-                      }}
-                      onMouseEnter={e => { if (!isActive) e.currentTarget.style.background = 'rgba(255,255,255,0.06)' }}
-                      onMouseLeave={e => { if (!isActive) e.currentTarget.style.background = 'transparent' }}
-                    >
-                      <div style={{ width: 8, height: 8, borderRadius: '50%', background: color, flexShrink: 0, opacity: isActive ? 1 : 0.7 }} />
-                      <span style={{ fontSize: 11, color: isActive ? 'var(--text)' : 'var(--text-muted)', fontWeight: isActive ? 600 : 400 }}>{name}</span>
-                      {isActive && <span style={{ fontSize: 9, color, marginLeft: 'auto' }}>✕</span>}
-                    </div>
-                  )
-                })}
-                <div style={{ borderTop: '1px solid rgba(48,54,61,0.6)', marginTop: 8, paddingTop: 8 }}>
-                  <div style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>Links</div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 5 }}>
-                    <div style={{ width: 16, height: 2, background: '#22d3ee', borderRadius: 1, flexShrink: 0 }} />
-                    <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>Outbound</span>
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-                    <div style={{ width: 16, height: 2, background: '#34d399', borderRadius: 1, flexShrink: 0 }} />
-                    <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>Inbound</span>
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
-        )}
 
         {/* AI Panel */}
         {showAI && (

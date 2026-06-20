@@ -51,6 +51,7 @@ function AppShell() {
   const bp      = useBreakpoint()
   const isMobile = bp === 'mobile'
   const isTablet = bp === 'tablet'
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const View    = VIEWS[view]
 
   return (
@@ -61,7 +62,8 @@ function AppShell() {
           active={view}
           onChange={setView}
           onCrawl={() => setShowCrawl(true)}
-          collapsed={isTablet}
+          collapsed={isTablet || sidebarCollapsed}
+          onToggleCollapse={() => setSidebarCollapsed(v => !v)}
         />
       )}
 
