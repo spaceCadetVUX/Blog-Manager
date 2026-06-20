@@ -285,10 +285,10 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
   }, [graphData.links, buildNeighbors])
 
   const onNodeHover = useCallback((node) => {
-    // Nếu có pin thì hover không ghi đè — canvas dùng pinnedRef
+    if (node) buildNeighbors(node)
     hoveredRef.current = node || null
     setHoveredNode(node || null)
-  }, [])
+  }, [buildNeighbors])
 
   const clickTimerRef = useRef(null)
 
