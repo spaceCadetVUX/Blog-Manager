@@ -59,6 +59,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
   const rawGraphData  = useRef({ nodes: [], links: [] })
   const [rawDataVersion, setRawDataVersion] = useState(0)
 
+  const [showProducts, setShowProducts] = useState(false)
   const [showLegend, setShowLegend] = useState(true)
   const [showFilters, setShowFilters] = useState(true)
   const [aiModel, setAiModel]     = useState('claude-haiku-4-5-20251001')
@@ -89,6 +90,8 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
     if (minLinks !== '0') params.min_links = minLinks
     if (filterSection) params.section = filterSection
 
+    if (showProducts) params.show_products = true
+
     api.graph(params).then(data => {
       const nodes = (data.nodes || []).map(n => ({
         id: n.id,
@@ -98,6 +101,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
         inbound: n.data?.inbound || 0,
         outbound: n.data?.outbound || 0,
         url: n.data?.url || '',
+        nodeType: n.type || 'postNode',
       }))
       const links = (data.edges || []).map(e => ({
         source: e.source,
@@ -106,7 +110,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
       rawGraphData.current = { nodes, links }
       setRawDataVersion(v => v + 1)  // trigger orphan effect khi data mới về
     }).catch(console.error).finally(() => setLoading(false))
-  }, [minLinks, filterSection])
+  }, [minLinks, filterSection, showProducts])
 
   // Áp dụng orphan filter mỗi khi data thay đổi HOẶC toggle thay đổi
   useEffect(() => {
@@ -231,7 +235,11 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
   }, [graphData.links])
 
   const onNodeClick = useCallback((node) => {
-    if (onSelectPost) onSelectPost(node.id)
+    if (node.nodeType === 'productNode') {
+      if (node.url) window.open(node.url, '_blank', 'noopener')
+    } else {
+      if (onSelectPost) onSelectPost(node.id)
+    }
   }, [onSelectPost])
 
   // Size: sqrt scaling — hub pages rõ rệt to hơn
@@ -248,6 +256,44 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
 
     // Node chưa có vị trí (frame đầu simulation) — skip
     if (node.x == null || !isFinite(node.x) || !isFinite(node.y)) return
+
+    // Product node — vẽ diamond nhỏ màu cam
+    if (node.nodeType === 'productNode') {
+      const s = isDimmed ? 3 : (isHovered ? 7 : 5)
+      const rgb = '249,115,22'
+      if (isDimmed) {
+        ctx.beginPath()
+        ctx.rect(node.x - s, node.y - s, s * 2, s * 2)
+        ctx.fillStyle = `rgba(${rgb},0.08)`
+        ctx.fill()
+        return
+      }
+      if (isHovered) {
+        const grd = ctx.createRadialGradient(node.x, node.y, s, node.x, node.y, s + 10)
+        grd.addColorStop(0, `rgba(${rgb},0.28)`)
+        grd.addColorStop(1, `rgba(${rgb},0)`)
+        ctx.beginPath(); ctx.arc(node.x, node.y, s + 10, 0, 2 * Math.PI)
+        ctx.fillStyle = grd; ctx.fill()
+      }
+      ctx.save()
+      ctx.translate(node.x, node.y)
+      ctx.rotate(Math.PI / 4)
+      ctx.beginPath()
+      ctx.rect(-s, -s, s * 2, s * 2)
+      ctx.fillStyle   = `rgba(${rgb},${isHovered ? 0.9 : isNeighbor ? 0.6 : 0.4})`
+      ctx.strokeStyle = `rgba(${rgb},${isHovered ? 1 : 0.7})`
+      ctx.lineWidth   = isHovered ? 2 : 1
+      ctx.fill(); ctx.stroke()
+      ctx.restore()
+      if (isHovered || globalScale > 2) {
+        const label = node.label.length > 22 ? node.label.slice(0, 22) + '…' : node.label
+        ctx.font = `${isHovered ? 10 : 8}px sans-serif`
+        ctx.fillStyle = `rgba(${rgb},${isHovered ? 0.95 : 0.7})`
+        ctx.textAlign = 'center'
+        ctx.fillText(label, node.x, node.y + s + 10)
+      }
+      return
+    }
 
     const r   = nodeRadius(node)
     const isHub = r >= 13   // nodes có ≥4 inbound
@@ -597,6 +643,11 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
           <button onClick={() => setShowOrphansOnly(v => !v)}
             style={{ padding: '4px 9px', borderRadius: 6, fontSize: 11, cursor: 'pointer', border: `1px solid ${showOrphansOnly ? 'var(--danger)' : 'var(--border)'}`, background: showOrphansOnly ? 'rgba(248,81,73,0.12)' : 'transparent', color: showOrphansOnly ? 'var(--danger)' : 'var(--text-muted)', transition: 'all 0.15s', whiteSpace: 'nowrap' }}
           >{showOrphansOnly ? '⚠ Orphans' : 'Orphans'}</button>
+
+          {/* Products toggle */}
+          <button onClick={() => setShowProducts(v => !v)}
+            style={{ padding: '4px 9px', borderRadius: 6, fontSize: 11, cursor: 'pointer', border: `1px solid ${showProducts ? 'rgba(249,115,22,0.6)' : 'var(--border)'}`, background: showProducts ? 'rgba(249,115,22,0.12)' : 'transparent', color: showProducts ? '#f97316' : 'var(--text-muted)', transition: 'all 0.15s', whiteSpace: 'nowrap' }}
+          >◆ Sản phẩm</button>
 
           {/* AI — khi filter section */}
           {filterSection && (

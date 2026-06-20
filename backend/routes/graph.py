@@ -34,13 +34,13 @@ DEFAULT_COLOR = "#94a3b8"
 def get_graph(
     section: str = Query("", description="Filter nodes by section"),
     min_links: int = Query(0, description="Chỉ lấy node có inbound >= min_links"),
+    show_products: bool = Query(False, description="Hiện product nodes"),
 ):
     with get_conn() as conn:
-        # Lấy tất cả posts với inbound/outbound count
         post_rows = conn.execute("""
             SELECT
                 p.slug, p.headline, p.article_section, p.url,
-                p.word_count, p.date_modified,
+                p.word_count, p.date_modified, p.products,
                 COUNT(DISTINCT li.from_slug) AS inbound,
                 COUNT(DISTINCT lo.to_slug)   AS outbound
             FROM posts p
@@ -53,7 +53,6 @@ def get_graph(
             SELECT from_slug, to_slug, anchor FROM internal_links
         """).fetchall()
 
-    # Build node set — filter nếu có
     all_slugs = {r["slug"] for r in post_rows}
 
     nodes = []
@@ -79,10 +78,9 @@ def get_graph(
                 "color":    SECTION_COLORS.get(sec, DEFAULT_COLOR),
                 "dateModified": r["date_modified"] or "",
             },
-            "position": {"x": 0, "y": 0},  # React Flow layout tự tính
+            "position": {"x": 0, "y": 0},
         })
 
-    # Chỉ lấy edges giữa các node trong filter
     edges = []
     for r in link_rows:
         src, tgt = r["from_slug"], r["to_slug"]
@@ -97,6 +95,54 @@ def get_graph(
             "label":  r["anchor"] or "",
             "data":   {"anchor": r["anchor"] or ""},
         })
+
+    # Product nodes
+    if show_products:
+        import json as _json
+        product_map: dict[str, dict] = {}  # handle → {name, url, posts_count}
+        post_product_edges = []
+
+        for r in post_rows:
+            if r["slug"] not in node_slugs:
+                continue
+            try:
+                products = _json.loads(r["products"] or "[]")
+            except Exception:
+                continue
+            for p in products:
+                purl = p.get("url", "")
+                if not purl or "/products/" not in purl:
+                    continue
+                handle = "prod__" + purl.split("/products/")[-1]
+                if handle not in product_map:
+                    product_map[handle] = {
+                        "name":  p.get("name", handle),
+                        "url":   purl,
+                        "image": p.get("image", ""),
+                        "count": 0,
+                    }
+                product_map[handle]["count"] += 1
+                post_product_edges.append({
+                    "id":     f"{r['slug']}__{handle}",
+                    "source": r["slug"],
+                    "target": handle,
+                    "data":   {"anchor": "", "isProduct": True},
+                })
+
+        for handle, info in product_map.items():
+            nodes.append({
+                "id":   handle,
+                "type": "productNode",
+                "data": {
+                    "label":   info["name"],
+                    "url":     info["url"],
+                    "image":   info["image"],
+                    "inbound": info["count"],
+                    "color":   "#f97316",
+                },
+                "position": {"x": 0, "y": 0},
+            })
+        edges.extend(post_product_edges)
 
     return {
         "nodes": nodes,
