@@ -75,38 +75,110 @@ function ArticleHTML({ slug }) {
   )
 }
 
+const getProductImg = p => p.image || (p.url.replace('https://knxstore.vn/products/', 'https://knxstore.vn/assets/image/product/') + '.jpg')
+
+function useProductPopup() {
+  const [popup, setPopup] = useState(null) // { product, rect }
+  const timerRef = useRef(null)
+
+  const show = (product, el) => {
+    clearTimeout(timerRef.current)
+    const rect = el.getBoundingClientRect()
+    setPopup({ product, rect })
+  }
+  const hide = () => {
+    timerRef.current = setTimeout(() => setPopup(null), 120)
+  }
+  const keepOpen = () => clearTimeout(timerRef.current)
+
+  return { popup, show, hide, keepOpen, setPopup }
+}
+
+function ProductPopup({ popup, hide, keepOpen }) {
+  if (!popup) return null
+  const { product: p, rect } = popup
+
+  // Tính vị trí: ưu tiên hiện bên phải, nếu không đủ chỗ thì bên trái
+  const PW = 220
+  const spaceRight = window.innerWidth - rect.right - 12
+  const left = spaceRight >= PW ? rect.right + 8 : rect.left - PW - 8
+  const top  = Math.min(rect.top, window.innerHeight - 280)
+
+  return (
+    <div
+      onMouseEnter={keepOpen}
+      onMouseLeave={hide}
+      style={{
+        position: 'fixed', zIndex: 9999,
+        left, top,
+        width: PW,
+        background: 'var(--surface)',
+        border: '1px solid var(--border)',
+        borderRadius: 10,
+        boxShadow: '0 8px 32px rgba(0,0,0,0.35)',
+        overflow: 'hidden',
+        pointerEvents: 'auto',
+        animation: 'fadeInPop 0.12s ease',
+      }}
+    >
+      <style>{`@keyframes fadeInPop { from { opacity:0; transform:scale(0.95) } to { opacity:1; transform:scale(1) } }`}</style>
+      <div style={{ position: 'relative', background: 'var(--surface-2)' }}>
+        <img
+          src={getProductImg(p)}
+          alt={p.name}
+          style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block' }}
+          onError={e => { e.target.style.display = 'none' }}
+        />
+      </div>
+      <div style={{ padding: '10px 12px 12px' }}>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', lineHeight: 1.45, marginBottom: 10 }}>
+          {p.name}
+        </div>
+        <a
+          href={p.url} target="_blank" rel="noopener noreferrer"
+          style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+            padding: '6px 0', borderRadius: 6, fontSize: 11, fontWeight: 500,
+            background: 'rgba(6,182,212,0.12)', border: '1px solid rgba(6,182,212,0.3)',
+            color: 'var(--accent-2)', textDecoration: 'none',
+            transition: 'background 0.1s',
+          }}
+          onMouseEnter={e => e.currentTarget.style.background = 'rgba(6,182,212,0.22)'}
+          onMouseLeave={e => e.currentTarget.style.background = 'rgba(6,182,212,0.12)'}
+        >
+          <ExternalLink size={11} /> Xem sản phẩm
+        </a>
+      </div>
+    </div>
+  )
+}
+
 function ProductGrid({ products }) {
   if (!products?.length) return null
-  const getImg = p => p.image || (p.url.replace('https://knxstore.vn/products/', 'https://knxstore.vn/assets/image/product/') + '.jpg')
+
   return (
     <div style={{ marginTop: 32, borderTop: '1px solid var(--border)', paddingTop: 20 }}>
       <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginBottom: 14 }}>
         Sản phẩm liên quan ({products.length})
       </div>
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))',
-        gap: 10,
-      }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: 10 }}>
         {products.map((p, i) => (
           <a key={i} href={p.url} target="_blank" rel="noopener noreferrer"
             style={{
-              display: 'flex', flexDirection: 'column', borderRadius: 8,
+              display: 'flex', flexDirection: 'column', borderRadius: 10,
               border: '1px solid var(--border)', overflow: 'hidden',
               background: 'var(--surface-2)', textDecoration: 'none',
-              transition: 'border-color 0.15s, transform 0.15s',
+              transition: 'border-color 0.15s, transform 0.15s, box-shadow 0.15s',
             }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(6,182,212,0.5)'; e.currentTarget.style.transform = 'translateY(-1px)' }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'none' }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(6,182,212,0.5)'; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.2)' }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none' }}
           >
             <img
-              src={getImg(p)}
-              alt={p.name}
-              loading="lazy"
+              src={getProductImg(p)} alt={p.name} loading="lazy"
               style={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover', display: 'block', background: 'var(--surface)' }}
               onError={e => { e.target.style.display = 'none' }}
             />
-            <div style={{ padding: '6px 8px', fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.4 }}>
+            <div style={{ padding: '8px 10px 10px', fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.5 }}>
               {p.name}
             </div>
           </a>
@@ -148,6 +220,7 @@ export default function PostDetail({ slug, onClose, onNavigate, navList = [], bp
   const [aiLoading, setAiLoading]     = useState(false)
   const [showAI, setShowAI]           = useState(false)
   const [recrawling, setRecrawling]   = useState(false)
+  const productPopup = useProductPopup()
   const [instructions, setInstructions] = useState('')
 
   const [chatMessages, setChatMessages] = useState([])
@@ -375,23 +448,23 @@ export default function PostDetail({ slug, onClose, onNavigate, navList = [], bp
         return (
           <>
             <SectionLabel>Sản phẩm liên quan ({products.length})</SectionLabel>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 4, marginBottom: 4 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 3, marginBottom: 4 }}>
               {products.map((p, i) => (
-                <a
-                  key={i}
-                  href={p.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <a key={i} href={p.url} target="_blank" rel="noopener noreferrer"
                   style={{
                     display: 'flex', alignItems: 'center', gap: 8,
-                    padding: '6px 10px', borderRadius: 6,
+                    padding: '5px 8px', borderRadius: 6,
                     background: 'var(--surface-2)', border: '1px solid var(--border)',
-                    textDecoration: 'none', transition: 'border-color 0.1s',
+                    textDecoration: 'none', transition: 'border-color 0.1s, background 0.1s',
                   }}
-                  onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(6,182,212,0.4)'}
-                  onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(6,182,212,0.4)'; e.currentTarget.style.background = 'var(--surface)'; productPopup.show(p, e.currentTarget) }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.background = 'var(--surface-2)'; productPopup.hide() }}
                 >
-                  <span style={{ fontSize: 13, flexShrink: 0 }}>🛒</span>
+                  <img
+                    src={getProductImg(p)} alt="" loading="lazy"
+                    style={{ width: 28, height: 28, borderRadius: 4, objectFit: 'cover', flexShrink: 0, background: 'var(--surface)' }}
+                    onError={e => { e.target.style.display = 'none' }}
+                  />
                   <span style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.4, flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {p.name || p.url.split('/').pop()}
                   </span>
@@ -399,6 +472,7 @@ export default function PostDetail({ slug, onClose, onNavigate, navList = [], bp
                 </a>
               ))}
             </div>
+            <ProductPopup popup={productPopup.popup} hide={productPopup.hide} keepOpen={productPopup.keepOpen} />
           </>
         )
       })()}
@@ -704,7 +778,7 @@ export default function PostDetail({ slug, onClose, onNavigate, navList = [], bp
                 </div>
 
                 {/* RIGHT — tabs: Links/AI | SEO Meta */}
-                <div style={{ width: 340, minWidth: 300, display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
+                <div style={{ width: 420, minWidth: 360, display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
                   <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', background: 'var(--surface)', flexShrink: 0 }}>
                     {[['links', 'Links & AI'], ['meta', 'SEO Meta'], ['chat', 'Chat']].map(([id, label]) => (
                       <button key={id} onClick={() => setRightTab(id)} style={{
