@@ -36,14 +36,14 @@ def get_audit():
         """).fetchall()
 
         stale_6m = conn.execute("""
-            SELECT slug, headline, date_modified FROM posts
+            SELECT slug, headline, date_modified, url, image, description FROM posts
             WHERE date_modified != '' AND date_modified IS NOT NULL
             AND date_modified < date('now', '-6 months')
             ORDER BY date_modified ASC
         """).fetchall()
 
         stale_1y = conn.execute("""
-            SELECT slug, headline, date_modified FROM posts
+            SELECT slug, headline, date_modified, url, image, description FROM posts
             WHERE date_modified != '' AND date_modified IS NOT NULL
             AND date_modified < date('now', '-12 months')
             ORDER BY date_modified ASC
@@ -62,8 +62,8 @@ def get_audit():
         "no_keywords":          [],  # keywords rỗng
         "low_word_count":       [],  # < 300 words
         "missing_section":      [],  # articleSection rỗng
-        "stale_6m":             [{"slug": r["slug"], "headline": (r["headline"] or "")[:80], "date_modified": r["date_modified"]} for r in stale_6m],
-        "stale_1y":             [{"slug": r["slug"], "headline": (r["headline"] or "")[:80], "date_modified": r["date_modified"]} for r in stale_1y],
+        "stale_6m":             [{"slug": r["slug"], "headline": (r["headline"] or "")[:80], "date_modified": r["date_modified"], "url": r["url"] or "", "image": r["image"] or "", "description": (r["description"] or "")[:200]} for r in stale_6m],
+        "stale_1y":             [{"slug": r["slug"], "headline": (r["headline"] or "")[:80], "date_modified": r["date_modified"], "url": r["url"] or "", "image": r["image"] or "", "description": (r["description"] or "")[:200]} for r in stale_1y],
     }
 
     for row in posts:
@@ -75,7 +75,15 @@ def get_audit():
         word_count = p.get("word_count") or 0
         section = p.get("article_section") or ""
 
-        item = {"slug": slug, "headline": headline[:80]}
+        item = {
+            "slug": slug,
+            "headline": headline[:80],
+            "url": p.get("url") or "",
+            "image": p.get("image") or "",
+            "description": description[:200] if description else "",
+            "article_section": section,
+            "inbound": link_counts.get(slug, 0),
+        }
 
         if link_counts.get(slug, 0) == 0:
             issues["orphan_posts"].append(item)

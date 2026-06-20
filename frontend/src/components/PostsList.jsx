@@ -272,24 +272,38 @@ export default function PostsList({ onSelectPost, bp = 'desktop' }) {
                   onMouseEnter={e => e.currentTarget.style.background = 'var(--surface-2)'}
                   onMouseLeave={e => e.currentTarget.style.background = i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.015)'}
                 >
-                  <td style={{ padding: '12px 16px', maxWidth: isTablet ? 220 : 380 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <td style={{ padding: '12px 16px', maxWidth: isTablet ? 260 : 480 }}>
+                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
                       {/* Thumbnail */}
                       <div style={{
-                        width: 72, height: 56, borderRadius: 5, flexShrink: 0, overflow: 'hidden',
+                        width: 90, height: 68, borderRadius: 6, flexShrink: 0, overflow: 'hidden',
                         background: 'var(--surface-2)', border: '1px solid var(--border-2)',
                       }}>
                         {post.image
                           ? <img src={post.image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} onError={e => { e.target.style.display = 'none' }} />
-                          : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, color: 'var(--border)' }}>✦</div>
+                          : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, color: 'var(--border)' }}>✦</div>
                         }
                       </div>
-                      <div style={{ minWidth: 0 }}>
-                        <div style={{ fontSize: 12, color: 'var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontWeight: 500 }}>
-                          {post.headline}
+                      <div style={{ minWidth: 0, flex: 1 }}>
+                        {/* Headline / Meta title */}
+                        <div style={{ fontSize: 12, color: 'var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontWeight: 600, lineHeight: 1.4 }}>
+                          {post.headline || '—'}
                         </div>
-                        {!isTablet && (
-                          <div style={{ fontSize: 11, color: 'var(--text-subtle)', marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{post.slug}</div>
+                        {/* URL */}
+                        {post.url && (
+                          <div style={{ fontSize: 10, color: 'var(--accent-2)', marginTop: 3, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', opacity: 0.75 }}>
+                            {post.url}
+                          </div>
+                        )}
+                        {/* Meta description */}
+                        {post.description && !isTablet && (
+                          <div style={{
+                            fontSize: 11, color: 'var(--text-muted)', marginTop: 4,
+                            display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical',
+                            overflow: 'hidden', lineHeight: 1.45,
+                          }}>
+                            {post.description}
+                          </div>
                         )}
                       </div>
                     </div>

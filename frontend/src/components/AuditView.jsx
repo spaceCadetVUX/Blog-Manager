@@ -216,37 +216,75 @@ export default function AuditView({ onSelectPost, bp = 'desktop' }) {
                   borderBottom: '1px solid var(--border-2)',
                   cursor: 'pointer',
                   background: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.01)',
-                  display: 'flex', alignItems: 'flex-start', gap: 10,
+                  display: 'flex', alignItems: 'flex-start', gap: 12,
                   transition: 'background 0.1s',
                 }}
                 onMouseEnter={e => e.currentTarget.style.background = 'var(--surface-2)'}
                 onMouseLeave={e => e.currentTarget.style.background = i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.01)'}
               >
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 13, color: 'var(--text)', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                    {item.headline}
+                {/* Thumbnail */}
+                {!isCompact && (
+                  <div style={{
+                    width: 90, height: 68, borderRadius: 6, flexShrink: 0, overflow: 'hidden',
+                    background: 'var(--surface-2)', border: '1px solid var(--border-2)',
+                  }}>
+                    {item.image
+                      ? <img src={item.image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} onError={e => { e.target.style.display = 'none' }} />
+                      : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, color: 'var(--border)' }}>✦</div>
+                    }
                   </div>
-                  {!isCompact && (
-                    <div style={{ fontSize: 11, color: 'var(--text-subtle)', marginTop: 2 }}>{item.slug}</div>
-                  )}
-                  {(selected === 'stale_6m' || selected === 'stale_1y') && item.date_modified && (
-                    <div style={{ fontSize: 10, color: 'var(--warning)', marginTop: 2 }}>
-                      Cập nhật lần cuối: {new Date(item.date_modified).toLocaleDateString('vi-VN')}
+                )}
+
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  {/* Headline */}
+                  <div style={{ fontSize: 12, color: 'var(--text)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', lineHeight: 1.4 }}>
+                    {item.headline || '—'}
+                  </div>
+                  {/* URL */}
+                  {item.url && !isCompact && (
+                    <div style={{ fontSize: 10, color: 'var(--accent-2)', marginTop: 3, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', opacity: 0.75 }}>
+                      {item.url}
                     </div>
                   )}
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
-                  {item.article_section && !isCompact && (
-                    <span style={{
-                      background: sc + '20', color: sc, border: '1px solid ' + sc + '40',
-                      borderRadius: 20, padding: '1px 8px', fontSize: 10, fontWeight: 500,
-                    }}>{item.article_section}</span>
+                  {/* Meta description */}
+                  {item.description && !isCompact && (
+                    <div style={{
+                      fontSize: 11, color: 'var(--text-muted)', marginTop: 4,
+                      display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical',
+                      overflow: 'hidden', lineHeight: 1.45,
+                    }}>
+                      {item.description}
+                    </div>
                   )}
-                  {item.inbound !== undefined && (
-                    <span style={{ fontSize: 11, color: (item.inbound || 0) > 0 ? 'var(--success)' : 'var(--danger)', fontWeight: 600 }}>
-                      {item.inbound || 0} in
-                    </span>
-                  )}
+                  {/* Extra info row */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 5, flexWrap: 'wrap' }}>
+                    {item.article_section && !isCompact && (
+                      <span style={{
+                        background: sc + '20', color: sc, border: '1px solid ' + sc + '40',
+                        borderRadius: 20, padding: '1px 8px', fontSize: 10, fontWeight: 500,
+                      }}>{item.article_section}</span>
+                    )}
+                    {item.inbound !== undefined && (
+                      <span style={{ fontSize: 10, color: (item.inbound || 0) > 0 ? 'var(--success)' : 'var(--danger)', fontWeight: 600 }}>
+                        {item.inbound || 0} in
+                      </span>
+                    )}
+                    {(selected === 'stale_6m' || selected === 'stale_1y') && item.date_modified && (
+                      <span style={{ fontSize: 10, color: 'var(--warning)' }}>
+                        Cập nhật lần cuối: {new Date(item.date_modified).toLocaleDateString('vi-VN')}
+                      </span>
+                    )}
+                    {item.len !== undefined && (
+                      <span style={{ fontSize: 10, color: 'var(--text-subtle)' }}>
+                        {item.len} ký tự
+                      </span>
+                    )}
+                    {item.word_count !== undefined && (
+                      <span style={{ fontSize: 10, color: 'var(--text-subtle)' }}>
+                        {item.word_count} từ
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
             )
