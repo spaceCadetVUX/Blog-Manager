@@ -261,16 +261,6 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
     return filtered.slice(0, 10)
   }, [search, searchType, graphData.nodes])
 
-  const zoomToNode = useCallback((node) => {
-    if (!fgRef.current || node.x == null) return
-    fgRef.current.centerAt(node.x, node.y, 600)
-    fgRef.current.zoom(5, 600)
-    setShowResults(false)
-    buildNeighbors(node)
-    pinnedRef.current = node
-    setPinnedNode(node)
-  }, [graphData.links])
-
   // Tính neighbor set khi hover
   const buildNeighbors = useCallback((node) => {
     const neighbors = new Set()
@@ -282,6 +272,17 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
     })
     node.__neighbors = neighbors
   }, [graphData.links])
+
+  const zoomToNode = useCallback((node) => {
+    if (!fgRef.current || node.x == null) return
+    fgRef.current.centerAt(node.x, node.y, 600)
+    fgRef.current.zoom(5, 600)
+    setShowResults(false)
+    buildNeighbors(node)
+    pinnedRef.current = node
+    setPinnedNode(node)
+    setTimeout(() => fgRef.current?.d3ReheatSimulation(), 50)
+  }, [graphData.links, buildNeighbors])
 
   const onNodeHover = useCallback((node) => {
     // Nếu có pin thì hover không ghi đè — canvas dùng pinnedRef
