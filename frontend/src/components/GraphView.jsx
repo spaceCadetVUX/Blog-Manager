@@ -59,7 +59,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
   const rawGraphData  = useRef({ nodes: [], links: [] })
   const [rawDataVersion, setRawDataVersion] = useState(0)
 
-  const [showProducts, setShowProducts] = useState(false)
+  const [showProducts, setShowProducts] = useState(true)
   const [productFilter, setProductFilter] = useState('all') // 'all' | 'has' | 'none'
   const [showLegend, setShowLegend] = useState(true)
   const [showFilters, setShowFilters] = useState(true)

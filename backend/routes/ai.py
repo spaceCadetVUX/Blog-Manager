@@ -113,6 +113,21 @@ def chat(req: ChatRequest):
         if post:
             p = dict(post)
             chat_instructions = _get_setting("chat_instructions")
+
+            import json as _json
+            try:
+                keywords = ", ".join(_json.loads(p.get("keywords") or "[]"))
+            except Exception:
+                keywords = ""
+            try:
+                products = _json.loads(p.get("products") or "[]")
+                products_str = "\n".join(f"  - {pr.get('name','')}: {pr.get('url','')}" for pr in products[:10])
+            except Exception:
+                products_str = ""
+
+            body = p.get("article_body", "").strip()
+            body_section = f"\n\n## Nội dung bài viết\n{body[:6000]}" if body else ""
+
             system = (
                 f"Bạn là SEO assistant cho blog knxstore.vn.\n"
                 f"Người dùng đang xem bài viết:\n"
@@ -121,8 +136,11 @@ def chat(req: ChatRequest):
                 f"- Section: {p.get('article_section','')}\n"
                 f"- Word count: {p.get('word_count',0)} từ\n"
                 f"- Description: {p.get('description','')}\n"
+                f"- Keywords: {keywords}\n"
                 f"- Inbound links: {inbound} | Outbound links: {outbound}\n"
-                f"Trả lời bằng tiếng Việt, tập trung vào bài viết này."
+                + (f"- Sản phẩm liên quan:\n{products_str}\n" if products_str else "")
+                + body_section
+                + f"\n\nTrả lời bằng tiếng Việt, tập trung vào bài viết này."
                 + (f"\n\n---\n{chat_instructions}" if chat_instructions else "")
             )
     elif req.with_context:

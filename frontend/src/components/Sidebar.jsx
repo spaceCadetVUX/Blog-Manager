@@ -1,11 +1,10 @@
-import { LayoutDashboard, GitBranch, FileText, ShieldCheck, RefreshCw, Lightbulb, BrainCircuit, MessageSquare, Settings } from 'lucide-react'
+import { LayoutDashboard, GitBranch, FileText, ShieldCheck, RefreshCw, BrainCircuit, MessageSquare, Settings } from 'lucide-react'
 
 const NAV = [
   { id: 'dashboard',   label: 'Dashboard',     icon: LayoutDashboard },
   { id: 'graph',       label: 'Link Graph',    icon: GitBranch },
   { id: 'posts',       label: 'Bài viết',      icon: FileText },
   { id: 'audit',       label: 'SEO Audit',     icon: ShieldCheck },
-  { id: 'suggestions', label: 'Gợi ý links',   icon: Lightbulb },
   { id: 'ai',          label: 'AI Analysis',   icon: BrainCircuit },
   { id: 'chat',        label: 'AI Chat',       icon: MessageSquare },
   { id: 'settings',    label: 'Settings',      icon: Settings },
