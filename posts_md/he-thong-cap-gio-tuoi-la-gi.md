@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/hvac"
   - name: "Giải pháp hệ thống cấp gió tươi chuẩn công trình xanh"
     url: "https://knxstore.vn/he-thong-cap-gio-tuoi-la-gi.html"
+products: [{"url": "https://knxstore.vn/products/kanonbus-bo-dieu-khien-dieu-hoa-vrv-vrf-kac001", "name": "Bộ điều khiển điều hòa VRV/VRF Kanonbus IP Router/Modbus RTU - KAC001", "image": "https://knxstore.vn/assets/image/product/kanonbus-bo-dieu-khien-dieu-hoa-vrv-vrf-kac001_1.png"}, {"url": "https://knxstore.vn/products/kanonbus-bo-dieu-khien-dieu-hoa-vrv-vrf-knx-kac005", "name": "Bộ điều khiển điều hòa VRV/VRF KNX Kanonbus - KAC005", "image": "https://knxstore.vn/assets/image/product/kanonbus-bo-dieu-khien-dieu-hoa-vrv-vrf-knx-kac005_1.png"}, {"url": "https://knxstore.vn/products/kanonbus-bo-dieu-khien-dieu-hoa-vrv-vrf-knx-kac008", "name": "Bộ điều khiển điều hòa KNX Kanonbus - KAC008", "image": "https://knxstore.vn/assets/image/product/kanonbus-bo-dieu-khien-dieu-hoa-vrv-vrf-knx-kac008_2.png"}, {"url": "https://knxstore.vn/products/kaiterra-thiet-bi-do-chat-luong-khong-khi-kaiterra-laser-egg-co2", "name": "Cảm biến chất lượng không khí Kaiterra Laser Egg + CO2- LE-202", "image": "https://knxstore.vn/assets/image/product/kaiterra-thiet-bi-do-chat-luong-khong-khi-kaiterra-laser-egg-co2_1.jpg"}, {"url": "https://knxstore.vn/products/kanonbus-cam-bien-chat-luong-khong-khi-kteaqs-t3-t7", "name": "Cảm biến chất lượng không khí KNX Kanonbus - KTEAQS-T3/T7", "image": "https://knxstore.vn/assets/image/product/kanonbus-cam-bien-chat-luong-khong-khi-kteaqs-t3-t7_3.png"}, {"url": "https://knxstore.vn/products/cam-bien-chat-luong-khong-khi-eve-room-voc-bluetooth-thread-apple-home-20ebx9901", "name": "Cảm biến chất lượng không khí Eve Room VOC, Thread, Apple Home", "image": "https://knxstore.vn/assets/image/product/cam-bien-chat-luong-khong-khi-eve-room-voc-bluetooth-thread-apple-home-20ebx9901.jpg"}]
 internal_links:
   - url: "https://knxstore.vn/vi-sao-dieu-hoa-inverter-tiet-kiem-dien-hon-dieu-hoa-binh-thuong.html"
     slug: "vi-sao-dieu-hoa-inverter-tiet-kiem-dien-hon-dieu-hoa-binh-thuong"
@@ -39,7 +40,7 @@ internal_links:
     anchor: "Giải pháp Matter Thread cho điều hòa đa thương hiệu"
   - url: "https://knxstore.vn/he-thong-dieu-hoa-vrv-va-vrf-la-gi.html"
     slug: "he-thong-dieu-hoa-vrv-va-vrf-la-gi"
-    anchor: "Hệ thống điều hòa VRV và VRF là gì?"
+    anchor: "Hệ thống điều hòa VRV/VRF là gì? Tích hợp BMS và KNX"
   - url: "https://knxstore.vn/so-sanh-dieu-khien-dieu-hoa-intesis-coolautomation-airzone.html"
     slug: "so-sanh-dieu-khien-dieu-hoa-intesis-coolautomation-airzone"
     anchor: "So sánh giải pháp HVAC: Intesis, CoolAutomation, Airzone"

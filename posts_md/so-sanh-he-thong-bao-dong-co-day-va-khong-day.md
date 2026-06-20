@@ -19,6 +19,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/an-ninh"
   - name: "So sánh hệ thống báo động có dây và không dây"
     url: "https://knxstore.vn/so-sanh-he-thong-bao-dong-co-day-va-khong-day.html"
+products: [{"url": "https://knxstore.vn/products/satel-cam-bien-chuyen-dong-co-day-cd-2", "name": "Cảm biến chuyển động có dây Satel - CD-2", "image": "https://knxstore.vn/assets/image/product/satel-cam-bien-chuyen-dong-co-day-cd-2_3.jpg"}, {"url": "https://knxstore.vn/products/satel-axd-200-cam-bien-khong-day-da-chuc-nang-wireless-multipurrpose-detector", "name": "Cảm biến chống trộm không dây đa chức năng Satel - AXD-200", "image": "https://knxstore.vn/assets/image/product/satel-axd-200-cam-bien-khong-day-da-chuc-nang-wireless-multipurrpose-detector_1.jpg"}, {"url": "https://knxstore.vn/products/satel-cam-bien-dang-rem-khong-day-aocd-260", "name": "Cảm biến chống trộm rèm hồng ngoại không dây Satel - AOCD-260", "image": "https://knxstore.vn/assets/image/product/satel-cam-bien-dang-rem-khong-day-aocd-260_3.jpg"}, {"url": "https://knxstore.vn/products/satel-bo-dieu-khien-he-thong-khong-day-433-mhz-mtx-300", "name": "Bộ điều khiển hệ thống không dây 433 MHz Satel - MTX-300", "image": "https://knxstore.vn/assets/image/product/satel-bo-dieu-khien-he-thong-khong-day-433-mhz-mtx-300_2.jpg"}]
 internal_links:
   - url: "https://knxstore.vn/knx-satel-ket-noi-an-ninh-hai-chieu-voi-module-int-knx-2.html"
     slug: "knx-satel-ket-noi-an-ninh-hai-chieu-voi-module-int-knx-2"

@@ -19,6 +19,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/hvac"
   - name: "Giải pháp điều khiển nhiệt độ từng phòng nhờ Thermostat KNX và KAC00X"
     url: "https://knxstore.vn/giai-phap-dieu-khien-nhiet-do-tung-phong-cho-nha-thong-minh.html"
+products: [{"url": "https://knxstore.vn/products/kanonbus-bang-dieu-khien-thermostat-knx-ktex8w-m", "name": "Thermostat KNX KTEX8W-M"}, {"url": "https://knxstore.vn/products/kanonbus-bo-dieu-khien-dieu-hoa-vrv-vrf-kac001", "name": "KAC-001"}, {"url": "https://knxstore.vn/products/kanonbus-bo-dieu-khien-dieu-hoa-vrv-vrf-knx-kac005", "name": "KAC-005"}, {"url": "https://knxstore.vn/products/kanonbus-bo-dieu-khien-dieu-hoa-vrv-vrf-knx-kac008", "name": "KAC-008"}]
 internal_links:
   - url: "https://knxstore.vn/vi-sao-dieu-hoa-inverter-tiet-kiem-dien-hon-dieu-hoa-binh-thuong.html"
     slug: "vi-sao-dieu-hoa-inverter-tiet-kiem-dien-hon-dieu-hoa-binh-thuong"
@@ -40,7 +41,7 @@ internal_links:
     anchor: "Giải pháp Matter Thread cho điều hòa đa thương hiệu"
   - url: "https://knxstore.vn/he-thong-dieu-hoa-vrv-va-vrf-la-gi.html"
     slug: "he-thong-dieu-hoa-vrv-va-vrf-la-gi"
-    anchor: "Hệ thống điều hòa VRV và VRF là gì?"
+    anchor: "Hệ thống điều hòa VRV/VRF là gì? Tích hợp BMS và KNX"
   - url: "https://knxstore.vn/so-sanh-dieu-khien-dieu-hoa-intesis-coolautomation-airzone.html"
     slug: "so-sanh-dieu-khien-dieu-hoa-intesis-coolautomation-airzone"
     anchor: "So sánh giải pháp HVAC: Intesis, CoolAutomation, Airzone"

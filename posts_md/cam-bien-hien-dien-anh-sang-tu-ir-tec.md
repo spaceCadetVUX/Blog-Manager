@@ -19,6 +19,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/cam-bien"
   - name: "Tìm hiểu về cảm biến hiện diện - ánh sáng thương hiệu IR-TEC"
     url: "https://knxstore.vn/cam-bien-hien-dien-anh-sang-tu-ir-tec.html"
+products: [{"url": "https://knxstore.vn/products/ir-tec-cam-bien-hien-dien-on-off-los-509sf", "name": "Tìm hiểu về cảm biến TRANS phân phối tại KNXStore"}, {"url": "https://knxstore.vn/products/ir-tec-cam-bien-hien-dien-smartdim-0-10v-os-net-on-lrd-509", "name": "Tìm hiểu về cảm biến OS-NET phân phối tại KNXStore"}, {"url": "https://knxstore.vn/products/ir-tec-cam-bien-chuyen-dong-gan-tuong-lbs-700", "name": "Tìm hiểu về cảm biến gắn tường phân phối tại KNXStore"}]
 internal_links:
   - url: "https://knxstore.vn/sensor-la-gi.html"
     slug: "sensor-la-gi"

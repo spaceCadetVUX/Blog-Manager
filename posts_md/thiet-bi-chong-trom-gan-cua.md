@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/news"
   - name: "Thiết bị chống trộm gắn cửa: Phân loại và lưu ý khi lắp đặt"
     url: "https://knxstore.vn/thiet-bi-chong-trom-gan-cua.html"
+products: [{"url": "https://knxstore.vn/products/satel-cam-bien-khong-day-da-chuc-nang-mxd-300", "name": "Cảm biến MXD-300"}, {"url": "https://knxstore.vn/products/satel-set-10-bo-cong-tac-tu-gan-chim-cho-cua-b-2s", "name": "Bộ cảm biến từ gắn chìm cho cửa SATEL - B-2S"}, {"url": "https://knxstore.vn/products/satel-cong-tac-tu-cho-cua-b-2t", "name": "SATEL - B-2T"}, {"url": "https://knxstore.vn/products/satel-cam-bien-tu-cho-cua-s-4", "name": "Cảm biến từ cho cửa SATEL - S-4"}, {"url": "https://knxstore.vn/products/satel-set-10-bo-cong-tac-tu-b-1t", "name": "Bộ công tắc từ gắn nổi SATEL - B-1T"}]
 internal_links:
   - url: "https://knxstore.vn/thiet-bi-bao-trom-qua-dien-thoai.html"
     slug: "thiet-bi-bao-trom-qua-dien-thoai"

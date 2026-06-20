@@ -119,7 +119,8 @@ export default function AuditView({ onSelectPost, bp = 'desktop' }) {
                     padding: '9px 16px',
                     background: isActive ? m.color + '18' : 'transparent',
                     borderLeft: `2px solid ${isActive ? m.color : 'transparent'}`,
-                    border: 'none', cursor: 'pointer', textAlign: 'left', transition: 'all 0.1s',
+                    borderTop: 'none', borderRight: 'none', borderBottom: 'none',
+                    cursor: 'pointer', textAlign: 'left', transition: 'all 0.1s',
                   }}
                   onMouseEnter={e => { if (!isActive) e.currentTarget.style.background = 'rgba(255,255,255,0.04)' }}
                   onMouseLeave={e => { if (!isActive) e.currentTarget.style.background = 'transparent' }}

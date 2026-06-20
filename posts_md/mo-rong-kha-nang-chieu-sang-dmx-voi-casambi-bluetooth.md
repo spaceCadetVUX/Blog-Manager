@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/chieu-sang"
   - name: "Mở rộng khả năng chiếu sáng DMX với Casambi Bluetooth"
     url: "https://knxstore.vn/mo-rong-kha-nang-chieu-sang-dmx-voi-casambi-bluetooth.html"
+products: [{"url": "https://knxstore.vn/products/bo-dieu-khien-do-sang-dmx-casambi-8-kenh-dmxcas", "name": "Bộ Điều Khiển DMX Không Dây BLE Casambi DMXcas", "image": "https://knxstore.vn/assets/image/product/bo-dieu-khien-do-sang-dmx-casambi-8-kenh-dmxcas_2.jpg"}, {"url": "https://knxstore.vn/products/bo-dieu-khien-dmx-da-kenh-casambi-voi-radio-tam-xa-casdmx", "name": "Bộ điều khiển DMX đa kênh với radio tầm xa Casambi - casDMX", "image": "https://knxstore.vn/assets/image/product/bo-dieu-khien-dmx-da-kenh-casambi-voi-radio-tam-xa-casdmx_2.jpg"}, {"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-chieu-sang-rgbw-tunable-white-bluetooth-cbu-pwm4", "name": "Bộ điều khiển LED tích hợp Casambi"}]
 internal_links:
   - url: "https://knxstore.vn/casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap.html"
     slug: "casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap"

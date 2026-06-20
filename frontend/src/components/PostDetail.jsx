@@ -75,6 +75,47 @@ function ArticleHTML({ slug }) {
   )
 }
 
+function ProductGrid({ products }) {
+  if (!products?.length) return null
+  const getImg = p => p.image || (p.url.replace('https://knxstore.vn/products/', 'https://knxstore.vn/assets/image/product/') + '.jpg')
+  return (
+    <div style={{ marginTop: 32, borderTop: '1px solid var(--border)', paddingTop: 20 }}>
+      <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginBottom: 14 }}>
+        Sản phẩm liên quan ({products.length})
+      </div>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))',
+        gap: 10,
+      }}>
+        {products.map((p, i) => (
+          <a key={i} href={p.url} target="_blank" rel="noopener noreferrer"
+            style={{
+              display: 'flex', flexDirection: 'column', borderRadius: 8,
+              border: '1px solid var(--border)', overflow: 'hidden',
+              background: 'var(--surface-2)', textDecoration: 'none',
+              transition: 'border-color 0.15s, transform 0.15s',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(6,182,212,0.5)'; e.currentTarget.style.transform = 'translateY(-1px)' }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'none' }}
+          >
+            <img
+              src={getImg(p)}
+              alt={p.name}
+              loading="lazy"
+              style={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover', display: 'block', background: 'var(--surface)' }}
+              onError={e => { e.target.style.display = 'none' }}
+            />
+            <div style={{ padding: '6px 8px', fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.4 }}>
+              {p.name}
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function SectionLabel({ children }) {
   return (
     <div style={{
@@ -106,6 +147,7 @@ export default function PostDetail({ slug, onClose, onNavigate, navList = [], bp
   const [aiContent, setAiContent]     = useState('')
   const [aiLoading, setAiLoading]     = useState(false)
   const [showAI, setShowAI]           = useState(false)
+  const [recrawling, setRecrawling]   = useState(false)
   const [instructions, setInstructions] = useState('')
 
   const [chatMessages, setChatMessages] = useState([])
@@ -282,6 +324,35 @@ export default function PostDetail({ slug, onClose, onNavigate, navList = [], bp
         </a>
       )}
 
+      {/* Recrawl */}
+      <button
+        onClick={async () => {
+          setRecrawling(true)
+          try {
+            const res = await api.recrawlPost(slug)
+            api.post(slug).then(setPost)
+            alert(`Recrawl xong: ${res.products} products, ${res.links} links`)
+          } catch(e) {
+            alert('Recrawl lỗi: ' + e.message)
+          } finally {
+            setRecrawling(false)
+          }
+        }}
+        disabled={recrawling}
+        style={{
+          display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 11,
+          cursor: recrawling ? 'not-allowed' : 'pointer', padding: '5px 10px', borderRadius: 6,
+          border: '1px solid rgba(99,102,241,0.4)',
+          background: recrawling ? 'rgba(99,102,241,0.05)' : 'rgba(99,102,241,0.1)',
+          color: recrawling ? 'rgba(129,140,248,0.5)' : '#818cf8',
+          marginTop: 4, transition: 'background 0.1s',
+        }}
+        onMouseEnter={e => { if (!recrawling) e.currentTarget.style.background = 'rgba(99,102,241,0.18)' }}
+        onMouseLeave={e => { if (!recrawling) e.currentTarget.style.background = 'rgba(99,102,241,0.1)' }}
+      >
+        {recrawling ? '⟳ Đang crawl...' : '⟳ Recrawl bài này'}
+      </button>
+
       {/* Keywords */}
       {post.keywords?.length > 0 && (
         <>
@@ -296,6 +367,41 @@ export default function PostDetail({ slug, onClose, onNavigate, navList = [], bp
           </div>
         </>
       )}
+
+      {/* Products */}
+      {(() => {
+        const products = post.products || []
+        if (!products.length) return null
+        return (
+          <>
+            <SectionLabel>Sản phẩm liên quan ({products.length})</SectionLabel>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 4, marginBottom: 4 }}>
+              {products.map((p, i) => (
+                <a
+                  key={i}
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: 8,
+                    padding: '6px 10px', borderRadius: 6,
+                    background: 'var(--surface-2)', border: '1px solid var(--border)',
+                    textDecoration: 'none', transition: 'border-color 0.1s',
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(6,182,212,0.4)'}
+                  onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
+                >
+                  <span style={{ fontSize: 13, flexShrink: 0 }}>🛒</span>
+                  <span style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.4, flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    {p.name || p.url.split('/').pop()}
+                  </span>
+                  <ExternalLink size={10} color="var(--text-subtle)" style={{ flexShrink: 0 }} />
+                </a>
+              ))}
+            </div>
+          </>
+        )
+      })()}
 
       {/* Outbound links */}
       <SectionLabel>Outbound Links ({post.outbound_links?.length || 0}) ↗</SectionLabel>
@@ -594,6 +700,7 @@ export default function PostDetail({ slug, onClose, onNavigate, navList = [], bp
                     {post.headline}
                   </h2>
                   <ArticleHTML slug={slug} />
+                  <ProductGrid products={post.products} />
                 </div>
 
                 {/* RIGHT — tabs: Links/AI | SEO Meta */}
@@ -652,6 +759,7 @@ export default function PostDetail({ slug, onClose, onNavigate, navList = [], bp
                             {post.headline}
                           </h2>
                           <ArticleHTML slug={slug} />
+                          <ProductGrid products={post.products} />
                         </div>
                       )}
                       {activeTab === 'stats' && rightPanel}

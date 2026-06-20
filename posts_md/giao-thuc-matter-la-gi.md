@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/kien-thuc"
   - name: "Thread trong bức tranh rộng lớn hơn: Giao thức Matter"
     url: "https://knxstore.vn/giao-thuc-matter-la-gi.html"
+products: [{"url": "https://knxstore.vn/products/atios-knx-bridge-ho-tro-apple-homekit-ade-kd", "name": "Bộ chuyển đổi KNX Matter Apple Homekit và Google Home, KNX DALI 2.0 Atios - ADE-KD", "image": "https://knxstore.vn/assets/image/product/atios-knx-bridge-ho-tro-apple-homekit-ade-kd.jpg"}, {"url": "https://knxstore.vn/products/kanonbus-knx-bridge-ho-tro-apple-homekit-tse300", "name": "KNX bridge hỗ trợ Apple HomeKit Kanonbus - TSE300", "image": "https://knxstore.vn/assets/image/product/kanonbus-knx-bridge-ho-tro-apple-homekit-tse300_1.png"}]
 internal_links:
   - url: "https://knxstore.vn/ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome.html"
     slug: "ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome"

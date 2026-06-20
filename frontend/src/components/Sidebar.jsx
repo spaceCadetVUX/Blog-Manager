@@ -64,7 +64,7 @@ export default function Sidebar({ active, onChange, onCrawl, collapsed = false }
                 padding: collapsed ? '11px 0' : '9px 16px',
                 background: isActive ? 'var(--accent-dim)' : 'transparent',
                 borderLeft: isActive ? '2px solid var(--accent)' : '2px solid transparent',
-                border: 'none',
+                borderTop: 'none', borderRight: 'none', borderBottom: 'none',
                 color: isActive ? 'var(--accent-2)' : 'var(--text-muted)',
                 cursor: 'pointer',
                 fontSize: 13,

@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/kien-thuc"
   - name: "5 bước thiết lập nhà thông minh theo chuẩn Matter"
     url: "https://knxstore.vn/5-buoc-thiet-lap-nha-thong-minh-theo-chuan-matter.html"
+products: [{"url": "https://knxstore.vn/products/bo-dieu-khien-trung-tam-hub-m3-matter-aqara-hm-g01d", "name": "Bộ điều khiển trung tâm Hub M3 Matter Aqara - HM-G01D", "image": "https://knxstore.vn/assets/image/product/bo-dieu-khien-trung-tam-hub-m3-matter-aqara-hm-g01d.jpg"}, {"url": "https://knxstore.vn/products/bo-dieu-khien-trung-tam-homey-pro-matter-thread-z-wave-zigbee-wi-fi-ble-ir", "name": "Bộ điều khiển trung tâm Homey Pro - Matter & Thread, Z-Wave, Zigbee, Wi-Fi, BLE, IR", "image": "https://knxstore.vn/assets/image/product/bo-dieu-khien-trung-tam-homey-pro-matter-thread-z-wave-zigbee-wi-fi-ble-ir-homey-pro-eu-03.jpg"}, {"url": "https://knxstore.vn/products/bo-dieu-khien-trung-tam-homey-pro-mini-matter-thread-zigbee-ethernet", "name": "Bộ điều khiển trung tâm Homey Pro Mini - Matter & Thread, Zigbee, Ethernet", "image": "https://knxstore.vn/assets/image/product/bo-dieu-khien-trung-tam-homey-pro-mini-matter-thread-zigbee-ethernet.jpg"}]
 internal_links:
   - url: "https://knxstore.vn/ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome.html"
     slug: "ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome"

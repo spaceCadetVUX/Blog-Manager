@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/huong-dan"
   - name: "Các phương án điều khiển rèm cửa tự động cho Smarthome KNX"
     url: "https://knxstore.vn/cac-phuong-an-dieu-khien-rem-cua-tu-dong-cho-smarthome-knx.html"
+products: [{"url": "https://knxstore.vn/products/satel-bo-dieu-khien-dong-co-rem-2-kenh-160ma-knx-bsa12h", "name": "Bộ Điều Khiển Động Cơ Rèm 2 Kênh 160mA"}, {"url": "https://knxstore.vn/products/legrand-bo-dieu-khien-dong-mo-rem-cua-4-kenh-chuan-knx-078491", "name": "Bộ điều khiển đóng/mở rèm cửa 4 kênh chuẩn KNX"}, {"url": "https://knxstore.vn/products/kanonbus-mo-dun-dieu-khien-rem-knx-kte2upc", "name": "động cơ qua tiếp điểm khô Dry Contact"}]
 internal_links:
   - url: "https://knxstore.vn/huong-dan-cap-nhat-firmware-va-main-program-kanonbus-kac005-moi-nhat-2026.html"
     slug: "huong-dan-cap-nhat-firmware-va-main-program-kanonbus-kac005-moi-nhat-2026"

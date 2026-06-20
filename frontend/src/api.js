@@ -34,6 +34,7 @@ export const api = {
   crawlStatus: (job_id)              => get(`/crawl/${job_id}`),
   suggestions: ()                    => get('/suggestions'),
   postHtml:    (slug)                => get(`/posts/${slug}/html`),
+  recrawlPost: (slug)                => post(`/posts/${slug}/recrawl`, {}),
   getSetting:      (key)             => get(`/settings/${key}`),
   setSetting:      (key, value)      => post(`/settings/${key}`, { value }),
   saveHistory:     (body)            => post('/ai/history', body),

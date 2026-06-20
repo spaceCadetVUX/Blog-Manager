@@ -19,6 +19,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/an-ninh"
   - name: "Thiết bị chống trộm ngoài trời"
     url: "https://knxstore.vn/thiet-bi-chong-trom-ngoai-troi.html"
+products: [{"url": "https://knxstore.vn/products/satel-cam-bien-hang-rao-activa-4", "name": "Cảm biến hàng rào chống trộm Satel - ACTIVA-4", "image": "https://knxstore.vn/assets/image/product/satel-cam-bien-hang-rao-activa-4_3.jpg"}, {"url": "https://knxstore.vn/products/satel-cam-bien-chuyen-dong-pir-mw-pir-mw-opal", "name": "Cảm biến chuyển động ngoài trời PIR + MW Satel - OPAL", "image": "https://knxstore.vn/assets/image/product/satel-cam-bien-chuyen-dong-pir-mw-pir-mw-opal_7.jpg"}, {"url": "https://knxstore.vn/products/satel-cam-bien-chuyen-dong-tia-hong-ngoai-graphite", "name": "Cảm biến chuyển động tia hồng ngoại Satel - GRAPHITE", "image": "https://knxstore.vn/assets/image/product/satel-cam-bien-chuyen-dong-tia-hong-ngoai-graphite_2.jpg"}, {"url": "https://knxstore.vn/products/satel-cam-bien-dang-rem-agate", "name": "Cảm biến chống trộm dạng rèm hồng ngoại Satel - AGATE", "image": "https://knxstore.vn/assets/image/product/satel-cam-bien-dang-rem-agate_4.jpg"}]
 internal_links:
   - url: "https://knxstore.vn/cam-bien-chuyen-dong.html"
     slug: "cam-bien-chuyen-dong"

@@ -40,7 +40,7 @@ internal_links:
     anchor: "Giải pháp Matter Thread cho điều hòa đa thương hiệu"
   - url: "https://knxstore.vn/he-thong-dieu-hoa-vrv-va-vrf-la-gi.html"
     slug: "he-thong-dieu-hoa-vrv-va-vrf-la-gi"
-    anchor: "Hệ thống điều hòa VRV và VRF là gì?"
+    anchor: "Hệ thống điều hòa VRV/VRF là gì? Tích hợp BMS và KNX"
   - url: "https://knxstore.vn/so-sanh-dieu-khien-dieu-hoa-intesis-coolautomation-airzone.html"
     slug: "so-sanh-dieu-khien-dieu-hoa-intesis-coolautomation-airzone"
     anchor: "So sánh giải pháp HVAC: Intesis, CoolAutomation, Airzone"

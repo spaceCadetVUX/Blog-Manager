@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/kien-thuc"
   - name: "Cảm biến vi sóng là gì? Nguyên lý, ưu điểm và ứng dụng thực tế"
     url: "https://knxstore.vn/cam-bien-vi-song-la-gi.html"
+products: [{"url": "https://knxstore.vn/products/satel-cam-bien-chuyen-dong-pir-mw-pir-mw-opal", "name": "Cảm biến chuyển động ngoài trời PIR + MW Satel - OPAL", "image": "https://knxstore.vn/assets/image/product/satel-cam-bien-chuyen-dong-pir-mw-pir-mw-opal_7.jpg"}, {"url": "https://knxstore.vn/products/satel-cam-bien-cong-nghe-kep-phat-hien-chuyen-dong-silver", "name": "Cảm biến chuyển động công nghệ kép PIR + MW Satel - SILVER", "image": "https://knxstore.vn/assets/image/product/satel-cam-bien-cong-nghe-kep-phat-hien-chuyen-dong-silver_1.jpg"}]
 internal_links:
   - url: "https://knxstore.vn/ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome.html"
     slug: "ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome"

@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/chieu-sang"
   - name: "Cách chọn đèn LED dây phù hợp cho mọi không gian"
     url: "https://knxstore.vn/cach-chon-den-led-day-phu-hop-cho-moi-khong-gian.html"
+products: [{"url": "https://knxstore.vn/products/dalcnet-dimmer-led-casambi-line-5cv-casambi", "name": "LINE-5CV-CASAMBI - Dimmer LED dây 5 ngõ ra RGB, RGBW, TW Casambi DALCNET", "image": "https://knxstore.vn/assets/image/product/dalcnet-dimmer-led-casambi-line-5cv-casambi_9.jpg"}]
 internal_links:
   - url: "https://knxstore.vn/casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap.html"
     slug: "casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap"

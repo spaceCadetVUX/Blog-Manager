@@ -101,7 +101,7 @@ def _run_crawl(job_id: str, sitemap_url: str, mode: str):
         # Import crawler functions (at project root)
         from crawl_posts import (
             fetch_html, extract_jsonld, extract_meta_tags,
-            find_article_jsonld, extract_internal_links,
+            find_article_jsonld, extract_internal_links, extract_product_links,
             jsonld_to_md, slug_from_url,
         )
 
@@ -115,6 +115,11 @@ def _run_crawl(job_id: str, sitemap_url: str, mode: str):
         output_dir = PROJECT_ROOT / "posts_md"
         output_dir.mkdir(exist_ok=True)
 
+        # Load updated_at từ DB để so sánh lastmod
+        from backend.db import get_conn as _get_conn
+        with _get_conn() as _conn:
+            db_dates = dict(_conn.execute("SELECT slug, updated_at FROM posts").fetchall())
+
         for i, entry in enumerate(entries):
             url = entry["url"]
             slug = slug_from_url(url)
@@ -122,10 +127,13 @@ def _run_crawl(job_id: str, sitemap_url: str, mode: str):
 
             job["current"] = slug
 
-            # Incremental: bỏ qua nếu file đã có
-            if out_path.exists() and mode == "incremental":
-                job["skipped"] += 1
-                continue
+            if mode == "incremental":
+                lastmod = entry.get("lastmod", "")
+                db_updated = db_dates.get(slug, "")
+                # Skip nếu đã có trong DB và sitemap không mới hơn
+                if db_updated and (not lastmod or lastmod <= db_updated[:10]):
+                    job["skipped"] += 1
+                    continue
 
             try:
                 html = fetch_html(url)
@@ -137,11 +145,12 @@ def _run_crawl(job_id: str, sitemap_url: str, mode: str):
                 meta       = extract_meta_tags(html)
                 article, webpage = find_article_jsonld(all_jsonld)
                 internal_links   = extract_internal_links(html, url)
+                product_links    = extract_product_links(html)
 
                 if not article:
                     article = {}
 
-                md = jsonld_to_md(url, entry["lastmod"], article, meta, all_jsonld, webpage, internal_links)
+                md = jsonld_to_md(url, entry["lastmod"], article, meta, all_jsonld, webpage, internal_links, product_links)
                 out_path.write_text(md, encoding="utf-8")
                 job["crawled"] += 1
 

@@ -19,6 +19,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/kien-thuc"
   - name: "Tự động hóa việc điều khiển động cơ rèm cửa cực gọn bằng công nghệ Casambi"
     url: "https://knxstore.vn/dieu-khien-dong-co-rem-cua-tu-dong-bang-casambi.html"
+products: [{"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-dali-cbu-da-1p", "name": "CBU-DA-1P"}, {"url": "https://knxstore.vn/products/bo-dieu-khien-dong-co-rem-tieu-chuan-dali-2-dx010", "name": "DX010"}, {"url": "https://knxstore.vn/products/bo-dieu-khien-rem-thong-minh-dali-2-dx485", "name": "DX485"}]
 internal_links:
   - url: "https://knxstore.vn/nang-cap-he-thong-chieu-sang-de-dang-voi-casambi-wireless-dali.html"
     slug: "nang-cap-he-thong-chieu-sang-de-dang-voi-casambi-wireless-dali"

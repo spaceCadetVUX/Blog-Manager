@@ -19,6 +19,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/kien-thuc"
   - name: "Hướng dẫn thiết lập và vận hành cảm biến Casambi DALI CP Electronic series"
     url: "https://knxstore.vn/huong-dan-thiet-lap-cam-bien-casambi-dali-cp-electronic.html"
+products: [{"url": "https://knxstore.vn/products/casambi-cam-bien-hong-ngoai-khu-vuc-tran-cao-ebdhs-b-cb-dd", "name": "EBDHS-B-CB-DD"}, {"url": "https://knxstore.vn/products/casambi-cam-bien-hong-ngoai-gan-tran-ebdspir-cb-dd", "name": "EBDSPIR-CB-DD"}]
 internal_links:
   - url: "https://knxstore.vn/ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome.html"
     slug: "ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome"

@@ -19,6 +19,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/news"
   - name: "Hệ thống báo cháy thông minh giảm rủi ro cháy nổ tối đa"
     url: "https://knxstore.vn/he-thong-bao-chay.html"
+products: [{"url": "https://knxstore.vn/products/satel-cam-bien-bao-khoi-nhiet", "name": "thiết bị đầu báo cháy"}]
 internal_links:
   - url: "https://knxstore.vn/knxstore-dat-chung-nhan-casambi-certified-commissioning-partner-4c.html"
     slug: "knxstore-dat-chung-nhan-casambi-certified-commissioning-partner-4c"

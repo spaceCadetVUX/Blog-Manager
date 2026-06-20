@@ -1,15 +1,20 @@
 import json
+import sys
+from pathlib import Path
 import httpx
 from bs4 import BeautifulSoup
 from fastapi import APIRouter, Query, HTTPException
 from backend.db import get_conn
+
+PROJECT_ROOT = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
 
 router = APIRouter(prefix="/posts", tags=["posts"])
 
 
 def row_to_dict(row) -> dict:
     d = dict(row)
-    for field in ("keywords", "mentions", "breadcrumb"):
+    for field in ("keywords", "mentions", "breadcrumb", "products"):
         try:
             d[field] = json.loads(d.get(field) or "[]")
         except Exception:
@@ -117,7 +122,55 @@ def get_post(slug: str):
     post = row_to_dict(row)
     post["outbound_links"] = [dict(r) for r in outbound]
     post["inbound_links"]  = [dict(r) for r in inbound]
+    # Explicit parse in case row_to_dict didn't run on this field
+    if isinstance(post.get("products"), str):
+        try:
+            post["products"] = json.loads(post["products"])
+        except Exception:
+            post["products"] = []
     return post
+
+
+@router.post("/{slug}/recrawl")
+def recrawl_post(slug: str):
+    with get_conn() as conn:
+        row = conn.execute("SELECT url FROM posts WHERE slug = ?", (slug,)).fetchone()
+    if not row or not row["url"]:
+        raise HTTPException(404, "Post not found")
+
+    url = row["url"]
+    try:
+        from crawl_posts import (
+            fetch_html, extract_jsonld, extract_meta_tags,
+            find_article_jsonld, extract_internal_links, extract_product_links,
+            jsonld_to_md,
+        )
+        from backend.import_posts import import_file
+    except ImportError as e:
+        raise HTTPException(500, f"Import error: {e}")
+
+    html = fetch_html(url)
+    if not html:
+        raise HTTPException(502, "Fetch failed")
+
+    all_jsonld = extract_jsonld(html)
+    meta       = extract_meta_tags(html)
+    article, webpage = find_article_jsonld(all_jsonld)
+    internal_links   = extract_internal_links(html, url)
+    product_links    = extract_product_links(html)
+
+    if not article:
+        article = {}
+
+    md = jsonld_to_md(url, "", article, meta, all_jsonld, webpage, internal_links, product_links)
+    out_path = PROJECT_ROOT / "posts_md" / f"{slug}.md"
+    out_path.write_text(md, encoding="utf-8")
+
+    with get_conn() as conn:
+        conn.execute("DELETE FROM internal_links WHERE from_slug = ?", (slug,))
+        import_file(out_path, conn)
+
+    return {"ok": True, "slug": slug, "products": len(product_links), "links": len(internal_links)}
 
 
 @router.get("/{slug}/html")

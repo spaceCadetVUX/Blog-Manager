@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/chieu-sang"
   - name: "Điều khiển chiếu sáng có dây mới nhất của Casambi - Salvador"
     url: "https://knxstore.vn/dieu-khien-chieu-sang-co-day-moi-nhat-cua-casambi-salvador.html"
+products: [{"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-dali-master-casambi-savaldor-sal-10xx", "name": "bộ điều khiển DALI master Salvador Casambi"}]
 internal_links:
   - url: "https://knxstore.vn/casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap.html"
     slug: "casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap"

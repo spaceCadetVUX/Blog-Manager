@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/huong-dan"
   - name: "Hướng dẫn kết nối rèm cửa tự động RS485"
     url: "https://knxstore.vn/huong-dan-ket-noi-rem-cua-tu-dong-rs485.html"
+products: [{"url": "https://knxstore.vn/products/kanonbus-bo-dieu-khien-da-chuc-nang-knx-rs485-ip-kcc-new", "name": "Bộ điều khiển đa chức năng KNX RS485 IP – KCC-NEW"}]
 internal_links:
   - url: "https://knxstore.vn/huong-dan-cap-nhat-firmware-va-main-program-kanonbus-kac005-moi-nhat-2026.html"
     slug: "huong-dan-cap-nhat-firmware-va-main-program-kanonbus-kac005-moi-nhat-2026"

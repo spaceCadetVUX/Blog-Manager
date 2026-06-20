@@ -19,6 +19,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/chieu-sang"
   - name: "Cách để tăng năng suất làm việc lên 30% nhờ công nghệ chiếu sáng Tunable White"
     url: "https://knxstore.vn/nang-cao-30-hieu-suat-lam-viec-voi-den-tunable-white.html"
+products: [{"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-chieu-sang-rgbw-tunable-white-bluetooth-cbu-pwm4", "name": "CBU-PWM4"}, {"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-2-kenh-0-10v-dali-bluetooth-cbu-a2d", "name": "CBU-A2D"}, {"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-led-drivers-dali-0-10v-bluetooth-cbu-asd", "name": "CBU-ASD"}, {"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-dali-cbu-da-1p", "name": "CBU-DA-1P"}, {"url": "https://knxstore.vn/products/casambi-cong-tac-dieu-khien-khong-day-xpress", "name": "Xpress"}]
 internal_links:
   - url: "https://knxstore.vn/cong-nghe-chieu-sang-tunable-white.html"
     slug: "cong-nghe-chieu-sang-tunable-white"

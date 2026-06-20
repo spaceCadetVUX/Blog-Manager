@@ -306,7 +306,8 @@ export default function AIView({ bp = 'desktop' }) {
                       justifyContent: 'space-between', padding: '9px 14px',
                       background: isActive ? 'rgba(139,92,246,0.14)' : 'transparent',
                       borderLeft: `2px solid ${isActive ? '#a78bfa' : 'transparent'}`,
-                      border: 'none', cursor: 'pointer', textAlign: 'left',
+                      borderTop: 'none', borderRight: 'none', borderBottom: 'none',
+                      cursor: 'pointer', textAlign: 'left',
                       transition: 'all 0.1s',
                     }}
                     onMouseEnter={e => { if (!isActive) e.currentTarget.style.background = 'rgba(255,255,255,0.04)' }}
@@ -342,7 +343,8 @@ export default function AIView({ bp = 'desktop' }) {
                       justifyContent: 'space-between', padding: '9px 14px',
                       background: isActive ? color + '16' : 'transparent',
                       borderLeft: `2px solid ${isActive ? color : 'transparent'}`,
-                      border: 'none', cursor: 'pointer', textAlign: 'left',
+                      borderTop: 'none', borderRight: 'none', borderBottom: 'none',
+                      cursor: 'pointer', textAlign: 'left',
                       transition: 'all 0.1s',
                     }}
                     onMouseEnter={e => { if (!isActive) e.currentTarget.style.background = 'rgba(255,255,255,0.04)' }}

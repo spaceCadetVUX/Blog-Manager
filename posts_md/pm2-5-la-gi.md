@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/kien-thuc"
   - name: "PM2.5 là gì? Vì sao đây là chỉ số ô nhiễm nguy hiểm nhất?"
     url: "https://knxstore.vn/pm2-5-la-gi.html"
+products: [{"url": "https://knxstore.vn/products/kaiterra-thiet-bi-do-chat-luong-khong-khi-kaiterra-laser-egg-co2", "name": "Cảm biến chất lượng không khí Kaiterra Laser Egg + CO2- LE-202", "image": "https://knxstore.vn/assets/image/product/kaiterra-thiet-bi-do-chat-luong-khong-khi-kaiterra-laser-egg-co2_1.jpg"}]
 internal_links:
   - url: "https://knxstore.vn/ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome.html"
     slug: "ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome"

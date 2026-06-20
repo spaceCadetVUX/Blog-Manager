@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/an-ninh"
   - name: "Tìm hiểu về cảm biến chuyển động từ thương hiệu Satel"
     url: "https://knxstore.vn/cam-bien-chuyen-dong.html"
+products: [{"url": "https://knxstore.vn/products/satel-cam-bien-chuyen-dong-pir-mw-pir-mw-opal", "name": "Opal Plus"}, {"url": "https://knxstore.vn/products/satel-cam-bien-phat-hien-chuyen-dong-trong-nha-pet", "name": "Slim Dual Luna Pet"}, {"url": "https://knxstore.vn/products/satel-cam-bien-chuyen-dong-tia-hong-ngoai-graphite", "name": "Cảm biến hồng ngoại PIR thụ động GRAPHITE"}]
 internal_links:
   - url: "https://knxstore.vn/tieu-chuan-an-ninh-chau-au-en50131.html"
     slug: "tieu-chuan-an-ninh-chau-au-en50131"

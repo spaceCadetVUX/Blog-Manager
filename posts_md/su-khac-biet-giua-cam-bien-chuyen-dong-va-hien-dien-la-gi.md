@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/kien-thuc"
   - name: "Sự khác biệt giữa cảm biến chuyển động và hiện diện là gì?"
     url: "https://knxstore.vn/su-khac-biet-giua-cam-bien-chuyen-dong-va-hien-dien-la-gi.html"
+products: [{"url": "https://knxstore.vn/products/ir-tec-cam-bien-hien-dien-on-off-los-509sf", "name": "Cảm Biến ON-OFF"}, {"url": "https://knxstore.vn/products/ir-tec-cam-bien-hien-dien-dim-0-10v-lrd-509", "name": "Cảm Biến DIM 0-10V"}, {"url": "https://knxstore.vn/products/ir-tec-cam-bien-os-net-0-10v-tuong-thich-zhaga-on-brd-734sz", "name": "Cảm Biến OS-NET"}, {"url": "https://knxstore.vn/products/satel-cam-bien-chuyen-dong-pir-mw-pir-mw-opal", "name": "Cảm Biến PIR OPAL của Satel"}, {"url": "https://knxstore.vn/products/legrand-cam-bien-hien-dien-knx-pir-hd-360-gan-tran-048922", "name": "Cảm Biến Hiện Diện HD 360° của Legrand"}]
 internal_links:
   - url: "https://knxstore.vn/motion-sensor-la-gi.html"
     slug: "motion-sensor-la-gi"

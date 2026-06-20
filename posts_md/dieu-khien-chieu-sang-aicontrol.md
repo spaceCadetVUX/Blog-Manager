@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/chieu-sang"
   - name: "Khám phá công nghệ điều khiển chiếu sáng của AIControl"
     url: "https://knxstore.vn/dieu-khien-chieu-sang-aicontrol.html"
+products: [{"url": "https://knxstore.vn/products/ai-control-bo-dieu-khien-dimmer-0-1-10v-hoac-dali-ai-zgad", "name": "AICONTROL - AI-ZGAD: Bộ điều khiển Dimmer tăng giảm chiếu sáng 0-10v/1-10v Hoặc Dali"}, {"url": "https://knxstore.vn/products/ai-control-bo-dieu-khien-dimmer-tang-giam-do-sang-triac", "name": "AICONTROL - AI-ZGDP-1M: Bộ điều khiển Dimmer tăng giảm độ sáng Triac"}]
 internal_links:
   - url: "https://knxstore.vn/cach-nhiet-do-mau-anh-sang-cct-tao-hieu-ung-trong-khong-gian.html"
     slug: "cach-nhiet-do-mau-anh-sang-cct-tao-hieu-ung-trong-khong-gian"

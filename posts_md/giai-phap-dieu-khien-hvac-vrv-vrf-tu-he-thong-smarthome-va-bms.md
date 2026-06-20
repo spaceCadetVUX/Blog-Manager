@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/huong-dan"
   - name: "Hệ thống điều khiển HVAC là gì? Giải pháp nào điều khiển VRV/VRF cho hệ thống Smarthome?"
     url: "https://knxstore.vn/giai-phap-dieu-khien-hvac-vrv-vrf-tu-he-thong-smarthome-va-bms.html"
+products: [{"url": "https://knxstore.vn/products/kanonbus-bo-dieu-khien-dieu-hoa-vrv-vrf-kac001", "name": "Bộ điều khiển điều hòa VRV/VRF Kanonbus IP Router/Modbus RTU - KAC001", "image": "https://knxstore.vn/assets/image/product/kanonbus-bo-dieu-khien-dieu-hoa-vrv-vrf-kac001_1.png"}, {"url": "https://knxstore.vn/products/kanonbus-bo-dieu-khien-dieu-hoa-vrv-vrf-knx-kac005", "name": "Bộ điều khiển điều hòa VRV/VRF KNX Kanonbus - KAC005", "image": "https://knxstore.vn/assets/image/product/kanonbus-bo-dieu-khien-dieu-hoa-vrv-vrf-knx-kac005_1.png"}, {"url": "https://knxstore.vn/products/kanonbus-bo-dieu-khien-dieu-hoa-vrv-vrf-knx-kac008", "name": "Bộ điều khiển điều hòa KNX Kanonbus - KAC008", "image": "https://knxstore.vn/assets/image/product/kanonbus-bo-dieu-khien-dieu-hoa-vrv-vrf-knx-kac008_2.png"}]
 internal_links:
   - url: "https://knxstore.vn/huong-dan-cap-nhat-firmware-va-main-program-kanonbus-kac005-moi-nhat-2026.html"
     slug: "huong-dan-cap-nhat-firmware-va-main-program-kanonbus-kac005-moi-nhat-2026"

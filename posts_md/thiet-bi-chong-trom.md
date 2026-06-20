@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/news"
   - name: "Top 7 thiết bị chống trộm an toàn và đáng mua nhất hiện nay"
     url: "https://knxstore.vn/thiet-bi-chong-trom.html"
+products: [{"url": "https://knxstore.vn/products/satel-cam-bien-phat-hien-chuyen-dong-trong-nha-pet", "name": "SLIM-DUAL-LUNA PET"}, {"url": "https://knxstore.vn/products/satel-cam-bien-chuyen-dong-pir-mw-pir-mw-opal", "name": "SATEL OPAL PLUS"}, {"url": "https://knxstore.vn/products/satel-cam-bien-cong-nghe-kep-phat-hien-chuyen-dong-silver", "name": "SILVER"}, {"url": "https://knxstore.vn/products/satel-cam-bien-chuyen-dong-tia-hong-ngoai-graphite", "name": "GRAPHITE PET"}, {"url": "https://knxstore.vn/products/satel-coi-bao-dong-ngoai-troi-khong-day-asp-105-r", "name": "ASP-105 R"}, {"url": "https://knxstore.vn/products/satel-cam-bien-vo-kinh-indigo", "name": "INDIGO"}, {"url": "https://knxstore.vn/products/satel-bang-dieu-khien-an-ninh-trung-tam-integra-64", "name": "INTEGRA 64"}]
 internal_links:
   - url: "https://knxstore.vn/thiet-bi-chong-trom-ngoai-troi.html"
     slug: "thiet-bi-chong-trom-ngoai-troi"

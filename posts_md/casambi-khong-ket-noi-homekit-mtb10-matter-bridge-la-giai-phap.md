@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/chieu-sang"
   - name: "Casambi không kết nối HomeKit? MTB10 Matter Bridge là giải pháp"
     url: "https://knxstore.vn/casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap.html"
+products: [{"url": "https://knxstore.vn/products/bo-dieu-khien-casambi-to-matter-bridge-rayrun-mtb10", "name": "MTB10 - Bộ cổng kết nối Casambi sang Matter Bridge Rayrun", "image": "https://knxstore.vn/assets/image/product/bo-dieu-khien-casambi-to-matter-bridge-rayrun-mtb10.jpg"}]
 internal_links:
   - url: "https://knxstore.vn/nfc-trong-he-thong-chieu-sang-thong-minh-hoat-dong-nhu-the-nao.html"
     slug: "nfc-trong-he-thong-chieu-sang-thong-minh-hoat-dong-nhu-the-nao"

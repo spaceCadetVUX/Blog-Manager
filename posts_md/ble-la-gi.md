@@ -1,13 +1,15 @@
 ---
 url: "https://knxstore.vn/ble-la-gi.html"
 headline: "BLE là gì ? Đặc điểm & cách thức hoạt động của công nghệ BLE"
-description: "Cụ thể BLE là gì? Cách thức hoạt động của công nghệ BLE như thế nào? Có khác gì với Bluetooth Mesh không? Tất cả sẽ có ngay trong bài viết dưới đây. Theo dõi nhé!"
+description: "BLE là nền tảng của Casambi mesh: chiếu sáng không hub, tích hợp DALI-2, 0-10V, Triac. So sánh BLE vs Zigbee, xem CBU modules và LED driver Casambi cho dự án. "
+title: "BLE là gì? Bluetooth Low Energy trong Casambi Mesh"
 og_site_name: "KNX Store"
 image: "https://knxstore.vn/assets/image/post/ble-la-gi.jpg"
-datePublished: "2025-04-01T10:46:40+07:00"
-dateModified: "2025-04-01T10:46:40+07:00"
+datePublished: "2026-06-18T17:16:07+07:00"
+dateModified: "2026-06-18T17:16:07+07:00"
+author: "Lê Võ Quốc Huy"
 articleSection: "Kiến thức"
-word_count: 2652
+word_count: 1507
 mentions: ["Aqara", "Apple Home"]
 breadcrumb:
   - name: "Trang chủ"
@@ -18,10 +20,8 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/kien-thuc"
   - name: "BLE là gì ? Đặc điểm & cách thức hoạt động của công nghệ BLE"
     url: "https://knxstore.vn/ble-la-gi.html"
+products: [{"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-led-drivers-dali-0-10v-bluetooth-cbu-asd", "name": "Bộ điều khiển LED drivers DALI & 0-10V Bluetooth Casambi - CBU-ASD-LR", "image": "https://knxstore.vn/assets/image/product/casambi-bo-dieu-khien-led-drivers-dali-0-10v-bluetooth-cbu-asd_3.jpg"}, {"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-2-kenh-0-10v-dali-bluetooth-cbu-a2d", "name": "CBU-A2D - Bộ điều khiển 2 kênh DALI và 0-10V Bluetooth Casambi", "image": "https://knxstore.vn/assets/image/product/casambi-bo-dieu-khien-2-kenh-0-10v-dali-bluetooth-cbu-a2d_2.jpg"}, {"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-dali-bluetooth-cbu-dcs", "name": "CBU-DCS - Bộ điều khiển DALI Bluetooth Casambi", "image": "https://knxstore.vn/assets/image/product/casambi-bo-dieu-khien-dali-bluetooth-cbu-dcs_3.jpg"}, {"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-dali-cbu-da-1p", "name": "CBU-DA-1P - Bộ điều khiển DALI Casambi Olfer", "image": "https://knxstore.vn/assets/image/product/casambi-bo-dieu-khien-dali-cbu-da-1p_10.jpg"}, {"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-chieu-sang-rgbw-tunable-white-bluetooth-cbu-pwm4", "name": "CBU-PWM4-LR - Bộ điều khiển chiếu sáng RGBW & tunable white Bluetooth Casambi", "image": "https://knxstore.vn/assets/image/product/casambi-bo-dieu-khien-chieu-sang-rgbw-tunable-white-bluetooth-cbu-pwm4.jpg"}, {"url": "https://knxstore.vn/products/led-driver-cc-casambi-15w-6-42v-2-kenh-nfc", "name": "LED Driver CC Casambi 15W 6-42V 2 kênh NFC - SRP-CA9105N-15CCT100-700", "image": "https://knxstore.vn/assets/image/product/led-driver-cc-casambi-15w-6-42v-2-kenh-nfc.jpg"}, {"url": "https://knxstore.vn/products/led-driver-cc-casambi-36w-6-54v-2-kenh-nfc", "name": "LED Driver CC Casambi 36W 6-54V 2 kênh NFC - SRP-CA9105N-36CCT350-1050", "image": "https://knxstore.vn/assets/image/product/led-driver-cc-casambi-36w-6-54v-2-kenh-nfc.jpg"}, {"url": "https://knxstore.vn/products/led-driver-cc-casambi-45w-6-54v-2-kenh-nfc", "name": "LED Driver CC Casambi 45W 6-54V 2 kênh NFC - SRP-CA9105N-45CCT500-1400", "image": "https://knxstore.vn/assets/image/product/led-driver-cc-casambi-45w-6-54v-2-kenh-nfc.jpg"}, {"url": "https://knxstore.vn/products/led-driver-cc-casambi-65w-6-54v-2-kenh-nfc", "name": "LED Driver CC Casambi 65W 6-54V 2 kênh NFC - SRP-CA9105N-65CCT500-1500", "image": "https://knxstore.vn/assets/image/product/led-driver-cc-casambi-65w-6-54v-2-kenh-nfc.jpg"}, {"url": "https://knxstore.vn/products/led-driver-cv-casambi-100w-24vdc-1-kenh-sunricher-srp-ca9105-24-100lcv", "name": "LED Driver CV Casambi 100W 24VDC 1 kênh Sunricher - SRP-CS9105-24-100LCV", "image": "https://knxstore.vn/assets/image/product/led-driver-cv-casambi-100w-24vdc-1-kenh-sunricher-srp-ca9105-24-100lcv.jpg"}, {"url": "https://knxstore.vn/products/casambi-cloud-gateway-cgw-001", "name": "CGW-001 - Thiết bị hỗ trợ điều khiển từ xa Cloud Gateway Casambi", "image": "https://knxstore.vn/assets/image/product/casambi-cloud-gateway-cgw-001_3.jpg"}, {"url": "https://knxstore.vn/products/lithernet-gateway-tich-hop-casambi-dua-tren-ethernet", "name": "Lithernet - Bộ cổng kết nối Ethernet Casambi", "image": "https://knxstore.vn/assets/image/product/lithernet-gateway-tich-hop-casambi-dua-tren-ethernet_3.jpg"}]
 internal_links:
-  - url: "https://knxstore.vn/nha-thong-minh-smart-home.html"
-    slug: "nha-thong-minh-smart-home"
-    anchor: "nhà thông minh"
   - url: "https://knxstore.vn/ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome.html"
     slug: "ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome"
     anchor: "IC là gì? Vai trò của IC trong thiết bị Smarthome"
@@ -56,238 +56,368 @@ internal_links:
 
 # BLE là gì ? Đặc điểm & cách thức hoạt động của công nghệ BLE
 
-> Cụ thể BLE là gì? Cách thức hoạt động của công nghệ BLE như thế nào? Có khác gì với Bluetooth Mesh không? Tất cả sẽ có ngay trong bài viết dưới đây. Theo dõi nhé!
+> BLE là nền tảng của Casambi mesh: chiếu sáng không hub, tích hợp DALI-2, 0-10V, Triac. So sánh BLE vs Zigbee, xem CBU modules và LED driver Casambi cho dự án. 
 
 ## Article Body
 
-Nhắc đến công nghệ không dây phổ biến hiện nay thì không thể bỏ qua cái tên BLE (Bluetooth Low Energy). Đây là một công nghệ mạng không dây tiên tiến cho phép thiết bị hoạt động trong thời gian dài chỉ với một viên pin nhỏ. Cụ thể BLE là gì? Cách thức hoạt động của công nghệ BLE như thế nào? Có khác gì với Bluetooth Mesh không? Tất cả sẽ có ngay trong bài viết dưới đây. Theo dõi nhé!
+Nếu bạn đã từng cân nhắc giải pháp chiếu sáng không dây cho một dự án thương mại, bạn biết bài toán: kéo thêm bus DALI-2 hay KNX TP tốn chi phí và thời gian, nhưng Zigbee thì lại cần hub coordinator và phức tạp khi debug. BLE (Bluetooth Low Energy) giải quyết bài toán đó theo một cách khác, và Casambi là hệ sinh thái chiếu sáng xây dựng trên BLE được triển khai rộng nhất hiện nay tại Việt Nam.
 
-BLE là gì?
+BLE không phải Bluetooth thông thường. Đây là giao thức tối ưu riêng cho IoT: tiêu thụ dưới 0.5 W, latency 6 ms, range 30-60 m indoor, và quan trọng hơn, có sẵn trong mọi smartphone từ 2013 trở đi. Không cần dongle, không cần app riêng cho từng brand.
 
-Công nghệ BLE là gì? BLE (Bluetooth Low Energy) có nguồn gốc từ Wibree được Nokia phát minh vào năm 2016. Sau đó, BLE được mua lại bởi tập đoàn Bluetooth SIG và trang bị phiên bản Bluetooth 4.0 vào năm 2010. Mục đích của việc này là giảm thiểu tiêu hao năng lượng khi kết nối giữa các thiết bị. Điều này sẽ tăng hiệu quả truyền tải và giúp người dùng gửi được nhiều dữ liệu quan trọng hơn.
+BLE là gì và thông số kỹ thuật cần biết
+
+BLE (Bluetooth Low Energy) có nguồn gốc từ dự án Wibree của Nokia, được Bluetooth SIG tích hợp vào Bluetooth 4.0 năm 2010. Mục tiêu thiết kế là giảm tiêu thụ điện xuống dưới 100 lần so với Bluetooth Classic, trong khi vẫn giữ khả năng kết nối đủ cho sensor và actuator IoT.
 
 
 
-Bluetooth Low Energy (BLE) là công nghệ giao tiếp không dây công suất thấp có thể được sử dụng trong khoảng cách ngắn để cho phép các thiết bị thông minh giao tiếp với nhau. Một số thiết bị bạn tương tác hàng ngày như điện thoại thông minh, đồng hồ thông minh, thiết bị theo dõi thể dục, tai nghe không dây và máy tính đang sử dụng BLE để tạo ra trải nghiệm liền mạch.
-
-BLE có nhiều khả năng và được triển khai trong nhiều lĩnh vực như y tế, thể dục, an ninh, nhà thông minh,v.v..Nó cũng hoạt động trên các thiết bị quen thuộc hàng ngày như điện thoại thông minh và máy tính xách tay mà bạn đang sử dụng.
-
-Điểm khác biệt giữa Bluetooth và BLE là gì ?
-
-Bluetooth và BLE tương tự nhau ở điểm chúng giúp người dùng kết nối với các thiết bị yêu thích và quan trọng nhất của họ cho cả mục đích sử dụng tiêu dùng và thương mại. Sự khác biệt nằm ở cách họ phân phối dữ liệu để tiết kiệm năng lượng. Dưới đây là bảng so sánh của hai công nghệ này. Về bản chất, BLE sẽ phát triển trên nền tảng IoT chứ không phải bản nâng cấp của Bluetooth.
+Thông số kỹ thuật chính của BLE:
 
 
 	
 		
-			
-			 
-			
-			
-			Bluetooth
-			
-			
-			BLE
-			
+			Thông số
+			Giá trị
 		
+	
+	
 		
-			
 			Tần số
-			
-			
-			2.4 G
-			
-			
-			2.4 G
-			
+			2.4 GHz ISM band
 		
 		
-			
-			Khoảng cách làm việc
-			
-			
-			10m
-			
-			
-			> 60m
-			
+			Số kênh
+			40 (37 data + 3 advertising)
 		
 		
-			
-			Tốc độ
-			
-			
-			1-3 Mbps
-			
-			
-			1 Mbps
-			
+			Data rate
+			1 Mbps (BLE 4.x), 2 Mbps (BLE 5.x LE 2M PHY)
 		
 		
-			
-			Thông lượng
-			
-			0,7 – 2,1 Mbps
-			
-			305 kbps
-			
+			Latency kết nối
+			~6 ms
 		
 		
-			
+			Range thực tế indoor
+			30-60 m (không vật cản), 10-15 m qua tường bê tông
+		
+		
+			Tiêu thụ điện
+			0.01-0.5 W (so với ~1 W Bluetooth Classic)
+		
+		
 			Bảo mật
-			
-			
-			64bit – 128 bit
-			
-			
-			128 bit AES
-			
+			AES-128 bit
 		
 		
-			
-			Năng lượng tiêu thụ
-			
-			
-			Nhỏ
-			
-			
-			Rất nhỏ
-			
-		
-		
-			
-			Cấu trúc liên kết mạng
-			
-			
-			Liên tục theo hai hướng
-			
-			
-			Từng đợt ngắn theo 1 hướng
-			
+			Hỗ trợ native
+			iOS 7+, Android 4.3+, Windows 8+
 		
 	
 
 
-So sánh nhanh giữa Bluetooth thường và BLE sẽ giúp bạn lựa chọn đúng công nghệ cho nhu cầu của mình. Để hiểu rõ hơn về sự khác biệt giữa hai công nghệ này, hãy cùng so sánh các đặc điểm chính sau:
+BLE không có khả năng thoại và không phù hợp cho stream dữ liệu lớn. Với lighting control, điều đó không quan trọng: một lệnh dim/scene/color không cần quá vài byte.
 
-
-	Bluetooth liên kết mạng liên tục theo cả hai hướng. BLE chỉ giao tiếp theo từng đợt ngắn và một số kết nối BLE chỉ đi theo một hướng.
-	Bluetooth thực hiện truyền dữ liệu với tốc độ 1-3MB. BLE được giới hạn ở 125KBs-2MBs.
-	Bluetooth có khả năng thoại còn BLE thì không.
-	Kết nối Bluetooth có độ trễ lên đến 100ms. Kết nối BLE có độ trễ là 6ms. Hãy nhớ rằng càng thấp càng tốt.
-	Bluetooth sử dụng nguồn 1 Watt. BLE sử dụng từ 0.01 đến 0,5 Watts. Điều này có nghĩa là một số thiết bị BLE sử dụng ít năng lượng hơn 100 lần.
+So sánh Bluetooth Classic và BLE
 
 
 
 
-Theo đó, kết nối Bluetooth thông thường thường được sử dụng để xử lý, truyền và trao đổi một lượng lớn dữ liệu như video đầu vào, âm thanh và hình ảnh. Tuy nhiên, kết nối Bluetooth sẽ tiêu tốn nhiều điện năng hơn và tốn kém hơn.
-
-Công nghệ BLE phù hợp với các ứng dụng không yêu cầu truyền tải lượng lớn dữ liệu. Do đó, thiết bị này có thể chạy bằng pin trong nhiều năm với chi phí thấp hơn Bluetooth vì nó không yêu cầu kết nối liên tục.
-
-
->>>Tìm hiểu thêm: Bộ điều khiển không dây Bluetooth CBU-A2D chính hãng, giá tốt của Casambi
-
-
-Cách thức hoạt động của BLE như thế nào ?
-
-Để các thiết bị hỗ trợ BLE có thể truyền dữ liệu cho nhau, trước tiên chúng phải tạo thành một kênh giao tiếp. Việc sử dụng API Bluetooth LE yêu cầu bạn khai báo một số quyền trong tệp kê khai của mình.
-
-Sau khi ứng dụng của bạn có quyền sử dụng Bluetooth, ứng dụng của bạn cần truy cập BluetoothAdapter và xác định xem Bluetooth có khả dụng trên thiết bị hay không. Nếu Bluetooth khả dụng, thiết bị sẽ quét các thiết bị BLE lân cận. Khi một thiết bị được tìm thấy, các khả năng của thiết bị BLE được phát hiện bằng cách kết nối với máy chủ GATT trên thiết bị BLE. Sau khi kết nối được thực hiện, dữ liệu có thể được truyền sang thiết bị được kết nối dựa trên các tính năng và dịch vụ có sẵn.
-
-Công nghệ BLE sử dụng cấu trúc dữ liệu phân cấp từ đó xác định cấu trúc trao đổi thông tin. Một thiết bị sử dụng BLE làm thiết bị ngoại vi quảng cáo các tính năng và dịch vụ của nó để nó có thể được sử dụng để giao tiếp với các thiết bị khác. Các thuộc tính này được xác định bằng cách sử dụng cấu hình GATT (Generic Attributes: thuộc tính chung). Hơn nữa, những đặc điểm này đại diện cho các giá trị dưới dạng các gói thông tin nhỏ, có thể thay đổi theo thời gian.
-
-Các đặc tính của công nghệ BLE được xác định để giữ các giá trị theo kiểu ghi hoặc đọc. Đối với các thiết bị ngoại vi cung cấp giá trị theo cách ghi, thường có một giao diện để nhận dữ liệu từ một trung tâm. Đối với các thiết bị ngoại vi cung cấp đặc tính kiểu đọc, chúng thường tiết lộ thông tin cho trung tâm để gửi dữ liệu.
-
-Một số thuật ngữ về BLE mà bạn không thể bỏ qua
-
-Dưới đây là tóm tắt các thuật ngữ và khái niệm BLE chính:
-
-
-	Cấu hình Thuộc tính Chung (GATT): Cấu hình GATT là một đặc điểm kỹ thuật chung để gửi và nhận các phần dữ liệu ngắn được gọi là “thuộc tính” qua liên kết BLE. Tất cả các cấu hình ứng dụng BLE hiện tại đều dựa trên GATT.
-	Cấu hình: Bluetooth SIG xác định nhiều cấu hình cho các thiết bị BLE. Cấu hình là một thông số kỹ thuật về cách một thiết bị hoạt động trong một ứng dụng cụ thể. Lưu ý rằng một thiết bị có thể triển khai nhiều cấu hình. Ví dụ: một thiết bị có thể chứa máy đo nhịp tim và máy dò mức pin.
-	Giao thức thuộc tính (ATT): GATT được xây dựng dựa trên Giao thức thuộc tính (ATT). Đây còn được gọi là GATT / ATT. ATT được tối ưu hóa để chạy trên các thiết bị BLE. Để đạt được điều này, nó sử dụng càng ít byte càng tốt. Mỗi thuộc tính được nhận dạng duy nhất bởi Mã định danh duy nhất toàn cầu (UUID), là định dạng 128 bit được tiêu chuẩn hóa cho các ID chuỗi được sử dụng để xác định thông tin duy nhất. Các thuộc tính được vận chuyển bởi ATT được định dạng dưới dạng các tính năng và dịch vụ.
-	Tính năng: Một đặc tính chứa một giá trị duy nhất và bộ mô tả 0-n mô tả giá trị của thuộc tính. Một thuộc tính có thể được coi là một kiểu, tương tự như một lớp.
-	Bộ mô tả: Bộ mô tả là các thuộc tính được xác định mô tả một giá trị đặc trưng. Ví dụ, một bộ mô tả có thể chỉ định một mô tả mà con người có thể đọc được, một phạm vi chấp nhận được đối với giá trị của một đặc tính hoặc một đơn vị đo lường cụ thể cho giá trị của một đặc tính. đếm.
-	Dịch vụ: Một dịch vụ là một tập hợp các đặc điểm. 
-
-
-Ứng dụng của BLE là gì?
-
-Công nghệ BLE ra đời với chức năng mang lại hiệu quả tối ưu cho người dùng thông qua các thiết bị IoT. Vì vậy, công nghệ này đã được ứng dụng rộng rãi trên các thiết bị thông minh trong các lĩnh vực khác nhau. BLE sẽ không bao giờ thay thế bluetooth. Nhưng nó đã trở thành công nghệ tiêu chuẩn cho nhiều ứng dụng.
-
-
-
-Thiết bị thông minh
-
-Hầu hết các thiết bị thông minh sử dụng BLE để giao tiếp với nhau. Nhiều thiết bị thông minh có nguồn điện hạn chế và sẽ không thể hỗ trợ việc sử dụng Bluetooth. BLE cũng được tìm thấy trong hầu hết các điện thoại thông minh, vì vậy nó cung cấp khả năng tương thích dễ dàng.
-
-Máy theo dõi thể dục
-
-Đây là một trong những trường hợp sử dụng chính của Bluetooth Low Energy, được cho là đã khiến nó trở nên phổ biến. Vì công nghệ Bluetooth (cả cổ điển và BLE) rất phổ biến trên điện thoại thông minh, máy tính bảng và máy tính xách tay, nên có một lý do khiến các thiết bị cá nhân mà chúng ta thường ghép nối với chúng chẳng hạn như máy theo dõi thể dục và các thiết bị thông minh khác cũng sẽ sử dụng chúng.
-
-Tiếp thị vùng lân cận
-
-BLE có thể được sử dụng để gửi tin nhắn quảng cáo đến các điện thoại thông minh ở gần. Điều này cho phép tiếp thị có mục tiêu đến mọi người chỉ dựa trên vị trí. Ví dụ: một cửa hàng có thể gửi thông báo cho mọi người khi họ bước vào cơ sở.
-
-Theo dõi vị trí trong nhà
-
-GPS rõ ràng là hiệu quả trong việc theo dõi vị trí. Nhưng nó thường không đủ chính xác để sử dụng ở những khu vực nhỏ như bên trong các tòa nhà. BLE cung cấp một giải pháp thay thế hữu ích cho việc giám sát trong nhà. Khi kết hợp với đèn hiệu, nó có thể được sử dụng để theo dõi điện thoại thông minh từ phòng này sang phòng khác.
-
-Một trong những lợi ích chính của BLE là nó có thể được sử dụng để định vị chính xác những nơi không thể sử dụng GPS - trong nhà. Bạn có thể sử dụng các thiết bị được trang bị BLE làm tín hiệu, tức là để truyền dữ liệu đến tất cả các thiết bị trong vùng lân cận, thay vì trao đổi một đối một. Dựa vào đó, các thiết bị có khả năng xử lý dữ liệu đó (chẳng hạn như điện thoại) hoặc chỉ cần chụp và chuyển tiếp dữ liệu đó xa hơn (chẳng hạn như điểm truy cập) có thể xác định vị trí của đèn. nhãn hiệu.
-
-Quản lý tài sản
-
-BLE cũng có thể được sử dụng để theo dõi các hạng mục vật chất và do đó phổ biến trong quản lý tài sản. Mỗi mục cần theo dõi được gán một thẻ BLE. Sau đó, các biểu tượng được thiết lập trên toàn bộ cơ sở để lắng nghe ID duy nhất của mỗi thẻ.
-
-Theo dõi liên hệ
-
-Vị trí trong nhà càng trở nên quan trọng hơn khi việc quản lý sử dụng trở thành một trong những ưu tiên hàng đầu của tất cả các doanh nghiệp. Để giữ an toàn cho đồng nghiệp của họ, người sử dụng lao động ngày càng xem xét các giải pháp dựa trên BLE để theo dõi liên hệ không cần ủy quyền.
-
-Trong trường hợp này, những người đến văn phòng được trang bị một thẻ BLE đơn giản dùng một lần để thu thập thông tin về nơi họ đến và người họ tiếp xúc. Đồng thời, nó không lưu trữ bất kỳ dữ liệu nhạy cảm nào có thể bị coi là xâm phạm quyền riêng tư. Nếu ai đó trong văn phòng bị ốm, rất dễ dàng xác định ai có thể đã tiếp xúc và bùng phát dịch bệnh.
-
-Ưu và nhược điểm của BLE là gì?
-
-Mọi công nghệ, thiết bị không phải lúc nào cũng hoàn hảo với những tính năng của chúng mà sẽ có những ưu nhược điểm riêng, điều này không riêng gì BLE. Vậy ưu, nhược điểm của BLE là gì?
-
-Ưu điểm
+	
+		
+			Thông số
+			Bluetooth Classic
+			BLE
+		
+	
+	
+		
+			Tần số
+			2.4 GHz
+			2.4 GHz
+		
+		
+			Khoảng cách
+			~10 m
+			>60 m
+		
+		
+			Tốc độ
+			1-3 Mbps
+			1-2 Mbps
+		
+		
+			Thông lượng thực
+			0.7-2.1 Mbps
+			305 kbps
+		
+		
+			Bảo mật
+			64-128 bit
+			128 bit AES
+		
+		
+			Tiêu thụ điện
+			~1 W
+			0.01-0.5 W
+		
+		
+			Topology
+			Liên tục 2 chiều
+			Burst ngắn 1-2 chiều
+		
+		
+			Hỗ trợ thoại
+			Có
+			Không
+		
+		
+			Latency kết nối
+			~100 ms
+			~6 ms
+		
+	
 
 
-	Tiết kiệm năng lượng tiêu thụ ở mức tối thiểu: với một pin đồng xu duy nhất, bạn có thể sử dụng thiết bị trong nhiều tháng hoặc nhiều năm nhờ cơ chế bật khi có dữ liệu hoặc tắt và tắt khi không có dữ liệu. cho dù một cách liên tục.
-	Giá thành của công nghệ BLE tương đối thấp: Các thành phần thiết kế BLE như chip, mô hình dữ liệu,… không quá đắt và không quá phức tạp nên giá thành của công nghệ này cũng tương đối thấp.
-	Hạn chế nhiễu giữa các thiết bị Bluetooth và Wifi nhờ BLE hoạt động ở tần số 2.4 Ghz
-	Thiết lập kết nối và truyền dữ liệu rất nhanh chỉ khoảng 3ms
+Bluetooth Classic phù hợp cho stream dữ liệu lớn liên tục như audio và video. BLE được thiết kế cho giao tiếp ngắn, không liên tục, pin coin cell dùng nhiều năm, phù hợp với sensor và actuator trong hệ thống IoT và chiếu sáng
+
+Tại sao Casambi chọn BLE thay vì Zigbee hay Wi-Fi?
+
+Câu hỏi này hay gặp khi tư vấn dự án. Có 3 công nghệ không dây phổ biến cho lighting control, và không cái nào hoàn hảo:
 
 
-Nhược điểm
+	
+		
+			Tiêu chí
+			BLE (Casambi)
+			Zigbee
+			Wi-Fi
+		
+	
+	
+		
+			Hub / coordinator
+			Không bắt buộc
+			Bắt buộc
+			Bắt buộc (AP/router)
+		
+		
+			Smartphone native
+			iOS + Android native
+			Cần bridge app
+			Cần app
+		
+		
+			Commissioning
+			NFC tap hoặc BLE scan
+			Coordinator trước
+			SSID + password
+		
+		
+			Tích hợp DALI-2
+			Có (CBU module)
+			Không phổ biến
+			Không phổ biến
+		
+		
+			Tiêu thụ điện node
+			Rất thấp
+			Thấp
+			Cao
+		
+		
+			Range mỗi hop
+			10-30 m indoor
+			10-20 m
+			30-50 m
+		
+		
+			Debug tool
+			Casambi app (thân thiện)
+			Cần network analyzer
+			Browser dev tools
+		
+	
 
 
-	Truyền lượng dữ liệu nhỏ: Công nghệ BLE có tần số điều chế của sóng Bluetooth trong không gian là 1Mbps. Tần số trên chỉ là thông số lý thuyết. Trên thực tế, thông số này nhỏ hơn do ảnh hưởng của nhiều yếu tố.
-	Khoảng cách giới hạn: Về mặt lý thuyết, công nghệ BLE có khả năng truyền dữ liệu với khoảng cách tối đa là 100m. Tuy nhiên trên thực tế, công nghệ này chỉ có thể truyền được với khoảng cách 30m, đạt hiệu quả cao nhất từ ​​2 đến 5m.
-	Hạn chế nhiễu giữa các thiết bị Bluetooth và Wifi nhờ BLE hoạt động ở tần số 2.4 Ghz.
+Lợi thế cốt lõi của BLE: smartphone là hub. Contractor không cần mang thêm thiết bị để commissioning, client không cần mua hub riêng để vận hành nội bộ. Điều này rút ngắn thời gian on-site đáng kể so với Zigbee.
+
+Casambi xây dựng BLE Mesh như thế nào?
+
+Casambi không dùng Bluetooth Mesh SIG chuẩn. Đây là giao thức mesh proprietary chạy trên BLE, được phát triển bởi Casambi Technologies (Finland) từ 2012.
+
+Relay và self-healing:
+
+Mỗi CBU node hoạt động đồng thời là receiver và relay. Không có master node duy nhất, mạng tự heal nếu một node mất nguồn. Smartphone kết nối vào bất kỳ node nào trong range, rồi lệnh được relay đến toàn bộ network.
+
+Giới hạn và mở rộng:
 
 
-Giải đáp một số thắc mắc về BLE là gì?
-
-Nền tảng hỗ trợ của BLE là gì?
-
-Hỗ trợ cho Bluetooth 4.0 và BLE khả dụng trên hầu hết các nền tảng chính kể từ các phiên bản như:
+	Tối đa 250 CBU nodes mỗi Casambi network
+	Nhiều network liên kết qua Network Share (dùng chung scene, schedule)
+	Range mỗi hop: 10-15 m qua tường bê tông, ~30 m không vật cản
 
 
-	iOS5 + (ưu tiên iOS7 +)
-	Android 4.3+ (nhiều bản sửa lỗi trong 4.4+)
-	Apple OS X 10.6+
-	Windows 8 (XP, Vista và 7 chỉ hỗ trợ Bluetooth 2.1)
-	GNU / Linux Vanilla BlueZ 4.93+
+Commissioning:
+
+Tap NFC vào CBU (smartphone có NFC) hoặc add qua BLE scan trong Casambi app. Không cần PC tool, không cần địa chỉ DALI-2 trước khi lắp.
+
+Một lưu ý thực tế từ triển khai: nếu smartphone không tìm thấy CBU khi add mới, kiểm tra Network > Sharing mode trước khi làm gì khác. Khoảng 70-80% trường hợp "không tìm thấy node" là do network chưa ở chế độ open sharing, không phải lỗi phần cứng.
+
+Casambi BLE Mesh so với Bluetooth Mesh SIG
 
 
-BLE có bảo mật không?
+	
+		
+			Đặc điểm
+			Casambi BLE Mesh
+			Bluetooth Mesh SIG (BT 5.x)
+		
+	
+	
+		
+			Chuẩn hóa
+			Proprietary (Casambi Technologies)
+			Open standard (Bluetooth SIG)
+		
+		
+			Interoperability
+			Casambi ecosystem only
+			Đa vendor (lý thuyết)
+		
+		
+			Commissioning
+			NFC tap hoặc app scan
+			Provisioner tool yêu cầu
+		
+		
+			Network size
+			250 nodes/network
+			Không giới hạn cứng
+		
+		
+			Latency lệnh
+			10 năm triển khai
+			Phụ thuộc firmware/vendor
+		
+		
+			Debug tool
+			Casambi app (thân thiện)
+			Mesh Inspector (phức tạp hơn)
+		
+	
 
 
-	Tất cả các kết nối BLE đều được trang bị mã hóa AES-128. Điều này ngăn không cho dữ liệu được đọc nếu nó bị chặn.
-	Các cuộc tấn công Man-in-the-Middle là có thể xảy ra, nhưng điều này chỉ có thể xảy ra trong một thời gian giới hạn khi hai thiết bị BLE đang ghép nối.
-	Phạm vi hạn chế của BLE cũng được hưởng lợi từ quan điểm bảo mật. Bất kỳ nỗ lực nào để tấn công một thiết bị BLE đều yêu cầu tin tặc đến gần thiết bị đó.
+Casambi proprietary mesh hy sinh tính interoperability để đổi lấy độ tin cậy cao và commissioning đơn giản. Đây là lựa chọn phù hợp cho SI/contractor muốn giảm thời gian on-site và tối thiểu hóa rủi ro triển khai.
+
+Modules CBU Casambi: tích hợp BLE vào hạ tầng DALI/0-10V hiện có
+
+CBU (Control Bus Unit) là hardware module tích hợp BLE radio cùng giao diện điều khiển (DALI, 0-10V, PWM, Relay). Đây là cách retrofit hệ thống Casambi vào LED driver hiện có mà không cần thay driver.
+
+Các modules CBU chính:
 
 
-Trên đây KNX Store đã chia sẻ đến các bạn những thông tin về công nghệ BLE là gì, các ứng dụng của công nghệ này cũng như ưu nhược điểm của BLE, hy vọng sẽ hữu ích cho bạn. Nếu bạn có nhu cầu tìm hiểu thêm thông tin về công nghệ này cũng như tham khảo các sản phẩm nhà thông minh, vui lòng liên hệ với KNX Store qua hotline để được tư vấn và hỗ trợ nhanh chóng.
+	
+		
+			Model
+			Giao diện
+			Số kênh
+			Ứng dụng điển hình
+		
+	
+	
+		
+			CBU-ASD-LR
+			DALI + 0-10V
+			1
+			LED driver 1 kênh, retrofit
+		
+		
+			CBU-A2D
+			DALI + 0-10V
+			2
+			2 LED driver độc lập
+		
+		
+			CBU-DCS
+			DALI
+			1 (multi-device)
+			DALI master, nhóm nhiều driver
+		
+		
+			CBU-DA-1P
+			DALI
+			1
+			DALI 1 kênh (Olfer, IP20)
+		
+		
+			CBU-PWM4-LR
+			PWM 4 kênh
+			4
+			RGBW / Tunable White LED strip
+		
+	
+
+
+CBU-ASD-LR và CBU-A2D là 2 model phổ biến nhất cho retrofit. Lắp song song với LED driver hiện có, commissioning dưới 5 phút/điểm đèn.
+
+Xem thêm module CBU điều khiển chiếu sáng Casambi tại KNXStore:
+{products:[503,6,648,1079,1159]}
+
+LED driver tích hợp BLE Casambi sẵn
+
+Với dự án mới (không retrofit), LED driver tích hợp Casambi chip sẵn gọn hơn so với dùng CBU rời. BLE radio nằm trực tiếp trong driver, không cần thêm module.
+
+Sunricher cung cấp dòng SRP-CA9105N (CC, 2 kênh CCT, NFC commissioning) phủ đầy các mức công suất phổ biến từ 15W đến 65W, phù hợp cho downlight và track light. Dòng SRP-CS9105 (CV, 24VDC) dùng cho LED strip và linear profile.
+
+Xem thêm LED driver tích hợp BLE Casambi tại KNXStore:
+{products:[3076,3078,3079,3080,2913]}
+
+Gateway và tích hợp hệ thống
+
+Casambi hoạt động hoàn toàn local không cần internet. Khi cần remote access hoặc tích hợp BMS:
+
+
+	CGW-001 (Cloud Gateway): Kết nối mạng Casambi vào Casambi cloud. REST API cho phép tích hợp với KNX, BACnet, SCADA, third-party BMS. Hỗ trợ scheduling qua cloud khi không có smartphone tại chỗ.
+	Lithernet: Cổng Ethernet-to-Casambi. Phù hợp môi trường yêu cầu kết nối có dây (data center, server room, phòng điều khiển).
+
+
+Xem thêm thiết bị gateway Casambi tại KNXStore:
+{products:[524,690]}
+
+Ứng dụng BLE Casambi theo loại công trình
+
+Văn phòng / thương mại: Điều khiển theo vùng, lịch trình, cảm biến hiện diện (CBU-PIR). Tích hợp với BMS qua CGW-001 REST API. Tuân thủ EN 15232 Energy Class A cho lighting control.
+
+Khách sạn / hospitality: Per-room control qua app, scene preset. Tùy chọn mở app cho khách theo phòng.
+
+Nhà ở / biệt thự: Không kéo bus cable DALI hay KNX. Phù hợp retrofit sau khi hoàn thiện nội thất.
+
+Ngoại thất / outdoor: CBU-ASD-LR kết hợp LED driver IP65. Relay qua các luminaire outdoor kéo dài range.
+
+Ưu và nhược điểm của BLE Casambi
+
+Ưu điểm:
+
+
+	Không cần bus cable điều khiển (DALI/KNX), tiết kiệm chi phí đi dây
+	Commissioning không cần PC tool, kỹ thuật viên dùng smartphone
+	Self-healing mesh: mất 1 node không ảnh hưởng toàn mạng
+	AES-128 encryption, dữ liệu không ra ngoài khi không có CGW
+	Tích hợp native với DALI DT6, DT8, 0-10V, Triac, Relay
+	Thiết lập kết nối nhanh, latency ~6 ms
+
+
+Nhược điểm:
+
+
+	Proprietary ecosystem: buộc phải dùng thiết bị Casambi-compatible, không mix trực tiếp với Zigbee hay Matter
+	Range mỗi hop giới hạn: cần density node đủ trong tòa nhà lớn (>1000 m²)
+	Tích hợp với KNX phức tạp hơn: cần KNX-Casambi bridge (VBU-K2C Vlinca hoặc Salvador)
+
+
+Kết Luận 
+
+Casambi BLE hiện là giải pháp wireless lighting triển khai nhanh nhất trên thị trường Việt Nam  không cần kéo bus cable bổ sung, không cần PC tool chuyên dụng, commissioning qua NFC và smartphone. KNXStore phân phối đầy đủ CBU modules, LED driver tích hợp sẵn, gateway và switch Casambi với hỗ trợ kỹ thuật xuyên suốt từ thiết kế đến commissioning. Liên hệ để được tư vấn cụ thể theo yêu cầu dự án.
 
 ## Raw JSON-LD
 
@@ -301,10 +431,10 @@ Trên đây KNX Store đã chia sẻ đến các bạn những thông tin về c
         "@id": "https://knxstore.vn/ble-la-gi.html#webpage",
         "url": "https://knxstore.vn/ble-la-gi.html",
         "name": "BLE là gì ? Đặc điểm & cách thức hoạt động của công nghệ BLE",
-        "description": "Cụ thể BLE là gì? Cách thức hoạt động của công nghệ BLE như thế nào? Có khác gì với Bluetooth Mesh không? Tất cả sẽ có ngay trong bài viết dưới đây. Theo dõi nhé!",
+        "description": "BLE là nền tảng của Casambi mesh: chiếu sáng không hub, tích hợp DALI-2, 0-10V, Triac. So sánh BLE vs Zigbee, xem CBU modules và LED driver Casambi cho dự án. ",
         "inLanguage": "vi-VN",
-        "datePublished": "2025-04-01T10:46:40+07:00",
-        "dateModified": "2025-04-01T10:46:40+07:00",
+        "datePublished": "2026-06-18T17:16:07+07:00",
+        "dateModified": "2026-06-18T17:16:07+07:00",
         "isPartOf": {
           "@id": "https://knxstore.vn/#website"
         },
@@ -349,6 +479,16 @@ Trên đây KNX Store đã chia sẻ đến các bạn những thông tin về c
               "item": "https://knxstore.vn/ble-la-gi.html"
             }
           ]
+        },
+        "author": {
+          "@type": "Person",
+          "@id": "https://knxstore.vn/author/le-vo-quoc-huy#author",
+          "name": "Lê Võ Quốc Huy",
+          "url": "https://knxstore.vn/author/le-vo-quoc-huy",
+          "image": {
+            "@type": "ImageObject",
+            "url": "https://knxstore.vn/assets/image/author/le-vo-quoc-huy1.jpg"
+          }
         }
       },
       {
@@ -358,13 +498,13 @@ Trên đây KNX Store đã chia sẻ đến các bạn những thông tin về c
           "@id": "https://knxstore.vn/ble-la-gi.html#webpage"
         },
         "headline": "BLE là gì ? Đặc điểm & cách thức hoạt động của công nghệ BLE",
-        "description": "Cụ thể BLE là gì? Cách thức hoạt động của công nghệ BLE như thế nào? Có khác gì với Bluetooth Mesh không? Tất cả sẽ có ngay trong bài viết dưới đây. Theo dõi nhé!",
-        "articleBody": "Nhắc đến công nghệ không dây phổ biến hiện nay thì không thể bỏ qua cái tên BLE (Bluetooth Low Energy). Đây là một công nghệ mạng không dây tiên tiến cho phép thiết bị hoạt động trong thời gian dài chỉ với một viên pin nhỏ. Cụ thể BLE là gì? Cách thức hoạt động của công nghệ BLE như thế nào? Có khác gì với Bluetooth Mesh không? Tất cả sẽ có ngay trong bài viết dưới đây. Theo dõi nhé!\r\n\r\nBLE là gì?\r\n\r\nCông nghệ BLE là gì? BLE (Bluetooth Low Energy) có nguồn gốc từ Wibree được Nokia phát minh vào năm 2016. Sau đó, BLE được mua lại bởi tập đoàn Bluetooth SIG và trang bị phiên bản Bluetooth 4.0 vào năm 2010. Mục đích của việc này là giảm thiểu tiêu hao năng lượng khi kết nối giữa các thiết bị. Điều này sẽ tăng hiệu quả truyền tải và giúp người dùng gửi được nhiều dữ liệu quan trọng hơn.\r\n\r\n\r\n\r\nBluetooth Low Energy (BLE) là công nghệ giao tiếp không dây công suất thấp có thể được sử dụng trong khoảng cách ngắn để cho phép các thiết bị thông minh giao tiếp với nhau. Một số thiết bị bạn tương tác hàng ngày như điện thoại thông minh, đồng hồ thông minh, thiết bị theo dõi thể dục, tai nghe không dây và máy tính đang sử dụng BLE để tạo ra trải nghiệm liền mạch.\r\n\r\nBLE có nhiều khả năng và được triển khai trong nhiều lĩnh vực như y tế, thể dục, an ninh, nhà thông minh,v.v..Nó cũng hoạt động trên các thiết bị quen thuộc hàng ngày như điện thoại thông minh và máy tính xách tay mà bạn đang sử dụng.\r\n\r\nĐiểm khác biệt giữa Bluetooth và BLE là gì ?\r\n\r\nBluetooth và BLE tương tự nhau ở điểm chúng giúp người dùng kết nối với các thiết bị yêu thích và quan trọng nhất của họ cho cả mục đích sử dụng tiêu dùng và thương mại. Sự khác biệt nằm ở cách họ phân phối dữ liệu để tiết kiệm năng lượng. Dưới đây là bảng so sánh của hai công nghệ này. Về bản chất, BLE sẽ phát triển trên nền tảng IoT chứ không phải bản nâng cấp của Bluetooth.\r\n\r\n\r\n\t\r\n\t\t\r\n\t\t\t\r\n\t\t\t \r\n\t\t\t\r\n\t\t\t\r\n\t\t\tBluetooth\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tBLE\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tTần số\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t2.4 G\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t2.4 G\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tKhoảng cách làm việc\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t10m\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t> 60m\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tTốc độ\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t1-3 Mbps\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t1 Mbps\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tThông lượng\r\n\t\t\t\r\n\t\t\t0,7 – 2,1 Mbps\r\n\t\t\t\r\n\t\t\t305 kbps\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tBảo mật\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t64bit – 128 bit\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t128 bit AES\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tNăng lượng tiêu thụ\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tNhỏ\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tRất nhỏ\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tCấu trúc liên kết mạng\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tLiên tục theo hai hướng\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tTừng đợt ngắn theo 1 hướng\r\n\t\t\t\r\n\t\t\r\n\t\r\n\r\n\r\nSo sánh nhanh giữa Bluetooth thường và BLE sẽ giúp bạn lựa chọn đúng công nghệ cho nhu cầu của mình. Để hiểu rõ hơn về sự khác biệt giữa hai công nghệ này, hãy cùng so sánh các đặc điểm chính sau:\r\n\r\n\r\n\tBluetooth liên kết mạng liên tục theo cả hai hướng. BLE chỉ giao tiếp theo từng đợt ngắn và một số kết nối BLE chỉ đi theo một hướng.\r\n\tBluetooth thực hiện truyền dữ liệu với tốc độ 1-3MB. BLE được giới hạn ở 125KBs-2MBs.\r\n\tBluetooth có khả năng thoại còn BLE thì không.\r\n\tKết nối Bluetooth có độ trễ lên đến 100ms. Kết nối BLE có độ trễ là 6ms. Hãy nhớ rằng càng thấp càng tốt.\r\n\tBluetooth sử dụng nguồn 1 Watt. BLE sử dụng từ 0.01 đến 0,5 Watts. Điều này có nghĩa là một số thiết bị BLE sử dụng ít năng lượng hơn 100 lần.\r\n\r\n\r\n\r\n\r\nTheo đó, kết nối Bluetooth thông thường thường được sử dụng để xử lý, truyền và trao đổi một lượng lớn dữ liệu như video đầu vào, âm thanh và hình ảnh. Tuy nhiên, kết nối Bluetooth sẽ tiêu tốn nhiều điện năng hơn và tốn kém hơn.\r\n\r\nCông nghệ BLE phù hợp với các ứng dụng không yêu cầu truyền tải lượng lớn dữ liệu. Do đó, thiết bị này có thể chạy bằng pin trong nhiều năm với chi phí thấp hơn Bluetooth vì nó không yêu cầu kết nối liên tục.\r\n\r\n\r\n>>>Tìm hiểu thêm: Bộ điều khiển không dây Bluetooth CBU-A2D chính hãng, giá tốt của Casambi\r\n\r\n\r\nCách thức hoạt động của BLE như thế nào ?\r\n\r\nĐể các thiết bị hỗ trợ BLE có thể truyền dữ liệu cho nhau, trước tiên chúng phải tạo thành một kênh giao tiếp. Việc sử dụng API Bluetooth LE yêu cầu bạn khai báo một số quyền trong tệp kê khai của mình.\r\n\r\nSau khi ứng dụng của bạn có quyền sử dụng Bluetooth, ứng dụng của bạn cần truy cập BluetoothAdapter và xác định xem Bluetooth có khả dụng trên thiết bị hay không. Nếu Bluetooth khả dụng, thiết bị sẽ quét các thiết bị BLE lân cận. Khi một thiết bị được tìm thấy, các khả năng của thiết bị BLE được phát hiện bằng cách kết nối với máy chủ GATT trên thiết bị BLE. Sau khi kết nối được thực hiện, dữ liệu có thể được truyền sang thiết bị được kết nối dựa trên các tính năng và dịch vụ có sẵn.\r\n\r\nCông nghệ BLE sử dụng cấu trúc dữ liệu phân cấp từ đó xác định cấu trúc trao đổi thông tin. Một thiết bị sử dụng BLE làm thiết bị ngoại vi quảng cáo các tính năng và dịch vụ của nó để nó có thể được sử dụng để giao tiếp với các thiết bị khác. Các thuộc tính này được xác định bằng cách sử dụng cấu hình GATT (Generic Attributes: thuộc tính chung). Hơn nữa, những đặc điểm này đại diện cho các giá trị dưới dạng các gói thông tin nhỏ, có thể thay đổi theo thời gian.\r\n\r\nCác đặc tính của công nghệ BLE được xác định để giữ các giá trị theo kiểu ghi hoặc đọc. Đối với các thiết bị ngoại vi cung cấp giá trị theo cách ghi, thường có một giao diện để nhận dữ liệu từ một trung tâm. Đối với các thiết bị ngoại vi cung cấp đặc tính kiểu đọc, chúng thường tiết lộ thông tin cho trung tâm để gửi dữ liệu.\r\n\r\nMột số thuật ngữ về BLE mà bạn không thể bỏ qua\r\n\r\nDưới đây là tóm tắt các thuật ngữ và khái niệm BLE chính:\r\n\r\n\r\n\tCấu hình Thuộc tính Chung (GATT): Cấu hình GATT là một đặc điểm kỹ thuật chung để gửi và nhận các phần dữ liệu ngắn được gọi là “thuộc tính” qua liên kết BLE. Tất cả các cấu hình ứng dụng BLE hiện tại đều dựa trên GATT.\r\n\tCấu hình: Bluetooth SIG xác định nhiều cấu hình cho các thiết bị BLE. Cấu hình là một thông số kỹ thuật về cách một thiết bị hoạt động trong một ứng dụng cụ thể. Lưu ý rằng một thiết bị có thể triển khai nhiều cấu hình. Ví dụ: một thiết bị có thể chứa máy đo nhịp tim và máy dò mức pin.\r\n\tGiao thức thuộc tính (ATT): GATT được xây dựng dựa trên Giao thức thuộc tính (ATT). Đây còn được gọi là GATT / ATT. ATT được tối ưu hóa để chạy trên các thiết bị BLE. Để đạt được điều này, nó sử dụng càng ít byte càng tốt. Mỗi thuộc tính được nhận dạng duy nhất bởi Mã định danh duy nhất toàn cầu (UUID), là định dạng 128 bit được tiêu chuẩn hóa cho các ID chuỗi được sử dụng để xác định thông tin duy nhất. Các thuộc tính được vận chuyển bởi ATT được định dạng dưới dạng các tính năng và dịch vụ.\r\n\tTính năng: Một đặc tính chứa một giá trị duy nhất và bộ mô tả 0-n mô tả giá trị của thuộc tính. Một thuộc tính có thể được coi là một kiểu, tương tự như một lớp.\r\n\tBộ mô tả: Bộ mô tả là các thuộc tính được xác định mô tả một giá trị đặc trưng. Ví dụ, một bộ mô tả có thể chỉ định một mô tả mà con người có thể đọc được, một phạm vi chấp nhận được đối với giá trị của một đặc tính hoặc một đơn vị đo lường cụ thể cho giá trị của một đặc tính. đếm.\r\n\tDịch vụ: Một dịch vụ là một tập hợp các đặc điểm. \r\n\r\n\r\nỨng dụng của BLE là gì?\r\n\r\nCông nghệ BLE ra đời với chức năng mang lại hiệu quả tối ưu cho người dùng thông qua các thiết bị IoT. Vì vậy, công nghệ này đã được ứng dụng rộng rãi trên các thiết bị thông minh trong các lĩnh vực khác nhau. BLE sẽ không bao giờ thay thế bluetooth. Nhưng nó đã trở thành công nghệ tiêu chuẩn cho nhiều ứng dụng.\r\n\r\n\r\n\r\nThiết bị thông minh\r\n\r\nHầu hết các thiết bị thông minh sử dụng BLE để giao tiếp với nhau. Nhiều thiết bị thông minh có nguồn điện hạn chế và sẽ không thể hỗ trợ việc sử dụng Bluetooth. BLE cũng được tìm thấy trong hầu hết các điện thoại thông minh, vì vậy nó cung cấp khả năng tương thích dễ dàng.\r\n\r\nMáy theo dõi thể dục\r\n\r\nĐây là một trong những trường hợp sử dụng chính của Bluetooth Low Energy, được cho là đã khiến nó trở nên phổ biến. Vì công nghệ Bluetooth (cả cổ điển và BLE) rất phổ biến trên điện thoại thông minh, máy tính bảng và máy tính xách tay, nên có một lý do khiến các thiết bị cá nhân mà chúng ta thường ghép nối với chúng chẳng hạn như máy theo dõi thể dục và các thiết bị thông minh khác cũng sẽ sử dụng chúng.\r\n\r\nTiếp thị vùng lân cận\r\n\r\nBLE có thể được sử dụng để gửi tin nhắn quảng cáo đến các điện thoại thông minh ở gần. Điều này cho phép tiếp thị có mục tiêu đến mọi người chỉ dựa trên vị trí. Ví dụ: một cửa hàng có thể gửi thông báo cho mọi người khi họ bước vào cơ sở.\r\n\r\nTheo dõi vị trí trong nhà\r\n\r\nGPS rõ ràng là hiệu quả trong việc theo dõi vị trí. Nhưng nó thường không đủ chính xác để sử dụng ở những khu vực nhỏ như bên trong các tòa nhà. BLE cung cấp một giải pháp thay thế hữu ích cho việc giám sát trong nhà. Khi kết hợp với đèn hiệu, nó có thể được sử dụng để theo dõi điện thoại thông minh từ phòng này sang phòng khác.\r\n\r\nMột trong những lợi ích chính của BLE là nó có thể được sử dụng để định vị chính xác những nơi không thể sử dụng GPS - trong nhà. Bạn có thể sử dụng các thiết bị được trang bị BLE làm tín hiệu, tức là để truyền dữ liệu đến tất cả các thiết bị trong vùng lân cận, thay vì trao đổi một đối một. Dựa vào đó, các thiết bị có khả năng xử lý dữ liệu đó (chẳng hạn như điện thoại) hoặc chỉ cần chụp và chuyển tiếp dữ liệu đó xa hơn (chẳng hạn như điểm truy cập) có thể xác định vị trí của đèn. nhãn hiệu.\r\n\r\nQuản lý tài sản\r\n\r\nBLE cũng có thể được sử dụng để theo dõi các hạng mục vật chất và do đó phổ biến trong quản lý tài sản. Mỗi mục cần theo dõi được gán một thẻ BLE. Sau đó, các biểu tượng được thiết lập trên toàn bộ cơ sở để lắng nghe ID duy nhất của mỗi thẻ.\r\n\r\nTheo dõi liên hệ\r\n\r\nVị trí trong nhà càng trở nên quan trọng hơn khi việc quản lý sử dụng trở thành một trong những ưu tiên hàng đầu của tất cả các doanh nghiệp. Để giữ an toàn cho đồng nghiệp của họ, người sử dụng lao động ngày càng xem xét các giải pháp dựa trên BLE để theo dõi liên hệ không cần ủy quyền.\r\n\r\nTrong trường hợp này, những người đến văn phòng được trang bị một thẻ BLE đơn giản dùng một lần để thu thập thông tin về nơi họ đến và người họ tiếp xúc. Đồng thời, nó không lưu trữ bất kỳ dữ liệu nhạy cảm nào có thể bị coi là xâm phạm quyền riêng tư. Nếu ai đó trong văn phòng bị ốm, rất dễ dàng xác định ai có thể đã tiếp xúc và bùng phát dịch bệnh.\r\n\r\nƯu và nhược điểm của BLE là gì?\r\n\r\nMọi công nghệ, thiết bị không phải lúc nào cũng hoàn hảo với những tính năng của chúng mà sẽ có những ưu nhược điểm riêng, điều này không riêng gì BLE. Vậy ưu, nhược điểm của BLE là gì?\r\n\r\nƯu điểm\r\n\r\n\r\n\tTiết kiệm năng lượng tiêu thụ ở mức tối thiểu: với một pin đồng xu duy nhất, bạn có thể sử dụng thiết bị trong nhiều tháng hoặc nhiều năm nhờ cơ chế bật khi có dữ liệu hoặc tắt và tắt khi không có dữ liệu. cho dù một cách liên tục.\r\n\tGiá thành của công nghệ BLE tương đối thấp: Các thành phần thiết kế BLE như chip, mô hình dữ liệu,… không quá đắt và không quá phức tạp nên giá thành của công nghệ này cũng tương đối thấp.\r\n\tHạn chế nhiễu giữa các thiết bị Bluetooth và Wifi nhờ BLE hoạt động ở tần số 2.4 Ghz\r\n\tThiết lập kết nối và truyền dữ liệu rất nhanh chỉ khoảng 3ms\r\n\r\n\r\nNhược điểm\r\n\r\n\r\n\tTruyền lượng dữ liệu nhỏ: Công nghệ BLE có tần số điều chế của sóng Bluetooth trong không gian là 1Mbps. Tần số trên chỉ là thông số lý thuyết. Trên thực tế, thông số này nhỏ hơn do ảnh hưởng của nhiều yếu tố.\r\n\tKhoảng cách giới hạn: Về mặt lý thuyết, công nghệ BLE có khả năng truyền dữ liệu với khoảng cách tối đa là 100m. Tuy nhiên trên thực tế, công nghệ này chỉ có thể truyền được với khoảng cách 30m, đạt hiệu quả cao nhất từ ​​2 đến 5m.\r\n\tHạn chế nhiễu giữa các thiết bị Bluetooth và Wifi nhờ BLE hoạt động ở tần số 2.4 Ghz.\r\n\r\n\r\nGiải đáp một số thắc mắc về BLE là gì?\r\n\r\nNền tảng hỗ trợ của BLE là gì?\r\n\r\nHỗ trợ cho Bluetooth 4.0 và BLE khả dụng trên hầu hết các nền tảng chính kể từ các phiên bản như:\r\n\r\n\r\n\tiOS5 + (ưu tiên iOS7 +)\r\n\tAndroid 4.3+ (nhiều bản sửa lỗi trong 4.4+)\r\n\tApple OS X 10.6+\r\n\tWindows 8 (XP, Vista và 7 chỉ hỗ trợ Bluetooth 2.1)\r\n\tGNU / Linux Vanilla BlueZ 4.93+\r\n\r\n\r\nBLE có bảo mật không?\r\n\r\n\r\n\tTất cả các kết nối BLE đều được trang bị mã hóa AES-128. Điều này ngăn không cho dữ liệu được đọc nếu nó bị chặn.\r\n\tCác cuộc tấn công Man-in-the-Middle là có thể xảy ra, nhưng điều này chỉ có thể xảy ra trong một thời gian giới hạn khi hai thiết bị BLE đang ghép nối.\r\n\tPhạm vi hạn chế của BLE cũng được hưởng lợi từ quan điểm bảo mật. Bất kỳ nỗ lực nào để tấn công một thiết bị BLE đều yêu cầu tin tặc đến gần thiết bị đó.\r\n\r\n\r\nTrên đây KNX Store đã chia sẻ đến các bạn những thông tin về công nghệ BLE là gì, các ứng dụng của công nghệ này cũng như ưu nhược điểm của BLE, hy vọng sẽ hữu ích cho bạn. Nếu bạn có nhu cầu tìm hiểu thêm thông tin về công nghệ này cũng như tham khảo các sản phẩm nhà thông minh, vui lòng liên hệ với KNX Store qua hotline để được tư vấn và hỗ trợ nhanh chóng.\r\n",
+        "description": "BLE là nền tảng của Casambi mesh: chiếu sáng không hub, tích hợp DALI-2, 0-10V, Triac. So sánh BLE vs Zigbee, xem CBU modules và LED driver Casambi cho dự án. ",
+        "articleBody": "Nếu bạn đã từng cân nhắc giải pháp chiếu sáng không dây cho một dự án thương mại, bạn biết bài toán: kéo thêm bus DALI-2 hay KNX TP tốn chi phí và thời gian, nhưng Zigbee thì lại cần hub coordinator và phức tạp khi debug. BLE (Bluetooth Low Energy) giải quyết bài toán đó theo một cách khác, và Casambi là hệ sinh thái chiếu sáng xây dựng trên BLE được triển khai rộng nhất hiện nay tại Việt Nam.\r\n\r\nBLE không phải Bluetooth thông thường. Đây là giao thức tối ưu riêng cho IoT: tiêu thụ dưới 0.5 W, latency 6 ms, range 30-60 m indoor, và quan trọng hơn, có sẵn trong mọi smartphone từ 2013 trở đi. Không cần dongle, không cần app riêng cho từng brand.\r\n\r\nBLE là gì và thông số kỹ thuật cần biết\r\n\r\nBLE (Bluetooth Low Energy) có nguồn gốc từ dự án Wibree của Nokia, được Bluetooth SIG tích hợp vào Bluetooth 4.0 năm 2010. Mục tiêu thiết kế là giảm tiêu thụ điện xuống dưới 100 lần so với Bluetooth Classic, trong khi vẫn giữ khả năng kết nối đủ cho sensor và actuator IoT.\r\n\r\n\r\n\r\nThông số kỹ thuật chính của BLE:\r\n\r\n\r\n\t\r\n\t\t\r\n\t\t\tThông số\r\n\t\t\tGiá trị\r\n\t\t\r\n\t\r\n\t\r\n\t\t\r\n\t\t\tTần số\r\n\t\t\t2.4 GHz ISM band\r\n\t\t\r\n\t\t\r\n\t\t\tSố kênh\r\n\t\t\t40 (37 data + 3 advertising)\r\n\t\t\r\n\t\t\r\n\t\t\tData rate\r\n\t\t\t1 Mbps (BLE 4.x), 2 Mbps (BLE 5.x LE 2M PHY)\r\n\t\t\r\n\t\t\r\n\t\t\tLatency kết nối\r\n\t\t\t~6 ms\r\n\t\t\r\n\t\t\r\n\t\t\tRange thực tế indoor\r\n\t\t\t30-60 m (không vật cản), 10-15 m qua tường bê tông\r\n\t\t\r\n\t\t\r\n\t\t\tTiêu thụ điện\r\n\t\t\t0.01-0.5 W (so với ~1 W Bluetooth Classic)\r\n\t\t\r\n\t\t\r\n\t\t\tBảo mật\r\n\t\t\tAES-128 bit\r\n\t\t\r\n\t\t\r\n\t\t\tHỗ trợ native\r\n\t\t\tiOS 7+, Android 4.3+, Windows 8+\r\n\t\t\r\n\t\r\n\r\n\r\nBLE không có khả năng thoại và không phù hợp cho stream dữ liệu lớn. Với lighting control, điều đó không quan trọng: một lệnh dim/scene/color không cần quá vài byte.\r\n\r\nSo sánh Bluetooth Classic và BLE\r\n\r\n\r\n\r\n\r\n\t\r\n\t\t\r\n\t\t\tThông số\r\n\t\t\tBluetooth Classic\r\n\t\t\tBLE\r\n\t\t\r\n\t\r\n\t\r\n\t\t\r\n\t\t\tTần số\r\n\t\t\t2.4 GHz\r\n\t\t\t2.4 GHz\r\n\t\t\r\n\t\t\r\n\t\t\tKhoảng cách\r\n\t\t\t~10 m\r\n\t\t\t>60 m\r\n\t\t\r\n\t\t\r\n\t\t\tTốc độ\r\n\t\t\t1-3 Mbps\r\n\t\t\t1-2 Mbps\r\n\t\t\r\n\t\t\r\n\t\t\tThông lượng thực\r\n\t\t\t0.7-2.1 Mbps\r\n\t\t\t305 kbps\r\n\t\t\r\n\t\t\r\n\t\t\tBảo mật\r\n\t\t\t64-128 bit\r\n\t\t\t128 bit AES\r\n\t\t\r\n\t\t\r\n\t\t\tTiêu thụ điện\r\n\t\t\t~1 W\r\n\t\t\t0.01-0.5 W\r\n\t\t\r\n\t\t\r\n\t\t\tTopology\r\n\t\t\tLiên tục 2 chiều\r\n\t\t\tBurst ngắn 1-2 chiều\r\n\t\t\r\n\t\t\r\n\t\t\tHỗ trợ thoại\r\n\t\t\tCó\r\n\t\t\tKhông\r\n\t\t\r\n\t\t\r\n\t\t\tLatency kết nối\r\n\t\t\t~100 ms\r\n\t\t\t~6 ms\r\n\t\t\r\n\t\r\n\r\n\r\nBluetooth Classic phù hợp cho stream dữ liệu lớn liên tục như audio và video. BLE được thiết kế cho giao tiếp ngắn, không liên tục, pin coin cell dùng nhiều năm, phù hợp với sensor và actuator trong hệ thống IoT và chiếu sáng\r\n\r\nTại sao Casambi chọn BLE thay vì Zigbee hay Wi-Fi?\r\n\r\nCâu hỏi này hay gặp khi tư vấn dự án. Có 3 công nghệ không dây phổ biến cho lighting control, và không cái nào hoàn hảo:\r\n\r\n\r\n\t\r\n\t\t\r\n\t\t\tTiêu chí\r\n\t\t\tBLE (Casambi)\r\n\t\t\tZigbee\r\n\t\t\tWi-Fi\r\n\t\t\r\n\t\r\n\t\r\n\t\t\r\n\t\t\tHub / coordinator\r\n\t\t\tKhông bắt buộc\r\n\t\t\tBắt buộc\r\n\t\t\tBắt buộc (AP/router)\r\n\t\t\r\n\t\t\r\n\t\t\tSmartphone native\r\n\t\t\tiOS + Android native\r\n\t\t\tCần bridge app\r\n\t\t\tCần app\r\n\t\t\r\n\t\t\r\n\t\t\tCommissioning\r\n\t\t\tNFC tap hoặc BLE scan\r\n\t\t\tCoordinator trước\r\n\t\t\tSSID + password\r\n\t\t\r\n\t\t\r\n\t\t\tTích hợp DALI-2\r\n\t\t\tCó (CBU module)\r\n\t\t\tKhông phổ biến\r\n\t\t\tKhông phổ biến\r\n\t\t\r\n\t\t\r\n\t\t\tTiêu thụ điện node\r\n\t\t\tRất thấp\r\n\t\t\tThấp\r\n\t\t\tCao\r\n\t\t\r\n\t\t\r\n\t\t\tRange mỗi hop\r\n\t\t\t10-30 m indoor\r\n\t\t\t10-20 m\r\n\t\t\t30-50 m\r\n\t\t\r\n\t\t\r\n\t\t\tDebug tool\r\n\t\t\tCasambi app (thân thiện)\r\n\t\t\tCần network analyzer\r\n\t\t\tBrowser dev tools\r\n\t\t\r\n\t\r\n\r\n\r\nLợi thế cốt lõi của BLE: smartphone là hub. Contractor không cần mang thêm thiết bị để commissioning, client không cần mua hub riêng để vận hành nội bộ. Điều này rút ngắn thời gian on-site đáng kể so với Zigbee.\r\n\r\nCasambi xây dựng BLE Mesh như thế nào?\r\n\r\nCasambi không dùng Bluetooth Mesh SIG chuẩn. Đây là giao thức mesh proprietary chạy trên BLE, được phát triển bởi Casambi Technologies (Finland) từ 2012.\r\n\r\nRelay và self-healing:\r\n\r\nMỗi CBU node hoạt động đồng thời là receiver và relay. Không có master node duy nhất, mạng tự heal nếu một node mất nguồn. Smartphone kết nối vào bất kỳ node nào trong range, rồi lệnh được relay đến toàn bộ network.\r\n\r\nGiới hạn và mở rộng:\r\n\r\n\r\n\tTối đa 250 CBU nodes mỗi Casambi network\r\n\tNhiều network liên kết qua Network Share (dùng chung scene, schedule)\r\n\tRange mỗi hop: 10-15 m qua tường bê tông, ~30 m không vật cản\r\n\r\n\r\nCommissioning:\r\n\r\nTap NFC vào CBU (smartphone có NFC) hoặc add qua BLE scan trong Casambi app. Không cần PC tool, không cần địa chỉ DALI-2 trước khi lắp.\r\n\r\nMột lưu ý thực tế từ triển khai: nếu smartphone không tìm thấy CBU khi add mới, kiểm tra Network > Sharing mode trước khi làm gì khác. Khoảng 70-80% trường hợp \"không tìm thấy node\" là do network chưa ở chế độ open sharing, không phải lỗi phần cứng.\r\n\r\nCasambi BLE Mesh so với Bluetooth Mesh SIG\r\n\r\n\r\n\t\r\n\t\t\r\n\t\t\tĐặc điểm\r\n\t\t\tCasambi BLE Mesh\r\n\t\t\tBluetooth Mesh SIG (BT 5.x)\r\n\t\t\r\n\t\r\n\t\r\n\t\t\r\n\t\t\tChuẩn hóa\r\n\t\t\tProprietary (Casambi Technologies)\r\n\t\t\tOpen standard (Bluetooth SIG)\r\n\t\t\r\n\t\t\r\n\t\t\tInteroperability\r\n\t\t\tCasambi ecosystem only\r\n\t\t\tĐa vendor (lý thuyết)\r\n\t\t\r\n\t\t\r\n\t\t\tCommissioning\r\n\t\t\tNFC tap hoặc app scan\r\n\t\t\tProvisioner tool yêu cầu\r\n\t\t\r\n\t\t\r\n\t\t\tNetwork size\r\n\t\t\t250 nodes/network\r\n\t\t\tKhông giới hạn cứng\r\n\t\t\r\n\t\t\r\n\t\t\tLatency lệnh\r\n\t\t\t10 năm triển khai\r\n\t\t\tPhụ thuộc firmware/vendor\r\n\t\t\r\n\t\t\r\n\t\t\tDebug tool\r\n\t\t\tCasambi app (thân thiện)\r\n\t\t\tMesh Inspector (phức tạp hơn)\r\n\t\t\r\n\t\r\n\r\n\r\nCasambi proprietary mesh hy sinh tính interoperability để đổi lấy độ tin cậy cao và commissioning đơn giản. Đây là lựa chọn phù hợp cho SI/contractor muốn giảm thời gian on-site và tối thiểu hóa rủi ro triển khai.\r\n\r\nModules CBU Casambi: tích hợp BLE vào hạ tầng DALI/0-10V hiện có\r\n\r\nCBU (Control Bus Unit) là hardware module tích hợp BLE radio cùng giao diện điều khiển (DALI, 0-10V, PWM, Relay). Đây là cách retrofit hệ thống Casambi vào LED driver hiện có mà không cần thay driver.\r\n\r\nCác modules CBU chính:\r\n\r\n\r\n\t\r\n\t\t\r\n\t\t\tModel\r\n\t\t\tGiao diện\r\n\t\t\tSố kênh\r\n\t\t\tỨng dụng điển hình\r\n\t\t\r\n\t\r\n\t\r\n\t\t\r\n\t\t\tCBU-ASD-LR\r\n\t\t\tDALI + 0-10V\r\n\t\t\t1\r\n\t\t\tLED driver 1 kênh, retrofit\r\n\t\t\r\n\t\t\r\n\t\t\tCBU-A2D\r\n\t\t\tDALI + 0-10V\r\n\t\t\t2\r\n\t\t\t2 LED driver độc lập\r\n\t\t\r\n\t\t\r\n\t\t\tCBU-DCS\r\n\t\t\tDALI\r\n\t\t\t1 (multi-device)\r\n\t\t\tDALI master, nhóm nhiều driver\r\n\t\t\r\n\t\t\r\n\t\t\tCBU-DA-1P\r\n\t\t\tDALI\r\n\t\t\t1\r\n\t\t\tDALI 1 kênh (Olfer, IP20)\r\n\t\t\r\n\t\t\r\n\t\t\tCBU-PWM4-LR\r\n\t\t\tPWM 4 kênh\r\n\t\t\t4\r\n\t\t\tRGBW / Tunable White LED strip\r\n\t\t\r\n\t\r\n\r\n\r\nCBU-ASD-LR và CBU-A2D là 2 model phổ biến nhất cho retrofit. Lắp song song với LED driver hiện có, commissioning dưới 5 phút/điểm đèn.\r\n\r\nXem thêm module CBU điều khiển chiếu sáng Casambi tại KNXStore:\r\n{products:[503,6,648,1079,1159]}\r\n\r\nLED driver tích hợp BLE Casambi sẵn\r\n\r\nVới dự án mới (không retrofit), LED driver tích hợp Casambi chip sẵn gọn hơn so với dùng CBU rời. BLE radio nằm trực tiếp trong driver, không cần thêm module.\r\n\r\nSunricher cung cấp dòng SRP-CA9105N (CC, 2 kênh CCT, NFC commissioning) phủ đầy các mức công suất phổ biến từ 15W đến 65W, phù hợp cho downlight và track light. Dòng SRP-CS9105 (CV, 24VDC) dùng cho LED strip và linear profile.\r\n\r\nXem thêm LED driver tích hợp BLE Casambi tại KNXStore:\r\n{products:[3076,3078,3079,3080,2913]}\r\n\r\nGateway và tích hợp hệ thống\r\n\r\nCasambi hoạt động hoàn toàn local không cần internet. Khi cần remote access hoặc tích hợp BMS:\r\n\r\n\r\n\tCGW-001 (Cloud Gateway): Kết nối mạng Casambi vào Casambi cloud. REST API cho phép tích hợp với KNX, BACnet, SCADA, third-party BMS. Hỗ trợ scheduling qua cloud khi không có smartphone tại chỗ.\r\n\tLithernet: Cổng Ethernet-to-Casambi. Phù hợp môi trường yêu cầu kết nối có dây (data center, server room, phòng điều khiển).\r\n\r\n\r\nXem thêm thiết bị gateway Casambi tại KNXStore:\r\n{products:[524,690]}\r\n\r\nỨng dụng BLE Casambi theo loại công trình\r\n\r\nVăn phòng / thương mại: Điều khiển theo vùng, lịch trình, cảm biến hiện diện (CBU-PIR). Tích hợp với BMS qua CGW-001 REST API. Tuân thủ EN 15232 Energy Class A cho lighting control.\r\n\r\nKhách sạn / hospitality: Per-room control qua app, scene preset. Tùy chọn mở app cho khách theo phòng.\r\n\r\nNhà ở / biệt thự: Không kéo bus cable DALI hay KNX. Phù hợp retrofit sau khi hoàn thiện nội thất.\r\n\r\nNgoại thất / outdoor: CBU-ASD-LR kết hợp LED driver IP65. Relay qua các luminaire outdoor kéo dài range.\r\n\r\nƯu và nhược điểm của BLE Casambi\r\n\r\nƯu điểm:\r\n\r\n\r\n\tKhông cần bus cable điều khiển (DALI/KNX), tiết kiệm chi phí đi dây\r\n\tCommissioning không cần PC tool, kỹ thuật viên dùng smartphone\r\n\tSelf-healing mesh: mất 1 node không ảnh hưởng toàn mạng\r\n\tAES-128 encryption, dữ liệu không ra ngoài khi không có CGW\r\n\tTích hợp native với DALI DT6, DT8, 0-10V, Triac, Relay\r\n\tThiết lập kết nối nhanh, latency ~6 ms\r\n\r\n\r\nNhược điểm:\r\n\r\n\r\n\tProprietary ecosystem: buộc phải dùng thiết bị Casambi-compatible, không mix trực tiếp với Zigbee hay Matter\r\n\tRange mỗi hop giới hạn: cần density node đủ trong tòa nhà lớn (>1000 m²)\r\n\tTích hợp với KNX phức tạp hơn: cần KNX-Casambi bridge (VBU-K2C Vlinca hoặc Salvador)\r\n\r\n\r\nKết Luận \r\n\r\nCasambi BLE hiện là giải pháp wireless lighting triển khai nhanh nhất trên thị trường Việt Nam  không cần kéo bus cable bổ sung, không cần PC tool chuyên dụng, commissioning qua NFC và smartphone. KNXStore phân phối đầy đủ CBU modules, LED driver tích hợp sẵn, gateway và switch Casambi với hỗ trợ kỹ thuật xuyên suốt từ thiết kế đến commissioning. Liên hệ để được tư vấn cụ thể theo yêu cầu dự án.\r\n",
         "articleSection": "Kiến thức",
         "keywords": [],
         "inLanguage": "vi-VN",
-        "datePublished": "2025-04-01T10:46:40+07:00",
-        "dateModified": "2025-04-01T10:46:40+07:00",
+        "datePublished": "2026-06-18T17:16:07+07:00",
+        "dateModified": "2026-06-18T17:16:07+07:00",
         "url": "https://knxstore.vn/ble-la-gi.html",
         "image": {
           "@id": "https://knxstore.vn/ble-la-gi.html#featured-image"
@@ -402,7 +542,63 @@ Trên đây KNX Store đã chia sẻ đến các bạn những thông tin về c
             "@type": "Country",
             "name": "Việt Nam"
           }
+        },
+        "author": {
+          "@type": "Person",
+          "@id": "https://knxstore.vn/author/le-vo-quoc-huy#author",
+          "name": "Lê Võ Quốc Huy",
+          "url": "https://knxstore.vn/author/le-vo-quoc-huy",
+          "image": {
+            "@type": "ImageObject",
+            "url": "https://knxstore.vn/assets/image/author/le-vo-quoc-huy1.jpg"
+          }
         }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://knxstore.vn/ble-la-gi.html#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "BLE là gì trong hệ thống chiếu sáng thương mại?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "BLE (Bluetooth Low Energy) là giao thức không dây 2.4 GHz tiêu thụ điện 0.01-0.5 W, nền tảng vật lý của Casambi mesh. Mỗi thiết bị Casambi chứa BLE radio, hoạt động đồng thời là node điều khiển và relay để mở rộng vùng phủ sóng mà không cần hub trung tâm."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Casambi có cần hub trung tâm không?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Không. Smartphone kết nối trực tiếp vào node gần nhất qua BLE, lệnh được relay qua các node khác trong network. CGW-001 chỉ cần khi yêu cầu remote access qua internet hoặc tích hợp BMS bên ngoài qua REST API."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Casambi BLE Mesh khác Bluetooth Mesh SIG ở điểm gì?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Casambi dùng giao thức mesh proprietary trên BLE, không phải Bluetooth Mesh SIG chuẩn. Casambi ưu tiên độ ổn định và commissioning đơn giản. Latency lệnh dưới 100 ms, tốt hơn Bluetooth Mesh SIG (100-500 ms) trong thực tế. Đánh đổi là ecosystem đóng: chỉ dùng được với thiết bị Casambi-compatible."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "BLE có đủ bảo mật cho tòa nhà thương mại không?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Có. Mọi kết nối Casambi BLE đều mã hóa AES-128. Network được bảo vệ bằng password. Thiết bị ngoài network không thể gửi lệnh vào. Range BLE giới hạn trong tòa nhà cũng là lớp bảo vệ vật lý bổ sung, attacker phải ở trong phạm vi vật lý."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Một mạng Casambi điều khiển được bao nhiêu thiết bị?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Tối đa 250 CBU nodes mỗi Casambi network. Nhiều networks liên kết qua Network Share để mở rộng quy mô, Casambi app quản lý tất cả trong một giao diện. Với dự án trên 500 điểm đèn, cần tính toán density node để đảm bảo relay coverage đủ."
+            }
+          }
+        ]
       }
     ]
   }

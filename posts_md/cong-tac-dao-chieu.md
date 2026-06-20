@@ -19,6 +19,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/driver-led"
   - name: "Công tắc đảo chiều là gì?"
     url: "https://knxstore.vn/cong-tac-dao-chieu.html"
+products: [{"url": "https://knxstore.vn/products/lutron-dieu-khien-chieu-sang-khong-day-pico-3-nut-bam", "name": "Điều khiển chiếu sáng không dây Pico 3 nút Lutron", "image": "https://knxstore.vn/assets/image/product/lutron-dieu-khien-chieu-sang-khong-day-pico-3-nut-bam_1.jpg"}, {"url": "https://knxstore.vn/products/lutron-dieu-khien-chieu-sang-khong-day-pico-4-nut-bam", "name": "Điều khiển chiếu sáng không dây Pico 4 nút Lutron", "image": "https://knxstore.vn/assets/image/product/lutron-dieu-khien-chieu-sang-khong-day-pico-4-nut-bam_1.jpg"}, {"url": "https://knxstore.vn/products/lutron-bo-dieu-khien-khong-day-pico-3-nut-bam", "name": "Bộ điều khiển không dây Pico 3 nút bấm Lutron - PK2-3B-TAW-L01", "image": "https://knxstore.vn/assets/image/product/lutron-bo-dieu-khien-khong-day-pico-3-nut-bam_1.jpeg"}]
 internal_links:
   - url: "https://knxstore.vn/den-cam-ung-cau-thang.html"
     slug: "den-cam-ung-cau-thang"

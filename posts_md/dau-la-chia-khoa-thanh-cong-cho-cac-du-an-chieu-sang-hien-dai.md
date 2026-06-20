@@ -19,6 +19,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/chieu-sang"
   - name: "Giải pháp Casambi Mesh - Lựa chọn hàng đầu cho dự án thương mại & công nghiệp"
     url: "https://knxstore.vn/dau-la-chia-khoa-thanh-cong-cho-cac-du-an-chieu-sang-hien-dai.html"
+products: [{"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-led-drivers-dali-0-10v-bluetooth-cbu-asd", "name": "CBU-ASD"}]
 internal_links:
   - url: "https://knxstore.vn/casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap.html"
     slug: "casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap"

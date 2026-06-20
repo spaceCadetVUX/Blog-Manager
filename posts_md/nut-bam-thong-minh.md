@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/cam-bien"
   - name: "Top 4 công tắc thông minh cao cấp và đáng mua nhất hiện nay"
     url: "https://knxstore.vn/nut-bam-thong-minh.html"
+products: [{"url": "https://knxstore.vn/products/kanonbus-cong-tac-dieu-khien-knx-kte8ts-m", "name": "KTE8TS-M"}, {"url": "https://knxstore.vn/products/kanonbus-bang-dieu-khien-thermostat-knx-ktex8w-m", "name": "KTEX8W-M"}, {"url": "https://knxstore.vn/products/casambi-cong-tac-bticino-living-now-3m-cbl-pb3-xx", "name": "PB2"}, {"url": "https://knxstore.vn/products/bticino-bang-dieu-khien-living-now-knx-thermostat-2m-kg4691f3knx", "name": "KG4691F3KNX"}]
 internal_links:
   - url: "https://knxstore.vn/sensor-la-gi.html"
     slug: "sensor-la-gi"

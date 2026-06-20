@@ -19,6 +19,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/cam-bien"
   - name: "Cảm biến khói là gì? Hướng dẫn chọn đúng loại cho nhà ở và văn phòng"
     url: "https://knxstore.vn/cam-bien-khoi.html"
+products: [{"url": "https://knxstore.vn/products/satel-cam-bien-bao-khoi-msd-300", "name": "Cảm biến báo khói không dây Satel - MSD-300", "image": "https://knxstore.vn/assets/image/product/satel-cam-bien-bao-khoi-msd-300_1.jpg"}, {"url": "https://knxstore.vn/products/satel-cam-bien-bao-khoi-nhiet", "name": "Cảm biến báo khói & nhiệt  Satel - TSD-1", "image": "https://knxstore.vn/assets/image/product/satel-cam-bien-bao-khoi-nhiet_1.jpg"}]
 internal_links:
   - url: "https://knxstore.vn/sensor-la-gi.html"
     slug: "sensor-la-gi"

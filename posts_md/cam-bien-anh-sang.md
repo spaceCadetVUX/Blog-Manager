@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/cam-bien"
   - name: "Cảm biến ánh sáng là gì? Khái niệm, nguyên lý và ứng dụng"
     url: "https://knxstore.vn/cam-bien-anh-sang.html"
+products: [{"url": "https://knxstore.vn/products/ofler-cam-bien-anh-sang-zhaga-olfer-casambi-cas-24v-zhaga-4p-80-da-lx", "name": "Cảm biến ánh sáng ZHAGA Casambi Olfer - CAS-24V-ZHAGA-4P-80-DA-LX", "image": "https://knxstore.vn/assets/image/product/ofler-cam-bien-anh-sang-zhaga-olfer-casambi-cas-24v-zhaga-4p-80-da-lx_4.jpg"}, {"url": "https://knxstore.vn/products/gia-do-nema-gan-tuong-jl-260c-exm-7p-ss", "name": "Giá đỡ NEMA gắn tường Olfer - JL-260C-E2M-7P-SS", "image": "https://knxstore.vn/assets/image/product/gia-do-nema-gan-tuong-jl-260c-exm-7p-ss_5.jpg"}, {"url": "https://knxstore.vn/products/ofler-cam-bien-anh-sang-nema-olfer-casambi-dali-0-10v-cas-uni-nema-5p-010da-rl-lx", "name": "CAS-UNI-NEMA-5P-010DA-RL-LX - Cảm biến ánh sáng NEMA Olfer Casambi DALI / 0-10V Olfer", "image": "https://knxstore.vn/assets/image/product/ofler-cam-bien-anh-sang-nema-olfer-casambi-dali-0-10v-cas-uni-nema-5p-010da-rl-lx_5.jpg"}, {"url": "https://knxstore.vn/products/ofler-bo-kit-socket-cho-cam-bien-co-chan-gan-zhaga-844007zk1m5", "name": "Bộ kit socket cho cảm biến có chân gắn Zhaga Olfer - 844007ZK1M5", "image": "https://knxstore.vn/assets/image/product/ofler-bo-kit-socket-cho-cam-bien-co-chan-gan-zhaga-844007zk1m5_4.jpg"}]
 internal_links:
   - url: "https://knxstore.vn/nut-bam-thong-minh.html"
     slug: "nut-bam-thong-minh"

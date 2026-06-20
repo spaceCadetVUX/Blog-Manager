@@ -52,12 +52,12 @@ def import_file(path: Path, conn) -> bool:
             (slug, url, headline, description, image,
              date_published, date_modified, author, publisher,
              article_section, word_count, keywords, mentions,
-             breadcrumb, article_body, robots, updated_at)
+             breadcrumb, article_body, robots, products, updated_at)
         VALUES
             (:slug, :url, :headline, :description, :image,
              :date_published, :date_modified, :author, :publisher,
              :article_section, :word_count, :keywords, :mentions,
-             :breadcrumb, :article_body, :robots, CURRENT_TIMESTAMP)
+             :breadcrumb, :article_body, :robots, :products, CURRENT_TIMESTAMP)
         ON CONFLICT(slug) DO UPDATE SET
             url             = excluded.url,
             headline        = excluded.headline,
@@ -74,6 +74,7 @@ def import_file(path: Path, conn) -> bool:
             breadcrumb      = excluded.breadcrumb,
             article_body    = excluded.article_body,
             robots          = excluded.robots,
+            products        = excluded.products,
             updated_at      = CURRENT_TIMESTAMP
     """, {
         "slug":            slug,
@@ -92,6 +93,7 @@ def import_file(path: Path, conn) -> bool:
         "breadcrumb":      to_json(meta.get("breadcrumb", [])),
         "article_body":    article_body,
         "robots":          meta.get("robots", ""),
+        "products":        to_json(meta.get("products", [])),
     })
 
     # Internal links

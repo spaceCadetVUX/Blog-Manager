@@ -142,6 +142,50 @@ def find_article_jsonld(blocks: list[dict]) -> tuple[dict | None, dict | None]:
 
 # ─── HTML PARSING ───────────────────────────────────────────────────────────────
 
+def extract_product_links(html: str) -> list[dict]:
+    """Extract Shopify product links embedded trong trang blog."""
+    soup = BeautifulSoup(html, "lxml")
+    seen: dict[str, bool] = {}
+    products: list[dict] = []
+
+    for a in soup.find_all("a", href=True):
+        href = a["href"].strip()
+        if href.startswith("/"):
+            href = f"https://{BASE_DOMAIN}{href}"
+        elif not href.startswith("http"):
+            continue
+
+        parsed = urlparse(href)
+        if BASE_DOMAIN not in parsed.netloc:
+            continue
+        if "/products/" not in parsed.path:
+            continue
+
+        clean_url = href.split("?")[0].split("#")[0]
+        if clean_url in seen:
+            continue
+        seen[clean_url] = True
+
+        name = a.get_text(strip=True)[:200]
+        img_src = None
+        img_tag = a.find("img")
+        if img_tag:
+            img_src = img_tag.get("src") or img_tag.get("data-src") or img_tag.get("data-lazy-src")
+            if img_src and img_src.startswith("//"):
+                img_src = "https:" + img_src
+            if img_src and not img_src.startswith("http"):
+                img_src = None
+            if len(name) < 3 and img_tag.get("alt"):
+                name = img_tag["alt"].strip()[:200]
+
+        product = {"url": clean_url, "name": name}
+        if img_src:
+            product["image"] = img_src
+        products.append(product)
+
+    return products
+
+
 def extract_internal_links(html: str, current_url: str) -> list[dict]:
     """Extract tất cả <a href> trỏ đến bài viết knxstore.vn (*.html)."""
     soup = BeautifulSoup(html, "lxml")
@@ -215,7 +259,8 @@ def safe_str(s: str) -> str:
 
 
 def jsonld_to_md(url: str, lastmod: str, article: dict, meta: dict, all_jsonld: list[dict],
-                 webpage: dict | None = None, internal_links: list[dict] | None = None) -> str:
+                 webpage: dict | None = None, internal_links: list[dict] | None = None,
+                 product_links: list[dict] | None = None) -> str:
     def g(obj, *keys):
         for k in keys:
             if not isinstance(obj, dict):
@@ -331,6 +376,9 @@ def jsonld_to_md(url: str, lastmod: str, article: dict, meta: dict, all_jsonld: 
             if bc_item["url"]:
                 lines.append(f'    url: "{bc_item["url"]}"')
 
+    if product_links:
+        lines.append(f'products: {json.dumps(product_links, ensure_ascii=False)}')
+
     if internal_links:
         lines.append("internal_links:")
         for lnk in internal_links:
@@ -379,6 +427,7 @@ def process_url(entry: dict, output_dir: Path) -> bool:
     meta           = extract_meta_tags(html)
     article, webpage = find_article_jsonld(all_jsonld)
     internal_links = extract_internal_links(html, url)
+    product_links  = extract_product_links(html)
 
     if not article:
         article = {}
@@ -386,9 +435,9 @@ def process_url(entry: dict, output_dir: Path) -> bool:
 
     link_count = len(internal_links)
     wc = len(article.get("articleBody", "").split()) if article else 0
-    print(f"  -> {slug}.md | {wc} words | {link_count} internal links")
+    print(f"  -> {slug}.md | {wc} words | {link_count} internal links | {len(product_links)} products")
 
-    md_content = jsonld_to_md(url, lastmod, article, meta, all_jsonld, webpage, internal_links)
+    md_content = jsonld_to_md(url, lastmod, article, meta, all_jsonld, webpage, internal_links, product_links)
     out_path.write_text(md_content, encoding="utf-8")
     return True
 
@@ -439,8 +488,20 @@ def crawl_all(force: bool = False):
 
     entries = parse_sitemap(SITEMAP_FILE)
     total = len(entries)
-    mode = "FORCE RECRAWL" if force else "INCREMENTAL"
+    mode = "FORCE RECRAWL" if force else "INCREMENTAL (lastmod)"
     print(f"Sitemap: {total} URLs | Mode: {mode}\nOutput: {output_dir.resolve()}\n")
+
+    # Load DB dates để so lastmod
+    db_dates: dict[str, str] = {}
+    if not force:
+        try:
+            import sqlite3
+            db_path = Path(__file__).parent / "blog.db"
+            conn = sqlite3.connect(db_path)
+            db_dates = dict(conn.execute("SELECT slug, updated_at FROM posts").fetchall())
+            conn.close()
+        except Exception:
+            pass
 
     ok = fail = skip = 0
     for i, entry in enumerate(entries, 1):
@@ -448,10 +509,13 @@ def crawl_all(force: bool = False):
         slug  = slug_from_url(url)
         out_path = output_dir / f"{slug}.md"
 
-        if out_path.exists() and not force:
-            print(f"[{i}/{total}] SKIP  {slug}")
-            skip += 1
-            continue
+        if not force:
+            lastmod    = entry.get("lastmod", "")
+            db_updated = db_dates.get(slug, "")
+            if db_updated and (not lastmod or lastmod <= db_updated[:10]):
+                print(f"[{i}/{total}] SKIP  {slug}")
+                skip += 1
+                continue
 
         print(f"[{i}/{total}] {url}")
         success = process_url(entry, output_dir)

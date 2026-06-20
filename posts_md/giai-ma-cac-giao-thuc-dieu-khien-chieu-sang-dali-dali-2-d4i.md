@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/chieu-sang"
   - name: "Giải mã các giao thức điều khiển chiếu sáng: DALI, DALI-2, D4i"
     url: "https://knxstore.vn/giai-ma-cac-giao-thuc-dieu-khien-chieu-sang-dali-dali-2-d4i.html"
+products: [{"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-dali-master-casambi-savaldor-sal-10xx", "name": "tại đây"}, {"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-2-kenh-0-10v-dali-bluetooth-cbu-a2d", "name": "CBU-A2D"}, {"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-led-drivers-dali-0-10v-bluetooth-cbu-asd", "name": "CBU-ASD"}, {"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-dali-bluetooth-cbu-dcs", "name": "CBU-DCS"}, {"url": "https://knxstore.vn/products/casambi-cloud-gateway-cgw-001", "name": "Casambi DALI Gateway"}]
 internal_links:
   - url: "https://knxstore.vn/casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap.html"
     slug: "casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap"

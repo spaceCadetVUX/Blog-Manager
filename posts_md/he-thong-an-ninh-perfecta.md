@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/an-ninh"
   - name: "Tìm hiểu về hệ thống an ninh Perfecta"
     url: "https://knxstore.vn/he-thong-an-ninh-perfecta.html"
+products: [{"url": "https://knxstore.vn/products/satel-bang-dieu-khien-an-ninh-32-zones-tich-hop-ethernet-ip", "name": "Perfecta IP 32 WRL"}, {"url": "https://knxstore.vn/products/satel-ban-phim-dieu-khien-co-day-perfecta-prf-lcd", "name": "PRF-LCD"}, {"url": "https://knxstore.vn/products/satel-cam-bien-khong-day-da-chuc-nang-mxd-300", "name": "MXD-300"}, {"url": "https://knxstore.vn/products/satel-mpd-300-cam-bien-chuyen-dong-khong-day", "name": "MPD 300"}, {"url": "https://knxstore.vn/products/satel-cam-bien-bao-khoi-msd-300", "name": "MSD-300"}, {"url": "https://knxstore.vn/products/satel-coi-bao-dong-trong-nha-spw-210-r", "name": "SPW-210 R"}, {"url": "https://knxstore.vn/products/satel-nut-nhan-dieu-khien-mpt-350", "name": "MPT-350"}]
 internal_links:
   - url: "https://knxstore.vn/he-thong-bao-trom-satel.html"
     slug: "he-thong-bao-trom-satel"

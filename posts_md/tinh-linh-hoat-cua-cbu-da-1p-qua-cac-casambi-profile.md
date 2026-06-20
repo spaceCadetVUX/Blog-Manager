@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/chieu-sang"
   - name: "Tính linh hoạt của CBU-DA-1P qua các Casambi Profile"
     url: "https://knxstore.vn/tinh-linh-hoat-cua-cbu-da-1p-qua-cac-casambi-profile.html"
+products: [{"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-dali-cbu-da-1p", "name": "CBU-DA-1P"}]
 internal_links:
   - url: "https://knxstore.vn/casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap.html"
     slug: "casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap"

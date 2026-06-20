@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/kien-thuc"
   - name: "SPI là gì? Ứng dụng SPI LED Controller trong LED RGBW"
     url: "https://knxstore.vn/spi-la-gi-ung-dung-spi-led-controller-trong-led-rgbw.html"
+products: [{"url": "https://knxstore.vn/products/bo-dieu-khien-led-pixel-spi-5-24v-casambi-running-light-casambi", "name": "Bộ điều khiển LED Pixel SPI, 5-24V Casambi - RUNNING-LIGHT-CASAMBI", "image": "https://knxstore.vn/assets/image/product/bo-dieu-khien-led-pixel-spi-5-24v-casambi-running-light-casambi.jpg"}]
 internal_links:
   - url: "https://knxstore.vn/ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome.html"
     slug: "ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome"

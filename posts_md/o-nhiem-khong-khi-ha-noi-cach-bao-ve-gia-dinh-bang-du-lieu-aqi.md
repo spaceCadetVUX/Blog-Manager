@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/kien-thuc"
   - name: "Ô nhiễm không khí Hà Nội: Cách bảo vệ gia đình bằng dữ liệu AQI"
     url: "https://knxstore.vn/o-nhiem-khong-khi-ha-noi-cach-bao-ve-gia-dinh-bang-du-lieu-aqi.html"
+products: [{"url": "https://knxstore.vn/products/kaiterra-thiet-bi-do-chat-luong-khong-khi-kaiterra-laser-egg-co2", "name": "Cảm biến chất lượng không khí Kaiterra Laser Egg + CO2- LE-202", "image": "https://knxstore.vn/assets/image/product/kaiterra-thiet-bi-do-chat-luong-khong-khi-kaiterra-laser-egg-co2_1.jpg"}]
 internal_links:
   - url: "https://knxstore.vn/ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome.html"
     slug: "ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome"

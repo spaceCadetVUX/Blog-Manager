@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/cam-bien"
   - name: "7 lý do nên dùng công tắc cảm biến ánh sáng cho Smarthome"
     url: "https://knxstore.vn/cong-tac-cam-bien-anh-sang.html"
+products: [{"url": "https://knxstore.vn/products/ir-tec-cam-bien-hien-dien-on-off-los-509sf", "name": "Cảm biến hiện diện LOS-509SF"}, {"url": "https://knxstore.vn/products/ir-tec-cam-bien-hien-dien-dim-dali-mrd-510", "name": "cảm biến hiện diện MRD-510"}, {"url": "https://knxstore.vn/products/ir-tec-cam-bien-hien-dien-dien-ap-thap-bos-515", "name": "Tham khảo ngay thiết bị BOS-515 cảm biến hiện diện điện áp thấp"}]
 internal_links:
   - url: "https://knxstore.vn/cam-bien-anh-sang.html"
     slug: "cam-bien-anh-sang"

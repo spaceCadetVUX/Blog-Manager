@@ -19,6 +19,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/driver-led"
   - name: "Đèn cảm ứng cầu thang"
     url: "https://knxstore.vn/den-cam-ung-cau-thang.html"
+products: [{"url": "https://knxstore.vn/products/bo-dieu-khien-den-led-cau-thang-32-kenh-ngo-vao-5-24vdc-oem-es32", "name": "Bộ điều khiển đèn LED cầu thang 32 kênh, ngõ vào 5-24VDC OEM - ES32", "image": "https://knxstore.vn/assets/image/product/bo-dieu-khien-den-led-cau-thang-32-kenh-ngo-vao-5-24vdc-oem-es32.jpg"}]
 internal_links:
   - url: "https://knxstore.vn/cong-tac-dao-chieu.html"
     slug: "cong-tac-dao-chieu"

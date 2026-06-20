@@ -19,6 +19,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/hvac"
   - name: "Giải pháp HVAC Intesis: Cứu cánh cho hệ thống điều hòa tại các khách sạn"
     url: "https://knxstore.vn/giai-phap-tiet-kiem-nang-luong-hvac-hieu-qua-cho-khach-san.html"
+products: [{"url": "https://knxstore.vn/products/intesis-gateway-dieu-hoa-khong-khi-intesis-700series-in770airxxso000", "name": "Intesis Gateway"}, {"url": "https://knxstore.vn/products/gateway-dieu-hoa-khong-khi-daikin-f1f2-knx-700-series-max-64-dan-lanh", "name": "Gateway điều hòa không khí Daikin F1F2 KNX 64IDU Intesis - IN770AIR00MO000-DAI", "image": "https://knxstore.vn/assets/image/product/gateway-dieu-hoa-khong-khi-daikin-f1f2-knx-700-series-max-64-dan-lanh.jpg"}, {"url": "https://knxstore.vn/products/gateway-dieu-hoa-khong-khi-daikin-f1f2-knx-700-series-max-16-dan-lanh", "name": "Gateway điều hòa không khí Daikin F1F2 KNX 16IDU Intesis - IN770AIR00SO000-DAI", "image": "https://knxstore.vn/assets/image/product/gateway-dieu-hoa-khong-khi-daikin-f1f2-knx-700-series-max-16-dan-lanh.jpg"}, {"url": "https://knxstore.vn/products/gateway-dieu-hoa-khong-khi-hitachi-knx-700-series-intesis", "name": "Gateway điều hòa không khí Hitachi KNX 4IDU Intesis - IN770AIRXXSO000-HIT", "image": "https://knxstore.vn/assets/image/product/gateway-dieu-hoa-khong-khi-hitachi-knx-700-series-intesis.jpg"}]
 internal_links:
   - url: "https://knxstore.vn/vi-sao-dieu-hoa-inverter-tiet-kiem-dien-hon-dieu-hoa-binh-thuong.html"
     slug: "vi-sao-dieu-hoa-inverter-tiet-kiem-dien-hon-dieu-hoa-binh-thuong"
@@ -40,7 +41,7 @@ internal_links:
     anchor: "Giải pháp Matter Thread cho điều hòa đa thương hiệu"
   - url: "https://knxstore.vn/he-thong-dieu-hoa-vrv-va-vrf-la-gi.html"
     slug: "he-thong-dieu-hoa-vrv-va-vrf-la-gi"
-    anchor: "Hệ thống điều hòa VRV và VRF là gì?"
+    anchor: "Hệ thống điều hòa VRV/VRF là gì? Tích hợp BMS và KNX"
   - url: "https://knxstore.vn/so-sanh-dieu-khien-dieu-hoa-intesis-coolautomation-airzone.html"
     slug: "so-sanh-dieu-khien-dieu-hoa-intesis-coolautomation-airzone"
     anchor: "So sánh giải pháp HVAC: Intesis, CoolAutomation, Airzone"

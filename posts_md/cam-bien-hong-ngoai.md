@@ -19,6 +19,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/cam-bien"
   - name: "Các công nghệ cảm biến trong nhà thông minh và ứng dụng"
     url: "https://knxstore.vn/cam-bien-hong-ngoai.html"
+products: [{"url": "https://knxstore.vn/products/satel-cam-bien-bao-khoi-msd-300", "name": "Cảm biến khói"}]
 internal_links:
   - url: "https://knxstore.vn/sensor-la-gi.html"
     slug: "sensor-la-gi"

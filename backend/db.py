@@ -35,6 +35,7 @@ def init_db():
             breadcrumb      TEXT DEFAULT '[]',
             article_body    TEXT DEFAULT '',
             robots          TEXT,
+            products        TEXT DEFAULT '[]',
             updated_at      TEXT DEFAULT CURRENT_TIMESTAMP
         );
 
@@ -65,3 +66,8 @@ def init_db():
         CREATE INDEX IF NOT EXISTS idx_links_to     ON internal_links(to_slug);
         CREATE INDEX IF NOT EXISTS idx_history_type ON analysis_history(type, created_at);
         """)
+        # Migration: thêm column mới nếu chưa có
+        try:
+            conn.execute("ALTER TABLE posts ADD COLUMN products TEXT DEFAULT '[]'")
+        except Exception:
+            pass

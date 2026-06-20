@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/chieu-sang"
   - name: "Vì sao D4i là lựa chọn tốt hơn cho chiếu sáng thông minh?"
     url: "https://knxstore.vn/vi-sao-d4i-la-lua-chon-tot-hon-cho-chieu-sang-thong-minh.html"
+products: [{"url": "https://knxstore.vn/products/ir-tec-cam-bien-hien-dien-smartdali-mrd-124s", "name": "Cảm biến hiện diện SmartDALI IR-TEC - MRD-124S", "image": "https://knxstore.vn/assets/image/product/ir-tec-cam-bien-hien-dien-smartdali-mrd-124s_2.jpg"}, {"url": "https://knxstore.vn/products/ir-tec-cam-bien-hien-dien-dali-2-mra-514s", "name": "Cảm biến hiện diện DALI-2 IR-TEC - MRA-514S", "image": "https://knxstore.vn/assets/image/product/ir-tec-cam-bien-hien-dien-dali-2-mra-514s_3.jpeg"}]
 internal_links:
   - url: "https://knxstore.vn/casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap.html"
     slug: "casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap"

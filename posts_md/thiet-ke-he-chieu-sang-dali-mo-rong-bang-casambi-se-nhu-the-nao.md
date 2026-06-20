@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/chieu-sang"
   - name: "Thiết kế hệ chiếu sáng DALI mở rộng bằng Casambi sẽ như thế nào?"
     url: "https://knxstore.vn/thiet-ke-he-chieu-sang-dali-mo-rong-bang-casambi-se-nhu-the-nao.html"
+products: [{"url": "https://knxstore.vn/products/bo-dieu-khien-16-dia-chi-driver-dali-master-salvador-casambi-sal-1016", "name": "SAL-1016 - Bộ điều khiển DALI Master 16 địa chỉ Bluetooth Casambi Salvador", "image": "https://knxstore.vn/assets/image/product/bo-dieu-khien-16-dia-chi-driver-dali-master-salvador-casambi-sal-1016.jpg"}, {"url": "https://knxstore.vn/products/bo-dieu-khien-32-dia-chi-driver-dali-master-salvador-casambi-sal-1032", "name": "SAL-1032 - Bộ điều khiển DALI Master 32 địa chỉ Bluetooth Casambi Salvador", "image": "https://knxstore.vn/assets/image/product/bo-dieu-khien-32-dia-chi-driver-dali-master-salvador-casambi-sal-1032.jpg"}, {"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-dali-master-casambi-savaldor-sal-10xx", "name": "Salvador SAL-1064 - Bộ điều khiển DALI Master 64 địa chỉ Bluetooth Casambi", "image": "https://knxstore.vn/assets/image/product/casambi-bo-dieu-khien-dali-master-casambi-savaldor-sal-10xx_4.jpg"}]
 internal_links:
   - url: "https://knxstore.vn/casambi-case-study-chieu-sang-khong-gian-showroom-blum-experience-center.html"
     slug: "casambi-case-study-chieu-sang-khong-gian-showroom-blum-experience-center"

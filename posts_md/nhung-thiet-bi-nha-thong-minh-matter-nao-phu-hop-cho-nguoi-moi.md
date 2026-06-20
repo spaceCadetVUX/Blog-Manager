@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/kien-thuc"
   - name: "Những thiết bị nhà thông minh Matter nào phù hợp cho người mới?"
     url: "https://knxstore.vn/nhung-thiet-bi-nha-thong-minh-matter-nao-phu-hop-cho-nguoi-moi.html"
+products: [{"url": "https://knxstore.vn/products/o-cam-thong-minh-eve-energy-matter-over-thread", "name": "Ổ cắm thông minh Eve Energy Matter over Thread", "image": "https://knxstore.vn/assets/image/product/o-cam-thong-minh-eve-energy-matter-over-thread.jpg"}, {"url": "https://knxstore.vn/products/cam-bien-chuyen-dong-eve-motion-matter-over-thread-ipx3", "name": "Cảm biến chuyển động Eve Motion, Matter over Thread, IPX3", "image": "https://knxstore.vn/assets/image/product/cam-bien-chuyen-dong-eve-motion-matter-over-thread-ipx3.jpg"}]
 internal_links:
   - url: "https://knxstore.vn/ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome.html"
     slug: "ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome"

@@ -19,6 +19,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/kien-thuc"
   - name: "Google Home là gì? Google Asistant là gì? Cách kết nối Google Assistant với Philips Hue"
     url: "https://knxstore.vn/google-assistant-ho-tro-tieng-viet.html"
+products: [{"url": "https://knxstore.vn/products/philips-hue-thiet-bi-dieu-khien-anh-sang-thong-minh", "name": "Philips Hue Bridge"}, {"url": "https://knxstore.vn/products/philips-hue-bong-den-philips-hue-wca-9w-a60-e27-vn", "name": "Bóng đèn Philips Hue"}]
 internal_links:
   - url: "https://knxstore.vn/ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome.html"
     slug: "ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome"

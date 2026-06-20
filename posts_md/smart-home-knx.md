@@ -22,7 +22,7 @@ breadcrumb:
 internal_links:
   - url: "https://knxstore.vn/he-thong-ung-dung-knx.html"
     slug: "he-thong-ung-dung-knx"
-    anchor: "Nhà thông minh KNX là gì?"
+    anchor: "Hệ thống KNX là gì? Ứng dụng từ nhà ở đến tòa nhà"
 ---
 
 # KNX Smarthome biến ngôi nhà thành không gian sống lý tưởng

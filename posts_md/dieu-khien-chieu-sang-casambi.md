@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/driver-led"
   - name: "Top 4 điều khiển chiếu sáng Casambi bán chạy nhất hiện nay"
     url: "https://knxstore.vn/dieu-khien-chieu-sang-casambi.html"
+products: [{"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-chieu-sang-dimmer-bluetooth-ld220wcm", "name": "Bộ điều khiển dimmer Triac Casambi Vadsbo - LD220WCM", "image": "https://knxstore.vn/assets/image/product/casambi-bo-dieu-khien-chieu-sang-dimmer-bluetooth-ld220wcm_4.jpg"}, {"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-2-kenh-0-10v-dali-bluetooth-cbu-a2d", "name": "CBU-A2D - Bộ điều khiển 2 kênh DALI và 0-10V Bluetooth Casambi", "image": "https://knxstore.vn/assets/image/product/casambi-bo-dieu-khien-2-kenh-0-10v-dali-bluetooth-cbu-a2d_2.jpg"}, {"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-chieu-sang-rgbw-tunable-white-bluetooth-cbu-pwm4", "name": "CBU-PWM4-LR - Bộ điều khiển chiếu sáng RGBW & tunable white Bluetooth Casambi", "image": "https://knxstore.vn/assets/image/product/casambi-bo-dieu-khien-chieu-sang-rgbw-tunable-white-bluetooth-cbu-pwm4.jpg"}, {"url": "https://knxstore.vn/products/casambi-cong-tac-dieu-khien-khong-day-xpress", "name": "Xpress - Công tắc điều khiển không dây Casambi", "image": "https://knxstore.vn/assets/image/product/casambi-cong-tac-dieu-khien-khong-day-xpress_2.jpg"}]
 internal_links:
   - url: "https://knxstore.vn/cong-nghe-chieu-sang-tunable-white.html"
     slug: "cong-nghe-chieu-sang-tunable-white"

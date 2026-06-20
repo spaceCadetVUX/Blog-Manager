@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/kien-thuc"
   - name: "Matter là gì? Những tiện ích và trở ngại của giao thức Matter"
     url: "https://knxstore.vn/matter-la-gi-nhung-tien-ich-va-tro-ngai-cua-giao-thuc-matter.html"
+products: [{"url": "https://knxstore.vn/products/atios-smartcore-ho-tro-apple-homekit-ade-r12", "name": "Atios – ADE-R12"}]
 internal_links:
   - url: "https://knxstore.vn/ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome.html"
     slug: "ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome"

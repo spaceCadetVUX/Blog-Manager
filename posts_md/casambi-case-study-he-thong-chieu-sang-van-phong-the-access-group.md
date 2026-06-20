@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/kien-thuc"
   - name: "Casambi Case Study | Hệ thống chiếu sáng văn phòng The Access Group"
     url: "https://knxstore.vn/casambi-case-study-he-thong-chieu-sang-van-phong-the-access-group.html"
+products: [{"url": "https://knxstore.vn/products/casambi-cong-tac-dieu-khien-khong-day-xpress", "name": "Công tắc điều khiển không dây Xpress Casambi"}, {"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-dali-cbu-da-1p", "name": "Bộ điều khiển DALI Casambi Olfer - CBU-DA-1P"}]
 internal_links:
   - url: "https://knxstore.vn/ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome.html"
     slug: "ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome"

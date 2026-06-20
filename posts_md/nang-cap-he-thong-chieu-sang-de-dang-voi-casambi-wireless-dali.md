@@ -19,6 +19,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/chieu-sang"
   - name: "Không cần dây dẫn - Casambi Wireless DALI sẽ giúp bạn nâng cấp chiếu sáng một cách dễ dàng"
     url: "https://knxstore.vn/nang-cap-he-thong-chieu-sang-de-dang-voi-casambi-wireless-dali.html"
+products: [{"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-dali-bluetooth-cbu-dcs", "name": "CBU-DCS"}, {"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-led-drivers-dali-0-10v-bluetooth-cbu-asd", "name": "CBU-ASD"}, {"url": "https://knxstore.vn/products/casambi-cong-tac-enocean-system-55-105x", "name": "Công tắc Enocean / System 55 Casambi - 105X", "image": "https://knxstore.vn/assets/image/product/casambi-cong-tac-enocean-system-55-105x_2.jpg"}, {"url": "https://knxstore.vn/products/casambi-cong-tac-dieu-khien-khong-day-xpress", "name": "Xpress - Công tắc điều khiển không dây Casambi", "image": "https://knxstore.vn/assets/image/product/casambi-cong-tac-dieu-khien-khong-day-xpress_2.jpg"}]
 internal_links:
   - url: "https://knxstore.vn/casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap.html"
     slug: "casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap"

@@ -18,6 +18,7 @@ breadcrumb:
     url: "https://knxstore.vn/blogs/cam-bien"
   - name: "Tìm hiểu về cảm biến TRANS từ IR-TEC"
     url: "https://knxstore.vn/cam-bien-trans-tu-irtec.html"
+products: [{"url": "https://knxstore.vn/products/ir-tec-cam-bien-hien-dien-smartdali-mrd-124s", "name": "SmartDIM"}, {"url": "https://knxstore.vn/products/cp-electronics-cam-bien-hien-dien-hong-ngoai-mws3a-prm", "name": "Thiết bị cảm biến hiện diện hồng ngoại CP Electronics - MWS3A-PRM"}, {"url": "https://knxstore.vn/products/ir-tec-cam-bien-chuyen-dong-gan-tuong-lbs-700", "name": "Điều khiển ON- OFF"}, {"url": "https://knxstore.vn/products/ir-tec-cam-bien-hien-dien-dim-0-10v-lrd-509", "name": "SmartDIM"}]
 internal_links:
   - url: "https://knxstore.vn/bo-dieu-khien-trung-tam-hubitat-hub.html"
     slug: "bo-dieu-khien-trung-tam-hubitat-hub"
