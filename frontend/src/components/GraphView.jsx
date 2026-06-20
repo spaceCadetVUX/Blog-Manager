@@ -149,32 +149,61 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
   useEffect(() => {
     if (!fgRef.current || graphData.nodes.length === 0) return
     const fg = fgRef.current
-    fg.d3Force('charge').strength(-600)
-    fg.d3Force('link').distance(140)
+    fg.d3Force('charge').strength(-1400)
+    fg.d3Force('link').distance(200)
+
+    const nodes = graphData.nodes
 
     // Clustering force: kéo nodes cùng section về centroid
-    const nodes = graphData.nodes
     fg.d3Force('cluster', alpha => {
+      const centroids = {}
+      const sectionCounts = {}
+      nodes.forEach(n => {
+        if (!n.section) return
+        if (!centroids[n.section]) centroids[n.section] = { x: 0, y: 0, count: 0 }
+        centroids[n.section].x += n.x || 0
+        centroids[n.section].y += n.y || 0
+        centroids[n.section].count += 1
+        sectionCounts[n.section] = (sectionCounts[n.section] || 0) + 1
+      })
+      Object.values(centroids).forEach(c => { c.x /= c.count; c.y /= c.count })
+      nodes.forEach(n => {
+        const c = centroids[n.section]
+        if (!c) return
+        const cnt = sectionCounts[n.section] || 1
+        const strength = Math.max(0.015, 0.10 - cnt * 0.003)
+        n.vx = (n.vx || 0) + (c.x - (n.x || 0)) * strength * alpha
+        n.vy = (n.vy || 0) + (c.y - (n.y || 0)) * strength * alpha
+      })
+    })
+
+    // Label zone repulsion: đẩy nodes ra khỏi centroid để label không bị đè
+    fg.d3Force('labelRepulsion', alpha => {
       const centroids = {}
       nodes.forEach(n => {
         if (!n.section) return
         if (!centroids[n.section]) centroids[n.section] = { x: 0, y: 0, count: 0 }
-        centroids[n.section].x     += n.x || 0
-        centroids[n.section].y     += n.y || 0
+        centroids[n.section].x += n.x || 0
+        centroids[n.section].y += n.y || 0
         centroids[n.section].count += 1
       })
       Object.values(centroids).forEach(c => { c.x /= c.count; c.y /= c.count })
-
-      const clusterStrength = 0.14
+      const clearR = 55 // bán kính vùng trống quanh label
       nodes.forEach(n => {
         const c = centroids[n.section]
-        if (!c) return
-        n.vx = (n.vx || 0) + (c.x - (n.x || 0)) * clusterStrength * alpha
-        n.vy = (n.vy || 0) + (c.y - (n.y || 0)) * clusterStrength * alpha
+        if (!c || n.x == null) return
+        const dx = (n.x || 0) - c.x
+        const dy = (n.y || 0) - c.y
+        const dist = Math.max(1, Math.hypot(dx, dy))
+        if (dist < clearR) {
+          const force = ((clearR - dist) / clearR) * alpha * 1.5
+          n.vx = (n.vx || 0) + (dx / dist) * force
+          n.vy = (n.vy || 0) + (dy / dist) * force
+        }
       })
     })
 
-    // Galaxy repulsion: đẩy các section ra xa nhau
+    // Galaxy repulsion: đẩy các section ra xa nhau (O(s²) — s nhỏ nên ổn)
     fg.d3Force('galaxyRepulsion', alpha => {
       const centroids = {}
       nodes.forEach(n => {
@@ -186,16 +215,15 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
         centroids[n.section].nodes.push(n)
       })
       Object.values(centroids).forEach(c => { c.x /= c.count; c.y /= c.count })
-
       const secList = Object.values(centroids)
       for (let i = 0; i < secList.length; i++) {
         for (let j = i + 1; j < secList.length; j++) {
           const a = secList[i], b = secList[j]
           const dx = b.x - a.x, dy = b.y - a.y
           const dist = Math.max(1, Math.hypot(dx, dy))
-          const minDist = 320
+          const minDist = 360 + (a.nodes.length + b.nodes.length) * 5
           if (dist < minDist) {
-            const force = (minDist - dist) / minDist * alpha * 1.2
+            const force = (minDist - dist) / minDist * alpha * 1.4
             const fx = (dx / dist) * force, fy = (dy / dist) * force
             a.nodes.forEach(n => { n.vx = (n.vx||0) - fx; n.vy = (n.vy||0) - fy })
             b.nodes.forEach(n => { n.vx = (n.vx||0) + fx; n.vy = (n.vy||0) + fy })
@@ -251,7 +279,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
   }, [onSelectPost])
 
   // Size: sqrt scaling — hub pages rõ rệt to hơn
-  const nodeRadius = (node) => Math.max(4, Math.min(30, 4 + Math.sqrt(node.inbound || 0) * 5))
+  const nodeRadius = (node) => Math.max(3, Math.min(18, 3 + Math.sqrt(node.inbound || 0) * 3))
 
   // Canvas custom rendering
   const paintNode = useCallback((node, ctx, globalScale) => {
@@ -267,84 +295,99 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
 
     // Product node — vẽ diamond nhỏ màu cam
     if (node.nodeType === 'productNode') {
-      const s = isDimmed ? 3 : (isHovered ? 7 : 5)
+      const s = isDimmed ? 3 : (isHovered ? 8 : 6)
       const rgb = '249,115,22'
       if (isDimmed) {
         ctx.beginPath()
         ctx.rect(node.x - s, node.y - s, s * 2, s * 2)
-        ctx.fillStyle = `rgba(${rgb},0.08)`
+        ctx.fillStyle = `rgba(${rgb},0.15)`
         ctx.fill()
         return
       }
-      if (isHovered) {
-        const grd = ctx.createRadialGradient(node.x, node.y, s, node.x, node.y, s + 10)
-        grd.addColorStop(0, `rgba(${rgb},0.28)`)
-        grd.addColorStop(1, `rgba(${rgb},0)`)
-        ctx.beginPath(); ctx.arc(node.x, node.y, s + 10, 0, 2 * Math.PI)
-        ctx.fillStyle = grd; ctx.fill()
-      }
+      // Glow halo
+      const glowS = isHovered ? s + 14 : s + 8
+      const grd = ctx.createRadialGradient(node.x, node.y, s * 0.5, node.x, node.y, glowS)
+      grd.addColorStop(0, `rgba(${rgb},${isHovered ? 0.45 : 0.25})`)
+      grd.addColorStop(1, `rgba(${rgb},0)`)
+      ctx.beginPath(); ctx.arc(node.x, node.y, glowS, 0, 2 * Math.PI)
+      ctx.fillStyle = grd; ctx.fill()
+
       ctx.save()
       ctx.translate(node.x, node.y)
       ctx.rotate(Math.PI / 4)
       ctx.beginPath()
       ctx.rect(-s, -s, s * 2, s * 2)
-      ctx.fillStyle   = `rgba(${rgb},${isHovered ? 0.9 : isNeighbor ? 0.6 : 0.4})`
-      ctx.strokeStyle = `rgba(${rgb},${isHovered ? 1 : 0.7})`
-      ctx.lineWidth   = isHovered ? 2 : 1
+      ctx.fillStyle   = `rgba(${rgb},${isHovered ? 0.95 : isNeighbor ? 0.78 : 0.62})`
+      ctx.strokeStyle = `rgba(${rgb},1)`
+      ctx.lineWidth   = isHovered ? 2.5 : 1.5
       ctx.fill(); ctx.stroke()
       ctx.restore()
       if (isHovered || globalScale > 2) {
         const label = node.label.length > 22 ? node.label.slice(0, 22) + '…' : node.label
         ctx.font = `${isHovered ? 10 : 8}px sans-serif`
-        ctx.fillStyle = `rgba(${rgb},${isHovered ? 0.95 : 0.7})`
+        ctx.fillStyle = `rgba(${rgb},${isHovered ? 1 : 0.8})`
         ctx.textAlign = 'center'
-        ctx.fillText(label, node.x, node.y + s + 10)
+        ctx.fillText(label, node.x, node.y + s + 11)
       }
       return
     }
 
     const r   = nodeRadius(node)
-    const isHub = r >= 13   // nodes có ≥4 inbound
+    const isHub = r >= 9
     const rgb = hex2rgb(node.color)
 
-    // Dimmed: chỉ chấm mờ, skip rest
+    // Dimmed: chấm mờ nhưng vẫn nhìn thấy
     if (isDimmed) {
       ctx.beginPath()
-      ctx.arc(node.x, node.y, Math.max(2, r * 0.5), 0, 2 * Math.PI)
-      ctx.fillStyle = `rgba(${rgb},0.05)`
+      ctx.arc(node.x, node.y, Math.max(2.5, r * 0.55), 0, 2 * Math.PI)
+      ctx.fillStyle = `rgba(${rgb},0.15)`
       ctx.fill()
       return
     }
 
-    // Radial glow — hub nodes + hovered
-    if (isHub || isHovered) {
-      const glowR = r + (isHovered ? 14 : isHub ? Math.min(10, r * 0.7) : 6)
-      const grd   = ctx.createRadialGradient(node.x, node.y, r * 0.4, node.x, node.y, glowR)
-      grd.addColorStop(0, `rgba(${rgb},${isHovered ? 0.3 : 0.14})`)
-      grd.addColorStop(1, `rgba(${rgb},0)`)
-      ctx.beginPath()
-      ctx.arc(node.x, node.y, glowR, 0, 2 * Math.PI)
-      ctx.fillStyle = grd
-      ctx.fill()
-    }
+    // Outer radial glow — tất cả nodes đều có, hub + hovered mạnh hơn
+    const glowR   = r + (isHovered ? 22 : isHub ? r * 1.2 : r * 0.8)
+    const glowOp0 = isHovered ? 0.55 : isHub ? 0.32 : 0.18
+    const grd     = ctx.createRadialGradient(node.x, node.y, r * 0.3, node.x, node.y, glowR)
+    grd.addColorStop(0, `rgba(${rgb},${glowOp0})`)
+    grd.addColorStop(0.5, `rgba(${rgb},${glowOp0 * 0.4})`)
+    grd.addColorStop(1, `rgba(${rgb},0)`)
+    ctx.beginPath()
+    ctx.arc(node.x, node.y, glowR, 0, 2 * Math.PI)
+    ctx.fillStyle = grd
+    ctx.fill()
 
     // Main circle
     ctx.beginPath()
     ctx.arc(node.x, node.y, r, 0, 2 * Math.PI)
-    const fillOp   = isHovered ? 0.85 : isNeighbor ? 0.68 : isHub ? 0.58 : 0.44
-    const strokeOp = isHovered ? 1    : isNeighbor ? 0.95 : 0.75
-    const lw       = isHovered ? 2.5  : r > 12 ? 2 : 1.5
+    const fillOp   = isHovered ? 0.95 : isNeighbor ? 0.82 : isHub ? 0.78 : 0.68
+    const strokeOp = isHovered ? 1    : isNeighbor ? 1    : isHub ? 0.95 : 0.85
+    const lw       = isHovered ? 2.5  : isHub ? 2 : 1.5
     ctx.fillStyle   = `rgba(${rgb},${fillOp})`
     ctx.strokeStyle = `rgba(${rgb},${strokeOp})`
     ctx.lineWidth   = lw
     ctx.fill()
     ctx.stroke()
 
-    // Bright inner core cho hub nodes
-    if (isHub) {
+    // Bright inner core
+    if (isHub || isHovered) {
       ctx.beginPath()
-      ctx.arc(node.x, node.y, r * 0.32, 0, 2 * Math.PI)
-      ctx.fillStyle = `rgba(${rgb},0.92)`
+      ctx.arc(node.x, node.y, r * (isHovered ? 0.45 : 0.38), 0, 2 * Math.PI)
+      ctx.fillStyle = `rgba(${rgb},1)`
+      ctx.fill()
+    }
+
+    // Specular highlight — white dot góc trên trái cho cảm giác 3D
+    if (r >= 6) {
+      const hx = node.x - r * 0.3
+      const hy = node.y - r * 0.3
+      const hr = Math.max(1, r * 0.22)
+      const hgrd = ctx.createRadialGradient(hx, hy, 0, hx, hy, hr)
+      hgrd.addColorStop(0, `rgba(255,255,255,${isHovered ? 0.55 : 0.3})`)
+      hgrd.addColorStop(1, `rgba(255,255,255,0)`)
+      ctx.beginPath()
+      ctx.arc(hx, hy, hr, 0, 2 * Math.PI)
+      ctx.fillStyle = hgrd
       ctx.fill()
     }
 
@@ -387,66 +430,102 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
     }
   }, [])
 
-  // Galaxy halos — vẽ trước nodes
-  const drawGalaxyHalos = useCallback((ctx) => {
-    const nodes = graphData.nodes
-    if (!nodes.length) return
-
-    // Tính centroid + spread từng section
+  // Tính centroid + spread một lần, dùng chung cho halos và labels
+  const getSectionGeometry = useCallback(() => {
     const bySection = {}
-    nodes.forEach(n => {
+    graphData.nodes.forEach(n => {
       if (!n.section || n.x == null || !isFinite(n.x)) return
       if (!bySection[n.section]) bySection[n.section] = []
       bySection[n.section].push(n)
     })
-
+    const result = {}
     Object.entries(bySection).forEach(([section, sNodes]) => {
       if (sNodes.length < 2) return
       const cx = sNodes.reduce((s, n) => s + n.x, 0) / sNodes.length
       const cy = sNodes.reduce((s, n) => s + n.y, 0) / sNodes.length
-      const spread = Math.max(
-        60,
-        sNodes.reduce((max, n) => Math.max(max, Math.hypot(n.x - cx, n.y - cy)), 0)
-      )
+      const spread = Math.max(60, sNodes.reduce((max, n) => Math.max(max, Math.hypot(n.x - cx, n.y - cy)), 0))
+      result[section] = { cx, cy, spread, color: sectionColor(section) }
+    })
+    return result
+  }, [graphData.nodes])
+
+  // Vẽ halos trước nodes (background)
+  const drawGalaxyHalos = useCallback((ctx) => {
+    if (!graphData.nodes.length) return
+    const geo = getSectionGeometry()
+    Object.entries(geo).forEach(([section, { cx, cy, spread, color }]) => {
+      const rgb = hex2rgb(color)
       const r = spread + 40
 
-      const color = sectionColor(section)
+      const grdOuter = ctx.createRadialGradient(cx, cy, spread * 0.2, cx, cy, r)
+      grdOuter.addColorStop(0, `rgba(${rgb},0.14)`)
+      grdOuter.addColorStop(0.45, `rgba(${rgb},0.07)`)
+      grdOuter.addColorStop(1, `rgba(${rgb},0)`)
+      ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2 * Math.PI)
+      ctx.fillStyle = grdOuter; ctx.fill()
+
+      const grdInner = ctx.createRadialGradient(cx, cy, 0, cx, cy, spread * 0.55)
+      grdInner.addColorStop(0, `rgba(${rgb},0.22)`)
+      grdInner.addColorStop(1, `rgba(${rgb},0)`)
+      ctx.beginPath(); ctx.arc(cx, cy, spread * 0.55, 0, 2 * Math.PI)
+      ctx.fillStyle = grdInner; ctx.fill()
+
+      ctx.beginPath(); ctx.arc(cx, cy, r * 0.88, 0, 2 * Math.PI)
+      ctx.strokeStyle = `rgba(${rgb},0.55)`; ctx.lineWidth = 1.5
+      ctx.setLineDash([5, 9]); ctx.stroke(); ctx.setLineDash([])
+
+      ctx.beginPath(); ctx.arc(cx, cy, spread + 10, 0, 2 * Math.PI)
+      ctx.strokeStyle = `rgba(${rgb},0.35)`; ctx.lineWidth = 1.2; ctx.stroke()
+    })
+  }, [graphData.nodes, getSectionGeometry])
+
+  // Vẽ labels SAU nodes — không bị đè
+  const drawGalaxyLabels = useCallback((ctx) => {
+    if (!graphData.nodes.length) return
+    const geo = getSectionGeometry()
+    Object.entries(geo).forEach(([section, { cx, cy, spread, color }]) => {
       const rgb = hex2rgb(color)
 
-      // Outer nebula glow
-      const grd = ctx.createRadialGradient(cx, cy, spread * 0.1, cx, cy, r)
-      grd.addColorStop(0, `rgba(${rgb},0.07)`)
-      grd.addColorStop(0.5, `rgba(${rgb},0.04)`)
-      grd.addColorStop(1, `rgba(${rgb},0)`)
-      ctx.beginPath()
-      ctx.arc(cx, cy, r, 0, 2 * Math.PI)
-      ctx.fillStyle = grd
-      ctx.fill()
+      const labelY = cy
 
-      // Subtle border ring
-      ctx.beginPath()
-      ctx.arc(cx, cy, r * 0.88, 0, 2 * Math.PI)
-      ctx.strokeStyle = `rgba(${rgb},0.08)`
-      ctx.lineWidth = 1
-      ctx.setLineDash([4, 8])
-      ctx.stroke()
-      ctx.setLineDash([])
-
-      // Section label ở centroid
       const label = section.length > 20 ? section.slice(0, 20) + '…' : section
-      const fsize = Math.max(10, Math.min(16, spread * 0.12))
-      ctx.font = `600 ${fsize}px system-ui,sans-serif`
+      const fsize = Math.max(13, Math.min(18, spread * 0.15))
+      ctx.font = `800 ${fsize}px system-ui,sans-serif`
       ctx.textAlign = 'center'
       ctx.textBaseline = 'middle'
       const tw = ctx.measureText(label).width
-      ctx.fillStyle = 'rgba(13,17,23,0.6)'
-      ctx.beginPath()
-      ctx.roundRect(cx - tw / 2 - 6, cy - fsize / 2 - 3, tw + 12, fsize + 6, 4)
-      ctx.fill()
-      ctx.fillStyle = `rgba(${rgb},0.75)`
-      ctx.fillText(label, cx, cy)
+      const ph = fsize + 12  // pill height
+      const pw = tw + 28     // pill width
+      const px = cx - pw / 2
+      const py = labelY - ph / 2
+
+      // Drop shadow
+      ctx.shadowColor = `rgba(${rgb},0.5)`
+      ctx.shadowBlur = 12
+
+      // Pill background
+      ctx.fillStyle = 'rgba(10,14,20,0.95)'
+      ctx.beginPath(); ctx.roundRect(px, py, pw, ph, 7); ctx.fill()
+      ctx.shadowBlur = 0
+
+      // Colored top accent bar
+      ctx.fillStyle = `rgba(${rgb},0.9)`
+      ctx.beginPath(); ctx.roundRect(px, py, pw, 3, [7, 7, 0, 0]); ctx.fill()
+
+      // Border
+      ctx.strokeStyle = `rgba(${rgb},0.55)`
+      ctx.lineWidth = 1.5
+      ctx.beginPath(); ctx.roundRect(px, py, pw, ph, 7); ctx.stroke()
+
+      // Dot + text
+      const dotX = cx - tw / 2 - 6
+      ctx.beginPath(); ctx.arc(dotX, labelY, 3.5, 0, 2 * Math.PI)
+      ctx.fillStyle = `rgba(${rgb},1)`; ctx.fill()
+
+      ctx.fillStyle = '#e6edf3'
+      ctx.fillText(label, cx + 4, labelY)
     })
-  }, [graphData.nodes])
+  }, [graphData.nodes, getSectionGeometry])
 
   // Vùng click khớp với node radius
   const paintNodePointerArea = useCallback((node, color, ctx) => {
@@ -459,12 +538,12 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
 
   const getLinkColor = useCallback((link) => {
     const h = hoveredRef.current
-    if (!h) return 'rgba(255,255,255,0.07)'
+    if (!h) return 'rgba(255,255,255,0.13)'
     const s = typeof link.source === 'object' ? link.source.id : link.source
     const t = typeof link.target === 'object' ? link.target.id : link.target
     if (s === h.id) return 'rgba(34,211,238,0.9)'   // outbound → cyan
     if (t === h.id) return 'rgba(52,211,153,0.9)'   // inbound  → green
-    return 'rgba(255,255,255,0.02)'
+    return 'rgba(255,255,255,0.04)'
   }, [hoveredNode])
 
   const getLinkWidth = useCallback((link) => {
@@ -698,6 +777,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
             graphData={graphData}
             backgroundColor="#0d1117"
             onRenderFramePre={drawGalaxyHalos}
+            onRenderFramePost={drawGalaxyLabels}
             nodeCanvasObject={paintNode}
             nodePointerAreaPaint={paintNodePointerArea}
             onNodeHover={onNodeHover}
@@ -721,9 +801,10 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
               return 'rgba(255,255,255,0.4)'
             }}
             linkDirectionalParticleSpeed={0.006}
-            cooldownTicks={150}
-            d3AlphaDecay={0.022}
-            d3VelocityDecay={0.28}
+            warmupTicks={100}
+            cooldownTicks={60}
+            d3AlphaDecay={0.025}
+            d3VelocityDecay={0.42}
             enableNodeDrag={true}
             enableZoomInteraction={true}
             enablePanInteraction={true}
