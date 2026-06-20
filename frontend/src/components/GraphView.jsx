@@ -60,6 +60,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
   const [rawDataVersion, setRawDataVersion] = useState(0)
 
   const [showProducts, setShowProducts] = useState(false)
+  const [productFilter, setProductFilter] = useState('all') // 'all' | 'has' | 'none'
   const [showLegend, setShowLegend] = useState(true)
   const [showFilters, setShowFilters] = useState(true)
   const [aiModel, setAiModel]     = useState('claude-haiku-4-5-20251001')
@@ -102,6 +103,8 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
         outbound: n.data?.outbound || 0,
         url: n.data?.url || '',
         nodeType: n.type || 'postNode',
+        hasProducts: n.data?.hasProducts || false,
+        productsCount: n.data?.productsCount || 0,
       }))
       const links = (data.edges || []).map(e => ({
         source: e.source,
@@ -123,19 +126,24 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
       target: typeof l.target === 'object' ? l.target.id : l.target,
     }))
 
-    if (!showOrphansOnly) {
-      setGraphData({ nodes, links: norm })
-      setStatsInfo({ nodes: nodes.length, edges: norm.length })
-      return
+    let filtered = nodes
+
+    if (showOrphansOnly) {
+      const hasInbound = new Set(norm.map(l => l.target))
+      filtered = filtered.filter(n => n.nodeType === 'productNode' || !hasInbound.has(n.id))
     }
 
-    const hasInbound = new Set(norm.map(l => l.target))
-    const filtered   = nodes.filter(n => !hasInbound.has(n.id))
-    const nodeIds    = new Set(filtered.map(n => n.id))
-    const filtLinks  = norm.filter(l => nodeIds.has(l.source) && nodeIds.has(l.target))
+    if (productFilter === 'has') {
+      filtered = filtered.filter(n => n.nodeType === 'productNode' || n.hasProducts)
+    } else if (productFilter === 'none') {
+      filtered = filtered.filter(n => n.nodeType !== 'productNode' && !n.hasProducts)
+    }
+
+    const nodeIds   = new Set(filtered.map(n => n.id))
+    const filtLinks = norm.filter(l => nodeIds.has(l.source) && nodeIds.has(l.target))
     setGraphData({ nodes: filtered, links: filtLinks })
     setStatsInfo({ nodes: filtered.length, edges: filtLinks.length })
-  }, [showOrphansOnly, rawDataVersion])
+  }, [showOrphansOnly, productFilter, rawDataVersion])
 
   // Tăng lực đẩy sau khi data load để nodes xa nhau hơn
   useEffect(() => {
@@ -648,6 +656,19 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
           <button onClick={() => setShowProducts(v => !v)}
             style={{ padding: '4px 9px', borderRadius: 6, fontSize: 11, cursor: 'pointer', border: `1px solid ${showProducts ? 'rgba(249,115,22,0.6)' : 'var(--border)'}`, background: showProducts ? 'rgba(249,115,22,0.12)' : 'transparent', color: showProducts ? '#f97316' : 'var(--text-muted)', transition: 'all 0.15s', whiteSpace: 'nowrap' }}
           >◆ Sản phẩm</button>
+
+          {/* Product filter */}
+          <div style={{ display: 'flex', gap: 2, border: '1px solid var(--border)', borderRadius: 6, overflow: 'hidden' }}>
+            {[['all', 'Tất cả'], ['has', 'Có SP'], ['none', 'Không SP']].map(([val, label]) => (
+              <button key={val} onClick={() => setProductFilter(val)} style={{
+                padding: '4px 8px', fontSize: 11, border: 'none', cursor: 'pointer',
+                background: productFilter === val ? 'rgba(249,115,22,0.15)' : 'transparent',
+                color: productFilter === val ? '#f97316' : 'var(--text-muted)',
+                fontWeight: productFilter === val ? 600 : 400,
+                transition: 'all 0.15s', whiteSpace: 'nowrap',
+              }}>{label}</button>
+            ))}
+          </div>
 
           {/* AI — khi filter section */}
           {filterSection && (

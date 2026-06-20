@@ -64,6 +64,15 @@ def get_graph(
         if r["inbound"] < min_links:
             continue
 
+        try:
+            import json as _j
+            _prods = _j.loads(r["products"] or "[]")
+            has_products = len(_prods) > 0
+            products_count = len(_prods)
+        except Exception:
+            has_products = False
+            products_count = 0
+
         node_slugs.add(r["slug"])
         nodes.append({
             "id":   r["slug"],
@@ -77,6 +86,8 @@ def get_graph(
                 "outbound": r["outbound"],
                 "color":    SECTION_COLORS.get(sec, DEFAULT_COLOR),
                 "dateModified": r["date_modified"] or "",
+                "hasProducts": has_products,
+                "productsCount": products_count,
             },
             "position": {"x": 0, "y": 0},
         })
