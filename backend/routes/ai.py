@@ -108,10 +108,20 @@ def chat(req: ChatRequest):
     if req.post_slug:
         with get_conn() as conn:
             post = conn.execute("SELECT * FROM posts WHERE slug = ?", [req.post_slug]).fetchone()
-            inbound = conn.execute("SELECT COUNT(*) FROM internal_links WHERE to_slug = ?", [req.post_slug]).fetchone()[0]
-            outbound = conn.execute("SELECT COUNT(*) FROM internal_links WHERE from_slug = ?", [req.post_slug]).fetchone()[0]
+            inbound_rows  = conn.execute("""
+                SELECT il.from_slug, p.headline FROM internal_links il
+                LEFT JOIN posts p ON p.slug = il.from_slug
+                WHERE il.to_slug = ?
+            """, [req.post_slug]).fetchall()
+            outbound_rows = conn.execute("""
+                SELECT il.to_slug, p.headline FROM internal_links il
+                LEFT JOIN posts p ON p.slug = il.to_slug
+                WHERE il.from_slug = ?
+            """, [req.post_slug]).fetchall()
+
         if post:
             p = dict(post)
+            section = p.get("article_section", "")
             chat_instructions = _get_setting("chat_instructions")
 
             import json as _json
@@ -125,20 +135,58 @@ def chat(req: ChatRequest):
             except Exception:
                 products_str = ""
 
+            # Danh sách bài cùng section để gợi ý internal links
+            with get_conn() as conn:
+                same_section = conn.execute("""
+                    SELECT p.slug, p.headline,
+                           COUNT(DISTINCT il.from_slug) AS inbound
+                    FROM posts p
+                    LEFT JOIN internal_links il ON il.to_slug = p.slug
+                    WHERE p.article_section = ? AND p.slug != ?
+                    GROUP BY p.slug
+                    ORDER BY inbound DESC
+                    LIMIT 40
+                """, [section, req.post_slug]).fetchall() if section else []
+
+                other_sections = conn.execute("""
+                    SELECT p.slug, p.headline, p.article_section,
+                           COUNT(DISTINCT il.from_slug) AS inbound
+                    FROM posts p
+                    LEFT JOIN internal_links il ON il.to_slug = p.slug
+                    WHERE p.article_section != ? AND p.article_section != '' AND p.slug != ?
+                    GROUP BY p.slug
+                    ORDER BY inbound DESC
+                    LIMIT 20
+                """, [section or "__none__", req.post_slug]).fetchall()
+
+            same_sec_str = "\n".join(
+                f"  - {r['slug']} [{r['inbound']} inbound]: {(r['headline'] or '')[:70]}"
+                for r in same_section
+            )
+            other_sec_str = "\n".join(
+                f"  - {r['slug']} [{r['article_section']}]: {(r['headline'] or '')[:70]}"
+                for r in other_sections
+            )
+            existing_inbound  = "\n".join(f"  ← {r['from_slug']}: {r['headline'] or ''}" for r in inbound_rows)
+            existing_outbound = "\n".join(f"  → {r['to_slug']}: {r['headline'] or ''}" for r in outbound_rows)
+
             body = p.get("article_body", "").strip()
-            body_section = f"\n\n## Nội dung bài viết\n{body[:6000]}" if body else ""
+            body_section = f"\n\n## Nội dung bài viết\n{body[:5000]}" if body else ""
 
             system = (
                 f"Bạn là SEO assistant cho blog knxstore.vn.\n"
                 f"Người dùng đang xem bài viết:\n"
                 f"- Title: {p.get('headline','')}\n"
                 f"- Slug: {p.get('slug','')}\n"
-                f"- Section: {p.get('article_section','')}\n"
+                f"- Section: {section}\n"
                 f"- Word count: {p.get('word_count',0)} từ\n"
                 f"- Description: {p.get('description','')}\n"
                 f"- Keywords: {keywords}\n"
-                f"- Inbound links: {inbound} | Outbound links: {outbound}\n"
+                f"- Inbound links hiện có ({len(inbound_rows)}):\n{existing_inbound or '  (chưa có)'}\n"
+                f"- Outbound links hiện có ({len(outbound_rows)}):\n{existing_outbound or '  (chưa có)'}\n"
                 + (f"- Sản phẩm liên quan:\n{products_str}\n" if products_str else "")
+                + (f"\n## Bài cùng section '{section}' (để gợi ý internal links):\n{same_sec_str}\n" if same_sec_str else "")
+                + (f"\n## Bài section khác (top inbound):\n{other_sec_str}\n" if other_sec_str else "")
                 + body_section
                 + f"\n\nTrả lời bằng tiếng Việt, tập trung vào bài viết này."
                 + (f"\n\n---\n{chat_instructions}" if chat_instructions else "")
