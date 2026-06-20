@@ -44,8 +44,10 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
   const fgRef = useRef(null)
   const [dimensions, setDimensions] = useState({ w: 900, h: 600 })
   const [graphData, setGraphData] = useState({ nodes: [], links: [] })
-  const hoveredRef = useRef(null)         // dùng ref để tránh stale closure trong paintNode
+  const hoveredRef = useRef(null)         // hover tạm thời (chuột)
+  const pinnedRef  = useRef(null)         // pinned bởi single click
   const [hoveredNode, setHoveredNode] = useState(null)
+  const [pinnedNode, setPinnedNode]   = useState(null)
 
   const [sections, setSections] = useState([])
   const [minLinks, setMinLinks] = useState('0')
@@ -55,6 +57,8 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
   const [statsInfo, setStatsInfo] = useState({ nodes: 0, edges: 0 })
   const [search, setSearch] = useState('')
   const [showResults, setShowResults] = useState(false)
+  const [searchType, setSearchType] = useState('all') // 'all' | 'post' | 'product'
+  const [searchCursor, setSearchCursor] = useState(0)
   const searchRef = useRef('')
   const rawGraphData  = useRef({ nodes: [], links: [] })
   const [rawDataVersion, setRawDataVersion] = useState(0)
@@ -242,48 +246,85 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
   const searchResults = useMemo(() => {
     const q = search.trim().toLowerCase()
     if (!q) return []
-    return graphData.nodes
-      .filter(n => n.label.toLowerCase().includes(q))
-      .slice(0, 8)
-  }, [search, graphData.nodes])
+    const filtered = graphData.nodes.filter(n => {
+      if (searchType === 'post' && n.nodeType === 'productNode') return false
+      if (searchType === 'product' && n.nodeType !== 'productNode') return false
+      return n.label.toLowerCase().includes(q)
+    })
+    // Sort: starts-with trước, contains sau; cùng loại thì sort by inbound
+    filtered.sort((a, b) => {
+      const aStart = a.label.toLowerCase().startsWith(q) ? 0 : 1
+      const bStart = b.label.toLowerCase().startsWith(q) ? 0 : 1
+      if (aStart !== bStart) return aStart - bStart
+      return (b.inbound || 0) - (a.inbound || 0)
+    })
+    return filtered.slice(0, 10)
+  }, [search, searchType, graphData.nodes])
 
   const zoomToNode = useCallback((node) => {
     if (!fgRef.current || node.x == null) return
     fgRef.current.centerAt(node.x, node.y, 600)
-    fgRef.current.zoom(6, 600)
+    fgRef.current.zoom(5, 600)
     setShowResults(false)
-  }, [])
-
-  // Tính neighbor set khi hover
-  const onNodeHover = useCallback((node) => {
-    if (node) {
-      const neighbors = new Set()
-      graphData.links.forEach(l => {
-        const s = typeof l.source === 'object' ? l.source.id : l.source
-        const t = typeof l.target === 'object' ? l.target.id : l.target
-        if (s === node.id) neighbors.add(t)
-        if (t === node.id) neighbors.add(s)
-      })
-      node.__neighbors = neighbors
-    }
-    hoveredRef.current = node || null
-    setHoveredNode(node || null)
+    buildNeighbors(node)
+    pinnedRef.current = node
+    setPinnedNode(node)
   }, [graphData.links])
 
+  // Tính neighbor set khi hover
+  const buildNeighbors = useCallback((node) => {
+    const neighbors = new Set()
+    graphData.links.forEach(l => {
+      const s = typeof l.source === 'object' ? l.source.id : l.source
+      const t = typeof l.target === 'object' ? l.target.id : l.target
+      if (s === node.id) neighbors.add(t)
+      if (t === node.id) neighbors.add(s)
+    })
+    node.__neighbors = neighbors
+  }, [graphData.links])
+
+  const onNodeHover = useCallback((node) => {
+    // Nếu có pin thì hover không ghi đè — canvas dùng pinnedRef
+    hoveredRef.current = node || null
+    setHoveredNode(node || null)
+  }, [])
+
+  const clickTimerRef = useRef(null)
+
   const onNodeClick = useCallback((node) => {
-    if (node.nodeType === 'productNode') {
-      if (node.url) window.open(node.url, '_blank', 'noopener')
-    } else {
-      if (onSelectPost) onSelectPost(node.id)
+    if (clickTimerRef.current) {
+      // Double click → clear pin + thực hiện action
+      clearTimeout(clickTimerRef.current)
+      clickTimerRef.current = null
+      pinnedRef.current = null
+      setPinnedNode(null)
+      if (node.nodeType === 'productNode') {
+        if (node.url) window.open(node.url, '_blank', 'noopener')
+      } else {
+        if (onSelectPost) onSelectPost(node.id)
+      }
+      return
     }
-  }, [onSelectPost])
+    clickTimerRef.current = setTimeout(() => {
+      clickTimerRef.current = null
+      // Single click: toggle pin connections
+      if (pinnedRef.current?.id === node.id) {
+        pinnedRef.current = null
+        setPinnedNode(null)
+      } else {
+        buildNeighbors(node)
+        pinnedRef.current = node
+        setPinnedNode(node)
+      }
+    }, 250)
+  }, [onSelectPost, buildNeighbors])
 
   // Size: sqrt scaling — hub pages rõ rệt to hơn
   const nodeRadius = (node) => Math.max(3, Math.min(18, 3 + Math.sqrt(node.inbound || 0) * 3))
 
   // Canvas custom rendering
   const paintNode = useCallback((node, ctx, globalScale) => {
-    const h          = hoveredRef.current
+    const h          = pinnedRef.current || hoveredRef.current
     const isHovered  = h?.id === node.id
     const isNeighbor = h?.__neighbors?.has(node.id)
     const q          = searchRef.current.trim().toLowerCase()
@@ -428,7 +469,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
             : 'rgba(230,237,243,0.5)'
       ctx.fillText(short, node.x, labelY)
     }
-  }, [])
+  }, [hoveredNode, pinnedNode])
 
   // Tính centroid + spread một lần, dùng chung cho halos và labels
   const getSectionGeometry = useCallback(() => {
@@ -537,22 +578,22 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
   }, [])
 
   const getLinkColor = useCallback((link) => {
-    const h = hoveredRef.current
+    const h = pinnedRef.current || hoveredRef.current
     if (!h) return 'rgba(255,255,255,0.13)'
     const s = typeof link.source === 'object' ? link.source.id : link.source
     const t = typeof link.target === 'object' ? link.target.id : link.target
     if (s === h.id) return 'rgba(34,211,238,0.9)'   // outbound → cyan
     if (t === h.id) return 'rgba(52,211,153,0.9)'   // inbound  → green
     return 'rgba(255,255,255,0.04)'
-  }, [hoveredNode])
+  }, [hoveredNode, pinnedNode])
 
   const getLinkWidth = useCallback((link) => {
-    const h = hoveredRef.current
+    const h = pinnedRef.current || hoveredRef.current
     if (!h) return 0.8
     const s = typeof link.source === 'object' ? link.source.id : link.source
     const t = typeof link.target === 'object' ? link.target.id : link.target
     return (s === h.id || t === h.id) ? 2 : 0.5
-  }, [hoveredNode])
+  }, [hoveredNode, pinnedNode])
 
   const runClusterAI = useCallback(async () => {
     if (!filterSection || aiLoading) return
@@ -620,17 +661,21 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
         {/* Row 1: Search + Recenter + Stats */}
         <div style={{ padding: '7px 12px', display: 'flex', alignItems: 'center', gap: 8 }}>
           {/* Search */}
-          <div style={{ position: 'relative', flex: 1, maxWidth: bp === 'mobile' ? '100%' : 220 }}>
+          <div style={{ position: 'relative', flex: 1, maxWidth: bp === 'mobile' ? '100%' : 260 }}>
             <input
               value={search}
-              onChange={e => { setSearch(e.target.value); setShowResults(true) }}
+              onChange={e => { setSearch(e.target.value); setShowResults(true); setSearchCursor(0) }}
               onFocus={() => setShowResults(true)}
-              onBlur={() => setTimeout(() => setShowResults(false), 150)}
+              onBlur={() => setTimeout(() => setShowResults(false), 180)}
               onKeyDown={e => {
                 if (e.key === 'Escape') { setSearch(''); setShowResults(false) }
-                if (e.key === 'Enter' && searchResults.length > 0) zoomToNode(searchResults[0])
+                if (e.key === 'ArrowDown') { e.preventDefault(); setSearchCursor(c => Math.min(c + 1, searchResults.length - 1)) }
+                if (e.key === 'ArrowUp')   { e.preventDefault(); setSearchCursor(c => Math.max(c - 1, 0)) }
+                if (e.key === 'Enter' && searchResults.length > 0) {
+                  zoomToNode(searchResults[searchCursor])
+                }
               }}
-              placeholder="Tìm node..."
+              placeholder="Tìm bài viết, sản phẩm..."
               style={{
                 width: '100%', boxSizing: 'border-box',
                 background: 'var(--surface-2)', border: '1px solid var(--border)',
@@ -640,31 +685,134 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
               onFocusCapture={e => e.target.style.borderColor = 'var(--accent)'}
               onBlurCapture={e => e.target.style.borderColor = 'var(--border)'}
             />
-            {search && (
-              <button onMouseDown={() => { setSearch(''); setShowResults(false) }}
-                style={{ position: 'absolute', right: 6, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: 14, lineHeight: 1, padding: 0 }}
-              >×</button>
-            )}
-            {showResults && searchResults.length > 0 && (
+            {search
+              ? <button onMouseDown={() => { setSearch(''); setShowResults(false) }}
+                  style={{ position: 'absolute', right: 6, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: 14, lineHeight: 1, padding: 0 }}
+                >×</button>
+              : <svg style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--text-subtle)" strokeWidth="2.5" strokeLinecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            }
+
+            {showResults && search.trim() && (
               <div style={{
                 position: 'absolute', top: '100%', left: 0, marginTop: 4,
-                background: 'var(--surface)', border: '1px solid var(--border)',
-                borderRadius: 8, zIndex: 50, minWidth: 260, maxWidth: '90vw',
-                boxShadow: '0 8px 24px rgba(0,0,0,0.5)', overflow: 'hidden',
+                background: '#161b22', border: '1px solid var(--border)',
+                borderRadius: 10, zIndex: 50, width: 340, maxWidth: '90vw',
+                boxShadow: '0 12px 32px rgba(0,0,0,0.6)',
+                overflow: 'hidden',
               }}>
-                {searchResults.map(node => (
-                  <div key={node.id} onMouseDown={() => zoomToNode(node)}
-                    style={{ padding: '8px 12px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, borderBottom: '1px solid var(--border-2)' }}
-                    onMouseEnter={e => e.currentTarget.style.background = 'var(--surface-2)'}
-                    onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
-                  >
-                    <div style={{ width: 8, height: 8, borderRadius: '50%', background: node.color, flexShrink: 0 }} />
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontSize: 12, color: 'var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{node.label}</div>
-                      <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 1 }}>{node.section} · {node.inbound} inbound</div>
-                    </div>
+                {/* Type filter tabs */}
+                <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', background: 'var(--surface)' }}>
+                  {[['all','Tất cả'], ['post','Bài viết'], ['product','◆ Sản phẩm']].map(([val, lbl]) => (
+                    <button key={val} onMouseDown={e => { e.preventDefault(); setSearchType(val); setSearchCursor(0) }}
+                      style={{
+                        flex: 1, padding: '6px 4px', fontSize: 11, border: 'none', cursor: 'pointer',
+                        background: searchType === val ? 'var(--accent-dim)' : 'transparent',
+                        color: searchType === val ? 'var(--accent-2)' : 'var(--text-muted)',
+                        borderBottom: `2px solid ${searchType === val ? 'var(--accent)' : 'transparent'}`,
+                        fontWeight: searchType === val ? 600 : 400,
+                        transition: 'all 0.12s',
+                      }}
+                    >{lbl}</button>
+                  ))}
+                </div>
+
+                {/* Result count */}
+                {searchResults.length > 0 && (
+                  <div style={{ padding: '5px 12px', fontSize: 10, color: 'var(--text-subtle)', borderBottom: '1px solid var(--border-2)' }}>
+                    {searchResults.length} kết quả{searchResults.length === 10 ? ' (top 10)' : ''}
                   </div>
-                ))}
+                )}
+
+                {/* Results */}
+                <div style={{ maxHeight: 360, overflow: 'auto' }}>
+                  {searchResults.length === 0 ? (
+                    <div style={{ padding: '16px 12px', fontSize: 12, color: 'var(--text-muted)', textAlign: 'center' }}>
+                      Không tìm thấy kết quả
+                    </div>
+                  ) : searchResults.map((node, i) => {
+                    const isProduct = node.nodeType === 'productNode'
+                    const isCursor  = i === searchCursor
+                    const q = search.trim().toLowerCase()
+                    const lbl = node.label
+                    const idx = lbl.toLowerCase().indexOf(q)
+                    // Highlight match
+                    const before = idx >= 0 ? lbl.slice(0, idx) : lbl
+                    const match  = idx >= 0 ? lbl.slice(idx, idx + q.length) : ''
+                    const after  = idx >= 0 ? lbl.slice(idx + q.length) : ''
+
+                    return (
+                      <div key={node.id}
+                        onMouseDown={() => zoomToNode(node)}
+                        onMouseEnter={() => setSearchCursor(i)}
+                        style={{
+                          padding: '8px 12px', cursor: 'pointer',
+                          display: 'flex', alignItems: 'center', gap: 10,
+                          borderBottom: '1px solid var(--border-2)',
+                          background: isCursor ? 'var(--surface-2)' : 'transparent',
+                          transition: 'background 0.08s',
+                        }}
+                      >
+                        {/* Icon / thumbnail */}
+                        {isProduct ? (
+                          <div style={{
+                            width: 36, height: 36, borderRadius: 6, flexShrink: 0, overflow: 'hidden',
+                            background: 'rgba(249,115,22,0.1)', border: '1px solid rgba(249,115,22,0.3)',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          }}>
+                            {node.image
+                              ? <img src={node.image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={e => { e.target.style.display='none' }} />
+                              : <span style={{ fontSize: 14, color: '#f97316' }}>◆</span>
+                            }
+                          </div>
+                        ) : (
+                          <div style={{
+                            width: 28, height: 28, borderRadius: '50%', flexShrink: 0,
+                            background: node.color + '22', border: `1.5px solid ${node.color}88`,
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          }}>
+                            <div style={{ width: 8, height: 8, borderRadius: '50%', background: node.color }} />
+                          </div>
+                        )}
+
+                        {/* Label + meta */}
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{ fontSize: 12, color: 'var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                            {before}<span style={{ color: 'var(--accent-2)', fontWeight: 700 }}>{match}</span>{after}
+                          </div>
+                          <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2, display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+                            {isProduct ? (
+                              <><span style={{ color: '#f97316' }}>Sản phẩm</span><span>·</span><span>{node.inbound} bài link đến</span></>
+                            ) : (
+                              <><span style={{ color: node.color }}>{node.section || '—'}</span><span>·</span>
+                              <span style={{ color: '#22d3ee' }}>↙{node.inbound}</span>
+                              <span style={{ color: '#34d399' }}>↗{node.outbound}</span></>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Open URL button */}
+                        {node.url && (
+                          <button
+                            onMouseDown={e => { e.stopPropagation(); window.open(node.url, '_blank', 'noopener') }}
+                            title="Mở trang"
+                            style={{ background: 'none', border: '1px solid var(--border)', borderRadius: 4, padding: '3px 5px', cursor: 'pointer', lineHeight: 0, flexShrink: 0, color: 'var(--text-subtle)', transition: 'all 0.1s' }}
+                            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--accent-2)' }}
+                            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-subtle)' }}
+                          >
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                            </svg>
+                          </button>
+                        )}
+                      </div>
+                    )
+                  })}
+                </div>
+
+                {/* Footer hint */}
+                <div style={{ padding: '5px 12px', fontSize: 10, color: 'var(--text-subtle)', borderTop: '1px solid var(--border-2)', display: 'flex', gap: 10 }}>
+                  <span>↑↓ chọn</span><span>Enter zoom</span><span>Esc đóng</span>
+                </div>
               </div>
             )}
           </div>
@@ -782,10 +930,15 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
             nodePointerAreaPaint={paintNodePointerArea}
             onNodeHover={onNodeHover}
             onNodeClick={onNodeClick}
+            onBackgroundClick={() => { pinnedRef.current = null; setPinnedNode(null) }}
+            onNodeRightClick={node => {
+              if (node.nodeType === 'productNode') { if (node.url) window.open(node.url, '_blank', 'noopener') }
+              else { if (onSelectPost) onSelectPost(node.id) }
+            }}
             linkColor={getLinkColor}
             linkWidth={getLinkWidth}
             linkDirectionalParticles={link => {
-              const h = hoveredRef.current
+              const h = pinnedRef.current || hoveredRef.current
               if (!h) return 0
               const s = typeof link.source === 'object' ? link.source.id : link.source
               const t = typeof link.target === 'object' ? link.target.id : link.target
@@ -795,16 +948,16 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
             linkDirectionalParticleColor={link => {
               const s = typeof link.source === 'object' ? link.source.id : link.source
               const t = typeof link.target === 'object' ? link.target.id : link.target
-              const h = hoveredRef.current
+              const h = pinnedRef.current || hoveredRef.current
               if (h && s === h.id) return 'rgba(34,211,238,0.9)'
               if (h && t === h.id) return 'rgba(52,211,153,0.9)'
               return 'rgba(255,255,255,0.4)'
             }}
             linkDirectionalParticleSpeed={0.006}
             warmupTicks={100}
-            cooldownTicks={60}
+            cooldownTicks={120}
             d3AlphaDecay={0.025}
-            d3VelocityDecay={0.42}
+            d3VelocityDecay={0.28}
             enableNodeDrag={true}
             enableZoomInteraction={true}
             enablePanInteraction={true}
