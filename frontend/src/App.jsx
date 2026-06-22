@@ -1,12 +1,34 @@
 import { useState, useEffect } from 'react'
-import { LayoutDashboard, GitBranch, FileText, ShieldCheck, Lightbulb, BrainCircuit, MessageSquare, Settings } from 'lucide-react'
+import { LayoutDashboard, GitBranch, FileText, ShieldCheck, Lightbulb, BrainCircuit, MessageSquare, Settings, BarChart2 } from 'lucide-react'
+
+function ContentIntelView() {
+  return (
+    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 16 }}>
+      <BarChart2 size={40} color="var(--accent-2)" strokeWidth={1.2} />
+      <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--text)' }}>Content Intelligence</div>
+      <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>content.tungvu.vn</div>
+      <a
+        href="https://content.tungvu.vn/"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          marginTop: 8, padding: '9px 24px', borderRadius: 8,
+          background: 'var(--accent)', color: '#fff',
+          fontSize: 13, fontWeight: 500, textDecoration: 'none',
+          display: 'flex', alignItems: 'center', gap: 8,
+        }}
+      >
+        Mở Content Intel ↗
+      </a>
+    </div>
+  )
+}
 import Sidebar from './components/Sidebar'
 import Dashboard from './components/Dashboard'
 import GraphView from './components/GraphView'
 import PostsList from './components/PostsList'
 import AuditView from './components/AuditView'
 import PostDetail from './components/PostDetail'
-import CrawlModal from './components/CrawlModal'
 import SuggestionsView from './components/SuggestionsView'
 import AIView from './components/AIView'
 import AIChatView from './components/AIChatView'
@@ -15,32 +37,32 @@ import useBreakpoint from './hooks/useBreakpoint'
 import LoginView from './components/LoginView'
 
 const VIEWS = {
-  dashboard:   Dashboard,
-  graph:       GraphView,
-  posts:       PostsList,
-  audit:       AuditView,
-  suggestions: SuggestionsView,
-  ai:          AIView,
-  chat:        AIChatView,
-  settings:    SettingsView,
+  dashboard:      Dashboard,
+  graph:          GraphView,
+  posts:          PostsList,
+  audit:          AuditView,
+  suggestions:    SuggestionsView,
+  ai:             AIView,
+  chat:           AIChatView,
+  'content-intel': ContentIntelView,
+  settings:       SettingsView,
 }
 
 const BOTTOM_NAV = [
-  { id: 'dashboard',   label: 'Dashboard', icon: LayoutDashboard },
-  { id: 'graph',       label: 'Graph',     icon: GitBranch },
-  { id: 'posts',       label: 'Bài viết',  icon: FileText },
-  { id: 'audit',       label: 'Audit',     icon: ShieldCheck },
-  { id: 'suggestions', label: 'Gợi ý',     icon: Lightbulb },
-  { id: 'ai',          label: 'AI Analysis', icon: BrainCircuit },
-  { id: 'chat',        label: 'AI Chat',    icon: MessageSquare },
-  { id: 'settings',   label: 'Settings',   icon: Settings },
+  { id: 'dashboard',     label: 'Dashboard',   icon: LayoutDashboard },
+  { id: 'graph',         label: 'Graph',       icon: GitBranch },
+  { id: 'posts',         label: 'Bài viết',    icon: FileText },
+  { id: 'audit',         label: 'Audit',       icon: ShieldCheck },
+  { id: 'suggestions',   label: 'Gợi ý',       icon: Lightbulb },
+  { id: 'ai',            label: 'AI Analysis', icon: BrainCircuit },
+  { id: 'chat',          label: 'AI Chat',     icon: MessageSquare },
+  { id: 'settings',      label: 'Settings',    icon: Settings },
 ]
 
 function AppShell() {
   const [view, setView]           = useState('graph')
   const [selectedSlug, setSelectedSlug] = useState(null)
   const [navList, setNavList]     = useState([])
-  const [showCrawl, setShowCrawl] = useState(false)
   const [refreshKey, setRefreshKey] = useState(0)
   const refresh = () => setRefreshKey(k => k + 1)
 
@@ -61,7 +83,7 @@ function AppShell() {
         <Sidebar
           active={view}
           onChange={setView}
-          onCrawl={() => setShowCrawl(true)}
+          onCrawl={() => setView('settings')}
           collapsed={isTablet || sidebarCollapsed}
           onToggleCollapse={() => setSidebarCollapsed(v => !v)}
         />
@@ -89,7 +111,7 @@ function AppShell() {
             })()}
           </div>
         )}
-        <View onSelectPost={handleSelectPost} bp={bp} refreshKey={refreshKey} />
+        <View onSelectPost={handleSelectPost} bp={bp} refreshKey={refreshKey} onDone={refresh} />
       </main>
 
       {/* Bottom nav — mobile only */}
@@ -108,13 +130,12 @@ function AppShell() {
             display: 'flex', alignItems: 'stretch',
             height: '100%', width: 'max-content', minWidth: '100%',
           }}>
-            {[...BOTTOM_NAV, { id: '__crawl__', label: 'Crawl', icon: null }].map(({ id, label, icon: Icon }) => {
+            {BOTTOM_NAV.map(({ id, label, icon: Icon }) => {
               const isActive = view === id
-              const isCrawl = id === '__crawl__'
               return (
                 <button
                   key={id}
-                  onClick={() => isCrawl ? setShowCrawl(true) : setView(id)}
+                  onClick={() => setView(id)}
                   style={{
                     width: 64, flexShrink: 0,
                     display: 'flex', flexDirection: 'column',
@@ -126,10 +147,7 @@ function AppShell() {
                     padding: '4px 0 6px',
                   }}
                 >
-                  {isCrawl
-                    ? <span style={{ fontSize: 18, lineHeight: 1 }}>↻</span>
-                    : <Icon size={18} strokeWidth={1.8} />
-                  }
+                  {Icon ? <Icon size={18} strokeWidth={1.8} /> : <span style={{ width: 18, display: 'inline-block' }} />}
                   <span style={{ fontSize: 9 }}>{label}</span>
                 </button>
               )
@@ -147,13 +165,7 @@ function AppShell() {
           bp={bp}
         />
       )}
-      {showCrawl && (
-        <CrawlModal
-          onClose={() => setShowCrawl(false)}
-          onDone={refresh}
-          bp={bp}
-        />
-      )}
+
     </div>
   )
 }

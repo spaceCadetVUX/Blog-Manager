@@ -1,13 +1,14 @@
-import { LayoutDashboard, GitBranch, FileText, ShieldCheck, RefreshCw, BrainCircuit, MessageSquare, Settings } from 'lucide-react'
+import { LayoutDashboard, GitBranch, FileText, ShieldCheck, BrainCircuit, MessageSquare, Settings, BarChart2 } from 'lucide-react'
 
 const NAV = [
-  { id: 'dashboard',   label: 'Dashboard',     icon: LayoutDashboard },
-  { id: 'graph',       label: 'Link Graph',    icon: GitBranch },
-  { id: 'posts',       label: 'Bài viết',      icon: FileText },
-  { id: 'audit',       label: 'SEO Audit',     icon: ShieldCheck },
-  { id: 'ai',          label: 'AI Analysis',   icon: BrainCircuit },
-  { id: 'chat',        label: 'AI Chat',       icon: MessageSquare },
-  { id: 'settings',    label: 'Settings',      icon: Settings },
+  { id: 'dashboard',      label: 'Dashboard',       icon: LayoutDashboard },
+  { id: 'graph',          label: 'Link Graph',      icon: GitBranch },
+  { id: 'posts',          label: 'Bài viết',        icon: FileText },
+  { id: 'audit',          label: 'SEO Audit',       icon: ShieldCheck },
+  { id: 'ai',             label: 'AI Analysis',     icon: BrainCircuit },
+  { id: 'chat',           label: 'AI Chat',         icon: MessageSquare },
+  { id: 'content-intel',  label: 'Content Intel',   icon: BarChart2 },
+  { id: 'settings',       label: 'Settings',        icon: Settings },
 ]
 
 export default function Sidebar({ active, onChange, onCrawl, collapsed = false, onToggleCollapse }) {
@@ -83,28 +84,6 @@ export default function Sidebar({ active, onChange, onCrawl, collapsed = false, 
 
       {/* Footer */}
       <div style={{ padding: collapsed ? '12px 0' : '12px 16px', borderTop: '1px solid var(--border-2)', display: 'flex', flexDirection: 'column', alignItems: collapsed ? 'center' : 'stretch', gap: 8 }}>
-        <button
-          onClick={onCrawl}
-          title={collapsed ? 'Crawl bài viết' : undefined}
-          style={{
-            display: 'flex', alignItems: 'center', justifyContent: collapsed ? 'center' : 'flex-start',
-            gap: collapsed ? 0 : 8,
-            padding: collapsed ? '8px' : '8px 10px',
-            borderRadius: 6,
-            border: '1px solid var(--border)',
-            background: 'transparent',
-            color: 'var(--text-muted)',
-            cursor: 'pointer', fontSize: 12,
-            transition: 'all 0.15s',
-            width: collapsed ? 36 : '100%',
-            height: collapsed ? 36 : undefined,
-          }}
-          onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent-dim)'; e.currentTarget.style.color = 'var(--accent-2)'; e.currentTarget.style.borderColor = 'var(--accent)' }}
-          onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.borderColor = 'var(--border)' }}
-        >
-          <RefreshCw size={13} strokeWidth={2} />
-          {!collapsed && 'Crawl bài viết'}
-        </button>
         {!collapsed && <div style={{ fontSize: 10, color: 'var(--text-subtle)' }}>knxstore.vn · v1.0.0</div>}
 
         {/* Collapse toggle */}

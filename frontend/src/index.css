@@ -99,7 +99,8 @@ body {
 @keyframes spin  { to { transform: rotate(360deg); } }
 @keyframes blink { 50% { opacity: 0; } }
 
-/* Article HTML renderer */
+
+/* ── Article HTML renderer */
 .article-render { font-size: 14px; line-height: 1.8; color: var(--text-muted); }
 .article-render h1 { font-size: 22px; font-weight: 700; color: var(--text); margin: 28px 0 12px; line-height: 1.35; }
 .article-render h2 { font-size: 18px; font-weight: 600; color: var(--text); margin: 24px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }

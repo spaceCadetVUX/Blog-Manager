@@ -257,6 +257,11 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
 
   useEffect(() => { danceModeRef.current = danceMode }, [danceMode])
 
+  // Tắt dance khi số node thay đổi (toggle products) — tránh lỗi node chưa có tọa độ
+  useEffect(() => {
+    if (danceMode) setDanceMode(false)
+  }, [graphData.nodes.length])
+
   useEffect(() => {
     const nodes = graphData.nodes
     if (!danceMode) {
@@ -267,8 +272,12 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
     }
     if (!fgRef.current || !nodes.length) return
 
-    // Chụp home position
-    nodes.forEach(n => { n._hx = n.x || 0; n._hy = n.y || 0 })
+    // Chụp home position + gán phase riêng cho mỗi node (golden ratio)
+    nodes.forEach((n, i) => {
+      n._hx     = n.x || 0
+      n._hy     = n.y || 0
+      n._phase  = i * 2.399  // golden angle ~137.5° in radians
+    })
 
     // Tính centroids từ home
     const centroids = {}
@@ -279,7 +288,22 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
     })
     Object.values(centroids).forEach(c => { c.x /= c.count; c.y /= c.count })
 
-    // Lưu góc + khoảng cách ban đầu từ centroid
+    // Tâm toàn cục = trung bình tất cả home positions
+    const globalCx = nodes.reduce((s, n) => s + n._hx, 0) / nodes.length
+    const globalCy = nodes.reduce((s, n) => s + n._hy, 0) / nodes.length
+
+    // Mỗi galaxy orbit quanh tâm toàn cục
+    const galaxyOrbits = {}
+    Object.entries(centroids).forEach(([sec, c]) => {
+      const dx = c.x - globalCx, dy = c.y - globalCy
+      galaxyOrbits[sec] = {
+        angle0: Math.atan2(dy, dx),
+        dist:   Math.max(Math.hypot(dx, dy), 20),
+        hx: c.x, hy: c.y,   // home position của centroid
+      }
+    })
+
+    // Lưu góc + khoảng cách ban đầu của mỗi node so với centroid HOME
     nodes.forEach(n => {
       const c = centroids[n.section]
       if (!c) return
@@ -288,26 +312,54 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
       n._dist   = Math.hypot(dx, dy)
     })
 
+    // Assign product nodes → galaxy gần nhất, orbit outer ring
+    const centroidList = Object.entries(centroids)
+    nodes.forEach(n => {
+      if (n.nodeType !== 'productNode' || !centroidList.length) return
+      let bestSec = null, bestD = Infinity
+      centroidList.forEach(([sec, c]) => {
+        const d = Math.hypot(n._hx - c.x, n._hy - c.y)
+        if (d < bestD) { bestD = d; bestSec = sec }
+      })
+      if (!bestSec) return
+      n._galaxySec = bestSec
+      const c = centroids[bestSec]
+      const dx = n._hx - c.x, dy = n._hy - c.y
+      n._angle0 = Math.atan2(dy, dx)
+      n._dist   = Math.max(bestD, 80) + 30
+    })
+
     const animate = () => {
       if (!danceModeRef.current) return
-      const t = performance.now() / 1000  // seconds
+      const t = performance.now() / 1000
 
-      nodes.forEach(n => {
-        const c = centroids[n.section]
-        if (c && n._dist != null) {
-          // Xoay quanh centroid — mỗi galaxy 1 tốc độ nhẹ khác nhau
-          const speed = 0.08 + (n._dist * 0.00008) // node xa trung tâm xoay chậm hơn chút
-          const angle = n._angle0 + t * speed
-          n.fx = c.x + Math.cos(angle) * n._dist
-          n.fy = c.y + Math.sin(angle) * n._dist
-        } else {
-          // Product nodes: float theo wave riêng
-          n.fx = n._hx + Math.sin(t * 0.6 + n._hx * 0.005) * 12
-          n.fy = n._hy + Math.cos(t * 0.5 + n._hy * 0.005) * 10
+      // Bước 1: tính vị trí hiện tại của từng centroid (đang orbit quanh global center)
+      const movingCentroids = {}
+      Object.entries(galaxyOrbits).forEach(([sec, g]) => {
+        const gSpeed = 45 / Math.max(g.dist, 10)
+        const a = g.angle0 + t * gSpeed
+        movingCentroids[sec] = {
+          x: globalCx + Math.cos(a) * g.dist,
+          y: globalCy + Math.sin(a) * g.dist,
         }
-        // Wave nhẹ toàn cục
-        n.fx += Math.sin(t * 0.5 + n._hx * 0.004) * 7
-        n.fy += Math.cos(t * 0.4 + n._hy * 0.004) * 5
+      })
+
+      // Bước 2: mỗi node orbit quanh centroid đang chuyển động
+      nodes.forEach(n => {
+        const p = n._phase
+        const sec = n.nodeType === 'productNode' ? n._galaxySec : n.section
+        const c = movingCentroids[sec]
+        if (c && n._dist != null) {
+          const speed = 45 / Math.max(n._dist, 10)
+          const angle = n._angle0 + t * speed
+          const bx = c.x + Math.cos(angle) * n._dist
+          const by = c.y + Math.sin(angle) * n._dist
+          n.fx = bx + Math.sin(t * 0.28 + p) * 10 + Math.sin(t * 0.17 + p * 1.3) * 5
+          n.fy = by + Math.cos(t * 0.23 + p * 0.9) * 8  + Math.cos(t * 0.13 + p * 1.7) * 4
+        } else {
+          n.fx = n._hx + Math.sin(t * 0.2 + p) * 12
+          n.fy = n._hy + Math.cos(t * 0.17 + p) * 10
+        }
       })
 
       fgRef.current?.resumeAnimation()
@@ -326,7 +378,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
       cancelAnimationFrame(danceRafRef.current)
       danceRafRef.current = null
       clearInterval(keepAlive)
-      nodes.forEach(n => { delete n.fx; delete n.fy; delete n._hx; delete n._hy; delete n._angle0; delete n._dist })
+      nodes.forEach(n => { delete n.fx; delete n.fy; delete n._hx; delete n._hy; delete n._angle0; delete n._dist; delete n._phase; delete n._galaxy; delete n._galaxySec })
     }
   }, [danceMode, graphData.nodes])
   useEffect(() => {
@@ -1035,7 +1087,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
 
           {/* Dance mode */}
           <button
-            onClick={() => setDanceMode(v => !v)}
+            onClick={() => { setDanceMode(v => { if (!v) setHideLinks(true); return !v }) }}
             title="Dance mode"
             style={{
               padding: '5px 10px', borderRadius: 6, fontSize: 12, cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0,
@@ -1045,8 +1097,21 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
               transition: 'all 0.15s',
               animation: danceMode ? 'dancePulse 1.2s ease-in-out infinite' : 'none',
             }}
-          >✦{bp !== 'mobile' && (danceMode ? ' Dancing…' : ' Dance')}</button>
-          <style>{`@keyframes dancePulse { 0%,100%{box-shadow:0 0 0 0 rgba(139,92,246,0)} 50%{box-shadow:0 0 8px 2px rgba(139,92,246,0.5)} }`}</style>
+          >
+            <span style={{ display:'inline-block', animation: danceMode ? 'starFloat 2.4s ease-in-out infinite' : 'none' }}>✦</span>
+            {bp !== 'mobile' && (danceMode ? ' Dancing…' : ' Dance')}
+          </button>
+          <style>{`
+            @keyframes dancePulse {
+              0%,100% { box-shadow: 0 0 0 0 rgba(139,92,246,0); }
+              50%      { box-shadow: 0 0 14px 3px rgba(139,92,246,0.45); }
+            }
+            @keyframes starFloat {
+              0%,100% { transform: translateY(0)   rotate(0deg)   scale(1);    }
+              25%     { transform: translateY(-3px) rotate(18deg)  scale(1.15); }
+              75%     { transform: translateY(2px)  rotate(-12deg) scale(0.92); }
+            }
+          `}</style>
 
           {/* Stats */}
           <div style={{ fontSize: 11, color: 'var(--text-subtle)', whiteSpace: 'nowrap', flexShrink: 0 }}>
