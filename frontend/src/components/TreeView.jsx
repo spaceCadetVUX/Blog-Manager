@@ -12,8 +12,8 @@ function PostRow({ post, onSelectPost }) {
     <div
       onClick={() => onSelectPost?.(post.slug)}
       style={{
-        display: 'flex', alignItems: 'flex-start', gap: 10,
-        padding: '8px 14px 8px 36px', cursor: 'pointer',
+        display: 'flex', alignItems: 'flex-start', gap: 12,
+        padding: '10px 16px 10px 40px', cursor: 'pointer',
         borderBottom: '1px solid var(--border-2)',
         transition: 'background 0.1s',
       }}
@@ -22,7 +22,7 @@ function PostRow({ post, onSelectPost }) {
     >
       {/* Thumbnail */}
       <div style={{
-        width: 72, height: 52, borderRadius: 5, flexShrink: 0, overflow: 'hidden',
+        width: 90, height: 64, borderRadius: 6, flexShrink: 0, overflow: 'hidden',
         background: 'var(--surface-2)', border: `1px solid ${isOrphan ? 'rgba(248,81,73,0.3)' : 'var(--border-2)'}`,
       }}>
         {post.image
@@ -33,14 +33,14 @@ function PostRow({ post, onSelectPost }) {
 
       <div style={{ flex: 1, minWidth: 0 }}>
         {/* headline */}
-        <div style={{ fontSize: 13, fontWeight: 500, color: 'var(--text)', lineHeight: 1.4, marginBottom: 2 }}>
+        <div style={{ fontSize: 14, fontWeight: 500, color: 'var(--text)', lineHeight: 1.4, marginBottom: 3 }}>
           {post.headline || post.slug}
         </div>
 
         {/* meta description */}
         {post.description && (
           <div style={{
-            fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.5,
+            fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.5,
             overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
             maxWidth: '100%', marginBottom: 4,
           }}>
@@ -51,26 +51,26 @@ function PostRow({ post, onSelectPost }) {
         {/* meta row */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
           {post.author && (
-            <span style={{ fontSize: 10, color: 'var(--text-subtle)' }}>👤 {post.author}</span>
+            <span style={{ fontSize: 11, color: 'var(--text-subtle)' }}>👤 {post.author}</span>
           )}
           {post.date_modified && (
-            <span style={{ fontSize: 10, color: 'var(--text-subtle)' }}>
+            <span style={{ fontSize: 11, color: 'var(--text-subtle)' }}>
               ✏️ {new Date(post.date_modified).toLocaleDateString('vi-VN')}
             </span>
           )}
           <span style={{
-            fontSize: 10, padding: '0 6px', borderRadius: 8,
+            fontSize: 11, padding: '1px 7px', borderRadius: 8,
             background: isOrphan ? 'rgba(248,81,73,0.1)' : 'rgba(63,185,80,0.08)',
             color: isOrphan ? 'var(--danger)' : 'var(--success)',
           }}>
             {post.inbound || 0} in · {post.outbound || 0} out
           </span>
           {productCount > 0 && (
-            <span style={{ fontSize: 10, color: '#f97316' }}>🛒 {productCount} sp</span>
+            <span style={{ fontSize: 11, color: '#f97316' }}>🛒 {productCount} sp</span>
           )}
           {isOrphan && (
-            <span style={{ display: 'flex', alignItems: 'center', gap: 3, fontSize: 10, color: 'var(--danger)' }}>
-              <AlertTriangle size={10} /> orphan
+            <span style={{ display: 'flex', alignItems: 'center', gap: 3, fontSize: 11, color: 'var(--danger)' }}>
+              <AlertTriangle size={11} /> orphan
             </span>
           )}
         </div>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { LayoutDashboard, GitBranch, FileText, ShieldCheck, BrainCircuit, MessageSquare, Settings, BarChart2, BookOpen, LogOut } from 'lucide-react'
+import { LayoutDashboard, GitBranch, FileText, ShieldCheck, BrainCircuit, MessageSquare, Settings, BarChart2, BookOpen, LogOut, RefreshCw } from 'lucide-react'
+import CrawlModal from './CrawlModal'
 
 const NAV = [
   { id: 'dashboard',      label: 'Dashboard',     icon: LayoutDashboard },
@@ -18,11 +19,13 @@ const DURATION = '0.28s'
 export default function Sidebar({ active, onChange, onCrawl, collapsed = false, onToggleCollapse, onLogout }) {
   // mounted flag — prevent animation on first paint
   const [ready, setReady] = useState(false)
+  const [showCrawl, setShowCrawl] = useState(false)
   useEffect(() => { const t = setTimeout(() => setReady(true), 50); return () => clearTimeout(t) }, [])
 
   const transition = ready ? `${DURATION} ${EASING}` : 'none'
 
   return (
+    <>
     <aside style={{
       width: collapsed ? 56 : 220,
       minWidth: collapsed ? 56 : 220,
@@ -166,6 +169,25 @@ export default function Sidebar({ active, onChange, onCrawl, collapsed = false, 
         flexShrink: 0,
         overflow: 'hidden',
       }}>
+        {/* Crawl */}
+        <button onClick={() => setShowCrawl(true)} title={collapsed ? 'Crawl' : undefined}
+          style={{
+            width: '100%', display: 'flex', alignItems: 'center', gap: 10,
+            padding: '8px 10px', background: 'transparent', border: 'none',
+            cursor: 'pointer', fontSize: 13, textAlign: 'left', borderRadius: 7,
+            color: 'var(--text-muted)', transition: `color 0.15s, background 0.15s`,
+          }}
+          onMouseEnter={e => { e.currentTarget.style.color = 'var(--accent-2)'; e.currentTarget.style.background = 'rgba(6,182,212,0.07)' }}
+          onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.background = 'transparent' }}
+        >
+          <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 20, height: 20, flexShrink: 0, transition: `transform ${DURATION} ${EASING}`, transform: collapsed ? 'translateX(4px)' : 'none' }}>
+            <RefreshCw size={16} strokeWidth={1.8} />
+          </span>
+          <span style={{ whiteSpace: 'nowrap', opacity: collapsed ? 0 : 1, transform: collapsed ? 'translateX(-8px)' : 'none', transition: `opacity ${transition}, transform ${transition}`, pointerEvents: 'none' }}>
+            Crawl
+          </span>
+        </button>
+
         {/* Settings */}
         {[
           { id: 'settings', label: 'Settings', icon: Settings, onClick: () => onChange('settings') },
@@ -250,5 +272,10 @@ export default function Sidebar({ active, onChange, onCrawl, collapsed = false, 
         )}
       </div>
     </aside>
+
+    {showCrawl && (
+      <CrawlModal onClose={() => setShowCrawl(false)} onDone={() => setShowCrawl(false)} />
+    )}
+    </>
   )
 }
