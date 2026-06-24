@@ -69,19 +69,27 @@ export default function HelpView() {
             <span style={{ color: '#34d399' }}>━ Xanh lá</span> = inbound vào node đang chọn
           </Row>
           <Row label="Hover node">Hiện bảng thông tin: tiêu đề, section, inbound/outbound, tác giả, ngày sửa.</Row>
-          <Row label="Click node">Ghim (pin) node — bảng thông tin giữ nguyên kể cả khi di chuột đi chỗ khác.</Row>
+          <Row label="Click node">Ghim (pin) node — bảng thông tin giữ nguyên kể cả khi di chuột đi chỗ khác. Click lại node đang ghim để bỏ ghim.</Row>
+          <Row label="Double-click node">Mở chi tiết bài viết trong panel bên phải. Với node sản phẩm (◆ cam): mở URL sản phẩm trong tab mới.</Row>
           <Row label="Click nền">Bỏ ghim, ẩn bảng thông tin.</Row>
+          <Row label="Scroll / pinch">Zoom in/out trên graph.</Row>
+          <Row label="Kéo nền">Pan — di chuyển toàn bộ graph.</Row>
+          <Row label="Kéo node">Di chuyển 1 node đến vị trí mong muốn.</Row>
 
           <div style={{ marginTop: 16, marginBottom: 8, fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>Bộ lọc & công cụ</div>
-          <Row label="Tìm kiếm">Tìm theo tên bài. Kết quả match sẽ highlight, còn lại mờ đi.</Row>
+          <Row label="Tìm kiếm">Tìm theo tên bài hoặc sản phẩm. Kết quả match highlight + ripple, còn lại mờ đi. Dùng ↑↓ chọn, Enter để zoom đến node, Esc đóng.</Row>
+          <Row label="Loại tìm kiếm">Tab <b style={{color:'var(--text)'}}>Tất cả / Bài viết / ◆ Sản phẩm</b> trong ô search — lọc kết quả search chỉ theo loại node.</Row>
           <Row label="Section">Lọc chỉ hiện node thuộc 1 section. Kết hợp được với các bộ lọc khác.</Row>
           <Row label="Min links">Chỉ hiện node có ít nhất X inbound link. Dùng để lọc ra hub page.</Row>
           <Row label="Sửa (date)">
             Lọc node theo ngày <b style={{ color: 'var(--text)' }}>date_modified</b>. Node ngoài khoảng bị mờ (ghost xám),
             node trong khoảng nổi bật hơn với ripple và kích thước lớn hơn. Đặt ngược from/to vẫn hoạt động đúng.
           </Row>
-          <Row label="— Links (slider)">Điều chỉnh độ trong suốt của đường nối. Kéo về 0 = ẩn hoàn toàn.</Row>
-          <Row label="Products">Bật/tắt hiển thị node sản phẩm (hình thoi màu cam) liên kết với bài viết.</Row>
+          <Row label="Recenter">Zoom fit toàn bộ graph vào khung hình. Dùng khi bị lạc sau khi zoom/pan.</Row>
+          <Row label="Orphans">Lọc chỉ hiện bài viết chưa có inbound link nào (cần bổ sung internal link).</Row>
+          <Row label="— Links (slider)">Điều chỉnh độ trong suốt của đường nối. Kéo về 0 = ẩn hoàn toàn. Giá trị được lưu lại sau khi reload.</Row>
+          <Row label="Products">Bật/tắt hiển thị node sản phẩm (hình thoi ◆ cam). Khi bật, có thêm filter: Tất cả / Có SP / Không SP để lọc bài viết.</Row>
+          <Row label="Label node">Node lớn (hub page) luôn hiện tên. Node nhỏ chỉ hiện tên khi zoom vào đủ gần hoặc hover.</Row>
           <Row label="Dance mode">Bật vật lý — các node liên tục chuyển động. Link tự ẩn khi bật.</Row>
           <Row label="✕ Clear">Xóa toàn bộ bộ lọc đang active (search, date, section, min links) về mặc định.</Row>
 
