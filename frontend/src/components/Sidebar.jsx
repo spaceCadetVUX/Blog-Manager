@@ -1,4 +1,4 @@
-import { LayoutDashboard, GitBranch, FileText, ShieldCheck, BrainCircuit, MessageSquare, Settings, BarChart2 } from 'lucide-react'
+import { LayoutDashboard, GitBranch, FileText, ShieldCheck, BrainCircuit, MessageSquare, Settings, BarChart2, BookOpen } from 'lucide-react'
 
 const NAV = [
   { id: 'dashboard',      label: 'Dashboard',       icon: LayoutDashboard },
@@ -9,6 +9,7 @@ const NAV = [
   { id: 'chat',           label: 'AI Chat',         icon: MessageSquare },
   { id: 'content-intel',  label: 'Content Intel',   icon: BarChart2 },
   { id: 'settings',       label: 'Settings',        icon: Settings },
+  { id: 'help',           label: 'Hướng dẫn',      icon: BookOpen },
 ]
 
 export default function Sidebar({ active, onChange, onCrawl, collapsed = false, onToggleCollapse }) {

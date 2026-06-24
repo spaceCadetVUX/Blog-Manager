@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { LayoutDashboard, GitBranch, FileText, ShieldCheck, Lightbulb, BrainCircuit, MessageSquare, Settings, BarChart2 } from 'lucide-react'
+import { LayoutDashboard, GitBranch, FileText, ShieldCheck, Lightbulb, BrainCircuit, MessageSquare, Settings, BarChart2, BookOpen } from 'lucide-react'
 
 function ContentIntelView() {
   return (
@@ -33,6 +33,7 @@ import SuggestionsView from './components/SuggestionsView'
 import AIView from './components/AIView'
 import AIChatView from './components/AIChatView'
 import SettingsView from './components/SettingsView'
+import HelpView from './components/HelpView'
 import useBreakpoint from './hooks/useBreakpoint'
 import LoginView from './components/LoginView'
 
@@ -46,6 +47,7 @@ const VIEWS = {
   chat:           AIChatView,
   'content-intel': ContentIntelView,
   settings:       SettingsView,
+  help:           HelpView,
 }
 
 const BOTTOM_NAV = [
@@ -57,6 +59,7 @@ const BOTTOM_NAV = [
   { id: 'ai',            label: 'AI Analysis', icon: BrainCircuit },
   { id: 'chat',          label: 'AI Chat',     icon: MessageSquare },
   { id: 'settings',      label: 'Settings',    icon: Settings },
+  { id: 'help',          label: 'Hướng dẫn',  icon: BookOpen },
 ]
 
 function AppShell() {
