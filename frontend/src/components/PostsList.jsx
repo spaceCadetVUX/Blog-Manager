@@ -55,28 +55,37 @@ export default function PostsList({ onSelectPost, bp = 'desktop' }) {
     api.sections().then(rows => setSections(rows.map(r => r.article_section))).catch(console.error)
   }, [])
 
+  const isFiltering = !!(search || dateFrom || dateTo)
+
   useEffect(() => { setPage(0) }, [filterSection, sortKey, sortDir, search, dateFrom, dateTo])
 
   useEffect(() => {
     setLoading(true)
-    const params = { sort: sortKey, order: sortDir, limit: PAGE_SIZE, offset: page * PAGE_SIZE }
+    const params = { sort: sortKey, order: sortDir }
     if (filterSection) params.section = filterSection
+    if (isFiltering) {
+      // fetch toàn bộ để search/date filter không bị giới hạn page
+      params.limit = 500
+      params.offset = 0
+      if (search) params.q = search
+    } else {
+      params.limit = PAGE_SIZE
+      params.offset = page * PAGE_SIZE
+    }
     api.posts(params)
       .then(data => { setPosts(data.items || []); setTotal(data.total ?? (data.items || []).length) })
       .catch(console.error)
       .finally(() => setLoading(false))
-  }, [filterSection, sortKey, sortDir, page])
+  }, [filterSection, sortKey, sortDir, page, search, dateFrom, dateTo])
 
   const filtered = posts.filter(p => {
-    if (search) {
-      const q = search.toLowerCase()
-      if (!(p.headline || '').toLowerCase().includes(q) && !(p.slug || '').toLowerCase().includes(q)) return false
-    }
     if (dateFrom || dateTo) {
       const iso = (p.date_modified || '').slice(0, 10)
+      const lo = dateFrom && dateTo ? (dateFrom < dateTo ? dateFrom : dateTo) : dateFrom
+      const hi = dateFrom && dateTo ? (dateFrom < dateTo ? dateTo : dateFrom) : dateTo
       if (!iso) return false
-      if (dateFrom && iso < dateFrom) return false
-      if (dateTo   && iso > dateTo)   return false
+      if (lo && iso < lo) return false
+      if (hi && iso > hi) return false
     }
     return true
   })
@@ -339,10 +348,10 @@ export default function PostsList({ onSelectPost, bp = 'desktop' }) {
         )}
       </div>
 
-      {/* Pagination */}
+      {/* Pagination — ẩn khi đang search/filter date */}
       {(() => {
         const totalPages = Math.ceil(total / PAGE_SIZE)
-        if (totalPages <= 1) return null
+        if (totalPages <= 1 || isFiltering) return null
         return (
           <div style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4,
