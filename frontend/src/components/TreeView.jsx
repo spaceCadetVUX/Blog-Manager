@@ -6,6 +6,7 @@ import { ChevronRight, ChevronDown, AlertTriangle, ExternalLink } from 'lucide-r
 function PostRow({ post, onSelectPost }) {
   const isOrphan = (post.inbound || 0) === 0
   const color = sectionColor(post.article_section || '')
+  const productCount = Array.isArray(post.products) ? post.products.length : 0
 
   return (
     <div
@@ -19,12 +20,16 @@ function PostRow({ post, onSelectPost }) {
       onMouseEnter={e => e.currentTarget.style.background = 'var(--surface-2)'}
       onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
     >
-      {/* dot */}
+      {/* Thumbnail */}
       <div style={{
-        width: 6, height: 6, borderRadius: '50%', marginTop: 5, flexShrink: 0,
-        background: isOrphan ? 'var(--danger)' : color,
-        opacity: isOrphan ? 1 : 0.7,
-      }} />
+        width: 72, height: 52, borderRadius: 5, flexShrink: 0, overflow: 'hidden',
+        background: 'var(--surface-2)', border: `1px solid ${isOrphan ? 'rgba(248,81,73,0.3)' : 'var(--border-2)'}`,
+      }}>
+        {post.image
+          ? <img src={post.image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} onError={e => { e.target.style.display = 'none' }} />
+          : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, color: color, opacity: 0.3 }}>✦</div>
+        }
+      </div>
 
       <div style={{ flex: 1, minWidth: 0 }}>
         {/* headline */}
@@ -60,6 +65,9 @@ function PostRow({ post, onSelectPost }) {
           }}>
             {post.inbound || 0} in · {post.outbound || 0} out
           </span>
+          {productCount > 0 && (
+            <span style={{ fontSize: 10, color: '#f97316' }}>🛒 {productCount} sp</span>
+          )}
           {isOrphan && (
             <span style={{ display: 'flex', alignItems: 'center', gap: 3, fontSize: 10, color: 'var(--danger)' }}>
               <AlertTriangle size={10} /> orphan
@@ -132,6 +140,19 @@ export default function TreeView({ onSelectPost, bp = 'desktop' }) {
   const [search, setSearch]     = useState('')
   const [sortBy, setSortBy]     = useState('headline')
   const [orphanOnly, setOrphanOnly] = useState(false)
+  const [dateFrom, setDateFrom] = useState('')
+  const [dateTo, setDateTo]     = useState('')
+
+  const checkDate = (iso, df, dt) => {
+    if (!df && !dt) return true
+    if (!iso) return false
+    const d = iso.slice(0, 10)
+    const lo = df && dt ? (df < dt ? df : dt) : df
+    const hi = df && dt ? (df < dt ? dt : df) : dt
+    if (lo && d < lo) return false
+    if (hi && d > hi) return false
+    return true
+  }
 
   useEffect(() => {
     setLoading(true)
@@ -144,6 +165,7 @@ export default function TreeView({ onSelectPost, bp = 'desktop' }) {
   // Filter + sort
   const filtered = posts.filter(p => {
     if (orphanOnly && (p.inbound || 0) > 0) return false
+    if (!checkDate(p.date_modified, dateFrom, dateTo)) return false
     if (!search.trim()) return true
     const q = search.toLowerCase()
     return (
@@ -222,6 +244,31 @@ export default function TreeView({ onSelectPost, bp = 'desktop' }) {
           {orphanOnly ? '⚠ Orphans' : 'Orphans'}
         </button>
 
+        {/* Date filter */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+          <span style={{ fontSize: 10, color: 'var(--text-subtle)', whiteSpace: 'nowrap' }}>Sửa:</span>
+          {[['from', dateFrom, setDateFrom], ['to', dateTo, setDateTo]].map(([which, val, setVal]) => (
+            <input
+              key={which}
+              type="date"
+              value={val}
+              onChange={e => setVal(e.target.value)}
+              style={{
+                padding: '3px 6px', fontSize: 11, borderRadius: 6,
+                border: `1px solid ${val ? 'var(--accent)' : 'var(--border)'}`,
+                background: val ? 'rgba(6,182,212,0.06)' : 'var(--surface-2)',
+                color: val ? 'var(--accent-2)' : 'var(--text-muted)',
+                outline: 'none', colorScheme: 'dark', cursor: 'pointer',
+              }}
+            />
+          ))}
+          {(dateFrom || dateTo) && (
+            <button onClick={() => { setDateFrom(''); setDateTo('') }}
+              style={{ fontSize: 12, padding: '2px 6px', borderRadius: 4, border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-muted)', cursor: 'pointer' }}
+            >×</button>
+          )}
+        </div>
+
         <div style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--text-subtle)', display: 'flex', gap: 12 }}>
           <span><b style={{ color: 'var(--text)' }}>{filtered.length}</b> bài</span>
           {totalOrphans > 0 && (
@@ -240,7 +287,7 @@ export default function TreeView({ onSelectPost, bp = 'desktop' }) {
             posts={sectionPosts}
             onSelectPost={onSelectPost}
             defaultOpen={Object.keys(grouped).length <= 6}
-            forceOpen={!!search.trim() || orphanOnly}
+            forceOpen={!!search.trim() || orphanOnly || !!(dateFrom || dateTo)}
           />
         ))}
         {noSection.length > 0 && (
@@ -250,7 +297,7 @@ export default function TreeView({ onSelectPost, bp = 'desktop' }) {
             posts={noSection}
             onSelectPost={onSelectPost}
             defaultOpen={false}
-            forceOpen={!!search.trim() || orphanOnly}
+            forceOpen={!!search.trim() || orphanOnly || !!(dateFrom || dateTo)}
           />
         )}
         {!loading && filtered.length === 0 && (
