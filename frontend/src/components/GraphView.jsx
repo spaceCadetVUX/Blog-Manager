@@ -62,7 +62,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
   const dateFromRef = useRef('')
   const dateToRef   = useRef('')
   const nodeMapRef  = useRef({})
-  const [hideLinks, setHideLinks] = useState(false)
+  const [linkOpacity, setLinkOpacity] = useState(() => parseFloat(localStorage.getItem('linkOpacity') ?? '1'))
   const [showSectionDrop, setShowSectionDrop] = useState(false)
   const [danceMode, setDanceMode] = useState(false)
   const danceModeRef = useRef(false)
@@ -260,16 +260,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
     if (hi && d > hi) return false
     return true
   }
-  // Giữ render loop chạy liên tục khi date filter active
-  useEffect(() => {
-    if (!dateFrom && !dateTo) return
-    const kick = () => fgRef.current?.resumeAnimation()
-    kick()
-    const id = setInterval(kick, 500)
-    return () => clearInterval(id)
-  }, [dateFrom, dateTo])
-
-  useEffect(() => { danceModeRef.current = danceMode }, [danceMode])
+useEffect(() => { danceModeRef.current = danceMode }, [danceMode])
 
   // Tắt dance khi số node thay đổi (toggle products) — tránh lỗi node chưa có tọa độ
   useEffect(() => {
@@ -773,11 +764,11 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
     const dateDimmed = (df || dt) && !isNodeInDateRange(s) && !isNodeInDateRange(t)
     if (dateDimmed) return 'rgba(255,255,255,0.03)'
     const h = pinnedRef.current || hoveredRef.current
-    if (!h) return hideLinks ? 'rgba(255,255,255,0)' : 'rgba(255,255,255,0.13)'
+    if (!h) return `rgba(255,255,255,${(0.13 * linkOpacity).toFixed(3)})`
     if (s === h.id) return 'rgba(34,211,238,0.9)'
     if (t === h.id) return 'rgba(52,211,153,0.9)'
-    return hideLinks ? 'rgba(255,255,255,0)' : 'rgba(255,255,255,0.04)'
-  }, [hoveredNode, pinnedNode, dateFrom, dateTo, hideLinks])
+    return `rgba(255,255,255,${(0.04 * linkOpacity).toFixed(3)})`
+  }, [hoveredNode, pinnedNode, dateFrom, dateTo, linkOpacity])
 
   const getLinkWidth = useCallback((link) => {
     const s = typeof link.source === 'object' ? link.source.id : link.source
@@ -786,9 +777,9 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
     const dateDimmed = (df || dt) && !isNodeInDateRange(s) && !isNodeInDateRange(t)
     if (dateDimmed) return 0.3
     const h = pinnedRef.current || hoveredRef.current
-    if (!h) return hideLinks ? 0 : 0.8
-    return (s === h.id || t === h.id) ? 2 : (hideLinks ? 0 : 0.5)
-  }, [hoveredNode, pinnedNode, dateFrom, dateTo, hideLinks])
+    if (!h) return 0.8 * linkOpacity
+    return (s === h.id || t === h.id) ? 2 : 0.5 * linkOpacity
+  }, [hoveredNode, pinnedNode, dateFrom, dateTo, linkOpacity])
 
   const runClusterAI = useCallback(async () => {
     if (!filterSection || aiLoading) return
@@ -1062,22 +1053,31 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
             style={{ padding: '5px 10px', borderRadius: 6, border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-muted)', fontSize: 12, cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0 }}
           >⊡{bp !== 'mobile' && ' Recenter'}</button>
 
-          {/* Hide links */}
-          <button
-            onClick={() => setHideLinks(v => !v)}
-            title={hideLinks ? 'Hiện đường nối' : 'Ẩn đường nối'}
-            style={{
-              padding: '5px 10px', borderRadius: 6, fontSize: 12, cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0,
-              border: `1px solid ${hideLinks ? 'rgba(251,191,36,0.6)' : 'var(--border)'}`,
-              background: hideLinks ? 'rgba(251,191,36,0.1)' : 'transparent',
-              color: hideLinks ? '#fbbf24' : 'var(--text-muted)',
-              transition: 'all 0.15s',
-            }}
-          >{hideLinks ? '⋯' : '—'}{bp !== 'mobile' && (hideLinks ? ' Ẩn link' : ' Links')}</button>
+          {/* Link opacity slider */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 5, flexShrink: 0 }}>
+            <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>— Links</span>
+            <input
+              type="range" min="0" max="1" step="0.05"
+              value={linkOpacity}
+              onChange={e => {
+                const v = parseFloat(e.target.value)
+                setLinkOpacity(v)
+                localStorage.setItem('linkOpacity', v)
+              }}
+              title={`Links: ${Math.round(linkOpacity * 100)}%`}
+              style={{
+                width: 64, cursor: 'pointer', flexShrink: 0,
+                WebkitAppearance: 'none', appearance: 'none',
+                height: 2, borderRadius: 2,
+                background: `linear-gradient(to right, var(--accent) ${linkOpacity * 100}%, rgba(255,255,255,0.15) ${linkOpacity * 100}%)`,
+                outline: 'none',
+              }}
+            />
+          </div>
 
           {/* Dance mode */}
           <button
-            onClick={() => { setDanceMode(v => { if (!v) setHideLinks(true); return !v }) }}
+            onClick={() => { setDanceMode(v => { if (!v) setLinkOpacity(0); return !v }) }}
             title="Dance mode"
             style={{
               padding: '5px 10px', borderRadius: 6, fontSize: 12, cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0,
@@ -1224,6 +1224,25 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
             )}
           </div>
 
+          {/* Clear all filters */}
+          {(search || dateFrom || dateTo || filterSection || minLinks !== '0') && (
+            <button
+              onClick={() => {
+                setSearch(''); setShowResults(false)
+                setDateFrom(''); setDateTo('')
+                setFilterSection('')
+                setMinLinks('0')
+              }}
+              title="Xóa toàn bộ bộ lọc"
+              style={{
+                padding: '4px 9px', borderRadius: 6, fontSize: 11, cursor: 'pointer',
+                border: '1px solid rgba(239,68,68,0.5)',
+                background: 'rgba(239,68,68,0.08)',
+                color: '#f87171', whiteSpace: 'nowrap', flexShrink: 0,
+              }}
+            >✕ Clear</button>
+          )}
+
           {/* AI — khi filter section */}
           {filterSection && (
 <>
@@ -1282,7 +1301,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
             }}
             linkDirectionalParticleSpeed={0.006}
             warmupTicks={100}
-            cooldownTicks={120}
+            cooldownTicks={(dateFrom || dateTo) ? Infinity : 120}
             d3AlphaDecay={0.025}
             d3VelocityDecay={0.28}
             enableNodeDrag={true}
