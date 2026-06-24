@@ -89,6 +89,7 @@ function AppShell() {
           onCrawl={() => setView('settings')}
           collapsed={isTablet || sidebarCollapsed}
           onToggleCollapse={() => setSidebarCollapsed(v => !v)}
+          onLogout={() => { localStorage.removeItem('app_token'); setToken('') }}
         />
       )}
 

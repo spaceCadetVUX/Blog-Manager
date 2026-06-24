@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { LayoutDashboard, GitBranch, FileText, ShieldCheck, BrainCircuit, MessageSquare, Settings, BarChart2, BookOpen } from 'lucide-react'
+import { LayoutDashboard, GitBranch, FileText, ShieldCheck, BrainCircuit, MessageSquare, Settings, BarChart2, BookOpen, LogOut } from 'lucide-react'
 
 const NAV = [
   { id: 'dashboard',      label: 'Dashboard',     icon: LayoutDashboard },
@@ -9,14 +9,13 @@ const NAV = [
   { id: 'ai',             label: 'AI Analysis',    icon: BrainCircuit },
   { id: 'chat',           label: 'AI Chat',        icon: MessageSquare },
   { id: 'content-intel',  label: 'Content Intel',  icon: BarChart2 },
-  { id: 'settings',       label: 'Settings',       icon: Settings },
   { id: 'help',           label: 'Hướng dẫn',     icon: BookOpen },
 ]
 
 const EASING   = 'cubic-bezier(0.4, 0, 0.2, 1)'
 const DURATION = '0.28s'
 
-export default function Sidebar({ active, onChange, onCrawl, collapsed = false, onToggleCollapse }) {
+export default function Sidebar({ active, onChange, onCrawl, collapsed = false, onToggleCollapse, onLogout }) {
   // mounted flag — prevent animation on first paint
   const [ready, setReady] = useState(false)
   useEffect(() => { const t = setTimeout(() => setReady(true), 50); return () => clearTimeout(t) }, [])
@@ -40,36 +39,24 @@ export default function Sidebar({ active, onChange, onCrawl, collapsed = false, 
 
       {/* ── Header ── */}
       <div style={{
-        height: 56,
-        padding: '0 16px',
+        height: 52,
+        padding: '0 12px',
         borderBottom: '1px solid var(--border-2)',
         display: 'flex',
         alignItems: 'center',
-        gap: 10,
+        justifyContent: 'center',
         overflow: 'hidden',
         flexShrink: 0,
       }}>
-        {/* Icon-only logo — always rendered, fade in/out */}
         <img
           src="/logo.png" alt="KNXStore"
           style={{
-            height: 22, objectFit: 'contain', flexShrink: 0,
-            transition: `opacity ${transition}, transform ${transition}`,
-            opacity: 1,
+            height: collapsed ? 22 : 20,
+            maxWidth: collapsed ? 32 : 120,
+            objectFit: 'contain',
+            transition: `height ${transition}, max-width ${transition}`,
           }}
         />
-        {/* Text block — slides + fades */}
-        <div style={{
-          overflow: 'hidden',
-          opacity: collapsed ? 0 : 1,
-          transform: collapsed ? 'translateX(-6px)' : 'translateX(0)',
-          transition: `opacity ${transition}, transform ${transition}`,
-          pointerEvents: collapsed ? 'none' : 'auto',
-          whiteSpace: 'nowrap',
-        }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', lineHeight: 1.3 }}>Blog Manager</div>
-          <div style={{ fontSize: 10, color: 'var(--text-subtle)' }}>knxstore.vn</div>
-        </div>
       </div>
 
       {/* ── Nav ── */}
@@ -171,50 +158,95 @@ export default function Sidebar({ active, onChange, onCrawl, collapsed = false, 
 
       {/* ── Footer ── */}
       <div style={{
-        padding: '10px 10px',
+        padding: '8px 6px',
         borderTop: '1px solid var(--border-2)',
         display: 'flex',
-        alignItems: 'center',
-        overflow: 'hidden',
+        flexDirection: 'column',
+        gap: 2,
         flexShrink: 0,
-        gap: 8,
+        overflow: 'hidden',
       }}>
-        {/* Version — fade */}
-        <span style={{
-          fontSize: 10, color: 'var(--text-subtle)',
-          flex: 1, whiteSpace: 'nowrap',
-          opacity: collapsed ? 0 : 1,
-          transform: collapsed ? 'translateX(-6px)' : 'translateX(0)',
-          transition: `opacity ${transition}, transform ${transition}`,
-          pointerEvents: collapsed ? 'none' : 'auto',
-        }}>v1.0.0</span>
-
-        {/* Collapse button */}
-        {onToggleCollapse && (
-          <button
-            onClick={onToggleCollapse}
-            title={collapsed ? 'Mở rộng' : 'Thu gọn'}
-            style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              width: 28, height: 28, flexShrink: 0,
-              borderRadius: 7,
-              border: '1px solid var(--border-2)',
-              background: 'transparent',
-              color: 'var(--text-subtle)',
-              cursor: 'pointer',
-              transition: `background 0.15s, color 0.15s, transform ${DURATION} ${EASING}`,
-            }}
-            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = 'var(--text-muted)' }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--text-subtle)' }}
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"
+        {/* Settings */}
+        {[
+          { id: 'settings', label: 'Settings', icon: Settings, onClick: () => onChange('settings') },
+        ].map(({ id, label, icon: Icon, onClick }) => {
+          const isActive = active === id
+          return (
+            <button key={id} onClick={onClick} title={collapsed ? label : undefined}
               style={{
-                transition: `transform ${DURATION} ${EASING}`,
-                transform: collapsed ? 'rotate(180deg)' : 'rotate(0deg)',
-              }}>
-              <polyline points="15 18 9 12 15 6"/>
-            </svg>
+                width: '100%', display: 'flex', alignItems: 'center', gap: 10,
+                padding: '8px 10px', position: 'relative',
+                background: 'transparent', border: 'none', cursor: 'pointer',
+                fontSize: 13, fontWeight: isActive ? 500 : 400, textAlign: 'left',
+                color: isActive ? 'var(--accent-2)' : 'var(--text-muted)',
+                borderRadius: 7, overflow: 'hidden',
+                transition: `color ${DURATION} ${EASING}`,
+              }}
+              onMouseEnter={e => { if (!isActive) e.currentTarget.style.color = 'var(--text)' }}
+              onMouseLeave={e => { if (!isActive) e.currentTarget.style.color = 'var(--text-muted)' }}
+            >
+              <span style={{
+                position: 'absolute', inset: '2px',
+                borderRadius: 6, background: 'var(--accent-dim)',
+                opacity: isActive ? 1 : 0,
+                transition: `opacity ${DURATION} ${EASING}`,
+                pointerEvents: 'none',
+              }} />
+              <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 20, height: 20, flexShrink: 0, position: 'relative', zIndex: 1, transition: `transform ${DURATION} ${EASING}`, transform: collapsed ? 'translateX(4px)' : 'none' }}>
+                <Icon size={16} strokeWidth={isActive ? 2.2 : 1.8} />
+              </span>
+              <span style={{ position: 'relative', zIndex: 1, whiteSpace: 'nowrap', opacity: collapsed ? 0 : 1, transform: collapsed ? 'translateX(-8px)' : 'none', transition: `opacity ${transition}, transform ${transition}`, pointerEvents: 'none' }}>
+                {label}
+              </span>
+            </button>
+          )
+        })}
+
+        {/* Logout */}
+        {onLogout && (
+          <button onClick={onLogout} title={collapsed ? 'Đăng xuất' : undefined}
+            style={{
+              width: '100%', display: 'flex', alignItems: 'center', gap: 10,
+              padding: '8px 10px',
+              background: 'transparent', border: 'none', cursor: 'pointer',
+              fontSize: 13, textAlign: 'left', borderRadius: 7,
+              color: 'var(--text-muted)',
+              transition: `color 0.15s, background 0.15s`,
+            }}
+            onMouseEnter={e => { e.currentTarget.style.color = '#f87171'; e.currentTarget.style.background = 'rgba(248,71,71,0.06)' }}
+            onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.background = 'transparent' }}
+          >
+            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 20, height: 20, flexShrink: 0, transition: `transform ${DURATION} ${EASING}`, transform: collapsed ? 'translateX(4px)' : 'none' }}>
+              <LogOut size={16} strokeWidth={1.8} />
+            </span>
+            <span style={{ whiteSpace: 'nowrap', opacity: collapsed ? 0 : 1, transform: collapsed ? 'translateX(-8px)' : 'none', transition: `opacity ${transition}, transform ${transition}`, pointerEvents: 'none' }}>
+              Đăng xuất
+            </span>
           </button>
+        )}
+
+        {/* Collapse toggle */}
+        {onToggleCollapse && (
+          <div style={{ display: 'flex', justifyContent: collapsed ? 'center' : 'flex-end', paddingTop: 4 }}>
+            <button
+              onClick={onToggleCollapse}
+              title={collapsed ? 'Mở rộng' : 'Thu gọn'}
+              style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                width: 28, height: 28, flexShrink: 0, borderRadius: 7,
+                border: '1px solid var(--border-2)', background: 'transparent',
+                color: 'var(--text-subtle)', cursor: 'pointer',
+                transition: `background 0.15s, color 0.15s`,
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = 'var(--text-muted)' }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--text-subtle)' }}
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"
+                style={{ transition: `transform ${DURATION} ${EASING}`, transform: collapsed ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </button>
+          </div>
         )}
       </div>
     </aside>

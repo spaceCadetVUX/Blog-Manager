@@ -138,7 +138,41 @@ export default function HelpView() {
           <Row label="AI Analysis">Phân tích cluster nội dung bằng AI — chọn section rồi nhấn 🤖 trên Link Graph.</Row>
           <Row label="AI Chat">Chat trực tiếp với AI về nội dung blog, SEO, gợi ý cải thiện.</Row>
           <Row label="Content Intel">Phân tích chuyên sâu nội dung: keyword gaps, cơ hội internal linking, v.v.</Row>
-          <Row label="Settings">Cấu hình URL crawl, re-crawl toàn bộ hoặc từng bài.</Row>
+          <Row label="Settings">Cấu hình crawl dữ liệu từ website, quản lý API Keys, tuỳ chỉnh AI. Xem chi tiết bên dưới ↓</Row>
+        </Section>
+
+        {/* Settings */}
+        <Section title="⚙️ Settings — Cập nhật dữ liệu từ website">
+          <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 14, lineHeight: 1.7 }}>
+            Mọi thay đổi trên knxstore.vn (bài mới, sửa nội dung, thêm link) <b style={{ color: 'var(--text)' }}>không tự động</b> cập nhật vào Blog Manager.
+            Cần chạy Crawl thủ công để đồng bộ.
+          </div>
+
+          <Row label="Incremental crawl" color="#34d399">
+            Chỉ crawl các bài <b style={{ color: 'var(--text)' }}>chưa có trong database</b>. Nhanh (~vài giây). Dùng khi có bài mới đăng.
+          </Row>
+          <Row label="Full recrawl" color="#f87171">
+            Crawl lại <b style={{ color: 'var(--text)' }}>toàn bộ</b> bài — ghi đè tất cả dữ liệu cũ. Chậm hơn (~1–2 phút). Dùng khi đã sửa nội dung, internal link, hoặc meta của nhiều bài cùng lúc.
+          </Row>
+          <Row label="Sitemap URL">
+            Mặc định: <code style={{ fontSize: 11, background: 'var(--surface-2)', padding: '1px 5px', borderRadius: 4 }}>https://knxstore.vn/sitemap-post.xml</code>.
+            Chỉ thay đổi nếu cấu trúc sitemap thay đổi.
+          </Row>
+          <Row label="Recrawl 1 bài">Trong tab Bài viết → click vào bài → nút <b style={{ color: 'var(--text)' }}>Recrawl</b> trong PostDetail. Dùng khi chỉ sửa 1 bài cụ thể.</Row>
+
+          <div style={{ marginTop: 16, marginBottom: 8, fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>API Keys & AI</div>
+          <Row label="Anthropic API Key">Dùng cho các tính năng AI Analysis, AI Chat, phân tích cluster. Lưu vào DB — ưu tiên hơn biến môi trường <code style={{ fontSize: 11, background: 'var(--surface-2)', padding: '1px 5px', borderRadius: 4 }}>.env</code>.</Row>
+          <Row label="AI Instructions">Tuỳ chỉnh system prompt cho AI — định hướng phong cách phân tích, ưu tiên loại gợi ý, v.v.</Row>
+
+          <div style={{
+            marginTop: 14, padding: '10px 14px', borderRadius: 8,
+            background: 'rgba(251,191,36,0.06)', border: '1px solid rgba(251,191,36,0.2)',
+            fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.7,
+          }}>
+            💡 <b style={{ color: '#fbbf24' }}>Quy trình thường dùng:</b> Sửa bài trên Shopify →{' '}
+            Settings → <b style={{ color: 'var(--text)' }}>Incremental crawl</b> (bài mới) hoặc{' '}
+            <b style={{ color: 'var(--text)' }}>Full recrawl</b> (sửa link/meta) → quay lại Graph/Tree xem kết quả.
+          </div>
         </Section>
 
         {/* Tips */}
