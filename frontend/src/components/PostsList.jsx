@@ -304,6 +304,12 @@ export default function PostsList({ onSelectPost, bp = 'desktop' }) {
                             {post.url}
                           </div>
                         )}
+                        {/* Author */}
+                        {post.author && (
+                          <div style={{ fontSize: 10, color: 'var(--text-subtle)', marginTop: 2 }}>
+                            👤 {post.author}
+                          </div>
+                        )}
                         {/* Meta description */}
                         {post.description && !isTablet && (
                           <div style={{
