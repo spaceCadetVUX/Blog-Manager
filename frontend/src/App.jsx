@@ -34,6 +34,7 @@ import AIView from './components/AIView'
 import AIChatView from './components/AIChatView'
 import SettingsView from './components/SettingsView'
 import HelpView from './components/HelpView'
+import CrawlModal from './components/CrawlModal'
 import useBreakpoint from './hooks/useBreakpoint'
 import LoginView from './components/LoginView'
 
@@ -77,6 +78,7 @@ function AppShell() {
   const isMobile = bp === 'mobile'
   const isTablet = bp === 'tablet'
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const [showCrawl, setShowCrawl] = useState(false)
   const View    = VIEWS[view]
 
   return (
@@ -90,7 +92,11 @@ function AppShell() {
           collapsed={isTablet || sidebarCollapsed}
           onToggleCollapse={() => setSidebarCollapsed(v => !v)}
           onLogout={() => { localStorage.removeItem('app_token'); setToken('') }}
+          onOpenCrawl={() => setShowCrawl(true)}
         />
+      )}
+      {showCrawl && (
+        <CrawlModal onClose={() => setShowCrawl(false)} onDone={() => setShowCrawl(false)} bp={bp} />
       )}
 
       {/* Main content */}

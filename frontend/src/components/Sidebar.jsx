@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { LayoutDashboard, GitBranch, FileText, ShieldCheck, BrainCircuit, MessageSquare, Settings, BarChart2, BookOpen, LogOut, RefreshCw } from 'lucide-react'
-import CrawlModal from './CrawlModal'
 
 const NAV = [
   { id: 'dashboard',      label: 'Dashboard',     icon: LayoutDashboard },
@@ -16,16 +15,14 @@ const NAV = [
 const EASING   = 'cubic-bezier(0.4, 0, 0.2, 1)'
 const DURATION = '0.28s'
 
-export default function Sidebar({ active, onChange, onCrawl, collapsed = false, onToggleCollapse, onLogout }) {
+export default function Sidebar({ active, onChange, onCrawl, collapsed = false, onToggleCollapse, onLogout, onOpenCrawl }) {
   // mounted flag — prevent animation on first paint
   const [ready, setReady] = useState(false)
-  const [showCrawl, setShowCrawl] = useState(false)
   useEffect(() => { const t = setTimeout(() => setReady(true), 50); return () => clearTimeout(t) }, [])
 
   const transition = ready ? `${DURATION} ${EASING}` : 'none'
 
   return (
-    <>
     <aside style={{
       width: collapsed ? 56 : 220,
       minWidth: collapsed ? 56 : 220,
@@ -170,7 +167,7 @@ export default function Sidebar({ active, onChange, onCrawl, collapsed = false, 
         overflow: 'hidden',
       }}>
         {/* Crawl */}
-        <button onClick={() => setShowCrawl(true)} title={collapsed ? 'Crawl' : undefined}
+        <button onClick={onOpenCrawl} title={collapsed ? 'Crawl' : undefined}
           style={{
             width: '100%', display: 'flex', alignItems: 'center', gap: 10,
             padding: '8px 10px', background: 'transparent', border: 'none',
@@ -273,9 +270,6 @@ export default function Sidebar({ active, onChange, onCrawl, collapsed = false, 
       </div>
     </aside>
 
-    {showCrawl && (
-      <CrawlModal onClose={() => setShowCrawl(false)} onDone={() => setShowCrawl(false)} />
-    )}
-    </>
+    </aside>
   )
 }
