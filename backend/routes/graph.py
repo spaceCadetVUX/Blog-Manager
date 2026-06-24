@@ -40,7 +40,7 @@ def get_graph(
         post_rows = conn.execute("""
             SELECT
                 p.slug, p.headline, p.article_section, p.url,
-                p.word_count, p.date_modified, p.products,
+                p.word_count, p.date_modified, p.author, p.products,
                 COUNT(DISTINCT li.from_slug) AS inbound,
                 COUNT(DISTINCT lo.to_slug)   AS outbound
             FROM posts p
@@ -86,6 +86,7 @@ def get_graph(
                 "outbound": r["outbound"],
                 "color":    SECTION_COLORS.get(sec, DEFAULT_COLOR),
                 "dateModified": r["date_modified"] or "",
+                "author": r["author"] or "",
                 "hasProducts": has_products,
                 "productsCount": products_count,
             },

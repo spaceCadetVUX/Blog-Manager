@@ -83,7 +83,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
     })
     ro.observe(containerRef.current)
     return () => ro.disconnect()
-  }, [])
+  }, [activeTab])
 
   useEffect(() => {
     api.sections()
@@ -149,7 +149,9 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
     const nodeIds   = new Set(filtered.map(n => n.id))
     const filtLinks = norm.filter(l => nodeIds.has(l.source) && nodeIds.has(l.target))
     setGraphData({ nodes: filtered, links: filtLinks })
-    setStatsInfo({ nodes: filtered.length, edges: filtLinks.length })
+    const postCount    = filtered.filter(n => n.nodeType !== 'productNode').length
+    const productCount = filtered.filter(n => n.nodeType === 'productNode').length
+    setStatsInfo({ nodes: filtered.length, edges: filtLinks.length, posts: postCount, products: productCount })
   }, [showOrphansOnly, productFilter, rawDataVersion])
 
   // Tăng lực đẩy sau khi data load để nodes xa nhau hơn
@@ -246,6 +248,18 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
   useEffect(() => { searchRef.current = search }, [search])
   useEffect(() => { dateFromRef.current = dateFrom }, [dateFrom])
   useEffect(() => { dateToRef.current = dateTo }, [dateTo])
+
+  // Helper: check node có trong date range không — normalize min/max để tránh lỗi khi đặt ngược
+  const checkInDateRange = (iso, df, dt) => {
+    if (!df && !dt) return true
+    if (!iso) return false
+    const d = iso.slice(0, 10)
+    const lo = df && dt ? (df < dt ? df : dt) : df
+    const hi = df && dt ? (df < dt ? dt : df) : dt
+    if (lo && d < lo) return false
+    if (hi && d > hi) return false
+    return true
+  }
   // Giữ render loop chạy liên tục khi date filter active
   useEffect(() => {
     if (!dateFrom && !dateTo) return
@@ -478,13 +492,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
 
     const df = dateFromRef.current, dt = dateToRef.current
     const dateActive = df || dt
-    const inDateRange = !dateActive || (() => {
-      if (!node.dateModified) return false
-      const iso = node.dateModified.slice(0, 10)
-      if (df && iso < df) return false
-      if (dt && iso > dt) return false
-      return true
-    })()
+    const inDateRange = checkInDateRange(node.dateModified, df, dt)
 
     const isDimmed   = (h && !isHovered && !isNeighbor) || (q && !matchSearch) || (dateActive && !inDateRange)
 
@@ -498,7 +506,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
       if (isDimmed) {
         ctx.beginPath()
         ctx.rect(node.x - s, node.y - s, s * 2, s * 2)
-        ctx.fillStyle = `rgba(${rgb},0.15)`
+        ctx.fillStyle = 'rgba(80,90,100,0.18)'
         ctx.fill()
         return
       }
@@ -534,23 +542,24 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
     const isHub = r >= 9
     const rgb = hex2rgb(node.color)
 
-    // Dimmed: chấm mờ nhưng vẫn nhìn thấy
+    // Dimmed: chấm xám ghost, không dùng màu gốc để tương phản rõ
     if (isDimmed) {
       ctx.beginPath()
-      ctx.arc(node.x, node.y, Math.max(2.5, r * 0.55), 0, 2 * Math.PI)
-      ctx.fillStyle = `rgba(${rgb},0.15)`
+      ctx.arc(node.x, node.y, Math.max(2, r * 0.45), 0, 2 * Math.PI)
+      ctx.fillStyle = 'rgba(80,90,100,0.22)'
       ctx.fill()
       return
     }
 
-    // Wave ripple: date-filtered nodes hoặc hovered/neighbor
+    // Wave ripple: date-filtered in-range → ripple mạnh hơn để nổi bật
     if ((dateActive && inDateRange) || isHovered || isNeighbor) {
-      const period = 1800 // ms mỗi vòng
-      const maxExpand = 28
-      for (let i = 0; i < 2; i++) {
-        const t = ((performance.now() + i * period * 0.5) % period) / period
+      const period = 1800
+      const maxExpand = dateActive && inDateRange && !isHovered ? 40 : 28
+      const baseOp    = dateActive && inDateRange && !isHovered ? 0.8 : 0.6
+      for (let i = 0; i < (dateActive && inDateRange && !isHovered ? 3 : 2); i++) {
+        const t = ((performance.now() + i * period * 0.4) % period) / period
         const wr = r + t * maxExpand
-        const op = (1 - t) * 0.6
+        const op = (1 - t) * baseOp
         ctx.beginPath()
         ctx.arc(node.x, node.y, wr, 0, 2 * Math.PI)
         ctx.strokeStyle = `rgba(${rgb},${op})`
@@ -571,12 +580,13 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
     ctx.fillStyle = grd
     ctx.fill()
 
-    // Main circle
+    // Main circle — boost khi date filter active và node in-range
+    const dateBoost = dateActive && inDateRange && !isHovered
     ctx.beginPath()
-    ctx.arc(node.x, node.y, r, 0, 2 * Math.PI)
-    const fillOp   = isHovered ? 0.95 : isNeighbor ? 0.82 : isHub ? 0.78 : 0.68
-    const strokeOp = isHovered ? 1    : isNeighbor ? 1    : isHub ? 0.95 : 0.85
-    const lw       = isHovered ? 2.5  : isHub ? 2 : 1.5
+    ctx.arc(node.x, node.y, dateBoost ? r * 1.1 : r, 0, 2 * Math.PI)
+    const fillOp   = isHovered ? 0.95 : dateBoost ? 0.92 : isNeighbor ? 0.82 : isHub ? 0.78 : 0.68
+    const strokeOp = isHovered ? 1    : dateBoost ? 1    : isNeighbor ? 1    : isHub ? 0.95 : 0.85
+    const lw       = isHovered ? 2.5  : dateBoost ? 2.5  : isHub ? 2 : 1.5
     ctx.fillStyle   = `rgba(${rgb},${fillOp})`
     ctx.strokeStyle = `rgba(${rgb},${strokeOp})`
     ctx.lineWidth   = lw
@@ -752,14 +762,8 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
 
   const isNodeInDateRange = (nodeId) => {
     const df = dateFromRef.current, dt = dateToRef.current
-    if (!df && !dt) return true
     const n = nodeMapRef.current[nodeId]
-    if (!n) return false
-    if (!n.dateModified) return false
-    const iso = n.dateModified.slice(0, 10)
-    if (df && iso < df) return false
-    if (dt && iso > dt) return false
-    return true
+    return checkInDateRange(n?.dateModified, df, dt)
   }
 
   const getLinkColor = useCallback((link) => {
@@ -806,31 +810,9 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
 
   // Sections hiện tại để vẽ legend
 
-  if (activeTab === 'tree') {
-    return (
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-        <div style={{
-          display: 'flex', borderBottom: '1px solid var(--border)',
-          background: 'var(--surface)', flexShrink: 0,
-        }}>
-          {[['graph', '🕸 Link Graph'], ['tree', '🌲 Tree View']].map(([id, label]) => (
-            <button key={id} onClick={() => setActiveTab(id)} style={{
-              padding: '9px 20px', fontSize: 12, fontWeight: activeTab === id ? 600 : 400,
-              background: 'none', border: 'none', cursor: 'pointer',
-              color: activeTab === id ? 'var(--accent-2)' : 'var(--text-muted)',
-              borderBottom: `2px solid ${activeTab === id ? 'var(--accent)' : 'transparent'}`,
-              transition: 'all 0.15s',
-            }}>{label}</button>
-          ))}
-        </div>
-        <TreeView onSelectPost={onSelectPost} bp={bp} />
-      </div>
-    )
-  }
-
   return (
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-      {/* Tab bar */}
+      {/* Tab bar — shared */}
       <div style={{
         display: 'flex', borderBottom: '1px solid var(--border)',
         background: 'var(--surface)', flexShrink: 0,
@@ -845,6 +827,14 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
           }}>{label}</button>
         ))}
       </div>
+
+      {/* Tree view — keep mounted, just hidden */}
+      <div style={{ display: activeTab === 'tree' ? 'flex' : 'none', flex: 1, flexDirection: 'column', overflow: 'hidden' }}>
+        <TreeView onSelectPost={onSelectPost} bp={bp} />
+      </div>
+
+      {/* Graph view — keep mounted, just hidden when tree active */}
+      <div style={{ display: activeTab === 'graph' ? 'flex' : 'none', flex: 1, flexDirection: 'column', overflow: 'hidden' }}>
       {/* Toolbar */}
       <div style={{ background: 'var(--surface)', borderBottom: '1px solid var(--border)', flexShrink: 0 }}>
 
@@ -1115,7 +1105,34 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
 
           {/* Stats */}
           <div style={{ fontSize: 11, color: 'var(--text-subtle)', whiteSpace: 'nowrap', flexShrink: 0 }}>
-            {loading ? <span style={{ color: 'var(--warning)' }}>…</span> : <>{statsInfo.nodes}N · {statsInfo.edges}E</>}
+            {loading ? <span style={{ color: 'var(--warning)' }}>…</span> : (() => {
+              const activeNode = pinnedNode || hoveredNode
+              if (activeNode) {
+                const prodLinks = graphData.links.filter(l => {
+                  const s = typeof l.source === 'object' ? l.source.id : l.source
+                  const t = typeof l.target === 'object' ? l.target.id : l.target
+                  return (s === activeNode.id && t.startsWith('prod__')) || (t === activeNode.id && s.startsWith('prod__'))
+                }).length
+                return (
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <span style={{ color: pinnedNode ? 'var(--accent-2)' : 'var(--text)', maxWidth: 180, overflow: 'hidden', textOverflow: 'ellipsis' }} title={activeNode.label}>
+                      {activeNode.label.length > 24 ? activeNode.label.slice(0, 24) + '…' : activeNode.label}
+                    </span>
+                    <span>·</span>
+                    <span style={{ color: '#22d3ee' }} title="Inbound">↙{activeNode.inbound}</span>
+                    <span style={{ color: '#34d399' }} title="Outbound">↗{activeNode.outbound}</span>
+                    {prodLinks > 0 && <span style={{ color: '#f97316' }} title="Link sản phẩm">◆{prodLinks}</span>}
+                  </span>
+                )
+              }
+              return (
+                <>
+                  <span style={{ color: 'var(--text)' }} title="Bài viết">{statsInfo.posts ?? statsInfo.nodes} bài</span>
+                  {statsInfo.products > 0 && <> · <span style={{ color: '#f97316' }} title="Sản phẩm">◆ {statsInfo.products} SP</span></>}
+                  {' · '}{statsInfo.edges}E
+                </>
+              )
+            })()}
           </div>
 
           {/* Toggle filters */}
@@ -1302,30 +1319,69 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
           />
         )}
 
-        {/* Hover tooltip */}
-        {hoveredNode && (
-          <div style={{
-            position: 'absolute', top: 12, left: 12,
-            background: 'rgba(22,27,34,0.95)',
-            border: `1px solid ${hoveredNode.color}40`,
-            borderRadius: 8, padding: '10px 14px',
-            maxWidth: 260, zIndex: 10,
-            boxShadow: '0 4px 16px rgba(0,0,0,0.6)',
-            backdropFilter: 'blur(4px)',
-          }}>
-            <div style={{ fontSize: 12, fontWeight: 500, color: 'var(--text)', lineHeight: 1.4, marginBottom: 6 }}>
-              {hoveredNode.label}
-            </div>
-            <div style={{ display: 'flex', gap: 10, fontSize: 11, color: 'var(--text-muted)' }}>
-              {hoveredNode.section && (
-                <span style={{ color: hoveredNode.color }}>{hoveredNode.section}</span>
+        {/* Hover / pinned tooltip */}
+        {(pinnedNode || hoveredNode) && (() => {
+          const n = hoveredNode || pinnedNode
+          const isPinned = !!pinnedNode
+          const dateStr = n.dateModified
+            ? new Date(n.dateModified).toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' })
+            : null
+          return (
+            <div style={{
+              position: 'absolute', top: 12, left: 12,
+              background: 'rgba(22,27,34,0.97)',
+              border: `1px solid ${n.color}${isPinned ? '80' : '40'}`,
+              borderRadius: 10, padding: '12px 14px',
+              width: 260, zIndex: 10,
+              boxShadow: isPinned ? `0 4px 20px ${n.color}30` : '0 4px 16px rgba(0,0,0,0.6)',
+              backdropFilter: 'blur(4px)',
+            }}>
+              {isPinned && !hoveredNode && (
+                <div style={{ fontSize: 9, color: 'var(--accent-2)', marginBottom: 4, letterSpacing: '0.05em', textTransform: 'uppercase' }}>Đã ghim</div>
               )}
-              <span>{hoveredNode.inbound} inbound</span>
-              <span>{hoveredNode.outbound} outbound</span>
+
+              {/* Title — clickable link */}
+              {n.url ? (
+                <a
+                  href={n.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    fontSize: 12, fontWeight: 600, color: n.color,
+                    lineHeight: 1.45, marginBottom: 8, display: 'block',
+                    textDecoration: 'none',
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.textDecoration = 'underline'}
+                  onMouseLeave={e => e.currentTarget.style.textDecoration = 'none'}
+                >
+                  {n.label}
+                </a>
+              ) : (
+                <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', lineHeight: 1.45, marginBottom: 8 }}>
+                  {n.label}
+                </div>
+              )}
+
+              {/* Section + links */}
+              <div style={{ display: 'flex', gap: 8, fontSize: 11, color: 'var(--text-muted)', marginBottom: 6, flexWrap: 'wrap' }}>
+                {n.section && <span style={{ color: n.color, fontWeight: 500 }}>{n.section}</span>}
+                <span>{n.inbound} inbound</span>
+                <span>{n.outbound} outbound</span>
+                {n.productsCount > 0 && <span style={{ color: '#f97316' }}>{n.productsCount} sản phẩm</span>}
+              </div>
+
+              {/* Meta: author + date */}
+              {(n.author || dateStr) && (
+                <div style={{ display: 'flex', gap: 8, fontSize: 10, color: 'rgba(125,133,144,0.7)', flexWrap: 'wrap', marginTop: 2 }}>
+                  {n.author && <span>✍ {n.author}</span>}
+                  {dateStr && <span>🕒 {dateStr}</span>}
+                </div>
+              )}
             </div>
-          </div>
-        )}
+          )
+        })()}
       </div>
+      </div>{/* end graph wrapper */}
     </div>
   )
 }
