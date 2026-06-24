@@ -269,7 +269,5 @@ export default function Sidebar({ active, onChange, onCrawl, collapsed = false, 
         )}
       </div>
     </aside>
-
-    </aside>
   )
 }
