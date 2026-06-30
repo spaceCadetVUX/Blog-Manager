@@ -110,7 +110,8 @@ export default function ProductPickerView({ bp = 'desktop' }) {
   }
   const removeProduct = (id) => setSelected(prev => prev.filter(s => s.id !== id))
 
-  const output = JSON.stringify({ products: selected.map(s => s.id) })
+  const ids = selected.map(s => s.id)
+  const output = `{products:[${ids.join(',')}]}`
   const copyOutput = () => {
     navigator.clipboard.writeText(output).then(() => {
       setCopied(true); setTimeout(() => setCopied(false), 1800)
