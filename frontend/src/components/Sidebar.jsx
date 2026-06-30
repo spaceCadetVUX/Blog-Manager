@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react'
-import { LayoutDashboard, GitBranch, FileText, ShieldCheck, BrainCircuit, MessageSquare, Settings, BarChart2, BookOpen, LogOut, RefreshCw } from 'lucide-react'
+import { LayoutDashboard, GitBranch, FileText, ShieldCheck, BrainCircuit, MessageSquare, Settings, BarChart2, BookOpen, LogOut, RefreshCw, Package, PackageSearch } from 'lucide-react'
 
 const NAV = [
-  { id: 'dashboard',      label: 'Dashboard',     icon: LayoutDashboard },
-  { id: 'graph',          label: 'Link Graph',     icon: GitBranch },
-  { id: 'posts',          label: 'Bài viết',       icon: FileText },
-  { id: 'audit',          label: 'SEO Audit',      icon: ShieldCheck },
-  { id: 'ai',             label: 'AI Analysis',    icon: BrainCircuit },
-  { id: 'chat',           label: 'AI Chat',        icon: MessageSquare },
-  { id: 'content-intel',  label: 'Content Intel',  icon: BarChart2 },
-  { id: 'help',           label: 'Hướng dẫn',     icon: BookOpen },
+  { id: 'dashboard',       label: 'Dashboard',     icon: LayoutDashboard },
+  { id: 'graph',           label: 'Link Graph',     icon: GitBranch },
+  { id: 'posts',           label: 'Bài viết',       icon: FileText },
+  { id: 'audit',           label: 'SEO Audit',      icon: ShieldCheck },
+  { id: 'ai',              label: 'AI Analysis',    icon: BrainCircuit },
+  { id: 'chat',            label: 'AI Chat',        icon: MessageSquare },
+  { id: 'products',        label: 'Sản phẩm',      icon: Package },
+  { id: 'product-picker',  label: 'Picker',         icon: PackageSearch },
+  { id: 'content-intel',   label: 'Content Intel',  icon: BarChart2 },
+  { id: 'help',            label: 'Hướng dẫn',     icon: BookOpen },
 ]
 
 const EASING   = 'cubic-bezier(0.4, 0, 0.2, 1)'

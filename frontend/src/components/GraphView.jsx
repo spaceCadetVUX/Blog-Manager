@@ -42,6 +42,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
   const danceRafRef = useRef(null)
   const [hoveredNode, setHoveredNode] = useState(null)
   const [pinnedNode, setPinnedNode]   = useState(null)
+  const [copiedField, setCopiedField] = useState(null) // 'name' | 'link'
 
   const [sections, setSections] = useState([])
   const [minLinks, setMinLinks] = useState('0')
@@ -1396,6 +1397,38 @@ useEffect(() => { danceModeRef.current = danceMode }, [danceMode])
                   {dateStr && <span>🕒 {dateStr}</span>}
                 </div>
               )}
+
+              {/* Copy actions */}
+              <div style={{ display: 'flex', gap: 6, marginTop: 10, borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: 8 }}>
+                {[
+                  { key: 'name', label: 'Copy tên', value: n.label },
+                  { key: 'link', label: 'Copy link', value: n.url, disabled: !n.url },
+                ].map(({ key, label, value, disabled }) => {
+                  const done = copiedField === key
+                  return (
+                    <button key={key}
+                      disabled={disabled}
+                      onClick={e => {
+                        e.stopPropagation()
+                        if (!value) return
+                        navigator.clipboard.writeText(value)
+                        setCopiedField(key)
+                        setTimeout(() => setCopiedField(null), 1800)
+                      }}
+                      style={{
+                        flex: 1, padding: '5px 0', borderRadius: 6, border: 'none', cursor: disabled ? 'not-allowed' : 'pointer',
+                        background: done ? 'rgba(34,197,94,0.15)' : 'rgba(255,255,255,0.06)',
+                        color: done ? '#4ade80' : disabled ? 'rgba(255,255,255,0.2)' : 'rgba(200,210,220,0.85)',
+                        fontSize: 11, fontWeight: 500, transition: 'background 0.15s, color 0.15s',
+                      }}
+                      onMouseEnter={e => { if (!disabled && !done) e.currentTarget.style.background = 'rgba(255,255,255,0.1)' }}
+                      onMouseLeave={e => { if (!done) e.currentTarget.style.background = done ? 'rgba(34,197,94,0.15)' : 'rgba(255,255,255,0.06)' }}
+                    >
+                      {done ? '✓ Đã copy' : label}
+                    </button>
+                  )
+                })}
+              </div>
             </div>
           )
         })()}

@@ -41,6 +41,18 @@ export const api = {
   getHistory:      (limit = 50)      => get(`/ai/history?limit=${limit}`),
   getHistoryItem:  (id)              => get(`/ai/history/${id}`),
   deleteHistory:   (id)              => fetch('/api/ai/history/' + id, { method: 'DELETE' }).then(r => r.json()),
+  products:          (params = {})   => get('/products?' + new URLSearchParams(params)),
+  productBrands:     ()              => get('/products/brands'),
+  productCategories: ()              => get('/products/categories'),
+  importProducts: (file) => {
+    const form = new FormData()
+    form.append('file', file)
+    return fetch('/api/products/import', {
+      method: 'POST',
+      headers: authHeader(),
+      body: form,
+    }).then(r => { if (!r.ok) return r.json().then(e => Promise.reject(e)); return r.json() })
+  },
 }
 
 export function streamLinkSuggestions(slug, model, onChunk, onDone) {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { LayoutDashboard, GitBranch, FileText, ShieldCheck, Lightbulb, BrainCircuit, MessageSquare, Settings, BarChart2, BookOpen } from 'lucide-react'
+import { LayoutDashboard, GitBranch, FileText, ShieldCheck, Lightbulb, BrainCircuit, MessageSquare, Settings, BarChart2, BookOpen, Package, PackageSearch } from 'lucide-react'
 
 function ContentIntelView() {
   return (
@@ -34,6 +34,8 @@ import AIView from './components/AIView'
 import AIChatView from './components/AIChatView'
 import SettingsView from './components/SettingsView'
 import HelpView from './components/HelpView'
+import ProductsView from './components/ProductsView'
+import ProductPickerView from './components/ProductPickerView'
 import CrawlModal from './components/CrawlModal'
 import useBreakpoint from './hooks/useBreakpoint'
 import LoginView from './components/LoginView'
@@ -47,6 +49,8 @@ const VIEWS = {
   ai:             AIView,
   chat:           AIChatView,
   'content-intel': ContentIntelView,
+  products:       ProductsView,
+  'product-picker': ProductPickerView,
   settings:       SettingsView,
   help:           HelpView,
 }
@@ -59,7 +63,9 @@ const BOTTOM_NAV = [
   { id: 'suggestions',   label: 'Gợi ý',       icon: Lightbulb },
   { id: 'ai',            label: 'AI Analysis', icon: BrainCircuit },
   { id: 'chat',          label: 'AI Chat',     icon: MessageSquare },
-  { id: 'settings',      label: 'Settings',    icon: Settings },
+  { id: 'products',        label: 'Sản phẩm',   icon: Package },
+  { id: 'product-picker',  label: 'Picker',      icon: PackageSearch },
+  { id: 'settings',        label: 'Settings',    icon: Settings },
   { id: 'help',          label: 'Hướng dẫn',  icon: BookOpen },
 ]
 

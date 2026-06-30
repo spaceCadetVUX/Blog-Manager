@@ -13,6 +13,7 @@ from backend.routes.crawl import router as crawl_router
 from backend.routes.suggestions import router as suggestions_router
 from backend.routes.ai import router as ai_router
 from backend.routes.settings import router as settings_router
+from backend.routes.products import router as products_router
 
 app = FastAPI(title="KNXStore Blog SEO API", version="0.1.0")
 
@@ -43,6 +44,7 @@ app.include_router(crawl_router)
 app.include_router(suggestions_router)
 app.include_router(ai_router)
 app.include_router(settings_router)
+app.include_router(products_router)
 
 
 @app.on_event("startup")
