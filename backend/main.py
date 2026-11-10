@@ -54,10 +54,14 @@ def startup():
 
 @app.get("/stats")
 def stats():
+    """Mặc định (total_links, orphan_posts, no_outbound, avg_inbound, top_linked) = chỉ link THÂN BÀI (kind='body').
+    Thêm: links_body/links_related, orphans_any (không có inbound ở BẤT KỲ loại nào = orphan thật)."""
     from backend.db import get_conn
     with get_conn() as conn:
         total_posts   = conn.execute("SELECT COUNT(*) FROM posts").fetchone()[0]
-        total_links   = conn.execute("SELECT COUNT(*) FROM internal_links").fetchone()[0]
+        links_by_kind = dict(conn.execute("SELECT kind, COUNT(*) FROM internal_links GROUP BY kind").fetchall())
+        links_body    = links_by_kind.get("body", 0)
+        links_related = links_by_kind.get("related", 0)
         sections      = conn.execute("""
             SELECT article_section, COUNT(*) c FROM posts
             WHERE article_section != '' GROUP BY article_section ORDER BY c DESC
@@ -65,32 +69,39 @@ def stats():
         avg_wc        = conn.execute("SELECT AVG(word_count) FROM posts WHERE word_count > 0").fetchone()[0]
         orphans       = conn.execute("""
             SELECT COUNT(*) FROM posts p
+            WHERE NOT EXISTS (SELECT 1 FROM internal_links WHERE to_slug = p.slug AND kind = 'body')
+        """).fetchone()[0]
+        orphans_any   = conn.execute("""
+            SELECT COUNT(*) FROM posts p
             WHERE NOT EXISTS (SELECT 1 FROM internal_links WHERE to_slug = p.slug)
         """).fetchone()[0]
         no_outbound   = conn.execute("""
             SELECT COUNT(*) FROM posts p
-            WHERE NOT EXISTS (SELECT 1 FROM internal_links WHERE from_slug = p.slug)
+            WHERE NOT EXISTS (SELECT 1 FROM internal_links WHERE from_slug = p.slug AND kind = 'body')
         """).fetchone()[0]
         top_linked    = conn.execute("""
             SELECT p.slug, p.headline, p.article_section,
                    COUNT(il.from_slug) AS inbound
             FROM posts p
-            LEFT JOIN internal_links il ON il.to_slug = p.slug
+            LEFT JOIN internal_links il ON il.to_slug = p.slug AND il.kind = 'body'
             GROUP BY p.id
             ORDER BY inbound DESC
             LIMIT 10
         """).fetchall()
         avg_inbound   = conn.execute("""
             SELECT AVG(cnt) FROM (
-                SELECT COUNT(*) cnt FROM internal_links GROUP BY to_slug
+                SELECT COUNT(*) cnt FROM internal_links WHERE kind = 'body' GROUP BY to_slug
             )
         """).fetchone()[0]
 
     return {
         "total_posts":    total_posts,
-        "total_links":    total_links,
+        "total_links":    links_body,          # giữ nghĩa cũ = link thân bài
+        "links_body":     links_body,
+        "links_related":  links_related,
         "avg_word_count": round(avg_wc or 0),
-        "orphan_posts":   orphans,
+        "orphan_posts":   orphans,             # inbound body = 0
+        "orphans_any":    orphans_any,         # inbound body = 0 VÀ related = 0 (orphan thật)
         "no_outbound":    no_outbound,
         "avg_inbound":    round(avg_inbound or 0, 1),
         "sections":       [dict(r) for r in sections],

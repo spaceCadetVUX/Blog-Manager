@@ -154,8 +154,12 @@ export default function HelpView() {
           <Row label="Full recrawl" color="#f87171">
             Crawl lại <b style={{ color: 'var(--text)' }}>toàn bộ</b> bài — ghi đè tất cả dữ liệu cũ. Chậm hơn (~1–2 phút). Dùng khi đã sửa nội dung, internal link, hoặc meta của nhiều bài cùng lúc.
           </Row>
+          <Row label="Nguồn">
+            Mặc định <b style={{ color: 'var(--text)' }}>MCP</b> (knxstore MCP server — đủ bài đã publish, Incremental so theo <code style={{ fontSize: 11, background: 'var(--surface-2)', padding: '1px 5px', borderRadius: 4 }}>editedAt</code>).
+            Chọn <b style={{ color: 'var(--text)' }}>Sitemap</b> để fetch HTML từng bài như trước. Bài có trong DB mà MCP không trả về chỉ được báo cáo, không bị xóa.
+          </Row>
           <Row label="Sitemap URL">
-            Mặc định: <code style={{ fontSize: 11, background: 'var(--surface-2)', padding: '1px 5px', borderRadius: 4 }}>https://knxstore.vn/sitemap-post.xml</code>.
+            Chỉ dùng khi chọn nguồn Sitemap. Mặc định: <code style={{ fontSize: 11, background: 'var(--surface-2)', padding: '1px 5px', borderRadius: 4 }}>https://knxstore.vn/sitemaps/posts.xml</code>.
             Chỉ thay đổi nếu cấu trúc sitemap thay đổi.
           </Row>
           <Row label="Recrawl 1 bài">Trong tab Bài viết → click vào bài → nút <b style={{ color: 'var(--text)' }}>Recrawl</b> trong PostDetail. Dùng khi chỉ sửa 1 bài cụ thể.</Row>

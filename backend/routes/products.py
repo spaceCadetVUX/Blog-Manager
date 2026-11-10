@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Query, UploadFile, File, HTTPException
-from backend.db import get_conn
+from pydantic import BaseModel
+from backend.db import get_conn, migrate_products
 
 router = APIRouter(prefix="/products", tags=["products"])
 
@@ -59,6 +60,9 @@ CREATE TABLE IF NOT EXISTS products (
 
 @router.post("/import")
 async def import_products(file: UploadFile = File(...)):
+    """LEGACY: import bảng sản phẩm từ file Admin.html (ID hệ cũ). Giữ lại để tương thích — nguồn chuẩn nay là
+    POST /products/sync (MCP). Lưu ý: import này ghi đè name/brand/price/category/url theo ID cũ; sau khi dùng nên
+    chạy lại /products/sync để khôi phục dữ liệu MCP."""
     if not file.filename.endswith((".html", ".htm")):
         raise HTTPException(400, "Chỉ chấp nhận file .html hoặc .htm")
 
@@ -73,6 +77,7 @@ async def import_products(file: UploadFile = File(...)):
 
     with get_conn() as conn:
         conn.execute(CREATE_TABLE_SQL)
+        migrate_products(conn)
 
         # Snapshot hiện tại
         existing = {
@@ -116,6 +121,27 @@ async def import_products(file: UploadFile = File(...)):
     }
 
 
+class SyncRequest(BaseModel):
+    deep: bool = False    # True: get_product_for_edit cho mọi sản phẩm (~7 phút) -> refresh category/status/legacyId
+
+
+@router.post("/sync")
+def sync_products_from_mcp(req: SyncRequest | None = None):
+    """Đồng bộ bảng products từ MCP knxstore.vn (search_products + get_product_for_edit).
+    Giữ nguyên products.id (ID cũ/legacy — chính là id số trong shortcode {products:[...]}); gán products.site_id =
+    ID mới của site (khớp MCP); sản phẩm mới trên site nhận id = legacyId (nếu có) hoặc 1_000_000 + site_id;
+    sản phẩm không còn trên site -> status='not_on_site' (không xóa dòng).
+    Trả số liệu: tổng MCP, khớp, mới, không còn trên site, mơ hồ."""
+    from backend import mcp_client
+    from backend.product_sync import sync_products
+    req = req or SyncRequest()
+    try:
+        with get_conn() as conn:
+            return sync_products(conn, deep=req.deep)
+    except mcp_client.MCPError as e:
+        raise HTTPException(502, f"MCP error: {str(e)[:300]}")
+
+
 @router.get("")
 def list_products(
     search:   str = Query("", alias="search"),
@@ -150,7 +176,7 @@ def list_products(
         ).fetchone()[0]
 
         rows = conn.execute(
-            f"""SELECT id, name, brand, price, category, url
+            f"""SELECT id, name, brand, price, category, url, site_id, slug, sku, stock_status, status
                 FROM products {where_sql}
                 ORDER BY {sort_col} {sort_dir}
                 LIMIT ? OFFSET ?""",

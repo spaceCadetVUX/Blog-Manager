@@ -2,11 +2,12 @@ import { useState, useEffect, useRef } from 'react'
 import { X, RefreshCw, CheckCircle, AlertCircle, Loader } from 'lucide-react'
 import { api } from '../api'
 
-const DEFAULT_SITEMAP = 'https://knxstore.vn/sitemap-post.xml'
+const DEFAULT_SITEMAP = 'https://knxstore.vn/sitemaps/posts.xml'
 
 export default function CrawlModal({ onClose, onDone, bp = 'desktop' }) {
   const [sitemapUrl, setSitemapUrl] = useState(DEFAULT_SITEMAP)
   const [mode, setMode] = useState('incremental')
+  const [source, setSource] = useState('mcp')
   const [jobId, setJobId] = useState(null)
   const [job, setJob] = useState(null)
   const [starting, setStarting] = useState(false)
@@ -31,12 +32,18 @@ export default function CrawlModal({ onClose, onDone, bp = 'desktop' }) {
     return () => clearInterval(pollRef.current)
   }, [jobId])
 
+  const isRelated = mode === 'related'   // chỉ làm mới "Bài viết liên quan" từ HTML live — không dùng MCP/sitemap
+  const isMcp = source === 'mcp'
+  const canStart = isRelated || isMcp || !!sitemapUrl.trim()
+
   const handleStart = async () => {
-    if (!sitemapUrl.trim()) return
+    if (!canStart) return
     setStarting(true)
     setError(null)
     try {
-      const res = await api.crawlStart(sitemapUrl.trim(), mode)
+      const res = isRelated
+        ? await api.crawlRelated()
+        : await api.crawlStart(isMcp ? '' : sitemapUrl.trim(), mode, source)
       setJobId(res.job_id)
     } catch (e) {
       setError(e.message)
@@ -45,7 +52,7 @@ export default function CrawlModal({ onClose, onDone, bp = 'desktop' }) {
     }
   }
 
-  const isRunning = job && (job.status === 'crawling' || job.status === 'fetching_sitemap' || job.importing)
+  const isRunning = job && (job.status === 'crawling' || job.status === 'fetching_sitemap' || job.status === 'fetching_list' || job.importing)
   const isDone    = job?.status === 'done'
   const isError   = job?.status === 'error'
 
@@ -56,6 +63,7 @@ export default function CrawlModal({ onClose, onDone, bp = 'desktop' }) {
   const statusLabel = {
     starting:        'Khởi động...',
     fetching_sitemap:'Đang tải sitemap...',
+    fetching_list:   isRelated ? 'Đang lấy danh sách bài từ DB...' : 'Đang lấy danh sách bài từ MCP...',
     crawling:        job?.importing ? 'Đang import vào database...' : `Crawling... (${pct}%)`,
     done:            'Hoàn tất!',
     error:           'Lỗi',
@@ -132,7 +140,38 @@ export default function CrawlModal({ onClose, onDone, bp = 'desktop' }) {
 
         {/* Body */}
         <div style={{ padding: bodyPad }}>
-          {/* Sitemap URL */}
+          {/* Nguồn crawl — không áp dụng cho mode "Related" (luôn tải HTML live) */}
+          {!isRelated && (
+          <div style={{ marginBottom: 14 }}>
+            <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 8 }}>
+              Nguồn
+            </label>
+            <div style={{ display: 'flex', gap: 8 }}>
+              {[
+                { val: 'mcp',     label: 'MCP',     desc: 'knxstore MCP server (đủ bài đã publish)' },
+                { val: 'sitemap', label: 'Sitemap', desc: 'Fetch HTML từng bài (thiếu bài chưa vào sitemap)' },
+              ].map(opt => (
+                <button
+                  key={opt.val}
+                  onClick={() => !jobId && setSource(opt.val)}
+                  disabled={!!jobId}
+                  style={{
+                    flex: 1, padding: isMobile ? '10px 10px' : '10px 12px', borderRadius: 8, cursor: jobId ? 'default' : 'pointer',
+                    border: source === opt.val ? '1px solid var(--accent)' : '1px solid var(--border)',
+                    background: source === opt.val ? 'var(--accent-dim)' : 'var(--surface-2)',
+                    textAlign: 'left', opacity: jobId ? 0.6 : 1,
+                  }}
+                >
+                  <div style={{ fontSize: 12, fontWeight: 500, color: source === opt.val ? 'var(--accent-2)' : 'var(--text)', marginBottom: 2 }}>{opt.label}</div>
+                  <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>{opt.desc}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+          )}
+
+          {/* Sitemap URL — chỉ dùng khi nguồn là Sitemap */}
+          {!isRelated && !isMcp && (
           <div style={{ marginBottom: 14 }}>
             <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 6 }}>
               Sitemap URL
@@ -158,6 +197,7 @@ export default function CrawlModal({ onClose, onDone, bp = 'desktop' }) {
               onBlur={e => e.target.style.borderColor = 'var(--border)'}
             />
           </div>
+          )}
 
           {/* Mode toggle */}
           <div style={{ marginBottom: 18 }}>
@@ -166,8 +206,9 @@ export default function CrawlModal({ onClose, onDone, bp = 'desktop' }) {
             </label>
             <div style={{ display: 'flex', gap: 8 }}>
               {[
-                { val: 'incremental', label: 'Incremental', desc: 'Chỉ crawl bài chưa có' },
-                { val: 'full',        label: 'Full recrawl', desc: 'Ghi đè tất cả (~2 phút)' },
+                { val: 'incremental', label: 'Incremental', desc: isMcp ? 'Chỉ bài mới hoặc đã sửa' : 'Chỉ crawl bài chưa có' },
+                { val: 'full',        label: 'Full recrawl', desc: 'Ghi đè tất cả (~7 phút, gồm tải HTML live lấy related)' },
+                { val: 'related',     label: 'Chỉ Related', desc: 'Chỉ làm mới "Bài viết liên quan" từ HTML live (~5 phút)' },
               ].map(opt => (
                 <button
                   key={opt.val}
@@ -229,6 +270,34 @@ export default function CrawlModal({ onClose, onDone, bp = 'desktop' }) {
                 </div>
               )}
 
+              {isDone && job.missing_in_mcp?.length > 0 && (
+                <div style={{ marginTop: 8, fontSize: 11, color: 'var(--warning)' }}>
+                  <div style={{ fontWeight: 500, marginBottom: 4 }}>
+                    {job.missing_in_mcp.length} bài có trong DB nhưng MCP không trả về (đã gỡ/nháp) — chưa xóa:
+                  </div>
+                  <div style={{ maxHeight: 90, overflowY: 'auto', color: 'var(--text-muted)', wordBreak: 'break-all' }}>
+                    {job.missing_in_mcp.map(s => <div key={s}>{s}</div>)}
+                  </div>
+                </div>
+              )}
+
+              {isDone && job.related_failed?.length > 0 && (
+                <div style={{ marginTop: 8, fontSize: 11, color: 'var(--warning)' }}>
+                  <div style={{ fontWeight: 500, marginBottom: 4 }}>
+                    {job.related_failed.length} bài tải HTML live lỗi — giữ nguyên related cũ:
+                  </div>
+                  <div style={{ maxHeight: 90, overflowY: 'auto', color: 'var(--text-muted)', wordBreak: 'break-all' }}>
+                    {job.related_failed.map(f => <div key={f.slug}>{f.slug} ({f.error})</div>)}
+                  </div>
+                </div>
+              )}
+
+              {isDone && job.no_related?.length > 0 && (
+                <div style={{ marginTop: 8, fontSize: 11, color: 'var(--text-muted)' }}>
+                  {job.no_related.length} bài không có khối "Bài viết liên quan" trên trang live
+                </div>
+              )}
+
               {isError && job.error && (
                 <div style={{ marginTop: 8, fontSize: 11, color: 'var(--danger)', wordBreak: 'break-all' }}>
                   {job.error}
@@ -257,14 +326,14 @@ export default function CrawlModal({ onClose, onDone, bp = 'desktop' }) {
                 )}
                 <button
                   onClick={handleStart}
-                  disabled={starting || !sitemapUrl.trim()}
+                  disabled={starting || !canStart}
                   style={{
                     flex: isMobile ? 1 : undefined,
                     padding: isMobile ? '12px 16px' : '8px 20px',
                     borderRadius: 6, cursor: 'pointer',
                     border: 'none', background: 'var(--accent)',
                     color: '#fff', fontSize: 13, fontWeight: 500,
-                    opacity: (starting || !sitemapUrl.trim()) ? 0.6 : 1,
+                    opacity: (starting || !canStart) ? 0.6 : 1,
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
                   }}
                 >

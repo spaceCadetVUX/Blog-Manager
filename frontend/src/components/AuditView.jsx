@@ -4,8 +4,9 @@ import { sectionColor } from '../sectionColors.js'
 
 const ISSUE_META = {
   broken_links:      { label: 'Broken links',       color: '#ff6b6b', desc: 'Link trỏ đến slug không tồn tại' },
-  orphan_posts:      { label: 'Orphan posts',       color: '#f85149', desc: 'Không có inbound links' },
-  no_outbound:       { label: 'No outbound',        color: '#f97316', desc: 'Không có outbound links' },
+  orphan_posts:      { label: 'Orphan (thân bài)',  color: '#f85149', desc: 'Không có inbound link trong thân bài (có thể vẫn nằm ở khối Bài viết liên quan)' },
+  orphan_true:       { label: 'Orphan thật',        color: '#dc2626', desc: 'Không có inbound link ở thân bài LẪN khối Bài viết liên quan' },
+  no_outbound:       { label: 'No outbound',        color: '#f97316', desc: 'Không có outbound link trong thân bài' },
   long_title:        { label: 'Title quá dài',      color: '#d29922', desc: 'Title > 60 ký tự' },
   short_title:       { label: 'Title quá ngắn',     color: '#d29922', desc: 'Title < 30 ký tự' },
   long_description:  { label: 'Desc quá dài',       color: '#d29922', desc: 'Description > 160 ký tự' },
@@ -161,7 +162,7 @@ export default function AuditView({ onSelectPost, bp = 'desktop' }) {
         <div>
           {selectedPosts.map((item, i) => {
             const isBrokenLink = selected === 'broken_links'
-            const key = isBrokenLink ? `${item.from_slug}__${item.to_slug}` : item.slug
+            const key = isBrokenLink ? `${item.from_slug}__${item.to_slug}__${item.kind || 'body'}` : item.slug
             const sc  = sectionColor(item.article_section)
 
             if (isBrokenLink) {
@@ -185,7 +186,9 @@ export default function AuditView({ onSelectPost, bp = 'desktop' }) {
                       {item.from_headline || item.from_slug}
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginTop: 4 }}>
-                      <span style={{ fontSize: 11, color: 'var(--text-subtle)' }}>link đến</span>
+                      <span style={{ fontSize: 11, color: 'var(--text-subtle)' }}>
+                        link đến{item.kind === 'related' ? ' (khối Bài viết liên quan)' : ' (thân bài)'}
+                      </span>
                       <span style={{
                         fontSize: 11, fontWeight: 600, color: '#ff6b6b',
                         background: 'rgba(255,107,107,0.1)', border: '1px solid rgba(255,107,107,0.3)',
@@ -267,6 +270,11 @@ export default function AuditView({ onSelectPost, bp = 'desktop' }) {
                     {item.inbound !== undefined && (
                       <span style={{ fontSize: 10, color: (item.inbound || 0) > 0 ? 'var(--success)' : 'var(--danger)', fontWeight: 600 }}>
                         {item.inbound || 0} in
+                      </span>
+                    )}
+                    {item.inbound_related !== undefined && (
+                      <span style={{ fontSize: 10, color: 'var(--text-subtle)' }}>
+                        {item.inbound_related || 0} in liên quan
                       </span>
                     )}
                     {(selected === 'stale_6m' || selected === 'stale_1y') && item.date_modified && (

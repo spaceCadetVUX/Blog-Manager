@@ -1,9 +1,12 @@
 """
-Crawl endpoint — trigger crawl từ sitemap URL, track progress qua polling.
+Crawl endpoint — trigger crawl, track progress qua polling.
+Nguồn: "mcp" (MCP server knxstore, mặc định) hoặc "sitemap" (fetch HTML từng bài).
 POST /crawl        → { job_id }
 GET  /crawl/{job_id} → job status
 """
 
+import json
+import os
 import sys
 import time
 import uuid
@@ -13,7 +16,7 @@ from pathlib import Path
 from urllib.request import urlopen, Request
 from urllib.error import URLError, HTTPError
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
 # Đảm bảo project root trong path để import crawl_posts
@@ -27,27 +30,51 @@ _jobs: dict[str, dict] = {}
 
 
 class CrawlRequest(BaseModel):
-    sitemap_url: str
-    mode: str = "incremental"  # "incremental" | "full"
+    sitemap_url: str = ""          # chỉ cần khi source="sitemap"
+    mode: str = "incremental"      # "incremental" | "full" | "related" (chỉ làm mới khối "Bài viết liên quan" từ HTML live)
+    source: str = "mcp"            # "mcp" | "sitemap" (bỏ qua khi mode="related": luôn lấy HTML live)
 
 
 @router.post("")
 def start_crawl(req: CrawlRequest):
+    if req.source not in ("mcp", "sitemap"):
+        raise HTTPException(422, "source phải là 'mcp' hoặc 'sitemap'")
+    if req.mode not in ("incremental", "full", "related"):
+        raise HTTPException(422, "mode phải là 'incremental', 'full' hoặc 'related'")
+    if req.source == "sitemap" and req.mode != "related" and not req.sitemap_url.strip():
+        raise HTTPException(422, "Thiếu sitemap_url cho source='sitemap'")
+
     job_id = uuid.uuid4().hex[:8]
     _jobs[job_id] = {
         "status":      "starting",
-        "sitemap_url": req.sitemap_url,
+        "source":      req.source,
+        "sitemap_url": req.sitemap_url if (req.source == "sitemap" and req.mode != "related") else "",
         "mode":        req.mode,
         "total":       0,
         "crawled":     0,
         "failed":      0,
         "skipped":     0,
+        "ignored":     0,
+        "no_body":     [],
+        "no_related":  [],   # trang live hợp lệ nhưng không có khối "Bài viết liên quan"
+        "related_failed": [],  # tải HTML live lỗi → GIỮ related cũ trong DB: [{slug, error}]
         "importing":   False,
         "current":     "",
         "error":       None,
     }
-    t = threading.Thread(target=_run_crawl, args=(job_id, req.sitemap_url, req.mode), daemon=True)
-    t.start()
+    if req.mode == "related":
+        _jobs[job_id]["source"] = "live"
+        target, args = _run_related_crawl, (job_id,)
+    elif req.source == "mcp":
+        _jobs[job_id].update({
+            "missing_in_mcp":      [],   # có trong DB nhưng MCP không trả về — chỉ báo cáo, không xóa
+            "failed_slugs":        [],   # get_post báo không tìm thấy bài
+            "unresolved_products": {},   # slug → id/slug sản phẩm trong shortcode không tra được
+        })
+        target, args = _run_mcp_crawl, (job_id, req.mode)
+    else:
+        target, args = _run_crawl, (job_id, req.sitemap_url, req.mode)
+    threading.Thread(target=target, args=args, daemon=True).start()
     return {"job_id": job_id}
 
 
@@ -84,15 +111,22 @@ def _parse_sitemap_url(sitemap_url: str) -> list[dict]:
     xml_data = _fetch(sitemap_url)
     if not xml_data:
         raise RuntimeError(f"Không fetch được sitemap: {sitemap_url}")
+    from crawl_posts import is_post_url
     root = ET.fromstring(xml_data)
     ns = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
     entries = []
+    ignored = []
     for el in root.findall("sm:url", ns):
         loc = el.findtext("sm:loc", namespaces=ns)
         lastmod = el.findtext("sm:lastmod", namespaces=ns)
-        if loc:
+        if not loc:
+            continue
+        # Chỉ lấy bài viết https://knxstore.vn/<slug>.html — bỏ /author/*, /blogs/*...
+        if is_post_url(loc):
             entries.append({"url": loc, "lastmod": lastmod or ""})
-    return entries
+        else:
+            ignored.append(loc)
+    return entries, ignored
 
 
 def _run_crawl(job_id: str, sitemap_url: str, mode: str):
@@ -102,13 +136,14 @@ def _run_crawl(job_id: str, sitemap_url: str, mode: str):
         from crawl_posts import (
             fetch_html, extract_jsonld, extract_meta_tags,
             find_article_jsonld, extract_internal_links, extract_product_links,
-            jsonld_to_md, slug_from_url,
+            jsonld_to_md, slug_from_url, ensure_article_body, related_from_html,
         )
 
         # 1. Fetch sitemap
         job["status"] = "fetching_sitemap"
         job["current"] = sitemap_url
-        entries = _parse_sitemap_url(sitemap_url)
+        entries, ignored = _parse_sitemap_url(sitemap_url)
+        job["ignored"] = len(ignored)   # URL sitemap không phải bài viết (author/blogs...)
         job["total"] = len(entries)
         job["status"] = "crawling"
 
@@ -119,6 +154,7 @@ def _run_crawl(job_id: str, sitemap_url: str, mode: str):
         from backend.db import get_conn as _get_conn
         with _get_conn() as _conn:
             db_dates = dict(_conn.execute("SELECT slug, updated_at FROM posts").fetchall())
+            old_related = _db_related(_conn)
 
         for i, entry in enumerate(entries):
             url = entry["url"]
@@ -141,16 +177,25 @@ def _run_crawl(job_id: str, sitemap_url: str, mode: str):
                     job["failed"] += 1
                     continue
 
+                if 'article-body' not in html:
+                    # Template đổi / trang không phải bài → không trích được link thân bài
+                    job["no_body"].append(slug)
+
                 all_jsonld = extract_jsonld(html)
                 meta       = extract_meta_tags(html)
                 article, webpage = find_article_jsonld(all_jsonld)
                 internal_links   = extract_internal_links(html, url)
                 product_links    = extract_product_links(html)
+                related_links    = related_from_html(html, url)   # None = trang không hợp lệ → giữ related cũ
+                if related_links is None:
+                    job["related_failed"].append({"slug": slug, "error": "trang không có #article-body"})
+                    related_links = old_related.get(slug) or None
+                elif not related_links:
+                    job["no_related"].append(slug)
 
-                if not article:
-                    article = {}
+                article = ensure_article_body(article or {}, html)
 
-                md = jsonld_to_md(url, entry["lastmod"], article, meta, all_jsonld, webpage, internal_links, product_links)
+                md = jsonld_to_md(url, entry["lastmod"], article, meta, all_jsonld, webpage, internal_links, product_links, related_links)
                 out_path.write_text(md, encoding="utf-8")
                 job["crawled"] += 1
 
@@ -173,3 +218,172 @@ def _run_crawl(job_id: str, sitemap_url: str, mode: str):
     except Exception as e:
         job["status"] = "error"
         job["error"]  = str(e)
+
+
+# ── Related links ("Bài viết liên quan") ────────────────────────────────────
+
+def _db_related(conn) -> dict[str, list[dict]]:
+    """related hiện có trong DB: slug → [{url, slug, anchor, position}] (để giữ nguyên khi tải live lỗi)."""
+    out: dict[str, list[dict]] = {}
+    for r in conn.execute("""SELECT from_slug, to_slug, anchor, position FROM internal_links
+                             WHERE kind = 'related' ORDER BY from_slug, position, id"""):
+        out.setdefault(r["from_slug"], []).append({
+            "url": f"https://knxstore.vn/{r['to_slug']}.html", "slug": r["to_slug"],
+            "anchor": r["anchor"] or "", "position": r["position"],
+        })
+    return out
+
+
+def _apply_live_related(job: dict, slug: str, live_url: str, old_related: dict) -> list[dict] | None:
+    """Tải HTML live của 1 bài → danh sách related để ghi vào md (frontmatter `related_links`).
+    Lỗi tải → ghi job['related_failed'] và trả related cũ trong DB (None nếu chưa có → không ghi khóa → import giữ nguyên)."""
+    from crawl_posts import live_related
+    rel = live_related(live_url)
+    if rel["status"] == "failed":
+        job["related_failed"].append({"slug": slug, "error": rel["error"]})
+        return old_related.get(slug) or None
+    if rel["status"] == "no_related":
+        job["no_related"].append(slug)
+    return rel["links"]
+
+
+def _run_related_crawl(job_id: str):
+    """mode="related": với mọi bài trong DB, tải HTML live → khối "Bài viết liên quan" → cập nhật frontmatter md
+    (khóa related_links) + internal_links kind='related'. KHÔNG gọi MCP, KHÔNG đụng body/products/article_body/posts.
+    Từng bài độc lập (ghi ngay); tải lỗi → giữ nguyên related cũ, ghi vào job['related_failed']."""
+    job = _jobs[job_id]
+    try:
+        from backend.db import get_conn
+        from backend.import_posts import replace_links
+        from crawl_posts import is_post_url, set_md_related_links, live_related, BASE_DOMAIN
+
+        job["status"] = "fetching_list"
+        job["current"] = "DB: posts"
+        with get_conn() as conn:
+            rows = [(r["slug"], r["url"] or "") for r in conn.execute("SELECT slug, url FROM posts ORDER BY slug")]
+        job["total"] = len(rows)
+        job["status"] = "crawling"
+
+        output_dir = PROJECT_ROOT / "posts_md"
+        for i, (slug, url) in enumerate(rows):
+            job["current"] = slug
+            live_url = url if is_post_url(url) else f"https://{BASE_DOMAIN}/{slug}.html"
+            rel = live_related(live_url)
+            if rel["status"] == "failed":
+                job["failed"] += 1
+                job["related_failed"].append({"slug": slug, "error": rel["error"]})
+            else:
+                if rel["status"] == "no_related":
+                    job["no_related"].append(slug)
+                links = rel["links"]
+                md_path = output_dir / f"{slug}.md"
+                if md_path.exists():
+                    old_md = md_path.read_text(encoding="utf-8")
+                    new_md = set_md_related_links(old_md, links)
+                    if new_md is not None and new_md != old_md:
+                        md_path.write_text(new_md, encoding="utf-8")
+                with get_conn() as conn:
+                    replace_links(conn, slug, "related", links)
+                job["crawled"] += 1
+            if i < len(rows) - 1:
+                time.sleep(0.5)
+
+        job["status"]  = "done"
+        job["current"] = ""
+
+    except Exception as e:
+        job["status"] = "error"
+        job["error"]  = _safe_err(e)
+
+
+# ── MCP worker ──────────────────────────────────────────────────────────────
+
+def _safe_err(e: Exception) -> str:
+    """Thông điệp lỗi cho job — không bao giờ để lộ token MCP."""
+    msg = str(e)
+    token = os.getenv("KNX_MCP_TOKEN", "").strip()
+    if token:
+        msg = msg.replace(token, "***")
+    return msg[:500]
+
+
+def _run_mcp_crawl(job_id: str, mode: str):
+    """list_posts → get_post từng bài → (gom md trong RAM) → ghi posts_md → import vào DB.
+    MCP lỗi giữa chừng → job error, KHÔNG ghi md và KHÔNG import (không để DB dở dang).
+    Bài có trong DB mà MCP không trả về → chỉ báo cáo ở job['missing_in_mcp']."""
+    job = _jobs[job_id]
+    try:
+        from backend import mcp_client
+        from backend.db import get_conn
+        from backend.product_sync import load_product_lookup
+        from crawl_posts import mcp_post_parts, mcp_post_to_md, slug_from_url, BASE_DOMAIN
+
+        job["status"] = "fetching_list"
+        job["current"] = "MCP: search_posts"
+        items = mcp_client.list_posts()
+        job["total"] = len(items)
+
+        with get_conn() as conn:
+            db_rows = {r["slug"]: (r["date_modified"] or "", r["products"]) for r in
+                       conn.execute("SELECT slug, date_modified, products FROM posts").fetchall()}
+            lookup = load_product_lookup(conn)   # khóa theo site_id (ID MỚI của site) + slug
+            old_related = _db_related(conn)
+
+        mcp_slugs = {slug_from_url(it.get("url") or f"/{it['slug']}.html") for it in items}
+        job["missing_in_mcp"] = sorted(set(db_rows) - mcp_slugs)
+        job["status"] = "crawling"
+
+        resolver = mcp_client.make_product_resolver()
+        pending: dict[str, str] = {}   # slug → nội dung md (chỉ ghi ra đĩa khi toàn bộ MCP call thành công)
+        for it in items:
+            mcp_slug = it["slug"]
+            job["current"] = mcp_slug
+            try:
+                post = mcp_client.get_post(mcp_slug)
+            except mcp_client.MCPToolError:
+                job["failed"] += 1
+                job["failed_slugs"].append(mcp_slug)
+                continue
+            # Lỗi khác (401, mạng, 5xx hết retry) → MCPError bay lên outer except → job error
+
+            slug = slug_from_url(post.get("url") or f"/{mcp_slug}.html")
+            date_mod = post.get("editedAt") or post.get("publishedAt") or ""
+            if mode == "incremental" and slug in db_rows and db_rows[slug][0] == date_mod:
+                job["skipped"] += 1
+                continue
+
+            if not (post.get("contentHtml") or "").strip():
+                job["no_body"].append(slug)
+            try:
+                old_products = json.loads(db_rows[slug][1]) if slug in db_rows else None
+            except Exception:
+                old_products = None
+            parts = mcp_post_parts(post, lookup, old_products, resolver)
+            if parts["unresolved_products"]:
+                job["unresolved_products"][slug] = parts["unresolved_products"]
+            # MCP không trả khối "Bài viết liên quan" → tải HTML live (tuần tự, delay 0.5s). Lỗi: giữ related cũ.
+            parts["related_links"] = _apply_live_related(job, slug, f"https://{BASE_DOMAIN}/{slug}.html", old_related)
+            pending[slug] = mcp_post_to_md(post, parts)
+            job["crawled"] += 1
+            time.sleep(0.5)
+
+        # Toàn bộ MCP call đã thành công → ghi md rồi import
+        output_dir = PROJECT_ROOT / "posts_md"
+        output_dir.mkdir(exist_ok=True)
+        for slug, md in pending.items():
+            (output_dir / f"{slug}.md").write_text(md, encoding="utf-8")
+
+        if pending:
+            job["importing"] = True
+            job["current"]   = "Importing to database…"
+            from backend.import_posts import run as import_run
+            import_run(output_dir)
+
+        job["status"]    = "done"
+        job["importing"] = False
+        job["current"]   = ""
+
+    except Exception as e:
+        job["status"]    = "error"
+        job["importing"] = False
+        job["error"]     = _safe_err(e)

@@ -298,15 +298,15 @@ export default function Dashboard({ onSelectPost, bp = 'desktop' }) {
           icon={FileText} color="var(--accent)"
         />
         <StatCard
-          label="Internal links"
+          label="Internal links (thân bài)"
           value={stats.total_links?.toLocaleString() || 0}
-          sub={`~${avgLinks} link/bài`}
+          sub={`~${avgLinks} link/bài · +${(stats.links_related || 0).toLocaleString()} ở "Bài viết liên quan"`}
           icon={Link2} color="var(--info)"
         />
         <StatCard
-          label="Orphan posts"
+          label="Orphan posts (thân bài)"
           value={stats.orphan_posts || 0}
-          sub={`${orphanPct}% chưa được link đến`}
+          sub={`${orphanPct}% không có link thân bài · ${stats.orphans_any ?? 0} orphan thật`}
           icon={AlertTriangle} color="var(--danger)"
           warn={(stats.orphan_posts || 0) > 5}
         />

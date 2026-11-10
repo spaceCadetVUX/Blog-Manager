@@ -2,6 +2,11 @@ import { useState, useEffect, useRef } from 'react'
 import { Search, X, Copy, Check, Package } from 'lucide-react'
 import { api } from '../api'
 
+// Id số trong shortcode {products:[...]} là ID cũ (products.id). Sản phẩm thêm từ MCP không có ID cũ
+// (id >= 1_000_000, sinh từ site_id) → site không giải được id số, phải dùng slug.
+const NEW_ID_OFFSET = 1_000_000
+const shortcodeToken = (p) => (p.id < NEW_ID_OFFSET ? p.id : (p.slug || ''))
+
 function imgCandidates(productUrl) {
   if (!productUrl) return []
   const slug = productUrl.replace(/\/$/, '').split('/products/')[1]
@@ -49,7 +54,7 @@ function SelectedCard({ item, index, onRemove }) {
       </div>
       {/* Info */}
       <div style={{ padding: '7px 8px', flex: 1 }}>
-        <div style={{ fontSize: 10, fontWeight: 600, color: 'var(--accent-2)', marginBottom: 2 }}>#{item.id}</div>
+        <div style={{ fontSize: 10, fontWeight: 600, color: 'var(--accent-2)', marginBottom: 2 }}>{item.id < NEW_ID_OFFSET ? `#${item.id}` : 'slug'}</div>
         <div style={{ fontSize: 11, color: 'var(--text)', lineHeight: 1.35, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{item.name}</div>
         {item.brand && <div style={{ fontSize: 10, color: 'var(--text-subtle)', marginTop: 3 }}>{item.brand}</div>}
       </div>
@@ -106,11 +111,12 @@ export default function ProductPickerView({ bp = 'desktop' }) {
 
   const addProduct = (item) => {
     if (selected.find(s => s.id === item.id)) return
-    setSelected(prev => [...prev, { id: item.id, name: item.name, brand: item.brand, url: item.url, price: item.price }])
+    if (item.status === 'not_on_site') return   // không còn trên site: shortcode không render được
+    setSelected(prev => [...prev, { id: item.id, name: item.name, brand: item.brand, url: item.url, price: item.price, slug: item.slug }])
   }
   const removeProduct = (id) => setSelected(prev => prev.filter(s => s.id !== id))
 
-  const ids = selected.map(s => s.id)
+  const ids = selected.map(shortcodeToken).filter(t => t !== '')
   const output = `{products:[${ids.join(',')}]}`
   const copyOutput = () => {
     navigator.clipboard.writeText(output).then(() => {
@@ -167,7 +173,8 @@ export default function ProductPickerView({ bp = 'desktop' }) {
           {!query && <div style={{ padding: '30px 16px', color: 'var(--text-subtle)', fontSize: 12, textAlign: 'center', lineHeight: 1.7 }}>Nhập tên sản phẩm<br/>để tìm kiếm</div>}
 
           {results.map(item => {
-            const already = selectedIds.has(item.id)
+            const gone = item.status === 'not_on_site'
+            const already = selectedIds.has(item.id) || gone
             return (
               <button key={item.id} onClick={() => addProduct(item)} disabled={already}
                 style={{
@@ -186,7 +193,8 @@ export default function ProductPickerView({ bp = 'desktop' }) {
                     <Highlight text={item.name} query={query} />
                   </div>
                   <div style={{ fontSize: 10, color: 'var(--text-subtle)', marginTop: 3, display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                    <span style={{ color: 'var(--accent-2)', fontWeight: 600 }}>#{item.id}</span>
+                    <span style={{ color: 'var(--accent-2)', fontWeight: 600 }}>{item.id < NEW_ID_OFFSET ? `#${item.id}` : 'slug'}</span>
+                    {gone && <span style={{ color: '#f87171' }}>không còn trên site</span>}
                     {item.brand && <span><Highlight text={item.brand} query={query} /></span>}
                     {item.price > 0 && <span style={{ color: 'var(--text-muted)' }}>{item.price.toLocaleString('vi-VN')}₫</span>}
                   </div>

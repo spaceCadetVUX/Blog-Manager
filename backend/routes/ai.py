@@ -111,12 +111,12 @@ def chat(req: ChatRequest):
             inbound_rows  = conn.execute("""
                 SELECT il.from_slug, p.headline FROM internal_links il
                 LEFT JOIN posts p ON p.slug = il.from_slug
-                WHERE il.to_slug = ?
+                WHERE il.to_slug = ? AND il.kind = 'body'
             """, [req.post_slug]).fetchall()
             outbound_rows = conn.execute("""
                 SELECT il.to_slug, p.headline FROM internal_links il
                 LEFT JOIN posts p ON p.slug = il.to_slug
-                WHERE il.from_slug = ?
+                WHERE il.from_slug = ? AND il.kind = 'body'
             """, [req.post_slug]).fetchall()
 
         if post:
@@ -141,7 +141,7 @@ def chat(req: ChatRequest):
                     SELECT p.slug, p.headline,
                            COUNT(DISTINCT il.from_slug) AS inbound
                     FROM posts p
-                    LEFT JOIN internal_links il ON il.to_slug = p.slug
+                    LEFT JOIN internal_links il ON il.to_slug = p.slug AND il.kind = 'body'
                     WHERE p.article_section = ? AND p.slug != ?
                     GROUP BY p.slug
                     ORDER BY inbound DESC
@@ -152,7 +152,7 @@ def chat(req: ChatRequest):
                     SELECT p.slug, p.headline, p.article_section,
                            COUNT(DISTINCT il.from_slug) AS inbound
                     FROM posts p
-                    LEFT JOIN internal_links il ON il.to_slug = p.slug
+                    LEFT JOIN internal_links il ON il.to_slug = p.slug AND il.kind = 'body'
                     WHERE p.article_section != ? AND p.article_section != '' AND p.slug != ?
                     GROUP BY p.slug
                     ORDER BY inbound DESC
@@ -194,7 +194,7 @@ def chat(req: ChatRequest):
     elif req.with_context:
         with get_conn() as conn:
             total = conn.execute("SELECT COUNT(*) FROM posts").fetchone()[0]
-            total_links = conn.execute("SELECT COUNT(*) FROM internal_links").fetchone()[0]
+            total_links = conn.execute("SELECT COUNT(*) FROM internal_links WHERE kind = 'body'").fetchone()[0]
             sections = conn.execute("""
                 SELECT article_section, COUNT(*) as cnt FROM posts
                 WHERE article_section != '' AND article_section IS NOT NULL
@@ -298,8 +298,8 @@ def analyze_cluster(req: ClusterRequest):
                    COUNT(DISTINCT il_in.from_slug)  AS inbound,
                    COUNT(DISTINCT il_out.to_slug)   AS outbound
             FROM posts p
-            LEFT JOIN internal_links il_in  ON il_in.to_slug   = p.slug
-            LEFT JOIN internal_links il_out ON il_out.from_slug = p.slug
+            LEFT JOIN internal_links il_in  ON il_in.to_slug   = p.slug AND il_in.kind = 'body'
+            LEFT JOIN internal_links il_out ON il_out.from_slug = p.slug AND il_out.kind = 'body'
             WHERE p.article_section = ?
             GROUP BY p.id
             ORDER BY inbound DESC
@@ -310,6 +310,7 @@ def analyze_cluster(req: ClusterRequest):
             FROM internal_links il
             JOIN posts pf ON pf.slug = il.from_slug AND pf.article_section = ?
             JOIN posts pt ON pt.slug = il.to_slug   AND pt.article_section = ?
+            WHERE il.kind = 'body'
         """, [req.section, req.section]).fetchall()
 
     if not posts:
@@ -379,7 +380,7 @@ Top 3-5 bài nên update sớm nhất và tại sao.
 def analyze_overall(req: OverallRequest):
     with get_conn() as conn:
         total_posts = conn.execute("SELECT COUNT(*) FROM posts").fetchone()[0]
-        total_links = conn.execute("SELECT COUNT(*) FROM internal_links").fetchone()[0]
+        total_links = conn.execute("SELECT COUNT(*) FROM internal_links WHERE kind = 'body'").fetchone()[0]
 
         sections = conn.execute("""
             SELECT p.article_section AS section,
@@ -387,12 +388,12 @@ def analyze_overall(req: OverallRequest):
                    COUNT(DISTINCT il_in.from_slug)  AS total_inbound,
                    COUNT(DISTINCT il_out.to_slug)   AS total_outbound,
                    SUM(CASE WHEN NOT EXISTS (
-                       SELECT 1 FROM internal_links WHERE to_slug = p.slug
+                       SELECT 1 FROM internal_links WHERE to_slug = p.slug AND kind = 'body'
                    ) THEN 1 ELSE 0 END) AS orphans,
                    ROUND(AVG(p.word_count), 0) AS avg_wc
             FROM posts p
-            LEFT JOIN internal_links il_in  ON il_in.to_slug   = p.slug
-            LEFT JOIN internal_links il_out ON il_out.from_slug = p.slug
+            LEFT JOIN internal_links il_in  ON il_in.to_slug   = p.slug AND il_in.kind = 'body'
+            LEFT JOIN internal_links il_out ON il_out.from_slug = p.slug AND il_out.kind = 'body'
             WHERE p.article_section != '' AND p.article_section IS NOT NULL
             GROUP BY p.article_section
             ORDER BY posts DESC
@@ -405,7 +406,8 @@ def analyze_overall(req: OverallRequest):
             FROM internal_links il
             JOIN posts pf ON pf.slug = il.from_slug
             JOIN posts pt ON pt.slug = il.to_slug
-            WHERE pf.article_section != pt.article_section
+            WHERE il.kind = 'body'
+              AND pf.article_section != pt.article_section
               AND pf.article_section != '' AND pt.article_section != ''
             GROUP BY from_sec, to_sec
             ORDER BY cnt DESC
@@ -415,7 +417,7 @@ def analyze_overall(req: OverallRequest):
         top_orphans = conn.execute("""
             SELECT p.slug, p.headline, p.article_section
             FROM posts p
-            WHERE NOT EXISTS (SELECT 1 FROM internal_links WHERE to_slug = p.slug)
+            WHERE NOT EXISTS (SELECT 1 FROM internal_links WHERE to_slug = p.slug AND kind = 'body')
             ORDER BY p.word_count DESC
             LIMIT 10
         """).fetchall()
@@ -514,7 +516,7 @@ def link_suggestions(slug: str, req: LinkSuggestRequest):
                    (SELECT GROUP_CONCAT(kw.value) FROM json_each(p.keywords) kw LIMIT 5) AS kw_list,
                    COUNT(DISTINCT il_in.from_slug) AS inbound
             FROM posts p
-            LEFT JOIN internal_links il_in ON il_in.to_slug = p.slug
+            LEFT JOIN internal_links il_in ON il_in.to_slug = p.slug AND il_in.kind = 'body'
             WHERE p.slug != ?
             GROUP BY p.id
             ORDER BY (p.article_section = ?) DESC, inbound DESC
@@ -523,10 +525,10 @@ def link_suggestions(slug: str, req: LinkSuggestRequest):
 
         # Links hiện có
         existing_out = conn.execute(
-            "SELECT to_slug FROM internal_links WHERE from_slug = ?", [slug]
+            "SELECT to_slug FROM internal_links WHERE from_slug = ? AND kind = 'body'", [slug]
         ).fetchall()
         existing_in = conn.execute(
-            "SELECT from_slug FROM internal_links WHERE to_slug = ?", [slug]
+            "SELECT from_slug FROM internal_links WHERE to_slug = ? AND kind = 'body'", [slug]
         ).fetchall()
 
     p = dict(post)
@@ -600,10 +602,10 @@ def review_post(slug: str, req: ReviewRequest):
             return StreamingResponse(not_found(), media_type="text/event-stream")
 
         inbound = conn.execute(
-            "SELECT COUNT(*) FROM internal_links WHERE to_slug = ?", [slug]
+            "SELECT COUNT(*) FROM internal_links WHERE to_slug = ? AND kind = 'body'", [slug]
         ).fetchone()[0]
         outbound = conn.execute(
-            "SELECT COUNT(*) FROM internal_links WHERE from_slug = ?", [slug]
+            "SELECT COUNT(*) FROM internal_links WHERE from_slug = ? AND kind = 'body'", [slug]
         ).fetchone()[0]
 
         related = conn.execute("""

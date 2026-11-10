@@ -68,6 +68,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
   const [danceMode, setDanceMode] = useState(false)
   const danceModeRef = useRef(false)
   const [showProducts, setShowProducts] = useState(true)
+  const [linkKind, setLinkKind] = useState('all') // 'body' (thân bài) | 'related' (Bài viết liên quan) | 'all'
   const [productFilter, setProductFilter] = useState('all') // 'all' | 'has' | 'none'
   const [showFilters, setShowFilters] = useState(true)
   const [aiModel, setAiModel]     = useState('claude-haiku-4-5-20251001')
@@ -99,6 +100,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
     if (filterSection) params.section = filterSection
 
     if (showProducts) params.show_products = true
+    params.kind = linkKind
 
     api.graph(params).then(data => {
       const nodes = (data.nodes || []).map(n => ({
@@ -117,11 +119,12 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
       const links = (data.edges || []).map(e => ({
         source: e.source,
         target: e.target,
+        kind: e.data?.kind || (e.data?.isProduct ? 'product' : 'body'),
       }))
       rawGraphData.current = { nodes, links }
       setRawDataVersion(v => v + 1)  // trigger orphan effect khi data mới về
     }).catch(console.error).finally(() => setLoading(false))
-  }, [minLinks, filterSection, showProducts])
+  }, [minLinks, filterSection, showProducts, linkKind])
 
   // Áp dụng orphan filter mỗi khi data thay đổi HOẶC toggle thay đổi
   useEffect(() => {
@@ -132,6 +135,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
     const norm = links.map(l => ({
       source: typeof l.source === 'object' ? l.source.id : l.source,
       target: typeof l.target === 'object' ? l.target.id : l.target,
+      kind: l.kind,
     }))
 
     let filtered = nodes
@@ -152,7 +156,9 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
     setGraphData({ nodes: filtered, links: filtLinks })
     const postCount    = filtered.filter(n => n.nodeType !== 'productNode').length
     const productCount = filtered.filter(n => n.nodeType === 'productNode').length
-    setStatsInfo({ nodes: filtered.length, edges: filtLinks.length, posts: postCount, products: productCount })
+    const bodyE = filtLinks.filter(l => l.kind === 'body').length
+    const relatedE = filtLinks.filter(l => l.kind === 'related').length
+    setStatsInfo({ nodes: filtered.length, edges: filtLinks.length, posts: postCount, products: productCount, bodyEdges: bodyE, relatedEdges: relatedE })
   }, [showOrphansOnly, productFilter, rawDataVersion])
 
   // Tăng lực đẩy sau khi data load để nodes xa nhau hơn
@@ -765,7 +771,9 @@ useEffect(() => { danceModeRef.current = danceMode }, [danceMode])
     const dateDimmed = (df || dt) && !isNodeInDateRange(s) && !isNodeInDateRange(t)
     if (dateDimmed) return 'rgba(255,255,255,0.03)'
     const h = pinnedRef.current || hoveredRef.current
-    if (!h) return `rgba(255,255,255,${(0.13 * linkOpacity).toFixed(3)})`
+    if (!h) return link.kind === 'related'
+      ? `rgba(251,191,36,${(0.30 * linkOpacity).toFixed(3)})`
+      : `rgba(255,255,255,${(0.13 * linkOpacity).toFixed(3)})`
     if (s === h.id) return 'rgba(34,211,238,0.9)'
     if (t === h.id) return 'rgba(52,211,153,0.9)'
     return `rgba(255,255,255,${(0.04 * linkOpacity).toFixed(3)})`
@@ -1131,6 +1139,10 @@ useEffect(() => { danceModeRef.current = danceMode }, [danceMode])
                   <span style={{ color: 'var(--text)' }} title="Bài viết">{statsInfo.posts ?? statsInfo.nodes} bài</span>
                   {statsInfo.products > 0 && <> · <span style={{ color: '#f97316' }} title="Sản phẩm">◆ {statsInfo.products} SP</span></>}
                   {' · '}{statsInfo.edges}E
+                  {(statsInfo.bodyEdges > 0 || statsInfo.relatedEdges > 0) && (
+                    <> <span style={{ color: 'rgba(255,255,255,0.75)' }} title="Link trong thân bài">{statsInfo.bodyEdges} body</span>
+                    {' · '}<span style={{ color: '#fbbf24' }} title="Link trong khối Bài viết liên quan">{statsInfo.relatedEdges} liên quan</span></>
+                  )}
                 </>
               )
             })()}
@@ -1180,7 +1192,21 @@ useEffect(() => { danceModeRef.current = danceMode }, [danceMode])
           {/* Orphans */}
           <button onClick={() => setShowOrphansOnly(v => !v)}
             style={{ padding: '4px 9px', borderRadius: 6, fontSize: 11, cursor: 'pointer', border: `1px solid ${showOrphansOnly ? 'var(--danger)' : 'var(--border)'}`, background: showOrphansOnly ? 'rgba(248,81,73,0.12)' : 'transparent', color: showOrphansOnly ? 'var(--danger)' : 'var(--text-muted)', transition: 'all 0.15s', whiteSpace: 'nowrap' }}
+          title={linkKind === 'body' ? 'Orphan theo link thân bài' : linkKind === 'related' ? 'Orphan theo link liên quan' : 'Orphan thật: không có link thân bài lẫn liên quan'}
           >{showOrphansOnly ? '⚠ Orphans' : 'Orphans'}</button>
+
+          {/* Loại link: thân bài / bài viết liên quan */}
+          <div style={{ display: 'flex', gap: 2, border: '1px solid var(--border)', borderRadius: 6, overflow: 'hidden' }} title="Phân định loại internal link">
+            {[['body', 'Thân bài'], ['related', 'Liên quan'], ['all', 'Cả hai']].map(([val, label]) => (
+              <button key={val} onClick={() => setLinkKind(val)} style={{
+                padding: '4px 8px', fontSize: 11, border: 'none', cursor: 'pointer',
+                background: linkKind === val ? (val === 'related' ? 'rgba(251,191,36,0.15)' : 'rgba(34,211,238,0.12)') : 'transparent',
+                color: linkKind === val ? (val === 'related' ? '#fbbf24' : '#22d3ee') : 'var(--text-muted)',
+                fontWeight: linkKind === val ? 600 : 400,
+                transition: 'all 0.15s', whiteSpace: 'nowrap',
+              }}>{label}</button>
+            ))}
+          </div>
 
           {/* Products toggle */}
           <button onClick={() => setShowProducts(v => !v)}
@@ -1283,6 +1309,7 @@ useEffect(() => { danceModeRef.current = danceMode }, [danceMode])
               else { if (onSelectPost) onSelectPost(node.id) }
             }}
             linkColor={getLinkColor}
+            linkLineDash={link => (link.kind === 'related' ? [4, 3] : null)}
             linkWidth={getLinkWidth}
             linkDirectionalParticles={link => {
               const h = pinnedRef.current || hoveredRef.current
@@ -1320,7 +1347,7 @@ useEffect(() => { danceModeRef.current = danceMode }, [danceMode])
           pointerEvents: 'none', whiteSpace: 'nowrap',
           backdropFilter: 'blur(4px)',
         }}>
-          <span style={{ color: '#22d3ee' }}>━</span> Outbound &nbsp;·&nbsp; <span style={{ color: '#34d399' }}>━</span> Inbound &nbsp;·&nbsp; Hover node · Click để xem chi tiết
+          <span style={{ color: '#22d3ee' }}>━</span> Outbound &nbsp;·&nbsp; <span style={{ color: '#34d399' }}>━</span> Inbound &nbsp;·&nbsp; <span style={{ color: 'rgba(255,255,255,0.6)' }}>━</span> Thân bài &nbsp;·&nbsp; <span style={{ color: '#fbbf24' }}>┅</span> Liên quan &nbsp;·&nbsp; Hover node · Click để xem chi tiết
         </div>
 
 

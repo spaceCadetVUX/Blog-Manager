@@ -5,7 +5,7 @@ Node color = articleSection.
 """
 
 import json
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, HTTPException, Query
 from backend.db import get_conn
 
 router = APIRouter(prefix="/graph", tags=["graph"])
@@ -35,23 +35,27 @@ def get_graph(
     section: str = Query("", description="Filter nodes by section"),
     min_links: int = Query(0, description="Chỉ lấy node có inbound >= min_links"),
     show_products: bool = Query(False, description="Hiện product nodes"),
+    kind: str = Query("body", description="Loại link: body (thân bài, mặc định) | related (khối Bài viết liên quan) | all"),
 ):
+    if kind not in ("body", "related", "all"):
+        raise HTTPException(422, "kind phải là 'body', 'related' hoặc 'all'")
+    # inbound/outbound của node và min_links tính theo `kind` đã chọn (all = cả hai loại, đếm distinct bài)
+    kind_sql = "" if kind == "all" else "AND kind = :kind"
     with get_conn() as conn:
-        post_rows = conn.execute("""
+        post_rows = conn.execute(f"""
             SELECT
                 p.slug, p.headline, p.article_section, p.url,
                 p.word_count, p.date_modified, p.author, p.products,
-                COUNT(DISTINCT li.from_slug) AS inbound,
-                COUNT(DISTINCT lo.to_slug)   AS outbound
+                (SELECT COUNT(DISTINCT from_slug) FROM internal_links WHERE to_slug   = p.slug {kind_sql}) AS inbound,
+                (SELECT COUNT(DISTINCT to_slug)   FROM internal_links WHERE from_slug = p.slug {kind_sql}) AS outbound
             FROM posts p
-            LEFT JOIN internal_links li ON li.to_slug   = p.slug
-            LEFT JOIN internal_links lo ON lo.from_slug = p.slug
-            GROUP BY p.slug
-        """).fetchall()
+        """, {"kind": kind}).fetchall()
 
-        link_rows = conn.execute("""
-            SELECT from_slug, to_slug, anchor FROM internal_links
-        """).fetchall()
+        link_rows = conn.execute(f"""
+            SELECT from_slug, to_slug, anchor, kind, position FROM internal_links
+            WHERE 1 = 1 {kind_sql}
+            ORDER BY from_slug, kind, position, id
+        """, {"kind": kind}).fetchall()
 
     all_slugs = {r["slug"] for r in post_rows}
 
@@ -101,11 +105,12 @@ def get_graph(
         if tgt not in all_slugs:
             continue
         edges.append({
-            "id":     f"{src}__{tgt}",
+            # id có kind để cặp (src,tgt) vừa body vừa related cho 2 edge khác nhau (kind=all)
+            "id":     f"{src}__{tgt}" if r["kind"] == "body" else f"{src}__{tgt}__{r['kind']}",
             "source": src,
             "target": tgt,
             "label":  r["anchor"] or "",
-            "data":   {"anchor": r["anchor"] or ""},
+            "data":   {"anchor": r["anchor"] or "", "kind": r["kind"]},
         })
 
     # Product nodes
@@ -162,6 +167,7 @@ def get_graph(
         "meta": {
             "totalNodes": len(nodes),
             "totalEdges": len(edges),
+            "kind": kind,
             "sections": list(SECTION_COLORS.keys()),
         },
     }

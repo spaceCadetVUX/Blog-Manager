@@ -4,7 +4,8 @@ import { sectionColor } from '../sectionColors.js'
 import { ChevronRight, ChevronDown, AlertTriangle, ExternalLink } from 'lucide-react'
 
 function PostRow({ post, onSelectPost }) {
-  const isOrphan = (post.inbound || 0) === 0
+  const isOrphan = (post.inbound || 0) === 0                       // chưa ai link trong thân bài
+  const trueOrphan = isOrphan && (post.inbound_related || 0) === 0 // không có link thân bài lẫn liên quan
   const color = sectionColor(post.article_section || '')
   const productCount = Array.isArray(post.products) ? post.products.length : 0
 
@@ -60,10 +61,16 @@ function PostRow({ post, onSelectPost }) {
           )}
           <span style={{
             fontSize: 11, padding: '1px 7px', borderRadius: 8,
-            background: isOrphan ? 'rgba(248,81,73,0.1)' : 'rgba(63,185,80,0.08)',
-            color: isOrphan ? 'var(--danger)' : 'var(--success)',
-          }}>
+            background: trueOrphan ? 'rgba(248,81,73,0.1)' : isOrphan ? 'rgba(251,191,36,0.1)' : 'rgba(63,185,80,0.08)',
+            color: trueOrphan ? 'var(--danger)' : isOrphan ? '#fbbf24' : 'var(--success)',
+          }} title="Link trong thân bài (body)">
             {post.inbound || 0} in · {post.outbound || 0} out
+          </span>
+          <span style={{
+            fontSize: 11, padding: '1px 7px', borderRadius: 8,
+            background: 'rgba(251,191,36,0.08)', color: '#fbbf24',
+          }} title="Link trong khối Bài viết liên quan">
+            {post.inbound_related || 0} in · {post.outbound_related || 0} out liên quan
           </span>
           {productCount > 0 && (
             <span style={{ fontSize: 11, color: '#f97316' }}>🛒 {productCount} sp</span>
@@ -83,7 +90,7 @@ function SectionGroup({ section, posts, onSelectPost, defaultOpen = true, forceO
   const [open, setOpen] = useState(defaultOpen)
   const isOpen = forceOpen || open
   const color = sectionColor(section)
-  const orphanCount = posts.filter(p => (p.inbound || 0) === 0).length
+  const orphanCount = posts.filter(p => (p.inbound || 0) === 0 && (p.inbound_related || 0) === 0).length // orphan thật
 
   return (
     <div style={{ marginBottom: 4 }}>
@@ -164,7 +171,7 @@ export default function TreeView({ onSelectPost, bp = 'desktop' }) {
 
   // Filter + sort
   const filtered = posts.filter(p => {
-    if (orphanOnly && (p.inbound || 0) > 0) return false
+    if (orphanOnly && ((p.inbound || 0) > 0 || (p.inbound_related || 0) > 0)) return false
     if (!checkDate(p.date_modified, dateFrom, dateTo)) return false
     if (!search.trim()) return true
     const q = search.toLowerCase()
@@ -192,7 +199,7 @@ export default function TreeView({ onSelectPost, bp = 'desktop' }) {
     grouped[sec].push(p)
   })
 
-  const totalOrphans = filtered.filter(p => (p.inbound || 0) === 0).length
+  const totalOrphans = filtered.filter(p => (p.inbound || 0) === 0 && (p.inbound_related || 0) === 0).length // orphan thật
   const isMobile = bp === 'mobile'
 
   return (
@@ -240,6 +247,7 @@ export default function TreeView({ onSelectPost, bp = 'desktop' }) {
             color: orphanOnly ? 'var(--danger)' : 'var(--text-muted)',
             transition: 'all 0.12s',
           }}
+          title="Orphan thật: không có link thân bài lẫn liên quan"
         >
           {orphanOnly ? '⚠ Orphans' : 'Orphans'}
         </button>

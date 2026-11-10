@@ -1,10 +1,11 @@
 import json
 import sys
 from pathlib import Path
-import httpx
 from bs4 import BeautifulSoup
 from fastapi import APIRouter, Query, HTTPException
 from backend.db import get_conn
+from backend.product_sync import load_product_lookup
+from backend.routes.crawl import _db_related, _apply_live_related
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
@@ -54,16 +55,17 @@ def list_posts(
 
     where_sql = ("WHERE " + " AND ".join(where_clauses)) if where_clauses else ""
 
+    # inbound/outbound = link THÂN BÀI (kind='body'); *_related = khối "Bài viết liên quan" (kind='related').
+    # Subquery tương quan (không JOIN) để 4 bộ đếm không nhân chéo hàng.
     sql = f"""
         SELECT
             p.*,
-            COUNT(DISTINCT li.from_slug) AS inbound,
-            COUNT(DISTINCT lo.to_slug)   AS outbound
+            (SELECT COUNT(DISTINCT from_slug) FROM internal_links WHERE to_slug   = p.slug AND kind = 'body')    AS inbound,
+            (SELECT COUNT(DISTINCT to_slug)   FROM internal_links WHERE from_slug = p.slug AND kind = 'body')    AS outbound,
+            (SELECT COUNT(DISTINCT from_slug) FROM internal_links WHERE to_slug   = p.slug AND kind = 'related') AS inbound_related,
+            (SELECT COUNT(DISTINCT to_slug)   FROM internal_links WHERE from_slug = p.slug AND kind = 'related') AS outbound_related
         FROM posts p
-        LEFT JOIN internal_links li ON li.to_slug   = p.slug
-        LEFT JOIN internal_links lo ON lo.from_slug = p.slug
         {where_sql}
-        GROUP BY p.id
         ORDER BY {sort_col} {order_sql}
         LIMIT ? OFFSET ?
     """
@@ -105,18 +107,21 @@ def get_post(slug: str):
         if not row:
             raise HTTPException(404, f"Post '{slug}' not found")
 
+        # kind: 'body' (thân bài) | 'related' (khối "Bài viết liên quan"); position chỉ có ở related
         outbound = conn.execute("""
-            SELECT il.to_slug, il.anchor, p.headline, p.article_section
+            SELECT il.to_slug, il.anchor, il.kind, il.position, p.headline, p.article_section
             FROM internal_links il
             LEFT JOIN posts p ON p.slug = il.to_slug
             WHERE il.from_slug = ?
+            ORDER BY il.kind, il.position, il.id
         """, (slug,)).fetchall()
 
         inbound = conn.execute("""
-            SELECT il.from_slug, il.anchor, p.headline, p.article_section
+            SELECT il.from_slug, il.anchor, il.kind, il.position, p.headline, p.article_section
             FROM internal_links il
             LEFT JOIN posts p ON p.slug = il.from_slug
             WHERE il.to_slug = ?
+            ORDER BY il.kind, il.id
         """, (slug,)).fetchall()
 
     post = row_to_dict(row)
@@ -133,68 +138,132 @@ def get_post(slug: str):
 
 @router.post("/{slug}/recrawl")
 def recrawl_post(slug: str):
+    """Nạp lại 1 bài từ MCP server (get_post) → posts_md → DB."""
     with get_conn() as conn:
-        row = conn.execute("SELECT url FROM posts WHERE slug = ?", (slug,)).fetchone()
-    if not row or not row["url"]:
+        row = conn.execute("SELECT products FROM posts WHERE slug = ?", (slug,)).fetchone()
+        lookup = load_product_lookup(conn)   # khóa theo site_id (ID MỚI của site) + slug
+        old_related = _db_related(conn)
+    if not row:
         raise HTTPException(404, "Post not found")
 
-    url = row["url"]
     try:
-        from crawl_posts import (
-            fetch_html, extract_jsonld, extract_meta_tags,
-            find_article_jsonld, extract_internal_links, extract_product_links,
-            jsonld_to_md,
-        )
+        from crawl_posts import mcp_post_parts, mcp_post_to_md, BASE_DOMAIN
+        from backend import mcp_client
         from backend.import_posts import import_file
     except ImportError as e:
         raise HTTPException(500, f"Import error: {e}")
 
-    html = fetch_html(url)
-    if not html:
-        raise HTTPException(502, "Fetch failed")
+    try:
+        post = mcp_client.get_post(slug)
+    except mcp_client.MCPToolError:
+        raise HTTPException(404, "Bài không còn trên MCP (đã gỡ hoặc chuyển nháp)")
+    except mcp_client.MCPError as e:
+        raise HTTPException(502, f"MCP error: {e}")
 
-    all_jsonld = extract_jsonld(html)
-    meta       = extract_meta_tags(html)
-    article, webpage = find_article_jsonld(all_jsonld)
-    internal_links   = extract_internal_links(html, url)
-    product_links    = extract_product_links(html)
-
-    if not article:
-        article = {}
-
-    md = jsonld_to_md(url, "", article, meta, all_jsonld, webpage, internal_links, product_links)
+    try:
+        old_products = json.loads(row["products"] or "[]")
+    except Exception:
+        old_products = None
+    parts = mcp_post_parts(post, lookup, old_products, mcp_client.make_product_resolver())
+    # MCP không trả khối "Bài viết liên quan" → tải HTML live; lỗi tải → giữ related cũ (không làm hỏng bài)
+    rel_job = {"related_failed": [], "no_related": []}
+    parts["related_links"] = _apply_live_related(rel_job, slug, f"https://{BASE_DOMAIN}/{slug}.html", old_related)
+    md = mcp_post_to_md(post, parts)
     out_path = PROJECT_ROOT / "posts_md" / f"{slug}.md"
     out_path.write_text(md, encoding="utf-8")
 
     with get_conn() as conn:
-        conn.execute("DELETE FROM internal_links WHERE from_slug = ?", (slug,))
-        import_file(out_path, conn)
+        import_file(out_path, conn)   # thay body + related theo từng loại; md không có related_links thì giữ related hiện có
 
-    return {"ok": True, "slug": slug, "products": len(product_links), "links": len(internal_links)}
+    related_status = "failed" if rel_job["related_failed"] else ("no_related" if rel_job["no_related"] else "ok")
+    return {"ok": True, "slug": slug, "products": len(parts["products"]), "links": len(parts["internal_links"]),
+            "related": len(parts["related_links"] or []), "related_status": related_status,
+            **({"related_error": rel_job["related_failed"][0]["error"]} if rel_job["related_failed"] else {})}
+
+
+_SITE = "https://knxstore.vn"
+
+
+def _abs_url(u: str) -> str:
+    u = (u or "").strip()
+    if u.startswith("//"):
+        return "https:" + u
+    if u.startswith("/"):
+        return _SITE + u
+    return u
+
+
+def _absolutize(soup: BeautifulSoup) -> None:
+    """contentHtml dùng đường dẫn tương đối (/media/..., /<slug>.html): UI chạy ở localhost nên phải tuyệt đối hoá."""
+    for tag in soup.find_all(True):
+        for attr in ("src", "href", "poster", "data-src"):
+            if tag.get(attr):
+                tag[attr] = _abs_url(tag[attr])
+        if tag.get("srcset"):
+            parts = []
+            for cand in tag["srcset"].split(","):
+                bits = cand.strip().split(None, 1)
+                if bits:
+                    parts.append(" ".join([_abs_url(bits[0])] + bits[1:]))
+            tag["srcset"] = ", ".join(parts)
+        if tag.name == "a" and tag.get("href", "").startswith("http"):
+            tag["target"] = "_blank"
+            tag["rel"] = "noopener"
 
 
 @router.get("/{slug}/html")
 def get_post_html(slug: str):
+    """Toàn văn bài viết để hiển thị: contentHtml (MCP get_post) + card sản phẩm (giải shortcode) + FAQ.
+    Trước đây tải trang live rồi chọn .main-content/main/article — template mới trả nhầm card sản phẩm."""
+    import html as _html
+    from crawl_posts import MCP_PRODUCTS_SHORTCODE
+    from backend.mcp_client import get_post as mcp_get_post, make_product_resolver
+
     with get_conn() as conn:
-        row = conn.execute("SELECT url FROM posts WHERE slug = ?", (slug,)).fetchone()
-    if not row or not row["url"]:
-        raise HTTPException(404, "URL not found")
+        row = conn.execute("SELECT slug FROM posts WHERE slug = ?", (slug,)).fetchone()
+        lookup = load_product_lookup(conn)
+    if not row:
+        raise HTTPException(404, f"Post '{slug}' not found")
 
     try:
-        r = httpx.get(row["url"], timeout=10, follow_redirects=True,
-                      headers={"User-Agent": "Mozilla/5.0 (compatible; KNXStoreSEO/1.0)"})
-        r.raise_for_status()
-    except Exception as e:
-        raise HTTPException(502, f"Fetch failed: {e}")
+        post = mcp_get_post(slug)
+    except Exception as e:  # không đưa chi tiết lỗi gốc ra ngoài (tránh lộ cấu hình/token)
+        raise HTTPException(502, f"Không lấy được bài từ MCP ({type(e).__name__})")
 
-    soup = BeautifulSoup(r.text, "html.parser")
+    resolver = make_product_resolver()
 
-    # Xóa nav, footer, sidebar, script, style khỏi kết quả
-    for tag in soup.select("script, style, nav, footer, header, .sidebar, .widget, .related-posts, .comments, [class*='swiper'], [class*='breadcrumb']"):
+    def expand(m):
+        chips = []
+        for tok in (t.strip().strip("\"'") for t in m.group(1).split(",")):
+            if not tok:
+                continue
+            entry = lookup.get(int(tok) if tok.isdigit() else tok) or resolver(tok)
+            if entry:
+                label = _html.escape(entry.get("name") or entry["url"])
+                chips.append(f'<a href="{_html.escape(entry["url"])}" style="display:inline-block;margin:2px 6px 2px 0;'
+                             f'padding:3px 9px;border:1px solid var(--border);border-radius:12px;font-size:12px;'
+                             f'color:#f97316;text-decoration:none">◆ {label}</a>')
+            else:
+                chips.append(f'<span style="display:inline-block;margin:2px 6px 2px 0;font-size:11px;color:var(--text-subtle)" '
+                             f'title="Sản phẩm không còn trên site">(không có SP: {_html.escape(tok)})</span>')
+        return '<div class="product-chips" style="margin:10px 0">' + "".join(chips) + "</div>"
+
+    body = MCP_PRODUCTS_SHORTCODE.sub(expand, post.get("contentHtml") or "")
+
+    faq_html = ""
+    faqs = sorted([f for f in (post.get("faqs") or []) if isinstance(f, dict)], key=lambda f: f.get("position") or 0)
+    if faqs:
+        items = []
+        for f in faqs:
+            q = _html.escape(" ".join(str(f.get("question") or "").split()))
+            a = str(f.get("answer") or "")
+            a = a if "<" in a else f"<p>{_html.escape(a)}</p>"
+            items.append(f"<h3>{q}</h3>{a}")
+        faq_html = "<h2>Câu hỏi thường gặp</h2>" + "".join(items)
+
+    soup = BeautifulSoup(body + faq_html, "html.parser")
+    for tag in soup.find_all(["script", "style", "iframe", "object", "embed"]):
         tag.decompose()
+    _absolutize(soup)
 
-    content = soup.select_one(".main-content") or soup.select_one("main") or soup.select_one("article")
-    if not content:
-        raise HTTPException(422, "Không tìm thấy nội dung bài viết")
-
-    return {"html": str(content)}
+    return {"html": str(soup), "source": "mcp", "edited_at": post.get("editedAt")}

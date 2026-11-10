@@ -30,7 +30,8 @@ export const api = {
   post:        (slug)                => get(`/posts/${slug}`),
   graph:       (params = {})         => get('/graph?' + new URLSearchParams(params)),
   audit:       ()                    => get('/audit'),
-  crawlStart:  (sitemap_url, mode)   => post('/crawl', { sitemap_url, mode }),
+  crawlStart:  (sitemap_url, mode, source = 'mcp') => post('/crawl', { sitemap_url, mode, source }),
+  crawlRelated: ()                   => post('/crawl', { sitemap_url: '', mode: 'related', source: 'mcp' }),  // chỉ làm mới khối "Bài viết liên quan" (HTML live)
   crawlStatus: (job_id)              => get(`/crawl/${job_id}`),
   suggestions: ()                    => get('/suggestions'),
   postHtml:    (slug)                => get(`/posts/${slug}/html`),
@@ -44,7 +45,12 @@ export const api = {
   products:          (params = {})   => get('/products?' + new URLSearchParams(params)),
   productBrands:     ()              => get('/products/brands'),
   productCategories: ()              => get('/products/categories'),
-  importProducts: (file) => {
+  syncProducts: (body = {}) => fetch('/api/products/sync', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...authHeader() },
+    body: JSON.stringify(body),
+  }).then(r => { if (!r.ok) return r.json().then(e => Promise.reject(e)); return r.json() }),
+  importProducts: (file) => {   // legacy: import Admin.html (ID cũ)
     const form = new FormData()
     form.append('file', file)
     return fetch('/api/products/import', {

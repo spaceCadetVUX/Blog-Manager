@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback, useRef } from 'react'
-import { Search, ExternalLink, ChevronUp, ChevronDown, Upload, X, CheckCircle, AlertCircle, Loader, Package, LayoutGrid, List } from 'lucide-react'
+import { Search, ExternalLink, ChevronUp, ChevronDown, Upload, X, CheckCircle, AlertCircle, Loader, Package, LayoutGrid, List, RefreshCw } from 'lucide-react'
 import { api } from '../api'
 
 function ImportModal({ onClose, onRefresh }) {
@@ -169,6 +169,126 @@ function ImportModal({ onClose, onRefresh }) {
   )
 }
 
+function SyncModal({ onClose, onRefresh }) {
+  const [status, setStatus] = useState('idle') // idle | running | done | error
+  const [result, setResult] = useState(null)
+  const [error, setError]   = useState('')
+  const [deep, setDeep]     = useState(false)
+
+  const run = async () => {
+    setStatus('running'); setError('')
+    try {
+      const res = await api.syncProducts({ deep })
+      setResult(res); setStatus('done')
+      onRefresh?.()
+    } catch (e) {
+      setError(e?.detail || e?.message || 'Lỗi không xác định')
+      setStatus('error')
+    }
+  }
+
+  return (
+    <div style={{
+      position: 'fixed', inset: 0, zIndex: 200,
+      background: 'rgba(0,0,0,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+    }} onClick={e => { if (e.target === e.currentTarget && status !== 'running') onClose() }}>
+      <div style={{
+        background: 'var(--surface)', border: '1px solid var(--border)',
+        borderRadius: 14, width: 460, maxWidth: '92vw', padding: 24,
+        display: 'flex', flexDirection: 'column', gap: 16,
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ fontWeight: 600, fontSize: 14, color: 'var(--text)' }}>Đồng bộ sản phẩm từ MCP</div>
+          <button onClick={onClose} disabled={status === 'running'} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-subtle)', display: 'flex', padding: 4 }}>
+            <X size={16} />
+          </button>
+        </div>
+
+        <div style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.6, background: 'var(--bg)', borderRadius: 8, padding: '10px 12px' }}>
+          Lấy toàn bộ sản phẩm đang bán từ MCP knxstore.vn và gắn <strong>ID site</strong> (ID mới của site) vào từng dòng.
+          ID trong bảng (ID cũ, dùng trong shortcode <code>{'{products:[...]}'}</code>) được giữ nguyên; sản phẩm không còn trên site chỉ bị đánh dấu, không bị xóa.
+        </div>
+
+        {status !== 'done' && (
+          <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, color: 'var(--text-muted)', cursor: 'pointer' }}>
+            <input type="checkbox" checked={deep} disabled={status === 'running'} onChange={e => setDeep(e.target.checked)} />
+            Làm mới đầy đủ (danh mục, trạng thái — chậm, vài phút)
+          </label>
+        )}
+
+        {status === 'done' && result && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+              <Badge color="var(--accent-2)" label="Trên MCP" count={result.mcp_total} />
+              <Badge color="#4ade80" label="Khớp" count={result.linked} />
+              <Badge color="#4ade80" label="Mới" count={result.new_count} />
+              <Badge color="#f87171" label="Không còn trên site" count={result.not_on_site_count} />
+              <Badge color="#fbbf24" label="Mơ hồ" count={result.ambiguous_count} />
+              <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--text-subtle)', alignSelf: 'center' }}>
+                Tổng DB: {result.total_in_db.toLocaleString()}
+              </span>
+            </div>
+            {result.new_count > 0 && (
+              <DetailSection title={`${result.new_count} sản phẩm mới trên site`} color="#4ade80">
+                {result.new.map(p => (
+                  <div key={p.id} style={detailRow}>
+                    <span style={{ color: 'var(--accent-2)', fontWeight: 600, flexShrink: 0 }}>#{p.site_id}</span>
+                    <span style={{ color: 'var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.name}</span>
+                  </div>
+                ))}
+              </DetailSection>
+            )}
+            {result.not_on_site_count > 0 && (
+              <DetailSection title={`${result.not_on_site_count} sản phẩm không còn trên site`} color="#f87171">
+                {result.not_on_site.map(p => (
+                  <div key={p.id} style={detailRow}>
+                    <span style={{ color: 'var(--text-subtle)', fontWeight: 600, flexShrink: 0 }}>cũ #{p.id}</span>
+                    <span style={{ color: 'var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.name}</span>
+                  </div>
+                ))}
+              </DetailSection>
+            )}
+            {result.ambiguous_count > 0 && (
+              <DetailSection title={`${result.ambiguous_count} trường hợp mơ hồ (chưa liên kết)`} color="#fbbf24">
+                {result.ambiguous.map(p => (
+                  <div key={p.site_id} style={detailRow}>
+                    <span style={{ color: 'var(--accent-2)', fontWeight: 600, flexShrink: 0 }}>#{p.site_id}</span>
+                    <span style={{ color: 'var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.slug}</span>
+                    <span style={{ color: 'var(--text-subtle)', flexShrink: 0 }}>ID cũ: {p.candidates.join(', ')}</span>
+                  </div>
+                ))}
+              </DetailSection>
+            )}
+          </div>
+        )}
+
+        {(status === 'error' || error) && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#f87171', fontSize: 13 }}>
+            <AlertCircle size={16} />
+            {error}
+          </div>
+        )}
+
+        <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
+          <button onClick={onClose} disabled={status === 'running'} style={{ ...btnBase, background: 'var(--bg)', color: 'var(--text-muted)', border: '1px solid var(--border)' }}>
+            {status === 'done' ? 'Đóng' : 'Hủy'}
+          </button>
+          {status !== 'done' && (
+            <button onClick={run} disabled={status === 'running'}
+              style={{ ...btnBase, background: 'var(--accent)', color: '#fff', opacity: status === 'running' ? 0.5 : 1, cursor: status === 'running' ? 'not-allowed' : 'pointer' }}>
+              {status === 'running'
+                ? <><Loader size={13} style={{ animation: 'spin 1s linear infinite' }} /> Đang đồng bộ...</>
+                : <><RefreshCw size={13} /> Đồng bộ</>}
+            </button>
+          )}
+        </div>
+      </div>
+
+      <style>{`@keyframes spin { to { transform: rotate(360deg) } }`}</style>
+    </div>
+  )
+}
+
 const btnBase = {
   display: 'flex', alignItems: 'center', gap: 6,
   padding: '7px 16px', borderRadius: 7, border: 'none',
@@ -254,9 +374,12 @@ function ProductCard({ item, isMobile }) {
             </div>
         }
         {/* ID badge */}
-        <span style={{ position: 'absolute', top: 7, left: 7, background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(4px)', color: 'var(--accent-2)', fontSize: 9, fontWeight: 700, padding: '2px 6px', borderRadius: 4 }}>
-          #{item.id}
+        <span title={item.site_id ? `ID cũ ${item.id} · ID site ${item.site_id}` : `ID cũ ${item.id}`} style={{ position: 'absolute', top: 7, left: 7, background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(4px)', color: 'var(--accent-2)', fontSize: 9, fontWeight: 700, padding: '2px 6px', borderRadius: 4 }}>
+          #{item.id < 1000000 ? item.id : `s${item.site_id}`}
         </span>
+        {item.status === 'not_on_site' && (
+          <span style={{ position: 'absolute', top: 7, right: 7, background: 'rgba(248,113,113,0.85)', color: '#fff', fontSize: 9, fontWeight: 600, padding: '2px 6px', borderRadius: 4 }}>không còn trên site</span>
+        )}
       </div>
 
       {/* Info */}
@@ -320,6 +443,7 @@ export default function ProductsView({ bp = 'desktop' }) {
   const [brands, setBrands]     = useState([])
   const [categories, setCategories] = useState([])
   const [showImport, setShowImport] = useState(false)
+  const [showSync, setShowSync]     = useState(false)
   const [viewMode, setViewMode]     = useState('card') // 'card' | 'table'
 
   const PAGE_SIZE = 50
@@ -405,7 +529,20 @@ export default function ProductsView({ bp = 'desktop' }) {
           ))}
         </div>
 
-        <button onClick={() => setShowImport(true)} style={{
+        <button onClick={() => setShowSync(true)} title="Đồng bộ sản phẩm từ MCP knxstore.vn" style={{
+          display: 'flex', alignItems: 'center', gap: 5,
+          padding: '5px 12px', borderRadius: 7, border: '1px solid var(--border)',
+          background: 'var(--bg)', color: 'var(--text-muted)', fontSize: 12, cursor: 'pointer',
+          flexShrink: 0,
+        }}
+          onMouseEnter={e => { e.currentTarget.style.color = 'var(--accent-2)'; e.currentTarget.style.borderColor = 'var(--accent)' }}
+          onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.borderColor = 'var(--border)' }}
+        >
+          <RefreshCw size={12} />
+          {!isMobile && 'Đồng bộ MCP'}
+        </button>
+
+        <button onClick={() => setShowImport(true)} title="Legacy: import file Admin.html (ID cũ)" style={{
           display: 'flex', alignItems: 'center', gap: 5,
           padding: '5px 12px', borderRadius: 7, border: '1px solid var(--border)',
           background: 'var(--bg)', color: 'var(--text-muted)', fontSize: 12, cursor: 'pointer',
@@ -418,6 +555,17 @@ export default function ProductsView({ bp = 'desktop' }) {
           {!isMobile && 'Cập nhật DB'}
         </button>
       </div>
+
+      {showSync && (
+        <SyncModal
+          onClose={() => setShowSync(false)}
+          onRefresh={() => {
+            api.productBrands().then(setBrands).catch(console.error)
+            api.productCategories().then(setCategories).catch(console.error)
+            fetch()
+          }}
+        />
+      )}
 
       {showImport && (
         <ImportModal
@@ -475,9 +623,9 @@ export default function ProductsView({ bp = 'desktop' }) {
                 <td style={{ ...td, width: 44, padding: '5px 6px 5px 10px' }}>
                   <ProductThumb url={item.url} size={34} />
                 </td>
-                {!isMobile && <td style={{ ...td, color: 'var(--text-subtle)', width: 48 }}>{item.id}</td>}
+                {!isMobile && <td style={{ ...td, color: 'var(--text-subtle)', width: 48 }} title={item.site_id ? `ID site ${item.site_id}` : ''}>{item.id < 1000000 ? item.id : `s${item.site_id}`}</td>}
                 <td style={{ ...td, maxWidth: isMobile ? 160 : 340 }}>
-                  <span style={{ display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', color: 'var(--text)' }} title={item.name}>
+                  <span style={{ display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', color: item.status === 'not_on_site' ? 'var(--text-subtle)' : 'var(--text)' }} title={item.status === 'not_on_site' ? `${item.name} — không còn trên site` : item.name}>
                     {item.name}
                   </span>
                 </td>

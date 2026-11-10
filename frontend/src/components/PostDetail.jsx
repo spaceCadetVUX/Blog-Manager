@@ -327,19 +327,28 @@ export default function PostDetail({ slug, onClose, onNavigate, navList = [], bp
     </div>
   )
 
+  // Link tách 2 loại: body (thân bài) và related (khối "Bài viết liên quan")
+  const outBody = (post?.outbound_links || []).filter(l => l.kind !== 'related')
+  const outRel  = (post?.outbound_links || []).filter(l => l.kind === 'related')
+  const inBody  = (post?.inbound_links  || []).filter(l => l.kind !== 'related')
+  const inRel   = (post?.inbound_links  || []).filter(l => l.kind === 'related')
+
   // Right panel: metadata + links + AI
   const rightPanel = post && (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 0, padding: '16px 16px 24px' }}>
       {/* Orphan warning */}
-      {(!post.inbound_links || post.inbound_links.length === 0) && (
+      {inBody.length === 0 && (
         <div style={{
           display: 'flex', alignItems: 'center', gap: 8,
-          background: 'rgba(248,81,73,0.08)', border: '1px solid rgba(248,81,73,0.25)',
+          background: inRel.length === 0 ? 'rgba(248,81,73,0.08)' : 'rgba(210,153,34,0.08)',
+          border: inRel.length === 0 ? '1px solid rgba(248,81,73,0.25)' : '1px solid rgba(210,153,34,0.3)',
           borderRadius: 6, padding: '7px 10px', marginBottom: 14,
-          color: 'var(--danger)', fontSize: 11,
+          color: inRel.length === 0 ? 'var(--danger)' : 'var(--warning)', fontSize: 11,
         }}>
           <AlertTriangle size={13} />
-          Orphan post — chưa có bài nào link đến
+          {inRel.length === 0
+            ? 'Orphan thật — không bài nào link đến (cả thân bài lẫn "Bài viết liên quan")'
+            : `Chưa có link trong thân bài — chỉ nằm trong khối "Bài viết liên quan" của ${inRel.length} bài`}
         </div>
       )}
 
@@ -353,10 +362,16 @@ export default function PostDetail({ slug, onClose, onNavigate, navList = [], bp
         )}
         <span style={{
           fontSize: 11, padding: '2px 8px', borderRadius: 10,
-          background: (post.inbound_links?.length || 0) > 0 ? 'rgba(63,185,80,0.12)' : 'rgba(248,81,73,0.1)',
-          color: (post.inbound_links?.length || 0) > 0 ? 'var(--success)' : 'var(--danger)',
+          background: inBody.length > 0 ? 'rgba(63,185,80,0.12)' : 'rgba(248,81,73,0.1)',
+          color: inBody.length > 0 ? 'var(--success)' : 'var(--danger)',
         }}>
-          {post.inbound_links?.length || 0} in · {post.outbound_links?.length || 0} out
+          {inBody.length} in · {outBody.length} out
+        </span>
+        <span title='Khối "Bài viết liên quan"' style={{
+          fontSize: 11, padding: '2px 8px', borderRadius: 10,
+          background: 'var(--border)', color: 'var(--text-muted)',
+        }}>
+          liên quan: {inRel.length} in · {outRel.length} out
         </span>
       </div>
 
@@ -477,30 +492,48 @@ export default function PostDetail({ slug, onClose, onNavigate, navList = [], bp
         )
       })()}
 
-      {/* Outbound links */}
-      <SectionLabel>Outbound Links ({post.outbound_links?.length || 0}) ↗</SectionLabel>
+      {/* Outbound links — thân bài */}
+      <SectionLabel>Outbound Links — thân bài ({outBody.length}) ↗</SectionLabel>
       <div style={{ fontSize: 10, color: 'var(--text-subtle)', marginBottom: 6 }}>
-        Bài này link <strong style={{ color: 'var(--text-muted)' }}>đến</strong> các bài khác
+        Bài này link <strong style={{ color: 'var(--text-muted)' }}>đến</strong> các bài khác trong nội dung
       </div>
-      {post.outbound_links?.length > 0 ? (
-        post.outbound_links.map(link => <LinkItem key={link.to_slug} link={link} onNavigate={handleNavigate} />)
+      {outBody.length > 0 ? (
+        outBody.map(link => <LinkItem key={link.to_slug} link={link} onNavigate={handleNavigate} />)
       ) : (
         <p style={{ fontSize: 11, color: 'var(--danger)', padding: '4px 10px', background: 'rgba(248,81,73,0.06)', borderRadius: 6 }}>
-          ⚠ Không có outbound links
+          ⚠ Không có outbound links trong thân bài
         </p>
       )}
 
-      {/* Inbound links */}
-      <SectionLabel>Inbound Links ({post.inbound_links?.length || 0}) ↙</SectionLabel>
-      <div style={{ fontSize: 10, color: 'var(--text-subtle)', marginBottom: 6 }}>
-        Các bài khác link <strong style={{ color: 'var(--text-muted)' }}>đến</strong> bài này
-      </div>
-      {post.inbound_links?.length > 0 ? (
-        post.inbound_links.map(link => <LinkItem key={link.from_slug} link={link} onNavigate={handleNavigate} />)
+      {/* Outbound links — khối "Bài viết liên quan" */}
+      <SectionLabel>Bài viết liên quan — khối cuối trang ({outRel.length}) ↗</SectionLabel>
+      {outRel.length > 0 ? (
+        outRel.map(link => <LinkItem key={link.to_slug} link={link} onNavigate={handleNavigate} />)
       ) : (
-        <p style={{ fontSize: 11, color: 'var(--danger)', padding: '4px 10px', background: 'rgba(248,81,73,0.06)', borderRadius: 6 }}>
-          ⚠ Orphan post — Google khó tìm thấy
+        <p style={{ fontSize: 11, color: 'var(--text-subtle)', padding: '4px 10px' }}>
+          Chưa có dữ liệu (crawl mode "Chỉ Related")
         </p>
+      )}
+
+      {/* Inbound links — thân bài */}
+      <SectionLabel>Inbound Links — thân bài ({inBody.length}) ↙</SectionLabel>
+      <div style={{ fontSize: 10, color: 'var(--text-subtle)', marginBottom: 6 }}>
+        Các bài khác link <strong style={{ color: 'var(--text-muted)' }}>đến</strong> bài này trong nội dung
+      </div>
+      {inBody.length > 0 ? (
+        inBody.map(link => <LinkItem key={link.from_slug} link={link} onNavigate={handleNavigate} />)
+      ) : (
+        <p style={{ fontSize: 11, color: inRel.length === 0 ? 'var(--danger)' : 'var(--warning)', padding: '4px 10px', background: inRel.length === 0 ? 'rgba(248,81,73,0.06)' : 'rgba(210,153,34,0.06)', borderRadius: 6 }}>
+          {inRel.length === 0 ? '⚠ Orphan thật — Google khó tìm thấy' : '⚠ Orphan thân bài (vẫn có link từ khối "Bài viết liên quan")'}
+        </p>
+      )}
+
+      {/* Inbound links — khối "Bài viết liên quan" của bài khác */}
+      <SectionLabel>Inbound từ "Bài viết liên quan" ({inRel.length}) ↙</SectionLabel>
+      {inRel.length > 0 ? (
+        inRel.map(link => <LinkItem key={link.from_slug} link={link} onNavigate={handleNavigate} />)
+      ) : (
+        <p style={{ fontSize: 11, color: 'var(--text-subtle)', padding: '4px 10px' }}>Không bài nào liệt kê bài này ở khối liên quan</p>
       )}
 
       {/* AI Review */}

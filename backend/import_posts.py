@@ -33,6 +33,32 @@ def to_json(val) -> str:
     return "[]"
 
 
+def replace_links(conn, slug: str, kind: str, links: list) -> int:
+    """Thay toàn bộ link outbound loại `kind` ('body'|'related') của bài `slug` bằng `links`
+    (list dict {slug, anchor, position?}). Trả số dòng đã ghi. Không đụng loại còn lại."""
+    conn.execute("DELETE FROM internal_links WHERE from_slug = ? AND kind = ?", (slug, kind))
+    n = 0
+    for i, lnk in enumerate(links, 1):
+        if not isinstance(lnk, dict):
+            continue
+        to_slug = lnk.get("slug", "")
+        if not to_slug:
+            continue
+        position = None
+        if kind == "related":
+            try:
+                position = int(lnk.get("position") or i)
+            except (TypeError, ValueError):
+                position = i
+        conn.execute("""
+            INSERT INTO internal_links (from_slug, to_slug, anchor, kind, position)
+            VALUES (?, ?, ?, ?, ?)
+            ON CONFLICT(from_slug, to_slug, kind) DO UPDATE SET anchor = excluded.anchor, position = excluded.position
+        """, (slug, to_slug, lnk.get("anchor", "") or "", kind, position))
+        n += 1
+    return n
+
+
 def import_file(path: Path, conn) -> bool:
     try:
         post = frontmatter.load(str(path))
@@ -96,19 +122,13 @@ def import_file(path: Path, conn) -> bool:
         "products":        to_json(meta.get("products", [])),
     })
 
-    # Internal links
-    links = meta.get("internal_links", []) or []
-    for lnk in links:
-        if not isinstance(lnk, dict):
-            continue
-        to_slug = lnk.get("slug", "")
-        if not to_slug:
-            continue
-        conn.execute("""
-            INSERT INTO internal_links (from_slug, to_slug, anchor)
-            VALUES (?, ?, ?)
-            ON CONFLICT(from_slug, to_slug) DO UPDATE SET anchor = excluded.anchor
-        """, (slug, to_slug, lnk.get("anchor", "")))
+    # Internal links: 2 loại — 'body' (thân bài, khóa md `internal_links`) và 'related' (khối "Bài viết liên quan",
+    # khóa md `related_links`). Mỗi loại được THAY THẾ riêng, không bao giờ xóa nhầm loại còn lại.
+    # body: luôn thay bằng kết quả crawl mới nhất (link cũ vd. widget template cũ không được sót lại).
+    replace_links(conn, slug, "body", meta.get("internal_links", []) or [])
+    # related: chỉ thay khi md CÓ khóa related_links (kể cả []) — md cũ chưa có khóa thì GIỮ related hiện có trong DB.
+    if "related_links" in meta:
+        replace_links(conn, slug, "related", meta.get("related_links") or [])
 
     return True
 
