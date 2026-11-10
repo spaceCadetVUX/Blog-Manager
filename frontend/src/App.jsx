@@ -102,7 +102,7 @@ function AppShell() {
         />
       )}
       {showCrawl && (
-        <CrawlModal onClose={() => setShowCrawl(false)} onDone={() => setShowCrawl(false)} bp={bp} />
+        <CrawlModal onClose={() => setShowCrawl(false)} onDone={refresh} bp={bp} />
       )}
 
       {/* Main content */}

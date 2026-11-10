@@ -93,8 +93,11 @@ def stats():
                 SELECT COUNT(*) cnt FROM internal_links WHERE kind = 'body' GROUP BY to_slug
             )
         """).fetchone()[0]
+        from backend.product_links import link_stats
+        product_link_stats = link_stats(conn)
 
     return {
+        **product_link_stats,                  # products_unmentioned, products_with_bundle, product_links{bundle, co_mentioned, co_mentioned_w3}
         "total_posts":    total_posts,
         "total_links":    links_body,          # giữ nghĩa cũ = link thân bài
         "links_body":     links_body,

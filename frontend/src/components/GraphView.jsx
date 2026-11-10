@@ -6,6 +6,11 @@ import AIPanel, { ModelSelect } from './AIPanel.jsx'
 import TreeView from './TreeView.jsx'
 
 
+// Cạnh sản phẩm–sản phẩm: bundle (MCP, có hướng) liền nét tím; co_mentioned (cùng được nhắc trong bài, không hướng) chấm xanh ngọc
+const BUNDLE_RGB = '232,121,249'
+const CO_RGB     = '45,212,191'
+const isProductLink = (kind) => kind === 'bundle' || kind === 'co_mentioned'
+
 function hex2rgb(hex) {
   const r = parseInt(hex.slice(1, 3), 16)
   const g = parseInt(hex.slice(3, 5), 16)
@@ -70,6 +75,10 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
   const [showProducts, setShowProducts] = useState(true)
   const [linkKind, setLinkKind] = useState('all') // 'body' (thân bài) | 'related' (Bài viết liên quan) | 'all'
   const [productFilter, setProductFilter] = useState('all') // 'all' | 'has' | 'none'
+  const [productLinkKind, setProductLinkKind] = useState('both') // cạnh sản phẩm–sản phẩm: 'none' | 'bundle' | 'co_mentioned' | 'both'
+  const [showIsolated, setShowIsolated] = useState(false) // khi ẩn bài: hiện cả sản phẩm chưa có liên kết
+  const [hidePosts, setHidePosts] = useState(false) // ẩn bài viết: chỉ xem mạng sản phẩm–sản phẩm
+  const [minCoWeight, setMinCoWeight] = useState(3) // chỉ hiện cặp co_mentioned có >= N bài chung (mặc định 3: ẩn ~7.5k cặp yếu)
   const [showFilters, setShowFilters] = useState(true)
   const [aiModel, setAiModel]     = useState('claude-haiku-4-5-20251001')
   const [aiContent, setAiContent] = useState('')
@@ -100,6 +109,15 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
     if (filterSection) params.section = filterSection
 
     if (showProducts) params.show_products = true
+    if (showProducts && productLinkKind !== 'none') {
+      params.product_links = productLinkKind
+      params.min_co_weight = minCoWeight
+    }
+    if (showProducts && hidePosts) {
+      params.hide_posts = true
+      if (showIsolated) params.include_isolated = true
+      if (productLinkKind === 'none') { params.product_links = 'both'; params.min_co_weight = minCoWeight }
+    }
     params.kind = linkKind
 
     api.graph(params).then(data => {
@@ -120,11 +138,12 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
         source: e.source,
         target: e.target,
         kind: e.data?.kind || (e.data?.isProduct ? 'product' : 'body'),
+        weight: e.data?.weight || 0,
       }))
       rawGraphData.current = { nodes, links }
       setRawDataVersion(v => v + 1)  // trigger orphan effect khi data mới về
     }).catch(console.error).finally(() => setLoading(false))
-  }, [minLinks, filterSection, showProducts, linkKind])
+  }, [minLinks, filterSection, showProducts, linkKind, productLinkKind, minCoWeight, hidePosts, showIsolated])
 
   // Áp dụng orphan filter mỗi khi data thay đổi HOẶC toggle thay đổi
   useEffect(() => {
@@ -136,6 +155,7 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
       source: typeof l.source === 'object' ? l.source.id : l.source,
       target: typeof l.target === 'object' ? l.target.id : l.target,
       kind: l.kind,
+      weight: l.weight,
     }))
 
     let filtered = nodes
@@ -158,7 +178,9 @@ export default function GraphView({ onSelectPost, bp = 'desktop' }) {
     const productCount = filtered.filter(n => n.nodeType === 'productNode').length
     const bodyE = filtLinks.filter(l => l.kind === 'body').length
     const relatedE = filtLinks.filter(l => l.kind === 'related').length
-    setStatsInfo({ nodes: filtered.length, edges: filtLinks.length, posts: postCount, products: productCount, bodyEdges: bodyE, relatedEdges: relatedE })
+    const bundleE = filtLinks.filter(l => l.kind === 'bundle').length
+    const coE = filtLinks.filter(l => l.kind === 'co_mentioned').length
+    setStatsInfo({ nodes: filtered.length, edges: filtLinks.length, posts: postCount, products: productCount, bodyEdges: bodyE, relatedEdges: relatedE, bundleEdges: bundleE, coEdges: coE })
   }, [showOrphansOnly, productFilter, rawDataVersion])
 
   // Tăng lực đẩy sau khi data load để nodes xa nhau hơn
@@ -771,6 +793,13 @@ useEffect(() => { danceModeRef.current = danceMode }, [danceMode])
     const dateDimmed = (df || dt) && !isNodeInDateRange(s) && !isNodeInDateRange(t)
     if (dateDimmed) return 'rgba(255,255,255,0.03)'
     const h = pinnedRef.current || hoveredRef.current
+    if (isProductLink(link.kind)) {
+      const rgb = link.kind === 'bundle' ? BUNDLE_RGB : CO_RGB
+      const base = link.kind === 'bundle' ? 0.6 : 0.3 + Math.min(link.weight || 0, 10) * 0.03
+      if (!h) return `rgba(${rgb},${(base * linkOpacity).toFixed(3)})`
+      if (s === h.id || t === h.id) return `rgba(${rgb},0.95)`
+      return `rgba(${rgb},${(0.05 * linkOpacity).toFixed(3)})`
+    }
     if (!h) return link.kind === 'related'
       ? `rgba(251,191,36,${(0.30 * linkOpacity).toFixed(3)})`
       : `rgba(255,255,255,${(0.13 * linkOpacity).toFixed(3)})`
@@ -786,8 +815,9 @@ useEffect(() => { danceModeRef.current = danceMode }, [danceMode])
     const dateDimmed = (df || dt) && !isNodeInDateRange(s) && !isNodeInDateRange(t)
     if (dateDimmed) return 0.3
     const h = pinnedRef.current || hoveredRef.current
-    if (!h) return 0.8 * linkOpacity
-    return (s === h.id || t === h.id) ? 2 : 0.5 * linkOpacity
+    const base = link.kind === 'co_mentioned' ? 0.6 + Math.min(link.weight || 0, 10) * 0.12 : link.kind === 'bundle' ? 1.6 : 0.8
+    if (!h) return base * linkOpacity
+    return (s === h.id || t === h.id) ? Math.max(2, base) : 0.5 * linkOpacity
   }, [hoveredNode, pinnedNode, dateFrom, dateTo, linkOpacity])
 
   const runClusterAI = useCallback(async () => {
@@ -1143,6 +1173,10 @@ useEffect(() => { danceModeRef.current = danceMode }, [danceMode])
                     <> <span style={{ color: 'rgba(255,255,255,0.75)' }} title="Link trong thân bài">{statsInfo.bodyEdges} body</span>
                     {' · '}<span style={{ color: '#fbbf24' }} title="Link trong khối Bài viết liên quan">{statsInfo.relatedEdges} liên quan</span></>
                   )}
+                  {(statsInfo.bundleEdges > 0 || statsInfo.coEdges > 0) && (
+                    <> <span style={{ color: `rgb(${BUNDLE_RGB})` }} title="Cạnh bundle giữa hai sản phẩm đang hiện">{statsInfo.bundleEdges} bundle</span>
+                    {' · '}<span style={{ color: `rgb(${CO_RGB})` }} title="Cạnh hai sản phẩm cùng được nhắc trong ít nhất N bài">{statsInfo.coEdges} cùng bài</span></>
+                  )}
                 </>
               )
             })()}
@@ -1225,6 +1259,66 @@ useEffect(() => { danceModeRef.current = danceMode }, [danceMode])
               }}>{label}</button>
             ))}
           </div>
+
+          {/* Liên kết sản phẩm–sản phẩm (chỉ có nghĩa khi bật ◆ Sản phẩm) */}
+          {showProducts && (
+            <>
+              <div style={{ display: 'flex', gap: 2, border: '1px solid var(--border)', borderRadius: 6, overflow: 'hidden' }} title="Cạnh giữa hai sản phẩm: bundle (CMS, có hướng) · cùng bài (cùng được nhắc trong một bài)">
+                {[['none', 'Không'], ['bundle', 'Bundle'], ['co_mentioned', 'Cùng bài'], ['both', 'Cả hai']].map(([val, label]) => {
+                  const active = productLinkKind === val
+                  const c = val === 'bundle' ? BUNDLE_RGB : val === 'co_mentioned' ? CO_RGB : '249,115,22'
+                  return (
+                    <button key={val} onClick={() => setProductLinkKind(val)} style={{
+                      padding: '4px 8px', fontSize: 11, border: 'none', cursor: 'pointer',
+                      background: active ? `rgba(${c},0.15)` : 'transparent',
+                      color: active ? `rgb(${c})` : 'var(--text-muted)',
+                      fontWeight: active ? 600 : 400, transition: 'all 0.15s', whiteSpace: 'nowrap',
+                    }}>{val === 'none' ? 'Liên kết SP: Không' : label}</button>
+                  )
+                })}
+              </div>
+              <button
+                onClick={() => {
+                  const next = !hidePosts
+                  setHidePosts(next)
+                  if (next && productLinkKind === 'none') setProductLinkKind('both')
+                }}
+                title="Ẩn toàn bộ bài viết, chỉ xem liên kết giữa các sản phẩm (bao gồm cả sản phẩm chưa bài nào nhắc)"
+                style={{
+                  padding: '4px 9px', borderRadius: 6, fontSize: 11, cursor: 'pointer', whiteSpace: 'nowrap',
+                  border: `1px solid ${hidePosts ? 'rgba(232,121,249,0.7)' : 'var(--border)'}`,
+                  background: hidePosts ? 'rgba(232,121,249,0.14)' : 'transparent',
+                  color: hidePosts ? '#e879f9' : 'var(--text-muted)', transition: 'all 0.15s',
+                }}
+              >{hidePosts ? '✕ Bài viết đã ẩn' : 'Ẩn bài viết'}</button>
+              {hidePosts && (
+                <button
+                  onClick={() => setShowIsolated(v => !v)}
+                  title="Hiện cả sản phẩm đang bán chưa có liên kết nào (bundle hay cùng bài ở ngưỡng hiện tại)"
+                  style={{
+                    padding: '4px 9px', borderRadius: 6, fontSize: 11, cursor: 'pointer', whiteSpace: 'nowrap',
+                    border: `1px solid ${showIsolated ? 'rgba(249,115,22,0.7)' : 'var(--border)'}`,
+                    background: showIsolated ? 'rgba(249,115,22,0.14)' : 'transparent',
+                    color: showIsolated ? '#f97316' : 'var(--text-muted)', transition: 'all 0.15s',
+                  }}
+                >{showIsolated ? '◆ Cả SP chưa liên kết' : 'Cả SP chưa liên kết'}</button>
+              )}
+              {(productLinkKind === 'co_mentioned' || productLinkKind === 'both') && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: 4 }} title="Chỉ hiện cặp sản phẩm cùng được nhắc trong ít nhất N bài (mặc định 3 để tránh hàng nghìn cạnh yếu)">
+                  <span style={{ fontSize: 10, color: 'var(--text-subtle)', whiteSpace: 'nowrap' }}>Cùng bài ≥</span>
+                  <input
+                    type="number" min="1" max="20" value={minCoWeight}
+                    onChange={e => { const n = parseInt(e.target.value); if (!isNaN(n) && n >= 1) setMinCoWeight(Math.min(n, 20)) }}
+                    style={{
+                      width: 46, padding: '3px 7px', fontSize: 11, borderRadius: 6,
+                      border: `1px solid rgba(${CO_RGB},0.6)`, background: `rgba(${CO_RGB},0.06)`,
+                      color: `rgb(${CO_RGB})`, outline: 'none', fontFamily: 'inherit',
+                    }}
+                  />
+                </div>
+              )}
+            </>
+          )}
 
           {/* Date range filter — calendar picker */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0 }}>
@@ -1309,11 +1403,11 @@ useEffect(() => { danceModeRef.current = danceMode }, [danceMode])
               else { if (onSelectPost) onSelectPost(node.id) }
             }}
             linkColor={getLinkColor}
-            linkLineDash={link => (link.kind === 'related' ? [4, 3] : null)}
+            linkLineDash={link => (link.kind === 'related' ? [4, 3] : link.kind === 'co_mentioned' ? [1, 3] : null)}
             linkWidth={getLinkWidth}
             linkDirectionalParticles={link => {
               const h = pinnedRef.current || hoveredRef.current
-              if (!h) return 0
+              if (!h || link.kind === 'co_mentioned') return 0   // co_mentioned không có hướng → không chạy hạt
               const s = typeof link.source === 'object' ? link.source.id : link.source
               const t = typeof link.target === 'object' ? link.target.id : link.target
               return (s === h.id || t === h.id) ? 2 : 0
@@ -1323,6 +1417,7 @@ useEffect(() => { danceModeRef.current = danceMode }, [danceMode])
               const s = typeof link.source === 'object' ? link.source.id : link.source
               const t = typeof link.target === 'object' ? link.target.id : link.target
               const h = pinnedRef.current || hoveredRef.current
+              if (link.kind === 'bundle') return `rgba(${BUNDLE_RGB},0.9)`
               if (h && s === h.id) return 'rgba(34,211,238,0.9)'
               if (h && t === h.id) return 'rgba(52,211,153,0.9)'
               return 'rgba(255,255,255,0.4)'
@@ -1347,7 +1442,7 @@ useEffect(() => { danceModeRef.current = danceMode }, [danceMode])
           pointerEvents: 'none', whiteSpace: 'nowrap',
           backdropFilter: 'blur(4px)',
         }}>
-          <span style={{ color: '#22d3ee' }}>━</span> Outbound &nbsp;·&nbsp; <span style={{ color: '#34d399' }}>━</span> Inbound &nbsp;·&nbsp; <span style={{ color: 'rgba(255,255,255,0.6)' }}>━</span> Thân bài &nbsp;·&nbsp; <span style={{ color: '#fbbf24' }}>┅</span> Liên quan &nbsp;·&nbsp; Hover node · Click để xem chi tiết
+          <span style={{ color: '#22d3ee' }}>━</span> Outbound &nbsp;·&nbsp; <span style={{ color: '#34d399' }}>━</span> Inbound &nbsp;·&nbsp; <span style={{ color: 'rgba(255,255,255,0.6)' }}>━</span> Thân bài &nbsp;·&nbsp; <span style={{ color: '#fbbf24' }}>┅</span> Liên quan &nbsp;·&nbsp; {showProducts && productLinkKind !== 'none' && <><span style={{ color: `rgb(${BUNDLE_RGB})` }}>━</span> Bundle &nbsp;·&nbsp; <span style={{ color: `rgb(${CO_RGB})` }}>┈</span> Cùng bài &nbsp;·&nbsp; </>}Hover node · Click để xem chi tiết
         </div>
 
 

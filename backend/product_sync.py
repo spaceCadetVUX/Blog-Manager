@@ -28,6 +28,14 @@ Mọi lời gọi MCP chạy TRƯỚC, ghi DB sau trong một transaction: MCP l
 Server MCP rate-limit chặt (429 khi gọi song song) nên gọi tuần tự (~0.4s/call).
   deep=True : get_product_for_edit cho mọi sản phẩm (~6-7 phút với ~800 sp) -> refresh category/status/legacyId toàn bộ.
   deep=False: chỉ gọi cho sản phẩm chưa liên kết (lần đầu ~ như deep; các lần sau ~15-30s).
+
+HAI KIỂU CHẠY (UI/API job nền: POST /products/sync/jobs {"mode": ...}):
+  mode="new"  (Chỉ cập nhật mới) = deep=False. search_products (~28 trang) -> thêm sản phẩm mới, cập nhật dòng có thay đổi,
+              bỏ qua dòng giống hệt, đánh dấu not_on_site cho sản phẩm biến mất. get_product_for_edit CHỈ gọi cho: sản phẩm
+              mới/chưa liên kết (cần legacyId), dò site_id nháp/lưu trữ, dòng cũ chưa khớp. Nhanh (~1 phút).
+  mode="full" (Ghi đè toàn bộ)   = deep=True. Như "new" NHƯNG get_product_for_edit cho MỌI sản phẩm để làm mới
+              category/status/legacyId... rồi ghi đè mọi trường lấy từ MCP. Chậm (~7 phút).
+  Cả hai: KHÔNG xóa dòng, KHÔNG đổi products.id; trường MCP không có giá trị (None/rỗng với name/brand/category/url) thì giữ giá trị cũ.
 """
 
 import re
@@ -116,15 +124,27 @@ def _entry_from_edit(e: dict) -> dict:
     }
 
 
-def sync_products(conn: sqlite3.Connection, deep: bool = False, progress=None) -> dict:
+def sync_products(conn: sqlite3.Connection, deep: bool = False, progress=None, progress_cb=None) -> dict:
     """Đồng bộ products từ MCP. `conn` do caller quản lý (commit khi thoát `with get_conn()`).
-    progress(msg) tùy chọn. Ném mcp_client.MCPError nếu MCP lỗi (khi đó chưa ghi gì)."""
+    progress(msg) tùy chọn. Ném mcp_client.MCPError nếu MCP lỗi (khi đó chưa ghi gì).
+    progress_cb(phase, done, total, current) tùy chọn — tiến độ có cấu trúc cho job nền. phase: catalog (đang tải
+    search_products, total=0 vì chưa biết) | details (get_product_for_edit cho sản phẩm cần làm mới) | gaps (dò site_id trống)
+    | lookup (tra slug dòng cũ chưa khớp) | writing (ghi DB). done/total đếm số lời gọi get_product_for_edit."""
     say = progress or (lambda m: None)
     ensure_products_table(conn)
+    prog = {"done": 0, "total": 0}
+
+    def report(phase: str, current: str, add_total: int = 0, step: int = 0) -> None:
+        prog["total"] += add_total
+        prog["done"] += step
+        say(current)
+        if progress_cb:
+            progress_cb(phase, prog["done"], prog["total"], current)
 
     # ── 1. MCP (không ghi DB) ───────────────────────────────────────────────
-    say("MCP: search_products")
-    catalog = {int(it["id"]): it for it in mcp_client.list_products()}
+    report("catalog", "MCP: search_products")
+    catalog = {int(it["id"]): it for it in mcp_client.list_products(
+        on_page=lambda p, tp: report("catalog", f"search_products trang {p}/{tp}"))}
     if not catalog:
         raise mcp_client.MCPError("search_products trả 0 sản phẩm — dừng, không ghi DB")
 
@@ -134,22 +154,34 @@ def sync_products(conn: sqlite3.Connection, deep: bool = False, progress=None) -
 
     # get_product_for_edit: sản phẩm chưa liên kết (cần legacyId) + toàn bộ nếu deep
     need_edit = sorted(sid for sid in catalog if deep or sid not in by_site)
+    # Sản phẩm không đang bán (nháp/lưu trữ): quét site_id trống + site_id đã gán mà không còn trong catalog
+    probe = [i for i in range(1, max(catalog) + GAP_SCAN_SLACK + 1) if i not in catalog]
+    probe += [sid for sid in by_site if sid not in catalog and sid not in probe]
+    report("details", "get_product_for_edit", add_total=len(need_edit) + len(probe))
+
     edits: dict[int, dict | None] = {}
-    for n, sid in enumerate(need_edit, 1):
-        say(f"MCP: get_product_for_edit {n}/{len(need_edit)}")
-        edits[sid] = mcp_client.get_product_edit(site_id=sid)
+    failed: list[dict] = []
+    for sid in need_edit:
+        slug = catalog[sid].get("slug") or str(sid)
+        try:
+            edits[sid] = mcp_client.get_product_edit(site_id=sid)
+        except mcp_client.MCPToolError as e:
+            # Sản phẩm CHƯA liên kết mà thiếu legacyId có thể bị chèn trùng dòng cũ -> dừng hẳn, không đoán.
+            # Sản phẩm đã liên kết (site_id) chỉ mất phần làm mới từ edit: giữ giá trị cũ, báo trong `failed`.
+            if sid not in by_site:
+                raise
+            edits[sid] = None
+            failed.append({"site_id": sid, "slug": slug, "error": str(e)[:200]})
+        report("details", slug, step=1)
 
     entries: dict[int, dict] = {sid: _entry_from_catalog(it, edits.get(sid)) for sid, it in catalog.items()}
     published = set(entries)
 
-    # Sản phẩm không đang bán (nháp/lưu trữ): quét site_id trống + site_id đã gán mà không còn trong catalog
-    probe = [i for i in range(1, max(catalog) + GAP_SCAN_SLACK + 1) if i not in catalog]
-    probe += [sid for sid in by_site if sid not in catalog and sid not in probe]
-    for n, sid in enumerate(probe, 1):
-        say(f"MCP: dò site_id trống {n}/{len(probe)}")
+    for sid in probe:
         e = mcp_client.get_product_edit(site_id=sid)
         if e:
             entries[sid] = _entry_from_edit(e)
+        report("gaps", f"dò site_id trống #{sid}", step=1)
 
     # ── 2. Khớp dòng cũ <-> MCP ─────────────────────────────────────────────
     old_slug = {i: slug_from_url(r["url"]) or r["slug"] for i, r in rows.items()}
@@ -207,18 +239,20 @@ def sync_products(conn: sqlite3.Connection, deep: bool = False, progress=None) -
 
     # Dòng cũ vẫn chưa khớp: tra theo slug cũ trước khi kết luận không còn trên site
     unmatched_old = [i for i in rows if i not in claimed and rows[i]["site_id"] is None and old_slug[i]]
-    for n, oid in enumerate(unmatched_old, 1):
-        say(f"MCP: tra slug dòng cũ chưa khớp {n}/{len(unmatched_old)}")
+    report("lookup", "tra slug dòng cũ chưa khớp", add_total=len(unmatched_old))
+    for oid in unmatched_old:
         e = mcp_client.get_product_edit(slug=old_slug[oid])
         if e and int(e["id"]) not in link and int(e["id"]) not in by_site:
             sid = int(e["id"])
             entries.setdefault(sid, _entry_from_edit(e))
             take(sid, oid, "slug_lookup")
+        report("lookup", old_slug[oid], step=1)
 
     # ── 3. Ghi DB (một transaction) ─────────────────────────────────────────
-    say("Ghi DB")
+    report("writing", "Ghi DB")
     stats = {"updated": 0, "unchanged": 0, "new": 0, "not_on_site": 0}
     new_items: list[dict] = []
+    updated_items: list[dict] = []
     gone_items: list[dict] = []
     nonpub_items: list[dict] = []
     inserted: set[int] = set()
@@ -238,6 +272,9 @@ def sync_products(conn: sqlite3.Connection, deep: bool = False, progress=None) -
         sets = ", ".join(f"{k}=?" for k in diff)
         conn.execute(f"UPDATE products SET {sets}, updated_at=CURRENT_TIMESTAMP WHERE id=?", [*diff.values(), oid])
         stats["updated"] += 1
+        if len(updated_items) < LIST_CAP:
+            updated_items.append({"id": oid, "site_id": rec["site_id"], "name": rec["name"] or cur.get("name"),
+                                  "changes": {k: {"old": cur.get(k), "new": v} for k, v in diff.items()}})
 
     def insert(rec: dict):
         leg = rec["legacy"]
@@ -287,7 +324,11 @@ def sync_products(conn: sqlite3.Connection, deep: bool = False, progress=None) -
         "slug_changed_count":  len(slug_changed),
         "total_in_db":         total,
         "deep":                deep,
+        "mode":                "full" if deep else "new",
+        "failed_count":        len(failed),
+        "failed":              failed[:LIST_CAP],
         "new":                 new_items,
+        "updated":             updated_items,
         "not_on_site":         gone_items,
         "non_published":       nonpub_items,
         "ambiguous":           ambiguous[:LIST_CAP],

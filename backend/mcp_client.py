@@ -166,9 +166,10 @@ def get_product(slug: str) -> dict:
     return data
 
 
-def list_products() -> list[dict]:
+def list_products(on_page=None) -> list[dict]:
     """Toàn bộ sản phẩm đang bán (phân trang search_products limit=30). Mỗi item có id (ID MỚI của site), slug, name,
-    sku, brand{slug,name}, stockStatus, price (int|None), url. Dedupe theo id."""
+    sku, brand{slug,name}, stockStatus, price (int|None), url. Dedupe theo id.
+    on_page(page, total_pages) tùy chọn: gọi sau mỗi trang (báo tiến độ cho job nền)."""
     items: dict[int, dict] = {}
     page, total_pages = 1, 1
     while page <= total_pages:
@@ -177,6 +178,8 @@ def list_products() -> list[dict]:
             if isinstance(it, dict) and it.get("id") is not None:
                 items[int(it["id"])] = it
         total_pages = int((data.get("meta") or {}).get("totalPages") or 1)
+        if on_page:
+            on_page(page, total_pages)
         page += 1
     return list(items.values())
 

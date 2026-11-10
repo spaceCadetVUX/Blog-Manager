@@ -1,8 +1,10 @@
 """
 Crawl endpoint — trigger crawl, track progress qua polling.
 Nguồn: "mcp" (MCP server knxstore, mặc định) hoặc "sitemap" (fetch HTML từng bài).
-POST /crawl        → { job_id }
+POST /crawl        → { job_id }   (409 nếu đang có job nặng khác: crawl bài / bundle / đồng bộ sản phẩm)
 GET  /crawl/{job_id} → job status
+Crawl BÀI VIẾT có 2 kiểu: mode="incremental" (chỉ cập nhật mới) | mode="full" (ghi đè toàn bộ); "related" là tùy chọn phụ.
+Crawl SẢN PHẨM là việc riêng: POST /products/sync/jobs (backend/routes/products.py).
 """
 
 import json
@@ -30,6 +32,11 @@ _jobs: dict[str, dict] = {}
 
 
 class CrawlRequest(BaseModel):
+    """Crawl BÀI VIẾT (crawl sản phẩm là việc riêng: POST /products/sync/jobs). Hai kiểu chạy:
+      mode="incremental" (Chỉ cập nhật mới): thêm bài mới + cập nhật bài có editedAt (MCP) / lastmod (sitemap) thay đổi;
+                         bài không đổi bị bỏ qua. Bài mới/được cập nhật có đủ body + related (tải HTML live); co_mentioned tính lại ở cuối.
+      mode="full"        (Ghi đè toàn bộ): ghi đè mọi bài (md + DB, cả body lẫn related). Chậm (~7 phút).
+    Tùy chọn phụ: mode="related" chỉ làm mới khối "Bài viết liên quan" từ HTML live cho mọi bài (không đụng body)."""
     sitemap_url: str = ""          # chỉ cần khi source="sitemap"
     mode: str = "incremental"      # "incremental" | "full" | "related" (chỉ làm mới khối "Bài viết liên quan" từ HTML live)
     source: str = "mcp"            # "mcp" | "sitemap" (bỏ qua khi mode="related": luôn lấy HTML live)
@@ -44,24 +51,30 @@ def start_crawl(req: CrawlRequest):
     if req.source == "sitemap" and req.mode != "related" and not req.sitemap_url.strip():
         raise HTTPException(422, "Thiếu sitemap_url cho source='sitemap'")
 
-    job_id = uuid.uuid4().hex[:8]
-    _jobs[job_id] = {
-        "status":      "starting",
-        "source":      req.source,
-        "sitemap_url": req.sitemap_url if (req.source == "sitemap" and req.mode != "related") else "",
-        "mode":        req.mode,
-        "total":       0,
-        "crawled":     0,
-        "failed":      0,
-        "skipped":     0,
-        "ignored":     0,
-        "no_body":     [],
-        "no_related":  [],   # trang live hợp lệ nhưng không có khối "Bài viết liên quan"
-        "related_failed": [],  # tải HTML live lỗi → GIỮ related cũ trong DB: [{slug, error}]
-        "importing":   False,
-        "current":     "",
-        "error":       None,
-    }
+    # Chỉ một job nặng một lúc (crawl bài / bundle / đồng bộ sản phẩm): MCP gọi tuần tự, tránh 429 và ghi chồng.
+    from backend.routes.products import _busy_job_id, _START_LOCK
+    with _START_LOCK:
+        busy = _busy_job_id()
+        if busy:
+            raise HTTPException(409, f"Đang có job khác chạy ({busy}) — chờ xong rồi thử lại")
+        job_id = uuid.uuid4().hex[:8]
+        _jobs[job_id] = {
+            "status":      "starting",
+            "source":      req.source,
+            "sitemap_url": req.sitemap_url if (req.source == "sitemap" and req.mode != "related") else "",
+            "mode":        req.mode,
+            "total":       0,
+            "crawled":     0,
+            "failed":      0,
+            "skipped":     0,
+            "ignored":     0,
+            "no_body":     [],
+            "no_related":  [],   # trang live hợp lệ nhưng không có khối "Bài viết liên quan"
+            "related_failed": [],  # tải HTML live lỗi → GIỮ related cũ trong DB: [{slug, error}]
+            "importing":   False,
+            "current":     "",
+            "error":       None,
+        }
     if req.mode == "related":
         _jobs[job_id]["source"] = "live"
         target, args = _run_related_crawl, (job_id,)
@@ -210,6 +223,7 @@ def _run_crawl(job_id: str, sitemap_url: str, mode: str):
         job["current"]   = "Importing to database…"
         from backend.import_posts import run as import_run
         import_run(output_dir)
+        _refresh_co_mentioned(job)
 
         job["status"]    = "done"
         job["importing"] = False
@@ -307,6 +321,17 @@ def _safe_err(e: Exception) -> str:
     return msg[:500]
 
 
+def _refresh_co_mentioned(job: dict) -> None:
+    """Sau import_run: tính lại product_links kind='co_mentioned' (posts.products đã đổi). Lỗi không làm hỏng job crawl."""
+    try:
+        from backend.db import get_conn
+        from backend.product_links import rebuild_co_mentioned
+        with get_conn() as conn:
+            job["co_mentioned"] = rebuild_co_mentioned(conn)
+    except Exception as e:
+        job["co_mentioned_error"] = _safe_err(e)
+
+
 def _run_mcp_crawl(job_id: str, mode: str):
     """list_posts → get_post từng bài → (gom md trong RAM) → ghi posts_md → import vào DB.
     MCP lỗi giữa chừng → job error, KHÔNG ghi md và KHÔNG import (không để DB dở dang).
@@ -378,6 +403,7 @@ def _run_mcp_crawl(job_id: str, mode: str):
             job["current"]   = "Importing to database…"
             from backend.import_posts import run as import_run
             import_run(output_dir)
+            _refresh_co_mentioned(job)
 
         job["status"]    = "done"
         job["importing"] = False

@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback, useRef } from 'react'
-import { Search, ExternalLink, ChevronUp, ChevronDown, Upload, X, CheckCircle, AlertCircle, Loader, Package, LayoutGrid, List, RefreshCw } from 'lucide-react'
+import { Search, ExternalLink, ChevronUp, ChevronDown, Upload, X, CheckCircle, AlertCircle, Loader, Package, LayoutGrid, List, RefreshCw, Network } from 'lucide-react'
 import { api } from '../api'
+import CrawlModal from './CrawlModal'
 
 function ImportModal({ onClose, onRefresh }) {
   const [file, setFile]       = useState(null)
@@ -169,122 +170,281 @@ function ImportModal({ onClose, onRefresh }) {
   )
 }
 
-function SyncModal({ onClose, onRefresh }) {
+// ── Đồng bộ liên kết sản phẩm: nạp bundle từ MCP (job nền, ~5-7 phút) + tính lại "hay đi cùng" (nhanh) ──
+function LinksSyncModal({ onClose, onRefresh }) {
   const [status, setStatus] = useState('idle') // idle | running | done | error
-  const [result, setResult] = useState(null)
+  const [job, setJob]       = useState(null)
   const [error, setError]   = useState('')
-  const [deep, setDeep]     = useState(false)
+  const [co, setCo]         = useState(null)
+  const [coBusy, setCoBusy] = useState(false)
+  const timer = useRef(null)
+  const alive = useRef(true)
 
-  const run = async () => {
-    setStatus('running'); setError('')
+  useEffect(() => () => { alive.current = false; clearTimeout(timer.current) }, [])
+
+  const friendly = e => {
+    const m = e?.message || ''
+    if (m.startsWith('409')) return 'Đang có job khác chạy — chờ xong rồi thử lại.'
+    return m || 'Lỗi không xác định'
+  }
+
+  const poll = async (jobId) => {
     try {
-      const res = await api.syncProducts({ deep })
-      setResult(res); setStatus('done')
-      onRefresh?.()
+      const j = await api.linksSyncStatus(jobId)
+      if (!alive.current) return
+      setJob(j)
+      if (j.status === 'done') { setStatus('done'); onRefresh?.(); return }
+      if (j.status === 'error') { setStatus('error'); setError(j.error || 'Job lỗi'); return }
+      timer.current = setTimeout(() => poll(jobId), 2000)
     } catch (e) {
-      setError(e?.detail || e?.message || 'Lỗi không xác định')
-      setStatus('error')
+      if (!alive.current) return
+      setStatus('error'); setError(friendly(e))
     }
   }
+
+  const run = async () => {
+    setStatus('running'); setError(''); setJob(null)
+    try {
+      const { job_id } = await api.linksSyncStart()
+      poll(job_id)
+    } catch (e) {
+      setStatus('error'); setError(friendly(e))
+    }
+  }
+
+  const rebuild = async () => {
+    setCoBusy(true); setError('')
+    try { setCo(await api.linksRebuild()); onRefresh?.() }
+    catch (e) { setError(friendly(e)) }
+    finally { setCoBusy(false) }
+  }
+
+  const running = status === 'running'
+  const pct = job && job.total > 0 ? Math.min(100, Math.round((job.done / job.total) * 100)) : 0
+  const r = job?.result
 
   return (
     <div style={{
       position: 'fixed', inset: 0, zIndex: 200,
       background: 'rgba(0,0,0,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-    }} onClick={e => { if (e.target === e.currentTarget && status !== 'running') onClose() }}>
+    }} onClick={e => { if (e.target === e.currentTarget) onClose() }}>
       <div style={{
         background: 'var(--surface)', border: '1px solid var(--border)',
-        borderRadius: 14, width: 460, maxWidth: '92vw', padding: 24,
+        borderRadius: 14, width: 480, maxWidth: '92vw', padding: 24,
         display: 'flex', flexDirection: 'column', gap: 16,
       }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <div style={{ fontWeight: 600, fontSize: 14, color: 'var(--text)' }}>Đồng bộ sản phẩm từ MCP</div>
-          <button onClick={onClose} disabled={status === 'running'} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-subtle)', display: 'flex', padding: 4 }}>
+          <div style={{ fontWeight: 600, fontSize: 14, color: 'var(--text)' }}>Đồng bộ liên kết sản phẩm</div>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-subtle)', display: 'flex', padding: 4 }}>
             <X size={16} />
           </button>
         </div>
 
         <div style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.6, background: 'var(--bg)', borderRadius: 8, padding: '10px 12px' }}>
-          Lấy toàn bộ sản phẩm đang bán từ MCP knxstore.vn và gắn <strong>ID site</strong> (ID mới của site) vào từng dòng.
-          ID trong bảng (ID cũ, dùng trong shortcode <code>{'{products:[...]}'}</code>) được giữ nguyên; sản phẩm không còn trên site chỉ bị đánh dấu, không bị xóa.
+          <strong style={{ color: '#e879f9' }}>Bundle</strong>: lấy combo/mua kèm từ MCP cho từng sản phẩm đang bán (gọi tuần tự, khoảng 5–7 phút).
+          Job chạy nền — đóng cửa sổ này không dừng job. Lỗi giữa chừng thì không ghi dở.
+          <br />
+          <strong style={{ color: '#2dd4bf' }}>Hay đi cùng</strong>: tính từ các bài viết (không gọi MCP, tính nhanh) — tự chạy lại sau mỗi lần đồng bộ sản phẩm.
         </div>
 
-        {status !== 'done' && (
-          <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, color: 'var(--text-muted)', cursor: 'pointer' }}>
-            <input type="checkbox" checked={deep} disabled={status === 'running'} onChange={e => setDeep(e.target.checked)} />
-            Làm mới đầy đủ (danh mục, trạng thái — chậm, vài phút)
-          </label>
-        )}
-
-        {status === 'done' && result && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-              <Badge color="var(--accent-2)" label="Trên MCP" count={result.mcp_total} />
-              <Badge color="#4ade80" label="Khớp" count={result.linked} />
-              <Badge color="#4ade80" label="Mới" count={result.new_count} />
-              <Badge color="#f87171" label="Không còn trên site" count={result.not_on_site_count} />
-              <Badge color="#fbbf24" label="Mơ hồ" count={result.ambiguous_count} />
-              <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--text-subtle)', alignSelf: 'center' }}>
-                Tổng DB: {result.total_in_db.toLocaleString()}
-              </span>
+        {(running || (job && status !== 'idle')) && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+            <div style={{ height: 6, borderRadius: 3, background: 'var(--bg)', overflow: 'hidden' }}>
+              <div style={{ width: `${status === 'done' ? 100 : pct}%`, height: '100%', background: '#e879f9', transition: 'width 0.4s' }} />
             </div>
-            {result.new_count > 0 && (
-              <DetailSection title={`${result.new_count} sản phẩm mới trên site`} color="#4ade80">
-                {result.new.map(p => (
-                  <div key={p.id} style={detailRow}>
-                    <span style={{ color: 'var(--accent-2)', fontWeight: 600, flexShrink: 0 }}>#{p.site_id}</span>
-                    <span style={{ color: 'var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.name}</span>
-                  </div>
-                ))}
-              </DetailSection>
-            )}
-            {result.not_on_site_count > 0 && (
-              <DetailSection title={`${result.not_on_site_count} sản phẩm không còn trên site`} color="#f87171">
-                {result.not_on_site.map(p => (
-                  <div key={p.id} style={detailRow}>
-                    <span style={{ color: 'var(--text-subtle)', fontWeight: 600, flexShrink: 0 }}>cũ #{p.id}</span>
-                    <span style={{ color: 'var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.name}</span>
-                  </div>
-                ))}
-              </DetailSection>
-            )}
-            {result.ambiguous_count > 0 && (
-              <DetailSection title={`${result.ambiguous_count} trường hợp mơ hồ (chưa liên kết)`} color="#fbbf24">
-                {result.ambiguous.map(p => (
-                  <div key={p.site_id} style={detailRow}>
-                    <span style={{ color: 'var(--accent-2)', fontWeight: 600, flexShrink: 0 }}>#{p.site_id}</span>
-                    <span style={{ color: 'var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.slug}</span>
-                    <span style={{ color: 'var(--text-subtle)', flexShrink: 0 }}>ID cũ: {p.candidates.join(', ')}</span>
-                  </div>
-                ))}
-              </DetailSection>
-            )}
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: 'var(--text-subtle)' }}>
+              <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '70%' }}>
+                {status === 'done' ? 'Hoàn tất' : job?.status === 'writing' ? 'Đang ghi vào DB…' : (job?.current || 'Đang khởi động…')}
+              </span>
+              <span>{job ? `${job.done}/${job.total}` : ''}{job?.failed > 0 ? ` · lỗi ${job.failed}` : ''}</span>
+            </div>
           </div>
         )}
 
-        {(status === 'error' || error) && (
+        {status === 'done' && r && (
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            <Badge color="#e879f9" label="Sản phẩm có bundle" count={r.products_with_bundle} />
+            <Badge color="#e879f9" label="Cặp bundle" count={r.pairs} />
+            <Badge color="#fbbf24" label="Không khớp" count={r.unmatched_count} />
+            <Badge color="#f87171" label="Lỗi tải" count={r.failed} />
+            {r.diff && <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--text-subtle)', alignSelf: 'center' }}>
+              +{r.diff.added} · −{r.diff.removed} · ~{r.diff.updated}
+            </span>}
+          </div>
+        )}
+
+        {co && (
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
+            <Badge color="#2dd4bf" label="Cặp hay đi cùng" count={co.pairs} />
+            <Badge color="#2dd4bf" label="Sản phẩm được nhắc" count={co.products_mentioned} />
+            <span style={{ fontSize: 11, color: 'var(--text-subtle)' }}>
+              {co.diff ? `+${co.diff.added} · −${co.diff.removed} · ~${co.diff.updated}` : ''}{co.max_weight ? ` · weight tối đa ${co.max_weight}` : ''}
+            </span>
+          </div>
+        )}
+
+        {error && (
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#f87171', fontSize: 13 }}>
-            <AlertCircle size={16} />
-            {error}
+            <AlertCircle size={16} /> {error}
           </div>
         )}
 
-        <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
-          <button onClick={onClose} disabled={status === 'running'} style={{ ...btnBase, background: 'var(--bg)', color: 'var(--text-muted)', border: '1px solid var(--border)' }}>
-            {status === 'done' ? 'Đóng' : 'Hủy'}
+        <div style={{ display: 'flex', gap: 8, justifyContent: 'space-between', flexWrap: 'wrap' }}>
+          <button onClick={rebuild} disabled={coBusy || running}
+            style={{ ...btnBase, background: 'var(--bg)', color: '#2dd4bf', border: '1px solid var(--border)', opacity: (coBusy || running) ? 0.5 : 1, cursor: (coBusy || running) ? 'not-allowed' : 'pointer' }}>
+            {coBusy ? <><Loader size={13} style={{ animation: 'spin 1s linear infinite' }} /> Đang tính…</> : <><RefreshCw size={13} /> Tính lại "hay đi cùng"</>}
           </button>
-          {status !== 'done' && (
-            <button onClick={run} disabled={status === 'running'}
-              style={{ ...btnBase, background: 'var(--accent)', color: '#fff', opacity: status === 'running' ? 0.5 : 1, cursor: status === 'running' ? 'not-allowed' : 'pointer' }}>
-              {status === 'running'
-                ? <><Loader size={13} style={{ animation: 'spin 1s linear infinite' }} /> Đang đồng bộ...</>
-                : <><RefreshCw size={13} /> Đồng bộ</>}
+          <div style={{ display: 'flex', gap: 8 }}>
+            <button onClick={onClose} style={{ ...btnBase, background: 'var(--bg)', color: 'var(--text-muted)', border: '1px solid var(--border)' }}>
+              {status === 'done' ? 'Đóng' : running ? 'Đóng (job vẫn chạy)' : 'Hủy'}
             </button>
-          )}
+            {!running && (
+              <button onClick={run} style={{ ...btnBase, background: 'var(--accent)', color: '#fff', cursor: 'pointer' }}>
+                <RefreshCw size={13} /> {status === 'done' ? 'Chạy lại bundle' : 'Đồng bộ bundle'}
+              </button>
+            )}
+            {running && (
+              <button disabled style={{ ...btnBase, background: 'var(--accent)', color: '#fff', opacity: 0.5, cursor: 'not-allowed' }}>
+                <Loader size={13} style={{ animation: 'spin 1s linear infinite' }} /> Đang chạy…
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
       <style>{`@keyframes spin { to { transform: rotate(360deg) } }`}</style>
+    </div>
+  )
+}
+
+// ── Liên kết sản phẩm ↔ sản phẩm: bundle (MCP) + hay đi cùng (cùng được nhắc trong một bài) + bài nhắc ──
+function LinkSection({ title, color, count, children }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, fontWeight: 600, color }}>
+        {title}
+        <span style={{ fontSize: 11, fontWeight: 400, color: 'var(--text-subtle)' }}>{count}</span>
+      </div>
+      {children}
+    </div>
+  )
+}
+
+function LinkProductRow({ p, onOpen, right }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '5px 0', borderBottom: '1px solid var(--border-2)' }}>
+      <ProductThumb url={p.url} size={30} />
+      <button onClick={() => onOpen(p.id)} title="Xem liên kết của sản phẩm này"
+        style={{ flex: 1, minWidth: 0, background: 'none', border: 'none', padding: 0, textAlign: 'left', cursor: 'pointer' }}>
+        <div style={{ fontSize: 12, color: p.status === 'not_on_site' ? 'var(--text-subtle)' : 'var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.name}</div>
+        <div style={{ fontSize: 10, color: 'var(--text-subtle)' }}>
+          {[p.brand, p.sku, p.status === 'not_on_site' ? 'không còn trên site' : ''].filter(Boolean).join(' · ')}
+        </div>
+      </button>
+      {right}
+    </div>
+  )
+}
+
+function CoMentionedRow({ item, onOpen }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <div>
+      <LinkProductRow p={item.product} onOpen={onOpen} right={
+        <button onClick={() => setOpen(v => !v)} title="Các bài cùng nhắc hai sản phẩm"
+          style={{ flexShrink: 0, background: 'rgba(45,212,191,0.12)', border: '1px solid rgba(45,212,191,0.35)', color: '#2dd4bf', borderRadius: 12, padding: '1px 8px', fontSize: 11, fontWeight: 600, cursor: 'pointer' }}>
+          {item.weight} bài {open ? '▲' : '▼'}
+        </button>
+      } />
+      {open && (
+        <div style={{ padding: '4px 0 6px 40px', display: 'flex', flexDirection: 'column', gap: 2 }}>
+          {item.posts.map(sl => (
+            <a key={sl} href={`https://knxstore.vn/${sl}.html`} target="_blank" rel="noopener noreferrer"
+              style={{ fontSize: 11, color: 'var(--text-muted)', textDecoration: 'none', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{sl}</a>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function LinksModal({ productId, onClose, onOpen }) {
+  const [data, setData]         = useState(null)
+  const [error, setError]       = useState('')
+  const [minWeight, setMinWeight] = useState(1)
+
+  // Parent đặt key={productId} nên đổi sản phẩm = mount mới (state sạch); đổi ngưỡng weight thì giữ dữ liệu cũ tới khi có mới
+  useEffect(() => {
+    let alive = true
+    api.productLinks(productId, { min_weight: minWeight, limit: 200 })
+      .then(d => { if (alive) { setData(d); setError('') } })
+      .catch(e => { if (alive) setError(e?.message || 'Lỗi không xác định') })
+    return () => { alive = false }
+  }, [productId, minWeight])
+
+  const p = data?.product
+  const empty = <div style={{ fontSize: 11, color: 'var(--text-subtle)', padding: '2px 0' }}>Không có.</div>
+
+  return (
+    <div style={{ position: 'fixed', inset: 0, zIndex: 200, background: 'rgba(0,0,0,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+      onClick={e => { if (e.target === e.currentTarget) onClose() }}>
+      <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 14, width: 560, maxWidth: '94vw', maxHeight: '88vh', padding: 22, display: 'flex', flexDirection: 'column', gap: 14 }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 10 }}>
+          <div style={{ minWidth: 0 }}>
+            <div style={{ fontSize: 10, color: 'var(--text-subtle)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Liên kết sản phẩm</div>
+            <div style={{ fontWeight: 600, fontSize: 14, color: 'var(--text)', lineHeight: 1.4 }}>{p ? p.name : '...'}</div>
+            {p && (
+              <div style={{ fontSize: 11, color: 'var(--text-subtle)', marginTop: 2 }}>
+                {p.id < 1000000 ? `ID cũ ${p.id}` : 'không có ID cũ'}{p.site_id ? ` · ID site ${p.site_id}` : ''}{p.sku ? ` · ${p.sku}` : ''}
+                {p.url && <> · <a href={p.url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-2)', textDecoration: 'none' }}>Mở trang ↗</a></>}
+              </div>
+            )}
+          </div>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-subtle)', display: 'flex', padding: 4, flexShrink: 0 }}>
+            <X size={16} />
+          </button>
+        </div>
+
+        <div style={{ overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 16, paddingRight: 2 }}>
+          {!data && !error && <div style={{ textAlign: 'center', padding: 30, color: 'var(--text-subtle)', fontSize: 12 }}>Đang tải...</div>}
+          {error && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#f87171', fontSize: 13 }}><AlertCircle size={16} />{error}</div>
+          )}
+          {data && <>
+            <LinkSection title="Bundle (mua kèm)" color="#e879f9" count={data.bundle.length}>
+              {data.bundle.length ? data.bundle.map(b => <LinkProductRow key={b.id} p={b} onOpen={onOpen} />) : empty}
+            </LinkSection>
+
+            {data.bundled_in.length > 0 && (
+              <LinkSection title="Nằm trong bundle của" color="#e879f9" count={data.bundled_in.length}>
+                {data.bundled_in.map(b => <LinkProductRow key={b.id} p={b} onOpen={onOpen} />)}
+              </LinkSection>
+            )}
+
+            <LinkSection title="Hay đi cùng (cùng được nhắc trong bài)" color="#2dd4bf"
+              count={data.co_mentioned_total > data.co_mentioned.length ? `${data.co_mentioned.length}/${data.co_mentioned_total}` : data.co_mentioned_total}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, color: 'var(--text-subtle)' }}>
+                Chỉ hiện cặp từ
+                <select value={minWeight} onChange={e => setMinWeight(parseInt(e.target.value))} style={{ ...selectStyle, padding: '2px 6px', fontSize: 11 }}>
+                  {[1, 2, 3, 5, 8].map(n => <option key={n} value={n}>{n}</option>)}
+                </select>
+                bài chung trở lên
+              </div>
+              {data.co_mentioned.length ? data.co_mentioned.map(c => <CoMentionedRow key={c.product.id} item={c} onOpen={onOpen} />) : empty}
+            </LinkSection>
+
+            <LinkSection title="Được nhắc ở bài" color="#f97316" count={data.mentioned_in.length}>
+              {data.mentioned_in.length ? data.mentioned_in.map(post => (
+                <a key={post.slug} href={post.url || `https://knxstore.vn/${post.slug}.html`} target="_blank" rel="noopener noreferrer"
+                  style={{ fontSize: 12, color: 'var(--text)', textDecoration: 'none', padding: '4px 0', borderBottom: '1px solid var(--border-2)', display: 'flex', justifyContent: 'space-between', gap: 8 }}>
+                  <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{post.headline}</span>
+                  <ExternalLink size={11} color="var(--text-subtle)" style={{ flexShrink: 0, marginTop: 2 }} />
+                </a>
+              )) : <div style={{ fontSize: 11, color: '#fbbf24', padding: '2px 0' }}>Chưa có bài nào nhắc sản phẩm này.</div>}
+            </LinkSection>
+          </>}
+        </div>
+      </div>
     </div>
   )
 }
@@ -354,7 +514,7 @@ function ProductThumb({ url, size = 36 }) {
   )
 }
 
-function ProductCard({ item, isMobile }) {
+function ProductCard({ item, isMobile, onLinks }) {
   const candidates = imgCandidates(item.url)
   const [idx, setIdx] = useState(0)
   const hasImg = candidates.length > 0 && idx < candidates.length
@@ -380,6 +540,10 @@ function ProductCard({ item, isMobile }) {
         {item.status === 'not_on_site' && (
           <span style={{ position: 'absolute', top: 7, right: 7, background: 'rgba(248,113,113,0.85)', color: '#fff', fontSize: 9, fontWeight: 600, padding: '2px 6px', borderRadius: 4 }}>không còn trên site</span>
         )}
+        <button onClick={e => { e.preventDefault(); e.stopPropagation(); onLinks?.(item.id) }} title="Liên kết sản phẩm: bundle, hay đi cùng, bài nhắc"
+          style={{ position: 'absolute', right: 7, bottom: 7, width: 24, height: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(4px)', border: 'none', borderRadius: 5, color: 'var(--accent-2)', cursor: 'pointer' }}>
+          <Network size={13} />
+        </button>
       </div>
 
       {/* Info */}
@@ -398,6 +562,10 @@ function ProductCard({ item, isMobile }) {
         {item.category && (
           <div style={{ fontSize: 10, color: 'var(--text-subtle)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.category}</div>
         )}
+        <div style={{ fontSize: 10, color: item.mentioned_in_count ? 'var(--text-subtle)' : '#fbbf24', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
+          title="Số bài nhắc · số sản phẩm trong bundle · số sản phẩm hay đi cùng">
+          {item.mentioned_in_count || 0} bài{item.bundle_count > 0 ? ` · ${item.bundle_count} bundle` : ''}{item.co_mentioned_count > 0 ? ` · ${item.co_mentioned_count} cùng bài` : ''}
+        </div>
       </div>
     </a>
   )
@@ -444,7 +612,11 @@ export default function ProductsView({ bp = 'desktop' }) {
   const [categories, setCategories] = useState([])
   const [showImport, setShowImport] = useState(false)
   const [showSync, setShowSync]     = useState(false)
+  const [showLinksSync, setShowLinksSync] = useState(false)
   const [viewMode, setViewMode]     = useState('card') // 'card' | 'table'
+  const [unmentioned, setUnmentioned] = useState(false)   // chỉ sản phẩm đang bán mà chưa bài nào nhắc
+  const [hasBundle, setHasBundle]     = useState(false)   // chỉ sản phẩm có bundle
+  const [linksId, setLinksId]         = useState(null)    // sản phẩm đang xem ở LinksModal
 
   const PAGE_SIZE = 50
 
@@ -455,14 +627,17 @@ export default function ProductsView({ bp = 'desktop' }) {
 
   const fetch = useCallback(() => {
     setLoading(true)
-    api.products({ search, brand, category, sort: sortKey, dir: sortDir, page, limit: PAGE_SIZE })
+    const params = { search, brand, category, sort: sortKey, dir: sortDir, page, limit: PAGE_SIZE }
+    if (unmentioned) params.mentioned = 'none'
+    if (hasBundle) params.has_bundle = 1
+    api.products(params)
       .then(r => { setItems(r.items); setTotal(r.total) })
       .catch(console.error)
       .finally(() => setLoading(false))
-  }, [search, brand, category, sortKey, sortDir, page])
+  }, [search, brand, category, sortKey, sortDir, page, unmentioned, hasBundle])
 
   useEffect(() => { fetch() }, [fetch])
-  useEffect(() => { setPage(0) }, [search, brand, category, sortKey, sortDir])
+  useEffect(() => { setPage(0) }, [search, brand, category, sortKey, sortDir, unmentioned, hasBundle])
 
   const handleSort = (col) => {
     if (col === sortKey) setSortDir(d => d === 'asc' ? 'desc' : 'asc')
@@ -510,6 +685,17 @@ export default function ProductsView({ bp = 'desktop' }) {
           {categories.map(c => <option key={c} value={c}>{c}</option>)}
         </select>
 
+        {/* Liên kết sản phẩm: lọc nhanh */}
+        {[[unmentioned, setUnmentioned, 'Chưa có bài nhắc', 'Sản phẩm đang bán mà chưa bài viết nào nhắc'],
+          [hasBundle, setHasBundle, 'Có bundle', 'Sản phẩm có bundle (mua kèm) trên CMS']].map(([on, set, label, tip]) => (
+          <button key={label} onClick={() => set(v => !v)} title={tip} style={{
+            padding: '5px 10px', borderRadius: 7, fontSize: 12, cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0,
+            border: `1px solid ${on ? 'var(--accent)' : 'var(--border)'}`,
+            background: on ? 'var(--accent-dim)' : 'var(--bg)',
+            color: on ? 'var(--accent-2)' : 'var(--text-muted)', fontWeight: on ? 600 : 400,
+          }}>{label}</button>
+        ))}
+
         <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--text-subtle)', whiteSpace: 'nowrap' }}>
           {loading ? '...' : `${total.toLocaleString()} sản phẩm`}
         </span>
@@ -529,7 +715,7 @@ export default function ProductsView({ bp = 'desktop' }) {
           ))}
         </div>
 
-        <button onClick={() => setShowSync(true)} title="Đồng bộ sản phẩm từ MCP knxstore.vn" style={{
+        <button onClick={() => setShowSync(true)} title="Crawl sản phẩm từ MCP knxstore.vn (chỉ cập nhật mới / ghi đè toàn bộ)" style={{
           display: 'flex', alignItems: 'center', gap: 5,
           padding: '5px 12px', borderRadius: 7, border: '1px solid var(--border)',
           background: 'var(--bg)', color: 'var(--text-muted)', fontSize: 12, cursor: 'pointer',
@@ -540,6 +726,19 @@ export default function ProductsView({ bp = 'desktop' }) {
         >
           <RefreshCw size={12} />
           {!isMobile && 'Đồng bộ MCP'}
+        </button>
+
+        <button onClick={() => setShowLinksSync(true)} title="Đồng bộ liên kết sản phẩm: bundle (MCP) + hay đi cùng" style={{
+          display: 'flex', alignItems: 'center', gap: 5,
+          padding: '5px 12px', borderRadius: 7, border: '1px solid var(--border)',
+          background: 'var(--bg)', color: 'var(--text-muted)', fontSize: 12, cursor: 'pointer',
+          flexShrink: 0,
+        }}
+          onMouseEnter={e => { e.currentTarget.style.color = '#e879f9'; e.currentTarget.style.borderColor = '#e879f9' }}
+          onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.borderColor = 'var(--border)' }}
+        >
+          <Network size={12} />
+          {!isMobile && 'Đồng bộ liên kết'}
         </button>
 
         <button onClick={() => setShowImport(true)} title="Legacy: import file Admin.html (ID cũ)" style={{
@@ -557,13 +756,24 @@ export default function ProductsView({ bp = 'desktop' }) {
       </div>
 
       {showSync && (
-        <SyncModal
+        // Đồng bộ MCP = crawl sản phẩm (tab "Sản phẩm" của modal Crawl): 2 kiểu "Chỉ cập nhật mới" | "Ghi đè toàn bộ", job nền có tiến độ
+        <CrawlModal
+          initialTab="products"
+          bp={bp}
           onClose={() => setShowSync(false)}
-          onRefresh={() => {
+          onDone={kind => {
+            if (kind !== 'products') return
             api.productBrands().then(setBrands).catch(console.error)
             api.productCategories().then(setCategories).catch(console.error)
             fetch()
           }}
+        />
+      )}
+
+      {showLinksSync && (
+        <LinksSyncModal
+          onClose={() => setShowLinksSync(false)}
+          onRefresh={() => fetch()}
         />
       )}
 
@@ -578,6 +788,10 @@ export default function ProductsView({ bp = 'desktop' }) {
         />
       )}
 
+      {linksId != null && (
+        <LinksModal key={linksId} productId={linksId} onClose={() => setLinksId(null)} onOpen={setLinksId} />
+      )}
+
       {/* Card grid */}
       {viewMode === 'card' && (
         <div style={{ flex: 1, overflow: 'auto', padding: isMobile ? 10 : 16 }}>
@@ -588,7 +802,7 @@ export default function ProductsView({ bp = 'desktop' }) {
             <div style={{ textAlign: 'center', padding: 60, color: 'var(--text-subtle)' }}>Không tìm thấy sản phẩm</div>
           )}
           <div style={{ display: 'grid', gridTemplateColumns: `repeat(auto-fill, minmax(${isMobile ? 140 : 180}px, 1fr))`, gap: isMobile ? 10 : 14 }}>
-            {items.map(item => <ProductCard key={item.id} item={item} isMobile={isMobile} />)}
+            {items.map(item => <ProductCard key={item.id} item={item} isMobile={isMobile} onLinks={setLinksId} />)}
           </div>
         </div>
       )}
@@ -604,15 +818,17 @@ export default function ProductsView({ bp = 'desktop' }) {
               <th style={th}><SortBtn col="brand" current={sortKey} dir={sortDir} onSort={handleSort} /></th>
               {!isMobile && <th style={th}><SortBtn col="category" current={sortKey} dir={sortDir} onSort={handleSort} /></th>}
               <th style={th}><SortBtn col="price" current={sortKey} dir={sortDir} onSort={handleSort} /></th>
+              {!isMobile && <th style={th} title="Số bài viết nhắc sản phẩm này">Bài nhắc</th>}
+              {!isMobile && <th style={th} title="Số sản phẩm trong bundle · số sản phẩm hay đi cùng (cùng được nhắc trong một bài)">Bundle · Cùng bài</th>}
               <th style={th}>Link</th>
             </tr>
           </thead>
           <tbody>
             {loading && (
-              <tr><td colSpan={isMobile ? 5 : 7} style={{ textAlign: 'center', padding: 40, color: 'var(--text-subtle)' }}>Đang tải...</td></tr>
+              <tr><td colSpan={isMobile ? 5 : 9} style={{ textAlign: 'center', padding: 40, color: 'var(--text-subtle)' }}>Đang tải...</td></tr>
             )}
             {!loading && items.length === 0 && (
-              <tr><td colSpan={isMobile ? 5 : 7} style={{ textAlign: 'center', padding: 40, color: 'var(--text-subtle)' }}>Không tìm thấy sản phẩm</td></tr>
+              <tr><td colSpan={isMobile ? 5 : 9} style={{ textAlign: 'center', padding: 40, color: 'var(--text-subtle)' }}>Không tìm thấy sản phẩm</td></tr>
             )}
             {items.map((item, i) => (
               <tr key={item.id}
@@ -644,7 +860,26 @@ export default function ProductsView({ bp = 'desktop' }) {
                 <td style={{ ...td, textAlign: 'right', whiteSpace: 'nowrap' }}>
                   <PriceTag price={item.price} />
                 </td>
-                <td style={{ ...td, textAlign: 'center', width: 36 }}>
+                {!isMobile && (
+                  <td style={{ ...td, textAlign: 'center', fontVariantNumeric: 'tabular-nums', color: item.mentioned_in_count ? 'var(--text-muted)' : '#fbbf24' }}>
+                    {item.mentioned_in_count || 0}
+                  </td>
+                )}
+                {!isMobile && (
+                  <td style={{ ...td, textAlign: 'center', fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap' }}>
+                    <button onClick={() => setLinksId(item.id)} title="Xem liên kết sản phẩm"
+                      style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 12, color: (item.bundle_count || item.co_mentioned_count) ? '#2dd4bf' : 'var(--text-subtle)' }}>
+                      {item.bundle_count || 0} · {item.co_mentioned_count || 0}
+                    </button>
+                  </td>
+                )}
+                <td style={{ ...td, textAlign: 'center', width: isMobile ? 62 : 36, whiteSpace: 'nowrap' }}>
+                  {isMobile && (
+                    <button onClick={() => setLinksId(item.id)} title="Liên kết sản phẩm"
+                      style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-subtle)', padding: '0 6px 0 0', verticalAlign: 'middle' }}>
+                      <Network size={13} />
+                    </button>
+                  )}
                   {item.url && (
                     <a href={item.url} target="_blank" rel="noopener noreferrer"
                       style={{ color: 'var(--text-subtle)', display: 'inline-flex', alignItems: 'center' }}

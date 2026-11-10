@@ -7,6 +7,7 @@ Node color = articleSection.
 import json
 from fastapi import APIRouter, HTTPException, Query
 from backend.db import get_conn
+from backend.product_links import make_url_resolver
 
 router = APIRouter(prefix="/graph", tags=["graph"])
 
@@ -30,15 +31,99 @@ SECTION_COLORS = {
 DEFAULT_COLOR = "#94a3b8"
 
 
+def _product_only_graph(product_links: str, min_co_weight: int, include_isolated: bool = False):
+    """Node = sản phẩm (products.id) có ≥1 cạnh product_links đã lọc; edge = cạnh đó. Không phụ thuộc bài viết
+    nên các bundle trỏ tới sản phẩm chưa bài nào nhắc vẫn được vẽ. inbound = số bài nhắc sản phẩm (0 nếu chưa có)."""
+    import json as _json
+    from backend.product_links import load_mentions
+    kinds = ("bundle", "co_mentioned") if product_links in ("both", "none") else (product_links,)
+    counts = {"bundle": 0, "co_mentioned": 0}
+    with get_conn() as c:
+        rows = c.execute(
+            "SELECT from_id, to_id, kind, weight FROM product_links "
+            "WHERE kind IN (SELECT value FROM json_each(?)) ORDER BY kind, from_id, to_id",
+            (_json.dumps(list(kinds)),)).fetchall()
+        rows = [r for r in rows if r["from_id"] != r["to_id"]
+                and not (r["kind"] == "co_mentioned" and r["weight"] < min_co_weight)]
+        ids = sorted({r["from_id"] for r in rows} | {r["to_id"] for r in rows})
+        prods = {r["id"]: r for r in c.execute(
+            "SELECT id, name, url, slug FROM products WHERE id IN (SELECT value FROM json_each(?))",
+            (_json.dumps(ids),)).fetchall()}
+        mentions = load_mentions(c)["by_product"]
+        if include_isolated:  # thêm sản phẩm đang bán chưa có cạnh nào (nút trơ)
+            for r in c.execute("SELECT id, name, url, slug FROM products WHERE status IS NULL OR status = 'PUBLISHED'"):
+                prods.setdefault(r["id"], r)
+            all_ids = [r["id"] for r in c.execute("SELECT id FROM products WHERE status IS NULL OR status = 'PUBLISHED'")]
+        else:
+            all_ids = []
+
+    def handle(pid: int) -> str | None:
+        pr = prods.get(pid)
+        if not pr:
+            return None
+        slug = pr["slug"] or ((pr["url"] or "").split("/products/")[-1].strip("/") if pr["url"] else "")
+        return f"prod__{slug}" if slug else None
+
+    nodes, edges, seen = [], [], set()
+    for r in rows:
+        src, tgt = handle(r["from_id"]), handle(r["to_id"])
+        if not src or not tgt or src == tgt:
+            continue
+        counts[r["kind"]] += 1
+        edges.append({
+            "id":     f"plink__{r['kind']}__{src}__{tgt}",
+            "source": src,
+            "target": tgt,
+            "data":   {"anchor": "", "kind": r["kind"], "weight": r["weight"], "isProductLink": True},
+        })
+        for pid, h in ((r["from_id"], src), (r["to_id"], tgt)):
+            if h in seen:
+                continue
+            seen.add(h)
+            pr = prods[pid]
+            nodes.append({
+                "id":   h,
+                "type": "productNode",
+                "data": {
+                    "label":   pr["name"] or h,
+                    "url":     pr["url"] or "",
+                    "image":   "",
+                    "inbound": len(mentions.get(pid, [])),
+                    "color":   "#f97316",
+                },
+                "position": {"x": 0, "y": 0},
+            })
+    for pid in all_ids:
+        h = handle(pid)
+        if not h or h in seen:
+            continue
+        seen.add(h)
+        pr = prods[pid]
+        nodes.append({
+            "id":   h,
+            "type": "productNode",
+            "data": {"label": pr["name"] or h, "url": pr["url"] or "", "image": "",
+                     "inbound": len(mentions.get(pid, [])), "color": "#f97316"},
+            "position": {"x": 0, "y": 0},
+        })
+    return nodes, edges, counts
+
+
 @router.get("")
 def get_graph(
     section: str = Query("", description="Filter nodes by section"),
     min_links: int = Query(0, description="Chỉ lấy node có inbound >= min_links"),
     show_products: bool = Query(False, description="Hiện product nodes"),
     kind: str = Query("body", description="Loại link: body (thân bài, mặc định) | related (khối Bài viết liên quan) | all"),
+    product_links: str = Query("none", description="Cạnh sản phẩm–sản phẩm (chỉ khi show_products): none | bundle | co_mentioned | both"),
+    min_co_weight: int = Query(3, ge=1, description="Chỉ lấy cặp co_mentioned có weight (số bài chung) >= ngưỡng này"),
+    include_isolated: bool = Query(False, description="Chỉ dùng cùng hide_posts: thêm cả sản phẩm đang bán chưa có liên kết nào"),
+    hide_posts: bool = Query(False, description="Ẩn bài viết: chỉ trả mạng sản phẩm–sản phẩm (cần show_products; product_links=none thì coi như both)"),
 ):
     if kind not in ("body", "related", "all"):
         raise HTTPException(422, "kind phải là 'body', 'related' hoặc 'all'")
+    if product_links not in ("none", "bundle", "co_mentioned", "both"):
+        raise HTTPException(422, "product_links phải là 'none', 'bundle', 'co_mentioned' hoặc 'both'")
     # inbound/outbound của node và min_links tính theo `kind` đã chọn (all = cả hai loại, đếm distinct bài)
     kind_sql = "" if kind == "all" else "AND kind = :kind"
     with get_conn() as conn:
@@ -97,6 +182,7 @@ def get_graph(
             "position": {"x": 0, "y": 0},
         })
 
+    link_counts = {"bundle": 0, "co_mentioned": 0}
     edges = []
     for r in link_rows:
         src, tgt = r["from_slug"], r["to_slug"]
@@ -118,6 +204,9 @@ def get_graph(
         import json as _json
         product_map: dict[str, dict] = {}  # handle → {name, url, posts_count}
         post_product_edges = []
+        handle_pid: dict[str, int] = {}    # handle → products.id (để nối cạnh sản phẩm–sản phẩm)
+        with get_conn() as pconn:
+            resolve_pid = make_url_resolver(pconn) if product_links != "none" else None
 
         for r in post_rows:
             if r["slug"] not in node_slugs:
@@ -138,6 +227,10 @@ def get_graph(
                         "image": p.get("image", ""),
                         "count": 0,
                     }
+                    if resolve_pid:
+                        pid = resolve_pid(purl)
+                        if pid is not None:
+                            handle_pid[handle] = pid
                 product_map[handle]["count"] += 1
                 post_product_edges.append({
                     "id":     f"{r['slug']}__{handle}",
@@ -161,13 +254,43 @@ def get_graph(
             })
         edges.extend(post_product_edges)
 
+        # Cạnh sản phẩm–sản phẩm (product_links): chỉ giữa hai product node đang hiện
+        if product_links != "none" and handle_pid:
+            kinds = ("bundle", "co_mentioned") if product_links == "both" else (product_links,)
+            pid_handle = {pid: h for h, pid in handle_pid.items()}
+            with get_conn() as pconn:
+                rows = pconn.execute(
+                    "SELECT from_id, to_id, kind, weight FROM product_links "
+                    "WHERE kind IN (SELECT value FROM json_each(?)) ORDER BY kind, from_id, to_id",
+                    (_json.dumps(list(kinds)),)).fetchall()
+            for r in rows:
+                if r["kind"] == "co_mentioned" and r["weight"] < min_co_weight:
+                    continue
+                src, tgt = pid_handle.get(r["from_id"]), pid_handle.get(r["to_id"])
+                if not src or not tgt or src == tgt:
+                    continue
+                link_counts[r["kind"]] += 1
+                edges.append({
+                    "id":     f"plink__{r['kind']}__{src}__{tgt}",
+                    "source": src,
+                    "target": tgt,
+                    "data":   {"anchor": "", "kind": r["kind"], "weight": r["weight"], "isProductLink": True},
+                })
+
+    if show_products and hide_posts:
+        # Mạng sản phẩm–sản phẩm thuần: mọi sản phẩm có ít nhất một liên kết (kể cả sản phẩm chưa bài nào nhắc)
+        nodes, edges, link_counts = _product_only_graph(product_links, min_co_weight, include_isolated)
+
     return {
         "nodes": nodes,
         "edges": edges,
         "meta": {
             "totalNodes": len(nodes),
             "totalEdges": len(edges),
+            "hidePosts": bool(show_products and hide_posts),
             "kind": kind,
+            "productLinks": {"mode": product_links if show_products else "none", "minCoWeight": min_co_weight,
+                             "bundle": link_counts["bundle"], "co_mentioned": link_counts["co_mentioned"]},
             "sections": list(SECTION_COLORS.keys()),
         },
     }

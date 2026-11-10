@@ -174,6 +174,12 @@ def recrawl_post(slug: str):
 
     with get_conn() as conn:
         import_file(out_path, conn)   # thay body + related theo từng loại; md không có related_links thì giữ related hiện có
+    try:   # products của bài có thể đổi → tính lại co_mentioned (transaction riêng, lỗi không làm hỏng recrawl)
+        from backend.product_links import rebuild_co_mentioned
+        with get_conn() as conn:
+            rebuild_co_mentioned(conn)
+    except Exception:
+        pass
 
     related_status = "failed" if rel_job["related_failed"] else ("no_related" if rel_job["no_related"] else "ok")
     return {"ok": True, "slug": slug, "products": len(parts["products"]), "links": len(parts["internal_links"]),

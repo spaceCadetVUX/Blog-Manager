@@ -5,10 +5,17 @@ function authHeader() {
   return token ? { Authorization: `Bearer ${token}` } : {}
 }
 
+// Lỗi HTTP: message giữ dạng `${status} ${path}` (nơi khác kiểm tra startsWith('409')); thêm .status để phân loại (404/409...).
+function httpError(res, path) {
+  const err = new Error(`${res.status} ${path}`)
+  err.status = res.status
+  return err
+}
+
 async function get(path) {
   const res = await fetch(BASE + path, { headers: authHeader() })
   if (res.status === 401) { localStorage.removeItem('app_token'); window.location.reload() }
-  if (!res.ok) throw new Error(`${res.status} ${path}`)
+  if (!res.ok) throw httpError(res, path)
   return res.json()
 }
 
@@ -19,7 +26,7 @@ async function post(path, body) {
     body: JSON.stringify(body),
   })
   if (res.status === 401) { localStorage.removeItem('app_token'); window.location.reload() }
-  if (!res.ok) throw new Error(`${res.status} ${path}`)
+  if (!res.ok) throw httpError(res, path)
   return res.json()
 }
 
@@ -45,7 +52,13 @@ export const api = {
   products:          (params = {})   => get('/products?' + new URLSearchParams(params)),
   productBrands:     ()              => get('/products/brands'),
   productCategories: ()              => get('/products/categories'),
-  syncProducts: (body = {}) => fetch('/api/products/sync', {
+  productLinks:      (id, params = {}) => get(`/products/${id}/links?` + new URLSearchParams(params)),   // {bundle, bundled_in, co_mentioned, mentioned_in}
+  linksSyncStart:    (slugs)         => post('/products/links/sync', slugs ? { slugs } : {}),            // job nền nạp bundle từ MCP → {job_id}
+  linksSyncStatus:   (job_id)        => get(`/products/links/sync/${job_id}`),
+  linksRebuild:      ()              => post('/products/links/rebuild', {}),                              // tính lại co_mentioned (nhanh)
+  syncJobStart:      (mode)          => post('/products/sync/jobs', { mode }),                            // job nền sync sản phẩm từ MCP: mode 'new' (chỉ cập nhật mới) | 'full' (ghi đè toàn bộ) → {job_id}
+  syncJobStatus:     (job_id)        => get(`/products/sync/jobs/${job_id}`),                             // {status, mode, phase, total, done, current, result, error}
+  syncProducts: (body = {}) => fetch('/api/products/sync', {   // LEGACY: sync đồng bộ trong 1 request (không còn dùng ở UI)
     method: 'POST',
     headers: { 'Content-Type': 'application/json', ...authHeader() },
     body: JSON.stringify(body),
