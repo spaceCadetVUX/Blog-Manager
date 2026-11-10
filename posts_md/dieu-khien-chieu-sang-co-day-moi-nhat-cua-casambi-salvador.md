@@ -1,213 +1,171 @@
 ---
 url: "https://knxstore.vn/dieu-khien-chieu-sang-co-day-moi-nhat-cua-casambi-salvador.html"
 headline: "Điều khiển chiếu sáng có dây mới nhất của Casambi - Salvador"
-description: "Casambi đã công bố cải tiến mới nhất của mình về điều khiển chiếu sáng có dây – Salvador. Đây là bộ điều khiển DALI mới, đánh dấu sự gia nhập chiến lược của công ty vào thị trường điều khiển ánh sáng có dây. Qua đó thiết lập vị thế mới với tư cách là nhà cung cấp điều khiển ánh sáng phổ biến và rộng khắp toàn thế giới."
-og_site_name: "KNX Store"
-image: "https://knxstore.vn/assets/image/post/dieu-khien-chieu-sang-co-day-moi-nhat-cua-casambi-salvador.jpg"
-datePublished: "2025-05-19T22:49:32+07:00"
-dateModified: "2025-05-19T22:49:32+07:00"
+description: "Salvador là DALI Application Controller có dây của Casambi, đưa tối đa 64 driver DALI vào mạng Casambi Evolution qua Bluetooth. Xem cách chọn phiên bản và lắp đặt đúng."
+title: "Casambi Salvador SAL-10XX Là Gì? DALI Master Cho Hệ Có Dây"
+image: "https://knxstore.vn/media/dc49a88e321ad41f10aa1330554de29acc800fed8ad421d322f442bbc8cad721.jpg"
+datePublished: "2026-08-05T09:55:06.000Z"
+dateModified: "2026-08-05T09:55:06.000Z"
+author: "Lê Võ Quốc Huy"
+publisher: "KNXStore.vn"
 articleSection: "Chiếu sáng"
-word_count: 875
-mentions: ["Aqara", "Apple Home"]
+word_count: 1771
+keywords: ["Chiếu sáng"]
+source: "mcp"
 breadcrumb:
   - name: "Trang chủ"
     url: "https://knxstore.vn/"
-  - name: "Blogs"
+  - name: "Tin tức"
     url: "https://knxstore.vn/blogs"
   - name: "Chiếu sáng"
     url: "https://knxstore.vn/blogs/chieu-sang"
   - name: "Điều khiển chiếu sáng có dây mới nhất của Casambi - Salvador"
     url: "https://knxstore.vn/dieu-khien-chieu-sang-co-day-moi-nhat-cua-casambi-salvador.html"
-products: [{"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-dali-master-casambi-savaldor-sal-10xx", "name": "bộ điều khiển DALI master Salvador Casambi"}]
+products: [{"url": "https://knxstore.vn/products/bo-dieu-khien-16-dia-chi-driver-dali-master-salvador-casambi-sal-1016", "name": "SAL-1016 - Bộ điều khiển DALI Master 16 địa chỉ Bluetooth Casambi Salvador"}, {"url": "https://knxstore.vn/products/bo-dieu-khien-32-dia-chi-driver-dali-master-salvador-casambi-sal-1032", "name": "SAL-1032 - Bộ điều khiển DALI Master 32 địa chỉ Bluetooth Casambi Salvador"}, {"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-dali-master-casambi-savaldor-sal-10xx", "name": "Salvador SAL-1064 - Bộ điều khiển DALI Master 64 địa chỉ Bluetooth Casambi"}, {"url": "https://knxstore.vn/products/lunatone-bo-cap-nguon-dali-220ma-dali-ps", "name": "Bộ cấp nguồn DALI 200mA Lunatone - DALI PS"}]
 internal_links:
-  - url: "https://knxstore.vn/casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap.html"
-    slug: "casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap"
-    anchor: "Casambi không kết nối HomeKit? MTB10 Matter Bridge là giải pháp"
-  - url: "https://knxstore.vn/nfc-trong-he-thong-chieu-sang-thong-minh-hoat-dong-nhu-the-nao.html"
-    slug: "nfc-trong-he-thong-chieu-sang-thong-minh-hoat-dong-nhu-the-nao"
-    anchor: "NFC có được sử dụng trong hệ thống chiếu sáng thông minh không?"
-  - url: "https://knxstore.vn/thiet-ke-he-chieu-sang-dali-mo-rong-bang-casambi-se-nhu-the-nao.html"
-    slug: "thiet-ke-he-chieu-sang-dali-mo-rong-bang-casambi-se-nhu-the-nao"
-    anchor: "Thiết kế hệ chiếu sáng DALI mở rộng bằng Casambi sẽ như thế nào?"
-  - url: "https://knxstore.vn/casambi-case-study-chieu-sang-dali-trong-cong-trinh-di-san-giardino-palazzo-pfanner.html"
-    slug: "casambi-case-study-chieu-sang-dali-trong-cong-trinh-di-san-giardino-palazzo-pfanner"
-    anchor: "Casambi Case Study | Chiếu sáng DALI trong công trình di sản Giardino Palazzo Pfanner"
-  - url: "https://knxstore.vn/casambi-case-study-chieu-sang-khong-gian-showroom-blum-experience-center.html"
-    slug: "casambi-case-study-chieu-sang-khong-gian-showroom-blum-experience-center"
-    anchor: "Casambi Case Study | Chiếu sáng không gian showroom Blum Experience Center"
-  - url: "https://knxstore.vn/cct-la-gi-trong-chieu-sang.html"
-    slug: "cct-la-gi-trong-chieu-sang"
-    anchor: "CCT là gì trong chiếu sáng?"
-  - url: "https://knxstore.vn/chi-so-ugr-la-gi.html"
-    slug: "chi-so-ugr-la-gi"
-    anchor: "Chỉ số UGR là gì"
-  - url: "https://knxstore.vn/su-khac-biet-giua-cong-nghe-dmx512-va-spi-la-gi.html"
-    slug: "su-khac-biet-giua-cong-nghe-dmx512-va-spi-la-gi"
-    anchor: "LED Dây Pixel SPI vs DMX512 Khác Nhau Thế Nào?"
   - url: "https://knxstore.vn/6-loai-cam-bien-quan-trong-trong-he-thong-chieu-sang-thong-minh.html"
     slug: "6-loai-cam-bien-quan-trong-trong-he-thong-chieu-sang-thong-minh"
     anchor: "6 loại cảm biến quan trọng trong hệ thống chiếu sáng thông minh"
-  - url: "https://knxstore.vn/vi-sao-tinh-tuong-tac-quyet-dinh-hieu-qua-cua-he-thong-chieu-sang-thong-minh.html"
-    slug: "vi-sao-tinh-tuong-tac-quyet-dinh-hieu-qua-cua-he-thong-chieu-sang-thong-minh"
-    anchor: "Vì sao tính tương tác quyết định hiệu quả của hệ thống chiếu sáng thông minh?"
+  - url: "https://knxstore.vn/nang-cap-he-thong-chieu-sang-de-dang-voi-casambi-wireless-dali.html"
+    slug: "nang-cap-he-thong-chieu-sang-de-dang-voi-casambi-wireless-dali"
+    anchor: "nâng cấp hệ thống chiếu sáng bằng Casambi Wireless DALI"
+  - url: "https://knxstore.vn/huong-dan-cau-hinh-dia-chi-dali-tren-olfer-casambi-cbu-da-1p.html"
+    slug: "huong-dan-cau-hinh-dia-chi-dali-tren-olfer-casambi-cbu-da-1p"
+    anchor: "Olfer Casambi CBU-DA-1P"
+related_links:
+  - url: "https://knxstore.vn/mo-rong-dali-2-ra-dimmer-triac-relay-dmx-va-modbus-tcp.html"
+    slug: "mo-rong-dali-2-ra-dimmer-triac-relay-dmx-va-modbus-tcp"
+    anchor: "Mở Rộng DALI-2 Ra Dimmer Triac, Relay, DMX Và Modbus TCP"
+    position: 1
+  - url: "https://knxstore.vn/casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap.html"
+    slug: "casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap"
+    anchor: "Casambi không kết nối HomeKit? MTB10 Matter Bridge là giải pháp"
+    position: 2
+  - url: "https://knxstore.vn/nfc-trong-he-thong-chieu-sang-thong-minh-hoat-dong-nhu-the-nao.html"
+    slug: "nfc-trong-he-thong-chieu-sang-thong-minh-hoat-dong-nhu-the-nao"
+    anchor: "NFC có được sử dụng trong hệ thống chiếu sáng thông minh không?"
+    position: 3
+  - url: "https://knxstore.vn/thiet-ke-he-chieu-sang-dali-mo-rong-bang-casambi-se-nhu-the-nao.html"
+    slug: "thiet-ke-he-chieu-sang-dali-mo-rong-bang-casambi-se-nhu-the-nao"
+    anchor: "Thiết kế hệ chiếu sáng DALI mở rộng bằng Casambi sẽ như thế nào?"
+    position: 4
 ---
 
 # Điều khiển chiếu sáng có dây mới nhất của Casambi - Salvador
 
-> Casambi đã công bố cải tiến mới nhất của mình về điều khiển chiếu sáng có dây – Salvador. Đây là bộ điều khiển DALI mới, đánh dấu sự gia nhập chiến lược của công ty vào thị trường điều khiển ánh sáng có dây. Qua đó thiết lập vị thế mới với tư cách là nhà cung cấp điều khiển ánh sáng phổ biến và rộng khắp toàn thế giới.
+> Salvador là DALI Application Controller có dây của Casambi, đưa tối đa 64 driver DALI vào mạng Casambi Evolution qua Bluetooth. Xem cách chọn phiên bản và lắp đặt đúng.
 
 ## Article Body
 
-Vào ngày 3 tháng 3 năm 2024, Casambi, công ty hàng đầu thế giới về điều khiển chiếu sáng thông minh, đã công bố cải tiến mới nhất của mình –Casambi Salvador. Đây là series bộ điều khiển DALI mới. Thông báo này đã đánh dấu sự gia nhập đầy tính chiến lược của công ty công nghệ này vào thị trường điều khiển ánh sáng có dây. Qua đó thiết lập vị thế mới với tư cách là nhà cung cấp điều khiển ánh sáng phổ biến và rộng khắp toàn thế giới.
-
-Salvador - đánh dấu kỷ nguyên mới của Casambi về điều khiển chiếu sáng có dây
-
-Cùng thời điểm, tại triển lãm thương mại Light + Building (sự kiện quốc tế hàng đầu về công nghệ ánh sáng và dịch vụ xây dựng) ở Frankfurt, Đức, Casambi đã giới thiệu dòng sản phẩm bộ điều khiển DALI mới của mình, Salvador. Dòng sản phẩm này góp phần gia tăng sự linh hoạt trong điều khiển chiếu sáng của hệ thống Casambi. Họ không chỉ cung cấp các tùy chọn không dây mà giờ đây đã có tùy chọn có dây và kết hợp.
-
-Người sáng lập cho biết sáng kiến này vô cùng phù hợp với sứ mệnh của công ty, đó là mang lại trải nghiệm ánh sáng hoàn hảo cho tất cả mọi người. Timo Pakkala, Đồng sáng lập và Giám đốc Chiến lược & Quản lý Sản phẩm, cho biết thêm:
-
-“Dù bạn ưa chuộng thiết bị điều khiển không dây, có dây hay kết hợp cả hai, mục tiêu của chúng tôi là đảm bảo Casambi hoạt động trong mọi cài đặt. Đặc biệt, chúng tôi đảm bảo tính tương thích với các giao thức chính như DALI, Bluetooth LE và EnOcean. Điều này mở ra nhiều khả năng cho thị trường và cung cấp giải pháp điều khiển ánh sáng đa dạng tính năng cho mọi môi trường.”
-
-
-
-Cách Salvador vận hành
-
-Với series các thiết bị điều khiển Salvador, bạn sẽ không phải lo lắng về vấn đề liệu các thiết bị có dây và không dây có xung đột với nhau hay không. Trên thực tế, khi kết hợp Salvador với các loại sản phẩm khác, chúng có thể cùng tồn tại hài hòa trong ứng dụng Casambi mà không gặp bất kỳ hạn chế nào.
-
-Ngoài ra, trình điều khiển DALI được tích hợp vào hệ thống Casambi thông qua kết nối có dây sẽ hoạt động trơn tru như các thiết bị hỗ trợ Casambi thông thường. Hai hệ số dạng đầu tiên trong dòng sản phẩm này có thể quản lý tới 64 địa chỉ DALI và hỗ trợ DALI DT6, DT8 cũng như D4i thông qua API đám mây Casambi.
-
-Salvador 2064 đi kèm với nguồn điện 130 mA tích hợp, loại bỏ nhu cầu sử dụng các nguồn điện khác trên bus DALI. Ngoài ra, nó còn có đồng hồ thời gian thực (RTC) bên trong với bộ lưu trữ năng lượng dự phòng và vỏ có chức năng giảm căng cáp. Kiểu dáng thứ hai, Salvador 1064, yêu cầu nguồn điện bên ngoài.
-
->> Xem thêm về sản phẩm bộ điều khiển DALI master Salvador Casambi
-
-
-
-Salvador 1064 hiện đã có sản phẩm mẫu và dự kiến sẽ bước vào giai đoạn sản xuất thương mại trong quý 2 năm 2024. Thiết bị này được đánh giá có mức giá cạnh tranh, mang lại lợi thế đáng kể so với các bộ điều khiển DALI hiện có trên thị trường. Trong khi đó, Salvador 2064 dự kiến sẽ chính thức ra mắt thương mại từ quý 3 năm 2024.
-
-Hiện tại, tất cả các phiên bản Salvador SAL-10XX đã có mặt tại KNXStore, sẵn sàng đáp ứng nhu cầu của Quý khách hàng. Chúng tôi cung cấp đầy đủ ba phiên bản Salvador (bao gồm Salvador 1016, Salvador 1032, Salvador 1064), giúp bạn dễ dàng lựa chọn giải pháp phù hợp nhất cho dự án của mình. Xem thêm chi tiết ngay tại đây.
-
-Casambi - Thương hiệu chuyên cung cấp giải pháp điều khiển ánh sáng thông minh qua các ứng dụng trực quan
-
-Casambi đã thiết lập một tiêu chuẩn mới trong tương tác giữa người dùng với ánh sáng. Công nghệ dựa trên Bluetooth® Low Energy của Casambi khiến cho việc tích hợp vào các thiết bị và đèn cực kỳ dễ dàng. Với các thiết bị điều khiển ánh sáng không dây và có dây của DALI, người dùng sẽ dễ dàng kết hợp một cách linh hoạt để tạo ra các mạng ánh sáng phù hợp và tận hưởng trải nghiệm tuyệt vời cùng hệ sinh thái Casambi.
-
-Trong vòng một thập kỷ qua, Casambi đã trở thành một thương hiệu tiên phong với hơn 300 đối tác và hơn 5 triệu thiết bị được bán trong hơn 200.000 dự án chiếu sáng trên toàn thế giới. Tự hào là hệ thống giải pháp hoàn chỉnh và toàn hiện, từ việc thiết kế đến triển khai và sử dụng hàng ngày, Casambi sẽ giúp các cá nhân và doanh nghiệp chiếu sáng không gian với sự kiểm soát hiệu quả và linh hoạt.
+Casambi Salvador là câu trả lời của Casambi cho một tình huống rất thường gặp ở công trình Việt Nam: đường DALI đã đi dây sẵn, nhưng chủ đầu tư lại muốn vận hành qua app không dây như Casambi. Salvador (SAL-10XX) là DALI Application Controller có dây, đưa toàn bộ driver trên một bus DALI vào mạng Casambi Evolution mà không cần phần mềm DALI chuyên dụng hay kỹ sư DALI riêng để commissioning. Đây là sản phẩm đang bán tại KNXStore ở ba phiên bản SAL-1016, SAL-1032 và SAL-1064, khác nhau ở số địa chỉ DALI quản lý được trên một bus.
+Salvador là gì trong hệ sinh thái Casambi
+Salvador là DALI Application Controller (DALI master) có dây, đóng vai trò cầu nối biến một bus DALI có sẵn thành một phần của mạng Casambi không dây. Sau khi Salvador quét và đánh địa chỉ, mỗi driver DALI trên bus xuất hiện trong app Casambi như một luminaire độc lập, đầy đủ khả năng dimming, group, scene, timer và thu thập dữ liệu D4i, không khác gì đèn Casambi không dây thông thường.
+Khác gì so với CBU thông thường
+Nhiều người quen với dòng CBU của Casambi hay nhầm Salvador là "một CBU khác". Không phải vậy. Một CBU gắn vào driver DALI chỉ đóng vai trò một node duy nhất, đúng bằng chính driver đó. Salvador thì ngược lại: nó là thiết bị chủ điều khiển cả một bus, và một Salvador có thể tạo ra tới 64 node riêng biệt từ 64 driver trên cùng bus, tùy phiên bản. Đây là khác biệt cần nắm trước khi tính toán số node cho cả dự án, vì tính nhầm Salvador là "1 node" sẽ làm sai hoàn toàn bài toán quy hoạch mạng Casambi phía sau.
+Ba phiên bản Salvador: chọn theo số driver DALI cần điều khiển
+Phần cứng và firmware của SAL-1016, SAL-1032 và SAL-1064 giống nhau hoàn toàn. Điểm khác biệt duy nhất là giới hạn discovery, tức số địa chỉ DALI tối đa mà Salvador được phép quét và quản lý trên một bus.
+Model
+Địa chỉ DALI tối đa
+Phù hợp
+SAL-1016
+16 (A0-A15)
+Dự án nhỏ, retrofit phòng đơn lẻ
+SAL-1032
+32 (A0-A31)
+Văn phòng, khách sạn, dự án vừa
+SAL-1064
+64 (A0-A63)
+DALI bus lớn, tòa nhà thương mại, kho công nghiệp
+64 địa chỉ là giới hạn vật lý tối đa của một bus DALI theo IEC 62386, không có phiên bản Salvador nào vượt qua con số này trên một bus. Khi một khu vực cần điều khiển nhiều hơn 64 driver, cách làm đúng là chia thành nhiều bus DALI vật lý riêng biệt, mỗi bus dùng một Salvador, rồi cho các Salvador này cùng tham gia một mạng Casambi Evolution để chia sẻ scene và group xuyên suốt các bus.
+Thông số kỹ thuật cần biết trước khi thiết kế
+Salvador lấy nguồn trực tiếp từ DALI bus, không có nguồn AC hay pin riêng, nên việc tính PSU và số node trong mạng phải làm đúng từ đầu, không phải việc "cắm vào chạy thử rồi sửa sau".
+Nguồn cấp và tải PSU DALI
+Salvador hoạt động ở điện áp 9.5-22.5 VDC lấy từ DALI bus, dòng tiêu thụ idle 5mA và peak 30mA. Tổng dòng bus DALI (Salvador cộng tất cả driver) không được vượt quá 250mA, chiều dài cáp bus tối đa 300m trên toàn tuyến.
+Khi lập bảng tải PSU, cần cộng cả dòng của Salvador và dòng bus của từng driver. Driver DT6 thông thường tiêu thụ khoảng 2-3mA dòng bus mỗi driver, nên ở cấu hình đầy 64 driver trên một SAL-1064, tổng dòng bus rơi vào khoảng 130-200mA, vẫn nằm trong giới hạn 250mA nếu PSU DALI đủ công suất. Với driver D4i có PSU tích hợp sẵn, cần tắt PSU tích hợp không dùng, nếu không sẽ cộng dồn dòng vượt ngưỡng (lỗi này khá hay gặp khi đội thi công không đọc kỹ tài liệu driver mới).
+Giới hạn node trong mạng Casambi Evolution
+Salvador chỉ tương thích Casambi Evolution, không dùng được với Casambi Classic. Tổng số node trong một mạng Evolution là 250, tính cả Salvador, driver đã đánh địa chỉ và thiết bị Casambi Ready (sensor, switch, gateway).
+Ví dụ dễ hình dung: một tòa nhà 4 tầng, mỗi tầng dùng một SAL-1064 quản lý 60 đèn panel DALI DT8, tổng cộng 4 Salvador cộng 240 driver bằng 244 node, chỉ còn 6 node dư cho sensor và switch. Ở mức sát giới hạn như vậy, cần tính trước ngay từ bước thiết kế nếu dự án còn kế hoạch bổ sung cảm biến sau này, chứ không đợi thi công xong mới phát hiện hết chỗ.
+Kiến trúc hybrid: DALI có dây và Casambi Ready không dây trong một mạng
+Salvador tạo ra một mạng lai giữa driver DALI có dây và thiết bị Casambi Ready không dây, cùng vận hành trong một mạng Casambi Evolution. Trong app, driver DALI qua Salvador hiển thị như luminaire bình thường, người dùng cuối không cần biết phía sau là bus có dây.
+Điểm cần nhớ: Salvador chỉ kết nối được DALI driver (luminaire), không kết nối DALI control (switch, sensor DALI chuẩn). Nếu dự án có cảm biến hoặc công tắc theo chuẩn DALI cần tích hợp, phải đổi sang thiết bị Casambi Ready hoạt động qua Bluetooth, tham khảo thêm
+6 loại cảm biến quan trọng trong hệ thống chiếu sáng thông minh
+để chọn đúng loại tương thích. Đấu nhầm cảm biến DALI trực tiếp vào Salvador là lỗi thường thấy nhất khi đội thi công quen làm DALI truyền thống chuyển sang hệ Casambi.
+Lắp đặt và những lỗi thường gặp khi triển khai Salvador
+Quy trình đấu nối cơ bản
+Salvador bắt vít cố định vào vị trí trên bus, thường trong tủ kỹ thuật hoặc hộp junction. Hai cổng DA1 và DA2 đấu song song nội bộ, cho phép bus DALI chạy xuyên qua thiết bị, cả hai cổng đều không phân cực. Dùng dây lõi đặc 0.5-1.5mm², tuốt dây 6-8mm trước khi đấu. Sau khi đấu nối, pairing vào app Casambi rồi chạy Discovery để tự động đánh địa chỉ toàn bộ driver, ở cấu hình đầy 64 driver quá trình này thường mất 2-5 phút.
+Không đặt Salvador trong hộp kim loại kín. Kim loại chặn tín hiệu Bluetooth, và đây là lỗi lắp đặt phổ biến nhất khi đội điện quen đặt thiết bị điều khiển trong tủ tôn theo thói quen làm hệ có dây truyền thống.
+Lỗi thường gặp khi triển khai
+Ba lỗi hay gặp nhất khi lắp Salvador lần đầu: đấu công tắc hoặc cảm biến DALI trực tiếp vào bus (chỉ được đấu driver), tính thiếu dòng PSU khi có driver D4i tích hợp nguồn, và đặt thiết bị trong hộp kim loại làm mất tín hiệu Bluetooth. Cả ba đều không gây lỗi ngay lúc lắp, mà chỉ lộ ra khi vận hành thực tế, nên nên rà lại checklist này trước khi đóng tủ điện, không phải sau khi đã đóng.
+Salvador phù hợp với công trình nào
+Cách Salvador phân bổ node và quản lý bus cho thấy rõ nó phù hợp nhất với công trình đã có bus DALI có dây từ trước, chứ không phải điểm khởi đầu cho một hệ thống hoàn toàn mới.
+Với văn phòng hoặc khách sạn dùng DALI thuần, một Salvador quản lý vài chục driver trong khu vực, kết hợp thêm cảm biến và công tắc Casambi Ready để có daylight harvesting và Human Centric Lighting mà không cần phần mềm DALI riêng. Với kho xưởng trần cao đã đi dây DALI sẵn, việc kéo lại dây cho một hệ không dây hoàn toàn thường tốn kém hơn nhiều so với việc tận dụng bus DALI có sẵn và chỉ bổ sung sensor Casambi Ready cho vùng cần dimming theo hiện diện. Với trường học hoặc trung tâm thương mại nhiều tầng, mỗi tầng dùng riêng một Salvador, các Salvador cùng tham gia một mạng Evolution để lập lịch và điều khiển tổng thể từ một app duy nhất, thay vì vận hành rời rạc theo từng tầng như trước.
+Với công trình cần báo cáo vận hành, không chỉ điều khiển bật tắt, dữ liệu D4i từ driver qua Salvador có thể truyền lên Cloud Gateway để phục vụ energy metering và diagnostic cho hệ thống BMS hoặc phân tích bên thứ ba.
+Nếu công trình chưa có bus DALI có dây và đang ở giai đoạn thiết kế mới, nên cân nhắc
+nâng cấp hệ thống chiếu sáng bằng Casambi Wireless DALI
+hoặc dùng CBU không dây thay vì kéo bus DALI riêng chỉ để lắp Salvador. Với dự án quy mô nhỏ chỉ vài driver, quy trình gán địa chỉ qua
+Olfer Casambi CBU-DA-1P
+đơn giản hơn nhiều so với Discovery toàn bus của Salvador, và cũng nên tham khảo trước để biết Salvador có phải lựa chọn hợp lý cho quy mô dự án hay không, hay chỉ cần CBU là đủ.
+Kết luận
+Salvador là lựa chọn đúng khi công trình đã có sẵn bus DALI có dây và cần đưa toàn bộ hệ thống đó vào một mạng Casambi Evolution để vận hành cùng cảm biến và automation không dây, mà không cần phần mềm DALI chuyên dụng hay kỹ sư DALI riêng cho commissioning. Chọn đúng phiên bản theo số driver thực tế, tính đủ dòng PSU DALI, và không đấu nhầm DALI control vào Salvador là ba điểm quyết định hệ thống vận hành ổn định ngay từ lần lắp đặt đầu tiên. Cần tư vấn giải pháp cho công trình của bạn? KNXStore.vn - Công ty CP Tích hợp Hệ thống Liên Minh. Địa chỉ:
+Văn phòng số SAV5-01.02, Lầu 1, Tháp 5, The Sun Avenue, 28 Mai Chí Thọ, Phường Bình Trưng, TP.HCM
+. Hotline:
+0918.918.755
+. Email:
+sales@knxstore.vn
+Salvador khác gì so với CBU trong hệ Casambi?
+CBU gắn vào từng driver và mỗi CBU chỉ là một node duy nhất. Salvador là DALI master điều khiển cả một bus, mỗi driver được Salvador đánh địa chỉ trở thành một node riêng, một Salvador có thể tạo ra hàng chục node từ một bus DALI có sẵn.
 
-## Raw JSON-LD
+Salvador có cần nguồn điện riêng không?
+Không có nguồn AC hay pin riêng. Salvador lấy nguồn trực tiếp từ DALI bus (9.5-22.5 VDC), và bus này vẫn cần một PSU DALI ngoài tính đủ cho cả Salvador và toàn bộ driver.
+
+## Raw MCP
 
 ```json
-[
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebPage",
-        "@id": "https://knxstore.vn/dieu-khien-chieu-sang-co-day-moi-nhat-cua-casambi-salvador.html#webpage",
-        "url": "https://knxstore.vn/dieu-khien-chieu-sang-co-day-moi-nhat-cua-casambi-salvador.html",
-        "name": "Điều khiển chiếu sáng có dây mới nhất của Casambi - Salvador",
-        "description": "Casambi đã công bố cải tiến mới nhất của mình về điều khiển chiếu sáng có dây – Salvador. Đây là bộ điều khiển DALI mới, đánh dấu sự gia nhập chiến lược của công ty vào thị trường điều khiển ánh sáng có dây. Qua đó thiết lập vị thế mới với tư cách là nhà cung cấp điều khiển ánh sáng phổ biến và rộng khắp toàn thế giới.",
-        "inLanguage": "vi-VN",
-        "datePublished": "2025-05-19T22:49:32+07:00",
-        "dateModified": "2025-05-19T22:49:32+07:00",
-        "isPartOf": {
-          "@id": "https://knxstore.vn/#website"
-        },
-        "publisher": {
-          "@id": "https://knxstore.vn/#organization"
-        },
-        "mainEntity": {
-          "@id": "https://knxstore.vn/dieu-khien-chieu-sang-co-day-moi-nhat-cua-casambi-salvador.html#article"
-        },
-        "primaryImageOfPage": {
-          "@type": "ImageObject",
-          "@id": "https://knxstore.vn/dieu-khien-chieu-sang-co-day-moi-nhat-cua-casambi-salvador.html#featured-image",
-          "url": "https://knxstore.vn/assets/image/post/dieu-khien-chieu-sang-co-day-moi-nhat-cua-casambi-salvador.jpg",
-          "contentUrl": "https://knxstore.vn/assets/image/post/dieu-khien-chieu-sang-co-day-moi-nhat-cua-casambi-salvador.jpg",
-          "caption": "Điều khiển chiếu sáng có dây mới nhất của Casambi - Salvador"
-        },
-        "breadcrumb": {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Trang chủ",
-              "item": "https://knxstore.vn/"
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Blogs",
-              "item": "https://knxstore.vn/blogs"
-            },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "name": "Chiếu sáng",
-              "item": "https://knxstore.vn/blogs/chieu-sang"
-            },
-            {
-              "@type": "ListItem",
-              "position": 4,
-              "name": "Điều khiển chiếu sáng có dây mới nhất của Casambi - Salvador",
-              "item": "https://knxstore.vn/dieu-khien-chieu-sang-co-day-moi-nhat-cua-casambi-salvador.html"
-            }
-          ]
-        }
-      },
-      {
-        "@type": "BlogPosting",
-        "@id": "https://knxstore.vn/dieu-khien-chieu-sang-co-day-moi-nhat-cua-casambi-salvador.html#article",
-        "mainEntityOfPage": {
-          "@id": "https://knxstore.vn/dieu-khien-chieu-sang-co-day-moi-nhat-cua-casambi-salvador.html#webpage"
-        },
-        "headline": "Điều khiển chiếu sáng có dây mới nhất của Casambi - Salvador",
-        "description": "Casambi đã công bố cải tiến mới nhất của mình về điều khiển chiếu sáng có dây – Salvador. Đây là bộ điều khiển DALI mới, đánh dấu sự gia nhập chiến lược của công ty vào thị trường điều khiển ánh sáng có dây. Qua đó thiết lập vị thế mới với tư cách là nhà cung cấp điều khiển ánh sáng phổ biến và rộng khắp toàn thế giới.",
-        "articleBody": "Vào ngày 3 tháng 3 năm 2024, Casambi, công ty hàng đầu thế giới về điều khiển chiếu sáng thông minh, đã công bố cải tiến mới nhất của mình –Casambi Salvador. Đây là series bộ điều khiển DALI mới. Thông báo này đã đánh dấu sự gia nhập đầy tính chiến lược của công ty công nghệ này vào thị trường điều khiển ánh sáng có dây. Qua đó thiết lập vị thế mới với tư cách là nhà cung cấp điều khiển ánh sáng phổ biến và rộng khắp toàn thế giới.\r\n\r\nSalvador - đánh dấu kỷ nguyên mới của Casambi về điều khiển chiếu sáng có dây\r\n\r\nCùng thời điểm, tại triển lãm thương mại Light + Building (sự kiện quốc tế hàng đầu về công nghệ ánh sáng và dịch vụ xây dựng) ở Frankfurt, Đức, Casambi đã giới thiệu dòng sản phẩm bộ điều khiển DALI mới của mình, Salvador. Dòng sản phẩm này góp phần gia tăng sự linh hoạt trong điều khiển chiếu sáng của hệ thống Casambi. Họ không chỉ cung cấp các tùy chọn không dây mà giờ đây đã có tùy chọn có dây và kết hợp.\r\n\r\nNgười sáng lập cho biết sáng kiến này vô cùng phù hợp với sứ mệnh của công ty, đó là mang lại trải nghiệm ánh sáng hoàn hảo cho tất cả mọi người. Timo Pakkala, Đồng sáng lập và Giám đốc Chiến lược & Quản lý Sản phẩm, cho biết thêm:\r\n\r\n“Dù bạn ưa chuộng thiết bị điều khiển không dây, có dây hay kết hợp cả hai, mục tiêu của chúng tôi là đảm bảo Casambi hoạt động trong mọi cài đặt. Đặc biệt, chúng tôi đảm bảo tính tương thích với các giao thức chính như DALI, Bluetooth LE và EnOcean. Điều này mở ra nhiều khả năng cho thị trường và cung cấp giải pháp điều khiển ánh sáng đa dạng tính năng cho mọi môi trường.”\r\n\r\n\r\n\r\nCách Salvador vận hành\r\n\r\nVới series các thiết bị điều khiển Salvador, bạn sẽ không phải lo lắng về vấn đề liệu các thiết bị có dây và không dây có xung đột với nhau hay không. Trên thực tế, khi kết hợp Salvador với các loại sản phẩm khác, chúng có thể cùng tồn tại hài hòa trong ứng dụng Casambi mà không gặp bất kỳ hạn chế nào.\r\n\r\nNgoài ra, trình điều khiển DALI được tích hợp vào hệ thống Casambi thông qua kết nối có dây sẽ hoạt động trơn tru như các thiết bị hỗ trợ Casambi thông thường. Hai hệ số dạng đầu tiên trong dòng sản phẩm này có thể quản lý tới 64 địa chỉ DALI và hỗ trợ DALI DT6, DT8 cũng như D4i thông qua API đám mây Casambi.\r\n\r\nSalvador 2064 đi kèm với nguồn điện 130 mA tích hợp, loại bỏ nhu cầu sử dụng các nguồn điện khác trên bus DALI. Ngoài ra, nó còn có đồng hồ thời gian thực (RTC) bên trong với bộ lưu trữ năng lượng dự phòng và vỏ có chức năng giảm căng cáp. Kiểu dáng thứ hai, Salvador 1064, yêu cầu nguồn điện bên ngoài.\r\n\r\n>> Xem thêm về sản phẩm bộ điều khiển DALI master Salvador Casambi\r\n\r\n\r\n\r\nSalvador 1064 hiện đã có sản phẩm mẫu và dự kiến sẽ bước vào giai đoạn sản xuất thương mại trong quý 2 năm 2024. Thiết bị này được đánh giá có mức giá cạnh tranh, mang lại lợi thế đáng kể so với các bộ điều khiển DALI hiện có trên thị trường. Trong khi đó, Salvador 2064 dự kiến sẽ chính thức ra mắt thương mại từ quý 3 năm 2024.\r\n\r\nHiện tại, tất cả các phiên bản Salvador SAL-10XX đã có mặt tại KNXStore, sẵn sàng đáp ứng nhu cầu của Quý khách hàng. Chúng tôi cung cấp đầy đủ ba phiên bản Salvador (bao gồm Salvador 1016, Salvador 1032, Salvador 1064), giúp bạn dễ dàng lựa chọn giải pháp phù hợp nhất cho dự án của mình. Xem thêm chi tiết ngay tại đây.\r\n\r\nCasambi - Thương hiệu chuyên cung cấp giải pháp điều khiển ánh sáng thông minh qua các ứng dụng trực quan\r\n\r\nCasambi đã thiết lập một tiêu chuẩn mới trong tương tác giữa người dùng với ánh sáng. Công nghệ dựa trên Bluetooth® Low Energy của Casambi khiến cho việc tích hợp vào các thiết bị và đèn cực kỳ dễ dàng. Với các thiết bị điều khiển ánh sáng không dây và có dây của DALI, người dùng sẽ dễ dàng kết hợp một cách linh hoạt để tạo ra các mạng ánh sáng phù hợp và tận hưởng trải nghiệm tuyệt vời cùng hệ sinh thái Casambi.\r\n\r\nTrong vòng một thập kỷ qua, Casambi đã trở thành một thương hiệu tiên phong với hơn 300 đối tác và hơn 5 triệu thiết bị được bán trong hơn 200.000 dự án chiếu sáng trên toàn thế giới. Tự hào là hệ thống giải pháp hoàn chỉnh và toàn hiện, từ việc thiết kế đến triển khai và sử dụng hàng ngày, Casambi sẽ giúp các cá nhân và doanh nghiệp chiếu sáng không gian với sự kiểm soát hiệu quả và linh hoạt.\r\n",
-        "articleSection": "Chiếu sáng",
-        "keywords": [],
-        "inLanguage": "vi-VN",
-        "datePublished": "2025-05-19T22:49:32+07:00",
-        "dateModified": "2025-05-19T22:49:32+07:00",
-        "url": "https://knxstore.vn/dieu-khien-chieu-sang-co-day-moi-nhat-cua-casambi-salvador.html",
-        "image": {
-          "@id": "https://knxstore.vn/dieu-khien-chieu-sang-co-day-moi-nhat-cua-casambi-salvador.html#featured-image"
-        },
-        "publisher": {
-          "@id": "https://knxstore.vn/#organization"
-        },
-        "isPartOf": {
-          "@id": "https://knxstore.vn/#website"
-        },
-        "about": {
-          "@type": "Thing",
-          "name": "Nhà thông minh",
-          "description": "Giải pháp smarthome và thiết bị thông minh"
-        },
-        "mentions": [
-          {
-            "@type": "Thing",
-            "name": "Aqara"
-          },
-          {
-            "@type": "Thing",
-            "name": "Apple Home"
-          }
-        ],
-        "contentLocation": {
-          "@type": "Country",
-          "name": "Việt Nam",
-          "identifier": "VN"
-        },
-        "locationCreated": {
-          "@type": "City",
-          "name": "TP. Hồ Chí Minh",
-          "containedInPlace": {
-            "@type": "Country",
-            "name": "Việt Nam"
-          }
-        }
-      }
-    ]
-  }
-]
+{
+  "slug": "dieu-khien-chieu-sang-co-day-moi-nhat-cua-casambi-salvador",
+  "title": "Điều khiển chiếu sáng có dây mới nhất của Casambi - Salvador",
+  "excerpt": "Salvador là DALI Application Controller có dây của Casambi, đưa tối đa 64 driver DALI vào mạng Casambi Evolution qua Bluetooth. Xem cách chọn phiên bản và lắp đặt đúng.",
+  "coverImage": "/media/dc49a88e321ad41f10aa1330554de29acc800fed8ad421d322f442bbc8cad721.jpg",
+  "authorName": null,
+  "author": {
+    "slug": "le-vo-quoc-huy",
+    "name": "Lê Võ Quốc Huy",
+    "bio": "Quốc Huy là chuyên viên tư vấn giải pháp tự động hóa tòa nhà tại KNXStore.vn, với kinh nghiệm làm việc trực tiếp cùng các System Integrator, ME Contractor và đơn vị thi công điện cơ và điện lạnh trên toàn quốc.\nHuy chuyên tư vấn và hỗ trợ kỹ thuật cho các dự án ứng dụng giao thức KNX, Casambi, DALI-2, BACnet và Modbus trong các công trình văn phòng, khách sạn, tòa nhà thương mại và khu công nghiệp.\nĐể được tư vấn dự án hoặc báo giá, bạn có thể liên hệ trực tiếp qua Zalo Hotline của KNXStore.",
+    "jobTitle": "Sales Engineer",
+    "expertiseAreas": "KNX TP / KNX IP DALI-2 Lighting Control BACnet / Modbus Integration Building Management System (BMS) M&E Project Consulting Commercial & Hospitality Automation",
+    "certifications": null,
+    "linkedinUrl": "https://www.linkedin.com/in/huy-le-vo-quoc-177ba8309/",
+    "facebookUrl": "https://www.facebook.com/levoquochuy3011",
+    "websiteUrl": "https://qhsmart.vn/",
+    "seoDescription": "Lê Võ Quốc Huy Chuyên viên tư vấn B2B tại KNXStore.vn. Hỗ trợ System Integrator & ME Contractor triển khai KNX, Casambi, DALI-2, BACnet cho tòa nhà thương mại tại Việt Nam.",
+    "imageUrl": "/media/97b725830514056a9de009c65ee513e0dfc89b8e538adb71b25533ed7c766777.jpg",
+    "imageAlt": "Lê Võ Quốc Huy",
+    "isActive": true
+  },
+  "publishedAt": "2026-08-05T09:55:06.000Z",
+  "categories": [
+    {
+      "slug": "chieu-sang",
+      "name": "Chiếu sáng"
+    }
+  ],
+  "b2c": false,
+  "status": "PUBLISHED",
+  "seoTitle": "Casambi Salvador SAL-10XX Là Gì? DALI Master Cho Hệ Có Dây",
+  "seoDescription": "Salvador là DALI Application Controller có dây của Casambi, đưa tối đa 64 driver DALI vào mạng Casambi Evolution qua Bluetooth. Xem cách chọn phiên bản và lắp đặt đúng.",
+  "faqs": [
+    {
+      "question": "Salvador khác gì so với CBU trong hệ Casambi?",
+      "answer": "CBU gắn vào từng driver và mỗi CBU chỉ là một node duy nhất. Salvador là DALI master điều khiển cả một bus, mỗi driver được Salvador đánh địa chỉ trở thành một node riêng, một Salvador có thể tạo ra hàng chục node từ một bus DALI có sẵn.",
+      "position": 0
+    },
+    {
+      "question": "Salvador có cần nguồn điện riêng không?",
+      "answer": "Không có nguồn AC hay pin riêng. Salvador lấy nguồn trực tiếp từ DALI bus (9.5-22.5 VDC), và bus này vẫn cần một PSU DALI ngoài tính đủ cho cả Salvador và toàn bộ driver.",
+      "position": 1
+    }
+  ],
+  "editedAt": null,
+  "url": "https://knxstore.vn/dieu-khien-chieu-sang-co-day-moi-nhat-cua-casambi-salvador.html"
+}
 ```

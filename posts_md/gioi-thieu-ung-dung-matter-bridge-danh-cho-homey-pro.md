@@ -2,53 +2,40 @@
 url: "https://knxstore.vn/gioi-thieu-ung-dung-matter-bridge-danh-cho-homey-pro.html"
 headline: "Giới thiệu ứng dụng Matter Bridge dành cho Homey Pro"
 description: "Homey Pro bổ sung tính năng Matter Bridge, cho phép đưa thiết bị Zigbee, Z-Wave, 433 MHz và IR vào Apple Home, Google Home và Alexa một cách tự nhiên."
-og_site_name: "KNX Store"
-image: "https://knxstore.vn/assets/image/post/gioi-thieu-ung-dung-matter-bridge-danh-cho-homey-pro.jpg"
-datePublished: "2025-11-22T15:11:48+07:00"
-dateModified: "2025-11-22T15:11:48+07:00"
+image: "https://knxstore.vn/media/83b9c4b63a834febae5e3b198291b911e626307ae4b6690269fd03fcd01e82d0.jpg"
+datePublished: "2025-11-22T08:11:48.000Z"
+dateModified: "2025-11-22T08:11:48.000Z"
+publisher: "KNXStore.vn"
 articleSection: "Kiến thức"
 word_count: 569
-mentions: ["Aqara", "Apple Home"]
+keywords: ["Kiến thức"]
+source: "mcp"
 breadcrumb:
   - name: "Trang chủ"
     url: "https://knxstore.vn/"
-  - name: "Blogs"
+  - name: "Tin tức"
     url: "https://knxstore.vn/blogs"
   - name: "Kiến thức"
     url: "https://knxstore.vn/blogs/kien-thuc"
   - name: "Giới thiệu ứng dụng Matter Bridge dành cho Homey Pro"
     url: "https://knxstore.vn/gioi-thieu-ung-dung-matter-bridge-danh-cho-homey-pro.html"
-internal_links:
+related_links:
+  - url: "https://knxstore.vn/giam-sat-nang-luong-trong-he-thong-knx-vi-sao-phai-do-dien-truoc-khi-tiet-kiem-dien.html"
+    slug: "giam-sat-nang-luong-trong-he-thong-knx-vi-sao-phai-do-dien-truoc-khi-tiet-kiem-dien"
+    anchor: "Giám Sát Năng Lượng Trong Hệ Thống KNX: Vì Sao Phải Đo Điện Trước Khi Tiết Kiệm Điện"
+    position: 1
   - url: "https://knxstore.vn/ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome.html"
     slug: "ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome"
-    anchor: "IC là gì? Vai trò của IC trong thiết bị Smarthome"
+    anchor: "IC Là Gì? Cấu Tạo, Chức Năng Và Vai Trò Trong Smarthome"
+    position: 2
   - url: "https://knxstore.vn/nfc-la-gi-vi-sao-smarthome-hien-dai-deu-tich-hop-cong-nghe-nay.html"
     slug: "nfc-la-gi-vi-sao-smarthome-hien-dai-deu-tich-hop-cong-nghe-nay"
     anchor: "NFC là gì? Vì sao smarthome hiện đại đều tích hợp công nghệ này?"
+    position: 3
   - url: "https://knxstore.vn/spi-la-gi-ung-dung-spi-led-controller-trong-led-rgbw.html"
     slug: "spi-la-gi-ung-dung-spi-led-controller-trong-led-rgbw"
-    anchor: "SPI là gì? Ứng dụng SPI LED Controller trong LED RGBW"
-  - url: "https://knxstore.vn/10-bi-quyet-de-so-huu-mang-thread-on-dinh-muot-ma-cho-smarthome.html"
-    slug: "10-bi-quyet-de-so-huu-mang-thread-on-dinh-muot-ma-cho-smarthome"
-    anchor: "10 bí quyết để sở hữu mạng Thread ổn định, mượt mà cho Smarthome"
-  - url: "https://knxstore.vn/5-buoc-thiet-lap-nha-thong-minh-theo-chuan-matter.html"
-    slug: "5-buoc-thiet-lap-nha-thong-minh-theo-chuan-matter"
-    anchor: "5 bước thiết lập nhà thông minh theo chuẩn Matter"
-  - url: "https://knxstore.vn/faq-giai-dap-cac-cau-hoi-thuong-gap-ve-tieu-chuan-matter.html"
-    slug: "faq-giai-dap-cac-cau-hoi-thuong-gap-ve-tieu-chuan-matter"
-    anchor: "FAQ: Giải đáp các câu hỏi thường gặp về tiêu chuẩn Matter"
-  - url: "https://knxstore.vn/vai-tro-cua-aes-128-ccm-trong-bao-ve-truyen-thong-knx-ip.html"
-    slug: "vai-tro-cua-aes-128-ccm-trong-bao-ve-truyen-thong-knx-ip"
-    anchor: "AES-128 CCM là gì? Cơ chế bảo mật tối ưu cho giao thức KNX/IP"
-  - url: "https://knxstore.vn/homey-gioi-thieu-phien-ban-self-hosted-server.html"
-    slug: "homey-gioi-thieu-phien-ban-self-hosted-server"
-    anchor: "Homey giới thiệu phiên bản Self-Hosted Server"
-  - url: "https://knxstore.vn/thiet-bi-nao-tuong-thich-voi-matter.html"
-    slug: "thiet-bi-nao-tuong-thich-voi-matter"
-    anchor: "Thiết bị nào tương thích với Matter?"
-  - url: "https://knxstore.vn/vi-sao-hien-tai-chua-co-camera-an-ninh-tuong-thich-matter.html"
-    slug: "vi-sao-hien-tai-chua-co-camera-an-ninh-tuong-thich-matter"
-    anchor: "Vì sao hiện tại chưa có camera an ninh tương thích Matter?"
+    anchor: "SPI Là Gì? Ứng Dụng SPI LED Controller Trong LED RGBW"
+    position: 4
 ---
 
 # Giới thiệu ứng dụng Matter Bridge dành cho Homey Pro
@@ -57,194 +44,66 @@ internal_links:
 
 ## Article Body
 
-Homey Pro và Homey Pro mini của Athom vốn đã hoạt động như Matter Controller, cho phép thêm thiết bị Matter trực tiếp vào hệ sinh thái Homey. Mới đây, Athom tiếp tục phát hành một tiện ích phần mềm mới, giúp biến hai hub này thành Matter Bridge – tức là có thể phiên dịch tín hiệu từ các thiết bị không hỗ trợ Matter sang ngôn ngữ Matter.
-
-Tiện ích này được cài đặt như mọi ứng dụng Homey khác và hoàn toàn miễn phí trên Homey App Store.
-
-Lưu ý: Homey gọi các tiện ích mở rộng của hub là app, nên dễ gây hiểu nhầm với ứng dụng Homey trên điện thoại. Ở đây, chúng ta đang nói đến ứng dụng chạy trên hub Homey, không phải app quản lý trên smartphone.
-
-
-
-Kết nối nhiều giao thức không dây về chung một chuẩn Matter
-
-Với Matter Bridge, thiết bị sử dụng Infrared, Z-Wave, Zigbee hoặc 433 MHz đều có thể được “bridge” sang các nền tảng hỗ trợ Matter như: Apple Home, Google Home, Amazon Alexa, Samsung SmartThings, Home Assistant…
-
-Khi đó, các thiết bị Homey sẽ xuất hiện tự nhiên trong app của nền tảng kia và có thể được điều khiển bằng tự động hóa, scene, hoặc giọng nói.
-
-Ví dụ:
-
-
-	Động cơ rèm cũ dùng 433 MHz
-	Ổ cắm không hỗ trợ Matter
-	Thermostat Z-Wave
-
-
-Tất cả các thiết bị trên đều có thể đưa vào Apple Home thông qua Homey Pro.
-
-Theo Athom, Homey tương thích hơn 1.000 thương hiệu và hỗ trợ hơn 50.000 thiết bị – nhưng chỉ một phần trong số này hiện đã có cluster Matter tương ứng.
-
-Những nhóm thiết bị được hỗ trợ qua Matter Bridge
-
-Tiện ích này hỗ trợ các nhóm thiết bị quan trọng sau:
-
-
-	Đèn (bật/tắt, dim, đổi màu, tunable white)
-	Ổ cắm thông minh
-	Thermostat
-	Khóa cửa
-	Rèm/mành
-	Cảm biến cửa – cửa sổ
-	Nhiệt độ – độ ẩm
-	Chuyển động – hiện diện
-	Chất lượng không khí
-	Cảm biến CO₂, khói
-
-
-
-
-Đây là những loại thiết bị Matter đã có chuẩn hóa tốt, nên Homey có thể bridge ổn định.
-
-Cách cài đặt và ghép nối
-
-Bạn có thể cài đặt tiện ích Matter Bridge bằng:
-
-
-	Homey App cho Android/iOS
-	Homey Web App qua trình duyệt
-
-
-Sau khi cài đặt, mục Matter Bridge sẽ xuất hiện trong Settings của Homey Pro.
-
-Tại đây, hub sẽ hiển thị mã pairing Matter gồm số 11 chữ số và QR code.
-
-
-
-Quét mã này bằng Apple Home, Google Home hoặc nền tảng Matter khác để thêm bridge vào hệ sinh thái tương ứng.
-
-Vì bridge này chưa được chứng nhận chính thức, một số nền tảng sẽ cảnh báo khi ghép nối, nhưng vẫn có thể thêm và sử dụng bình thường. Sau khi thêm, bạn chỉ việc chọn thiết bị nào muốn chia sẻ qua Matter.
-
-Ý nghĩa thực tế cho hệ thống chiếu sáng
-
-Tiện ích Matter Bridge giúp Homey Pro trở thành điểm kết nối trung tâm, gom thiết bị đa giao thức về một chỗ, rồi xuất chúng sang Apple Home, Google Home, Alexa hoặc SmartThings như thiết bị Matter bản địa.
-
+Homey Pro và Homey Pro mini của Athom vốn đã hoạt động như Matter Controller, cho phép thêm thiết bị Matter trực tiếp vào hệ sinh thái Homey. Mới đây, Athom tiếp tục phát hành một tiện ích phần mềm mới, giúp biến hai hub này thành Matter Bridge – tức là có thể phiên dịch tín hiệu từ các thiết bị không hỗ trợ Matter sang ngôn ngữ Matter.
+Tiện ích này được cài đặt như mọi ứng dụng Homey khác và hoàn toàn miễn phí trên Homey App Store.
+Lưu ý: Homey gọi các tiện ích mở rộng của hub là app, nên dễ gây hiểu nhầm với ứng dụng Homey trên điện thoại. Ở đây, chúng ta đang nói đến ứng dụng chạy trên hub Homey, không phải app quản lý trên smartphone.
+Kết nối nhiều giao thức không dây về chung một chuẩn Matter
+Với Matter Bridge, thiết bị sử dụng Infrared, Z-Wave, Zigbee hoặc 433 MHz đều có thể được “bridge” sang các nền tảng hỗ trợ Matter như: Apple Home, Google Home, Amazon Alexa, Samsung SmartThings, Home Assistant…
+Khi đó, các thiết bị Homey sẽ xuất hiện tự nhiên trong app của nền tảng kia và có thể được điều khiển bằng tự động hóa, scene, hoặc giọng nói.
+Ví dụ:
+Động cơ rèm cũ dùng 433 MHz
+Ổ cắm không hỗ trợ Matter
+Thermostat Z-Wave
+Tất cả các thiết bị trên đều có thể đưa vào Apple Home thông qua Homey Pro.
+Theo Athom, Homey tương thích hơn 1.000 thương hiệu và hỗ trợ hơn 50.000 thiết bị – nhưng chỉ một phần trong số này hiện đã có cluster Matter tương ứng.
+Những nhóm thiết bị được hỗ trợ qua Matter Bridge
+Tiện ích này hỗ trợ các nhóm thiết bị quan trọng sau:
+Đèn (bật/tắt, dim, đổi màu, tunable white)
+Ổ cắm thông minh
+Thermostat
+Khóa cửa
+Rèm/mành
+Cảm biến cửa – cửa sổ
+Nhiệt độ – độ ẩm
+Chuyển động – hiện diện
+Chất lượng không khí
+Cảm biến CO₂, khói
+Đây là những loại thiết bị Matter đã có chuẩn hóa tốt, nên Homey có thể bridge ổn định.
+Cách cài đặt và ghép nối
+Bạn có thể cài đặt tiện ích Matter Bridge bằng:
+Homey App cho Android/iOS
+Homey Web App qua trình duyệt
+Sau khi cài đặt, mục Matter Bridge sẽ xuất hiện trong Settings của Homey Pro.
+Tại đây, hub sẽ hiển thị mã pairing Matter gồm số 11 chữ số và QR code.
+Quét mã này bằng Apple Home, Google Home hoặc nền tảng Matter khác để thêm bridge vào hệ sinh thái tương ứng.
+Vì bridge này chưa được chứng nhận chính thức, một số nền tảng sẽ cảnh báo khi ghép nối, nhưng vẫn có thể thêm và sử dụng bình thường. Sau khi thêm, bạn chỉ việc chọn thiết bị nào muốn chia sẻ qua Matter.
+Ý nghĩa thực tế cho hệ thống chiếu sáng
+Tiện ích Matter Bridge giúp Homey Pro trở thành điểm kết nối trung tâm, gom thiết bị đa giao thức về một chỗ, rồi xuất chúng sang Apple Home, Google Home, Alexa hoặc SmartThings như thiết bị Matter bản địa.
 Đây là bước tiến lớn cho những ai muốn dùng Homey làm trung tâm, nhưng vẫn tận dụng tối đa tiện ích của các hệ sinh thái khác như Siri, Google Assistant hoặc automation cao cấp.
 
-## Raw JSON-LD
+## Raw MCP
 
 ```json
-[
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebPage",
-        "@id": "https://knxstore.vn/gioi-thieu-ung-dung-matter-bridge-danh-cho-homey-pro.html#webpage",
-        "url": "https://knxstore.vn/gioi-thieu-ung-dung-matter-bridge-danh-cho-homey-pro.html",
-        "name": "Giới thiệu ứng dụng Matter Bridge dành cho Homey Pro",
-        "description": "Homey Pro bổ sung tính năng Matter Bridge, cho phép đưa thiết bị Zigbee, Z-Wave, 433 MHz và IR vào Apple Home, Google Home và Alexa một cách tự nhiên.",
-        "inLanguage": "vi-VN",
-        "datePublished": "2025-11-22T15:11:48+07:00",
-        "dateModified": "2025-11-22T15:11:48+07:00",
-        "isPartOf": {
-          "@id": "https://knxstore.vn/#website"
-        },
-        "publisher": {
-          "@id": "https://knxstore.vn/#organization"
-        },
-        "mainEntity": {
-          "@id": "https://knxstore.vn/gioi-thieu-ung-dung-matter-bridge-danh-cho-homey-pro.html#article"
-        },
-        "primaryImageOfPage": {
-          "@type": "ImageObject",
-          "@id": "https://knxstore.vn/gioi-thieu-ung-dung-matter-bridge-danh-cho-homey-pro.html#featured-image",
-          "url": "https://knxstore.vn/assets/image/post/gioi-thieu-ung-dung-matter-bridge-danh-cho-homey-pro.jpg",
-          "contentUrl": "https://knxstore.vn/assets/image/post/gioi-thieu-ung-dung-matter-bridge-danh-cho-homey-pro.jpg",
-          "caption": "Giới thiệu ứng dụng Matter Bridge dành cho Homey Pro"
-        },
-        "breadcrumb": {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Trang chủ",
-              "item": "https://knxstore.vn/"
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Blogs",
-              "item": "https://knxstore.vn/blogs"
-            },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "name": "Kiến thức",
-              "item": "https://knxstore.vn/blogs/kien-thuc"
-            },
-            {
-              "@type": "ListItem",
-              "position": 4,
-              "name": "Giới thiệu ứng dụng Matter Bridge dành cho Homey Pro",
-              "item": "https://knxstore.vn/gioi-thieu-ung-dung-matter-bridge-danh-cho-homey-pro.html"
-            }
-          ]
-        }
-      },
-      {
-        "@type": "BlogPosting",
-        "@id": "https://knxstore.vn/gioi-thieu-ung-dung-matter-bridge-danh-cho-homey-pro.html#article",
-        "mainEntityOfPage": {
-          "@id": "https://knxstore.vn/gioi-thieu-ung-dung-matter-bridge-danh-cho-homey-pro.html#webpage"
-        },
-        "headline": "Giới thiệu ứng dụng Matter Bridge dành cho Homey Pro",
-        "description": "Homey Pro bổ sung tính năng Matter Bridge, cho phép đưa thiết bị Zigbee, Z-Wave, 433 MHz và IR vào Apple Home, Google Home và Alexa một cách tự nhiên.",
-        "articleBody": "Homey Pro và Homey Pro mini của Athom vốn đã hoạt động như Matter Controller, cho phép thêm thiết bị Matter trực tiếp vào hệ sinh thái Homey. Mới đây, Athom tiếp tục phát hành một tiện ích phần mềm mới, giúp biến hai hub này thành Matter Bridge – tức là có thể phiên dịch tín hiệu từ các thiết bị không hỗ trợ Matter sang ngôn ngữ Matter.\r\n\r\nTiện ích này được cài đặt như mọi ứng dụng Homey khác và hoàn toàn miễn phí trên Homey App Store.\r\n\r\nLưu ý: Homey gọi các tiện ích mở rộng của hub là app, nên dễ gây hiểu nhầm với ứng dụng Homey trên điện thoại. Ở đây, chúng ta đang nói đến ứng dụng chạy trên hub Homey, không phải app quản lý trên smartphone.\r\n\r\n\r\n\r\nKết nối nhiều giao thức không dây về chung một chuẩn Matter\r\n\r\nVới Matter Bridge, thiết bị sử dụng Infrared, Z-Wave, Zigbee hoặc 433 MHz đều có thể được “bridge” sang các nền tảng hỗ trợ Matter như: Apple Home, Google Home, Amazon Alexa, Samsung SmartThings, Home Assistant…\r\n\r\nKhi đó, các thiết bị Homey sẽ xuất hiện tự nhiên trong app của nền tảng kia và có thể được điều khiển bằng tự động hóa, scene, hoặc giọng nói.\r\n\r\nVí dụ:\r\n\r\n\r\n\tĐộng cơ rèm cũ dùng 433 MHz\r\n\tỔ cắm không hỗ trợ Matter\r\n\tThermostat Z-Wave\r\n\r\n\r\nTất cả các thiết bị trên đều có thể đưa vào Apple Home thông qua Homey Pro.\r\n\r\nTheo Athom, Homey tương thích hơn 1.000 thương hiệu và hỗ trợ hơn 50.000 thiết bị – nhưng chỉ một phần trong số này hiện đã có cluster Matter tương ứng.\r\n\r\nNhững nhóm thiết bị được hỗ trợ qua Matter Bridge\r\n\r\nTiện ích này hỗ trợ các nhóm thiết bị quan trọng sau:\r\n\r\n\r\n\tĐèn (bật/tắt, dim, đổi màu, tunable white)\r\n\tỔ cắm thông minh\r\n\tThermostat\r\n\tKhóa cửa\r\n\tRèm/mành\r\n\tCảm biến cửa – cửa sổ\r\n\tNhiệt độ – độ ẩm\r\n\tChuyển động – hiện diện\r\n\tChất lượng không khí\r\n\tCảm biến CO₂, khói\r\n\r\n\r\n\r\n\r\nĐây là những loại thiết bị Matter đã có chuẩn hóa tốt, nên Homey có thể bridge ổn định.\r\n\r\nCách cài đặt và ghép nối\r\n\r\nBạn có thể cài đặt tiện ích Matter Bridge bằng:\r\n\r\n\r\n\tHomey App cho Android/iOS\r\n\tHomey Web App qua trình duyệt\r\n\r\n\r\nSau khi cài đặt, mục Matter Bridge sẽ xuất hiện trong Settings của Homey Pro.\r\n\r\nTại đây, hub sẽ hiển thị mã pairing Matter gồm số 11 chữ số và QR code.\r\n\r\n\r\n\r\nQuét mã này bằng Apple Home, Google Home hoặc nền tảng Matter khác để thêm bridge vào hệ sinh thái tương ứng.\r\n\r\nVì bridge này chưa được chứng nhận chính thức, một số nền tảng sẽ cảnh báo khi ghép nối, nhưng vẫn có thể thêm và sử dụng bình thường. Sau khi thêm, bạn chỉ việc chọn thiết bị nào muốn chia sẻ qua Matter.\r\n\r\nÝ nghĩa thực tế cho hệ thống chiếu sáng\r\n\r\nTiện ích Matter Bridge giúp Homey Pro trở thành điểm kết nối trung tâm, gom thiết bị đa giao thức về một chỗ, rồi xuất chúng sang Apple Home, Google Home, Alexa hoặc SmartThings như thiết bị Matter bản địa.\r\n\r\nĐây là bước tiến lớn cho những ai muốn dùng Homey làm trung tâm, nhưng vẫn tận dụng tối đa tiện ích của các hệ sinh thái khác như Siri, Google Assistant hoặc automation cao cấp.\r\n",
-        "articleSection": "Kiến thức",
-        "keywords": [],
-        "inLanguage": "vi-VN",
-        "datePublished": "2025-11-22T15:11:48+07:00",
-        "dateModified": "2025-11-22T15:11:48+07:00",
-        "url": "https://knxstore.vn/gioi-thieu-ung-dung-matter-bridge-danh-cho-homey-pro.html",
-        "image": {
-          "@id": "https://knxstore.vn/gioi-thieu-ung-dung-matter-bridge-danh-cho-homey-pro.html#featured-image"
-        },
-        "publisher": {
-          "@id": "https://knxstore.vn/#organization"
-        },
-        "isPartOf": {
-          "@id": "https://knxstore.vn/#website"
-        },
-        "about": {
-          "@type": "Thing",
-          "name": "Nhà thông minh",
-          "description": "Giải pháp smarthome và thiết bị thông minh"
-        },
-        "mentions": [
-          {
-            "@type": "Thing",
-            "name": "Aqara"
-          },
-          {
-            "@type": "Thing",
-            "name": "Apple Home"
-          }
-        ],
-        "contentLocation": {
-          "@type": "Country",
-          "name": "Việt Nam",
-          "identifier": "VN"
-        },
-        "locationCreated": {
-          "@type": "City",
-          "name": "TP. Hồ Chí Minh",
-          "containedInPlace": {
-            "@type": "Country",
-            "name": "Việt Nam"
-          }
-        }
-      }
-    ]
-  }
-]
+{
+  "slug": "gioi-thieu-ung-dung-matter-bridge-danh-cho-homey-pro",
+  "title": "Giới thiệu ứng dụng Matter Bridge dành cho Homey Pro",
+  "excerpt": "Homey Pro bổ sung tính năng Matter Bridge, cho phép đưa thiết bị Zigbee, Z-Wave, 433 MHz và IR vào Apple Home, Google Home và Alexa một cách tự nhiên.",
+  "coverImage": "/media/83b9c4b63a834febae5e3b198291b911e626307ae4b6690269fd03fcd01e82d0.jpg",
+  "authorName": null,
+  "author": null,
+  "publishedAt": "2025-11-22T08:11:48.000Z",
+  "categories": [
+    {
+      "slug": "kien-thuc",
+      "name": "Kiến thức"
+    }
+  ],
+  "b2c": false,
+  "status": "PUBLISHED",
+  "seoTitle": null,
+  "seoDescription": "Homey Pro bổ sung tính năng Matter Bridge, cho phép đưa thiết bị Zigbee, Z-Wave, 433 MHz và IR vào Apple Home, Google Home và Alexa một cách tự nhiên.",
+  "faqs": [],
+  "editedAt": null,
+  "url": "https://knxstore.vn/gioi-thieu-ung-dung-matter-bridge-danh-cho-homey-pro.html"
+}
 ```

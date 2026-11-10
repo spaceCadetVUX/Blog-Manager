@@ -1,308 +1,179 @@
 ---
 url: "https://knxstore.vn/su-khac-biet-giua-cam-bien-chuyen-dong-va-hien-dien-la-gi.html"
-headline: "Sự khác biệt giữa cảm biến chuyển động và hiện diện là gì?"
-description: "Bằng cách kết hợp hoặc sử dụng một trong hai cảm biến chuyển động hoặc cảm biến hiện diện vào hệ thống nhà thông minh, bạn hoàn toàn có thể tiết kiệm năng lượng và kiểm soát hiệu suất của các hệ thống từ chiếu sáng, an ninh, v.v.."
-og_site_name: "KNX Store"
-image: "https://knxstore.vn/assets/image/post/su-khac-biet-giua-cam-bien-chuyen-dong-va-hien-dien-la-gi.jpg"
-datePublished: "2025-07-20T20:09:55+07:00"
-dateModified: "2025-07-20T20:09:55+07:00"
+headline: "Cảm Biến Hiện Diện Khác Gì Cảm Biến Chuyển Động?"
+description: "Cảm biến hiện diện và cảm biến chuyển động khác nhau thế nào, nên chọn loại nào cho trường học, văn phòng, cao ốc, bán lẻ? Tư vấn miễn phí tại KNXStore.vn."
+image: "https://knxstore.vn/media/da3f3527396e095b994e72b9a50f8775035a9996a1b5303fadac2fd8b48b28d8.jpg"
+datePublished: "2026-08-10T08:04:13.000Z"
+dateModified: "2026-08-10T08:04:13.000Z"
+author: "Tạ Minh Vũ"
+publisher: "KNXStore.vn"
 articleSection: "Kiến thức"
-word_count: 1919
-mentions: ["Aqara", "Apple Home"]
+word_count: 1849
+keywords: ["Kiến thức"]
+source: "mcp"
 breadcrumb:
   - name: "Trang chủ"
     url: "https://knxstore.vn/"
-  - name: "Blogs"
+  - name: "Tin tức"
     url: "https://knxstore.vn/blogs"
   - name: "Kiến thức"
     url: "https://knxstore.vn/blogs/kien-thuc"
-  - name: "Sự khác biệt giữa cảm biến chuyển động và hiện diện là gì?"
+  - name: "Cảm Biến Hiện Diện Khác Gì Cảm Biến Chuyển Động?"
     url: "https://knxstore.vn/su-khac-biet-giua-cam-bien-chuyen-dong-va-hien-dien-la-gi.html"
-products: [{"url": "https://knxstore.vn/products/ir-tec-cam-bien-hien-dien-on-off-los-509sf", "name": "Cảm Biến ON-OFF"}, {"url": "https://knxstore.vn/products/ir-tec-cam-bien-hien-dien-dim-0-10v-lrd-509", "name": "Cảm Biến DIM 0-10V"}, {"url": "https://knxstore.vn/products/ir-tec-cam-bien-os-net-0-10v-tuong-thich-zhaga-on-brd-734sz", "name": "Cảm Biến OS-NET"}, {"url": "https://knxstore.vn/products/satel-cam-bien-chuyen-dong-pir-mw-pir-mw-opal", "name": "Cảm Biến PIR OPAL của Satel"}, {"url": "https://knxstore.vn/products/legrand-cam-bien-hien-dien-knx-pir-hd-360-gan-tran-048922", "name": "Cảm Biến Hiện Diện HD 360° của Legrand"}]
+products: [{"url": "https://knxstore.vn/products/cp-electronics-cam-bien-hien-dien-knx-ebdhs-knx", "name": "Cảm biến hiện diện KNX CP Electronics - EBDHS-KNX"}, {"url": "https://knxstore.vn/products/cp-electronics-cam-bien-hien-dien-vang-mat-hong-ngoai-knx-mws3a-knx", "name": "Cảm biến hiện diện/vắng mặt hồng ngoại KNX CP Electronics - MWS3A-KNX"}, {"url": "https://knxstore.vn/products/cp-electronics-cam-bien-hien-dien-knx-mws6-knx", "name": "Cảm biến hiện diện KNX CP Electronics - MWS6-KNX"}, {"url": "https://knxstore.vn/products/cp-electronics-cam-bien-hien-dien-hong-ngoai-knx-gan-tran-ebdspir-knx", "name": "Cảm biến hiện diện hồng ngoại KNX, gắn trần CP Electronics - EBDSPIR-KNX"}, {"url": "https://knxstore.vn/products/lutron-cam-bien-hien-dien-khong-day-gan-tran", "name": "Cảm biến hiện diện không dây gắn trần Lutron - LRF7-OCR2B-P-WH"}, {"url": "https://knxstore.vn/products/lutron-cam-bien-hien-dien-khong-day-gan-tuong", "name": "Cảm biến hiện diện không dây gắn tường Lutron - LRF7-OWLB-P-WH"}, {"url": "https://knxstore.vn/products/cam-bien-hien-dien-casambi-ip65-zhaga-dim-0-10v-sunricher-sr-cs9033a-pir-v", "name": "Cảm biến hiện diện Casambi IP65 Zhaga dim 0-10V Sunricher - SR-CS9033A-PIR-V"}]
 internal_links:
-  - url: "https://knxstore.vn/motion-sensor-la-gi.html"
-    slug: "motion-sensor-la-gi"
-    anchor: "Cảm biến chuyển động"
+  - url: "https://knxstore.vn/cam-bien-bat-tat-den.html"
+    slug: "cam-bien-bat-tat-den"
+    anchor: "cảm biến bật tắt đèn theo hiện diện người"
+related_links:
+  - url: "https://knxstore.vn/giam-sat-nang-luong-trong-he-thong-knx-vi-sao-phai-do-dien-truoc-khi-tiet-kiem-dien.html"
+    slug: "giam-sat-nang-luong-trong-he-thong-knx-vi-sao-phai-do-dien-truoc-khi-tiet-kiem-dien"
+    anchor: "Giám Sát Năng Lượng Trong Hệ Thống KNX: Vì Sao Phải Đo Điện Trước Khi Tiết Kiệm Điện"
+    position: 1
   - url: "https://knxstore.vn/ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome.html"
     slug: "ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome"
-    anchor: "IC là gì? Vai trò của IC trong thiết bị Smarthome"
+    anchor: "IC Là Gì? Cấu Tạo, Chức Năng Và Vai Trò Trong Smarthome"
+    position: 2
   - url: "https://knxstore.vn/nfc-la-gi-vi-sao-smarthome-hien-dai-deu-tich-hop-cong-nghe-nay.html"
     slug: "nfc-la-gi-vi-sao-smarthome-hien-dai-deu-tich-hop-cong-nghe-nay"
     anchor: "NFC là gì? Vì sao smarthome hiện đại đều tích hợp công nghệ này?"
+    position: 3
   - url: "https://knxstore.vn/spi-la-gi-ung-dung-spi-led-controller-trong-led-rgbw.html"
     slug: "spi-la-gi-ung-dung-spi-led-controller-trong-led-rgbw"
-    anchor: "SPI là gì? Ứng dụng SPI LED Controller trong LED RGBW"
-  - url: "https://knxstore.vn/10-bi-quyet-de-so-huu-mang-thread-on-dinh-muot-ma-cho-smarthome.html"
-    slug: "10-bi-quyet-de-so-huu-mang-thread-on-dinh-muot-ma-cho-smarthome"
-    anchor: "10 bí quyết để sở hữu mạng Thread ổn định, mượt mà cho Smarthome"
-  - url: "https://knxstore.vn/5-buoc-thiet-lap-nha-thong-minh-theo-chuan-matter.html"
-    slug: "5-buoc-thiet-lap-nha-thong-minh-theo-chuan-matter"
-    anchor: "5 bước thiết lập nhà thông minh theo chuẩn Matter"
-  - url: "https://knxstore.vn/faq-giai-dap-cac-cau-hoi-thuong-gap-ve-tieu-chuan-matter.html"
-    slug: "faq-giai-dap-cac-cau-hoi-thuong-gap-ve-tieu-chuan-matter"
-    anchor: "FAQ: Giải đáp các câu hỏi thường gặp về tiêu chuẩn Matter"
-  - url: "https://knxstore.vn/vai-tro-cua-aes-128-ccm-trong-bao-ve-truyen-thong-knx-ip.html"
-    slug: "vai-tro-cua-aes-128-ccm-trong-bao-ve-truyen-thong-knx-ip"
-    anchor: "AES-128 CCM là gì? Cơ chế bảo mật tối ưu cho giao thức KNX/IP"
-  - url: "https://knxstore.vn/homey-gioi-thieu-phien-ban-self-hosted-server.html"
-    slug: "homey-gioi-thieu-phien-ban-self-hosted-server"
-    anchor: "Homey giới thiệu phiên bản Self-Hosted Server"
-  - url: "https://knxstore.vn/thiet-bi-nao-tuong-thich-voi-matter.html"
-    slug: "thiet-bi-nao-tuong-thich-voi-matter"
-    anchor: "Thiết bị nào tương thích với Matter?"
-  - url: "https://knxstore.vn/vi-sao-hien-tai-chua-co-camera-an-ninh-tuong-thich-matter.html"
-    slug: "vi-sao-hien-tai-chua-co-camera-an-ninh-tuong-thich-matter"
-    anchor: "Vì sao hiện tại chưa có camera an ninh tương thích Matter?"
+    anchor: "SPI Là Gì? Ứng Dụng SPI LED Controller Trong LED RGBW"
+    position: 4
 ---
 
-# Sự khác biệt giữa cảm biến chuyển động và hiện diện là gì?
+# Cảm Biến Hiện Diện Khác Gì Cảm Biến Chuyển Động?
 
-> Bằng cách kết hợp hoặc sử dụng một trong hai cảm biến chuyển động hoặc cảm biến hiện diện vào hệ thống nhà thông minh, bạn hoàn toàn có thể tiết kiệm năng lượng và kiểm soát hiệu suất của các hệ thống từ chiếu sáng, an ninh, v.v..
+> Cảm biến hiện diện và cảm biến chuyển động khác nhau thế nào, nên chọn loại nào cho trường học, văn phòng, cao ốc, bán lẻ? Tư vấn miễn phí tại KNXStore.vn.
 
 ## Article Body
 
-Sẽ thực sự tuyệt vời nếu bạn trở về nhà khi trời tối và đèn ở hành lang bật sáng khi bạn bước vào. Hoặc đơn giản như lúc đi vệ sinh vào ban đêm, đèn chiếu sáng tự động bật và tắt ngay lập tức khi bạn rời đi. Bằng cách kết hợp cảm biến chuyển động hoặc cảm biến hiện diện vào hệ thống nhà thông minh, bạn hoàn toàn có thể đạt được điều đó. Thế nhưng điểm khác biệt giữa hai ứng dụng này là gì và cách chúng hoạt động như thế nào?
-
-Đặc điểm nổi bật giữa cảm biến chuyển động và cảm biến hiện diện
-
-Cảm biến chuyển động và cảm biến hiện diện đều có sự tương đồng về cách thức hoạt động vì chúng đo chuyển động trong một khu vực. Đặc biệt trong hệ thống chiếu sáng, thiết bị cũng giảm thời gian bật đèn, tương đương với việc tiết kiệm năng lượng và góp phần giảm lượng khí thải carbon. Tuy nhiên mỗi loại cảm biến lại mang đặc điểm khác biệt nổi bật, khiến chúng phù hợp với nhiều ứng dụng đa dạng khác nhau.
-
-
-	
-		
-			
-			Đặc điểm khác biệt
-			
-			
-			Cảm biến chuyển động
-			
-			
-			Cảm biến hiện diện
-			
-		
-		
-			
-			Công nghệ
-			
-			
-			Thiết bị cảm biến thông thường sử dụng công nghệ cảm biến hồng ngoại, vi sóng hoặc siêu âm để phát hiện vật thể chuyển động.
-			
-			
-			Cảm biến hiện diện có thể sử dụng một hoặc tích hợp nhiều công nghệ như cảm biến chuyển động, cảm biến tiệm cận, cảm biến quang điện và cảm biến hình ảnh để phát hiện các đối tượng bằng cách phân tích sự thay đổi trong tần số sóng phản xạ.
-			
-		
-		
-			
-			Độ nhạy
-			
-			
-			Phát hiện chuyển động trong phạm vi có những chuyển động lớn, chẳng hạn như một người bước vào phòng. Ít có khả năng đưa ra cảnh báo sai.
-			
-			
-			Phát hiện những thay đổi nhỏ nhất trong môi trường, chẳng hạn như nhiệt tỏa ra từ cơ thể con người hay các sóng âm có thể tạo ra khi có sự chuyển động. Có thể kích hoạt nhiều cảnh báo sai hơn so với cảm biến chuyển động.
-			
-		
-		
-			
-			Hiệu suất năng lượng
-			
-			
-			Cảm biến có thể tắt hệ thống khi vẫn có người trong phòng nhưng không di chuyển, dẫn đến khả năng khó chịu và lãng phí năng lượng khi khởi động lại hệ thống.
-			
-			
-			Hệ thống đèn hoặc hệ thống HVAC vẫn có thể tiếp tục hoạt động ngay cả khi người đứng yên, tránh sử dụng năng lượng không cần thiết.
-			
-		
-		
-			
-			Ứng dụng
-			
-			
-			Thường được sử dụng trong các hệ thống an ninh để phát hiện những kẻ xâm nhập di chuyển xung quanh
-			
-			
-			Phù hợp cho các hệ thống giám sát sử dụng năng lượng và quản lý năng lượng (hệ thống chiếu sáng thông minh hoặc điều khiển HVAC)
-			
-		
-	
-
-
-Những ứng dụng phổ biến của cảm biến chuyển động và hiện diện
-
-Cảm biến chuyển động và hiện diện có khả năng giúp tiết kiệm thời gian và làm cho những quy trình ứng dụng thiết bị thông minh trong các lĩnh vực thường ngày trở nên thuận tiện hơn nhiều. Sự linh hoạt và tính tùy chỉnh của chúng cho phép thích ứng với các yêu cầu cụ thể của không gian hoặc tình huống. Cùng KNXStore khám phá sâu hơn những ứng dụng tuyệt vời của những cảm biến này nhé.
-
-Trong hệ thống nhà thông minh và BMS
-
-Trong bối cảnh các hệ thống nhà thông minh tiên tiến, thiết bị cảm biến chuyển động và hiện diện sẽ phát huy tác dụng nhờ khả năng tự động hóa hàng loạt các tác vụ đa dạng và thiết thực. Hãy tưởng tượng rằng cảm biến chuyển động không chỉ đơn thuần là một thiết bị thông thường, mà chính là một "người hộ vệ" thông minh và nhạy bén. Bạn có thể sử dụng thiết bị để mở bất kỳ cửa ra vào, cổng, cửa gara, cửa sổ, cửa chớp, v.v.. hoặc chiếu sáng cho khu vực ngoài trời vào buổi tối.
-
-Với hệ thống cảm biến chuyển động của IR-TEC, mọi giải pháp về điều khiển ánh sáng cho khu vực nhà ở, thậm chí cho các tòa nhà cao cấp đều sẽ được giải quyết. Những thiết bị cảm biến của IR-TEC được thiết kế với thuật toán dimming đèn liên tục, mang lại hiệu suất điều chỉnh độ sáng mượt mà, ít nhấp nháy. Quý Khách hàng có thể tham khảo qua các sản phẩm điển hình của thương hiệu này tại KNXStore: Cảm Biến ON-OFF, Cảm Biến DIM 0-10V, Cảm Biến OS-NET.
-
-
-
-Điều tương tự cũng áp dụng cho cảm biến hiện diện, một công cụ thông minh và linh hoạt hỗ trợ đắc lực cho hệ thống nhà thông minh. Cảm biến hiện diện có khả năng điều khiển nhiệt độ trong không gian sống theo một cách tinh tế nhất - dựa trên sự hiện diện của con người. Điều này không chỉ tạo ra sự thoải mái cho người sử dụng mà còn giúp tối ưu hóa việc sử dụng năng lượng -một yếu tố quan trọng trong thời đại hiện nay.
-
-An ninh gia đình
-
-Trong hệ thống an ninh gia đình, cảm biến chuyển động vô cùng nhạy bén trong việc phát hiện các hoạt đông xâm nhập đáng ngờ, đồng thời đặt báo thức và gửi thông báo đi ngay khi có thay đổi. Điều này mang lại sự an tâm và yên tâm cho gia đình, vì họ có thể biết được mọi sự diễn ra trong ngôi nhà của mình. Ngoài ra, bạn cũng có thể kết hợp các loại cảm biến nhiệt độ, cảm biến ngoại vi, còi báo động, v.v.. để tạo nên một hệ thống an ninh vững chắc.
-
-Nhiều nghiên cứu chỉ ra rằng những ngôi nhà có hệ thống điều khiển ánh sáng tốt sẽ ít có khả năng trở thành mục tiêu của kẻ trộm. Trong hệ thống chiếu sáng, đèn cảm biến được bổ sung thêm một lớp bảo mật bằng cách chiếu sáng khu vực bất cứ khi nào phát hiện chuyển động. Cách tiếp cận chủ động này sẽ tăng cường an ninh ngôi nhà và mang lại sự an tâm cho gia chủ.
-
-
-
-Ứng dụng công nghiệp
-
-Trong môi trường công nghiệp, sử dụng các thiết bị cảm biến chuyển động sẽ đem lại lợi ích to lớn cho việc tăng cường an toàn. Các thiết bị này có khả năng phát hiện chuyển động trong khu vực nguy hiểm và kích hoạt cảnh báo, nhằm đảm bảo an ninh và tránh tai nạn không đáng có. Ngoài ra cảm biến chuyển động bật tắt đèn cũng là một loại cảm biến đáng để tham khảo trong hệ thống này.
-
-Đối với việc giám sát sự hiện diện của nhân viên trong các khu vực cụ thể, sử dụng cảm biến hiện diện là một giải pháp hiệu quả. Chúng có khả năng theo dõi và kiểm soát truy cập, đồng thời ghi lại thông tin về thời gian điểm danh của nhân viên. Điều này giúp tăng cường sự quản lý và giám sát, đồng thời đảm bảo tính chính xác và minh bạch trong quá trình làm việc.
-
-Trong môi trường bán lẻ và kinh doanh
-
-Trong môi trường bán lẻ, việc sử dụng cảm biến chuyển động không chỉ giúp người dùng theo dõi chính xác sự di chuyển của khách hàng, mà còn cung cấp những dữ liệu về hành vi của họ và đảm bảo hiệu quả tối đa trong việc bố trí cửa hàng. Về cảm biến hiện diện, sử dụng cảm biến hiện diện cũng mang đến khả năng giám sát và quản lý chính xác mức độ sử dụng phòng trong thời gian thực.
-
-
-
-Cách xác định loại cảm biến phù hợp cho ứng dụng của bạn
-
-Khi đưa ra lựa chọn giữa cảm biến chuyển động và cảm biến hiện diện, bạn cần xem xét đến nhiều yếu tố liên quan nhằm đảm bảo sự phù hợp đối với ứng dụng ngoài đời. Dưới đây là những yếu tố KNXStore cho rằng chúng sẽ ảnh hưởng trực tiếp đến quyết định của bạn.
-
-Mục đích sử dụng
-
-Yếu tố cần được xem xét đầu tiên chính là mục đích sử dụng của cảm biến. Nếu bạn cần thiết bị có thể phát hiện những chuyển động quan trọng để kiểm soát an ninh, hay điều khiển ánh sáng tại những khu vực có nhiều chuyển động hơn như hành lang hay cầu thang, thì cảm biến chuyển động sẽ là sự lựa chọn tối ưu. Trái lại, trong các khu vực ít hoạt động di chuyển như văn phòng tại nhà, phòng khách hoặc phòng ngủ, sử dụng cảm biến hiện diện sẽ phù hợp hơn.
-
-
-
-Nhờ các cảm biến miễn dịch của thú cưng của Satel, ngôi nhà vẫn được bảo vệ kể cả khi có động vật đi lại tự do trong phạm vi quét
-
-Lý tưởng nhất là bạn nên thiết lập sự kết hợp giữa cảm biến chuyển động và hiện diện ở nơi chúng có hiệu quả nhất. Chẳng hạn như thiết bị Cảm Biến PIR OPAL của Satel có khả năng phát hiện chuyển động trong khu vực được bảo vệ, phù hợp sử dụng cho các khu vực có thú cưng dưới 15kg. Hoặc như Cảm Biến Hiện Diện HD 360° của Legrand rất phù hợp cho các khu vực nhỏ và kín như phòng khách, phòng ăn, phòng ngủ, văn phòng, v.v..
-
-Hiệu suất năng lượng
-
-Cảm biến hiện diện đóng một vai trò quan trọng trong việc tiết kiệm năng lượng bằng cách đảm bảo rằng hệ thống chiếu sáng và hệ thống điều hòa không khí (HVAC) chỉ hoạt động khi có sự hiện diện của con người trong không gian. Mặc dù cảm biến chuyển động cũng có thể đóng góp vào việc tiết kiệm năng lượng, tuy nhiên chúng thường không hiệu quả như cảm biến hiện diện vì chúng không thể phân biệt giữa không gian có người và không gian không có người một cách chính xác.
-
-Cài đặt và bảo trì
-
-Cả hai loại cảm biến đều yêu cầu được lắp đặt và chăm sóc định kỳ. Do đó người dùng cần xem xét kỹ mức độ phức tạp trong quá trình lắp đặt và các yêu cầu bảo trì cần thiết để có lựa chọn đúng giữa hai phương án này. Kỹ thuật viên có trình độ tại KNXStore sẽ đảm bảo vấn đề này cho dự án của bạn. Sau khi đánh giá kỹ lưỡng, chúng tôi sẽ giúp bạn chọn, cài đặt và bảo dưỡng thiết bị để Quý Khách hàng có thể an tâm hơn và tiết kiệm được nhiều thời gian và công sức đáng kể.
-
-
-
-Với khả năng phát hiện chuyển động và hiện diện, các cảm biến sẽ tự động kích hoạt các chức năng như điều chỉnh ánh sáng, quản lý nhiệt độ, hoặc thậm chí là khóa mở cửa tự động. Sự kết hợp hoàn hảo giữa công nghệ cảm biến và các tiện ích, việc bổ sung cảm biến chuyển động và hiện diện vào không gian sống sẽ tạo ra một trải nghiệm sống hiện đại và sang trọng hơn bao giờ hết.
+Một phòng họp dùng cảm biến chuyển động thường xuyên tắt đèn đột ngột dù cả phòng vẫn đang ngồi họp, chỉ vì không ai đứng dậy di chuyển. Đây là ví dụ điển hình cho việc chọn nhầm loại cảm biến. Cảm biến hiện diện và cảm biến chuyển động nghe có vẻ giống nhau, đều để tự động bật tắt đèn hoặc điều hòa, nhưng thực chất phục vụ hai nhóm nhu cầu khác biệt rõ rệt. Bài viết này phân tích sự khác biệt về công nghệ, độ nhạy và hiệu suất năng lượng giữa hai loại, tập trung vào ứng dụng cho trường học, văn phòng, cao ốc và công trình bán lẻ, nơi việc chọn sai loại cảm biến gây lãng phí điện hoặc khó chịu cho người dùng.
+Cảm biến hiện diện khác gì cảm biến chuyển động?
+Cảm biến chuyển động chỉ phát hiện được sự di chuyển rõ rệt như một người bước vào phòng, còn cảm biến hiện diện có thể phát hiện cả những chuyển động rất nhỏ như gõ bàn phím hay xoay đầu khi đang ngồi yên.
+Sự khác biệt này bắt nguồn từ công nghệ đầu dò. Cảm biến chuyển động thường chỉ dùng một công nghệ như PIR hoặc vi sóng, trong khi cảm biến hiện diện có thể kết hợp thêm công nghệ siêu âm hoặc cảm biến quang điện để tăng độ nhạy. Kết quả là cảm biến hiện diện phù hợp hơn cho không gian có người ngồi lâu và ít di chuyển, còn cảm biến chuyển động phù hợp hơn cho khu vực có người ra vào liên tục.
+Cảm biến chuyển động nói chung có bài phân loại 4 công nghệ phổ biến riêng
+, tập trung vào ứng dụng nhà ở, trong khi bài này tập trung vào bài toán công trình thương mại.
+Vì sao công trình thương mại cần phân biệt rõ hai loại này?
+Câu trả lời ngắn: chọn sai loại cảm biến trong văn phòng hoặc trường học gây ra hai vấn đề trái ngược nhau, đèn tắt giữa chừng gây khó chịu hoặc đèn sáng cả ngày dù phòng không có ai.
+Với không gian có người ngồi lâu như phòng họp, lớp học hay bàn làm việc, cảm biến chuyển động thông thường dễ hiểu nhầm trạng thái "ngồi yên làm việc" thành "phòng trống" và tắt đèn giữa chừng. Ngược lại, ở hành lang hay cầu thang nơi người chỉ đi ngang qua, cảm biến hiện diện với độ nhạy cao lại dễ bị kích hoạt bởi những chuyển động không cần thiết như rèm bay hay điều hòa thổi, gây lãng phí năng lượng và bảo trì thường xuyên hơn mức cần thiết.
+Tiêu chí
+Cảm biến chuyển động
+Cảm biến hiện diện
+Độ nhạy
+Phát hiện chuyển động lớn, rõ ràng
+Phát hiện cả vi chuyển động khi ngồi yên
+Rủi ro chính
+Tắt đèn nhầm khi người ngồi yên lâu
+Báo nhầm do nhiễu môi trường
+Chi phí
+Thấp hơn
+Cao hơn do nhiều công nghệ đầu dò
+Phù hợp nhất
+Hành lang, cầu thang, kho, bãi đỗ xe
+Phòng họp, lớp học, văn phòng cá nhân
+Bảng trên chỉ mang tính tham khảo tổng quát, mỗi công trình cụ thể vẫn cần khảo sát thực tế để chọn đúng loại và cấu hình độ nhạy phù hợp.
+Cảm biến hiện diện hoạt động theo cơ chế nào?
+Công nghệ đơn: PIR, vi sóng, siêu âm
+Ba công nghệ đầu dò chính không chỉ khác tên gọi, mà khác cả vùng phủ, góc quét và điểm yếu, điều này quyết định trực tiếp cảm biến có phù hợp với cách người dùng thực tế ngồi trong phòng hay không.
+PIR chia vùng quét thành nhiều ô nhỏ qua thấu kính Fresnel, chỉ kích hoạt khi thân nhiệt cắt ngang ranh giới giữa các ô. Đây là lý do PIR rất nhạy với chuyển động ngang qua phòng nhưng lại kém nhạy với chuyển động hướng thẳng vào cảm biến, ví dụ một người ngồi ngay dưới cảm biến gõ bàn phím có thể không đủ để duy trì tín hiệu, vì lúc đó thân nhiệt không cắt qua ranh giới ô nào.
+Vi sóng phát sóng tần số cao và đo độ lệch tần số phản xạ theo hiệu ứng Doppler khi có vật thể chuyển động. Vì sóng vi ba xuyên qua được vật liệu nhẹ như vách thạch cao hay kính mờ, cảm biến vi sóng có thể bắt luôn cả chuyển động ở phòng bên cạnh nếu không giới hạn đúng vùng phủ, đây cũng là nguyên nhân phổ biến gây báo nhầm chéo phòng trong văn phòng dùng vách ngăn mỏng.
+Siêu âm phát sóng âm tần số cao, ngoài ngưỡng nghe của tai người, rồi phân tích sự thay đổi trong sóng phản hồi. Vì bước sóng ngắn hơn nhiều so với vi sóng, siêu âm bắt được cả những vi chuyển động như gõ bàn phím hay xoay ghế, đúng đặc tính cần cho không gian làm việc tĩnh. Đánh đổi là sóng âm dội lại từ vách cứng hoặc luồng khí điều hòa thổi mạnh cũng dễ bị hiểu nhầm thành chuyển động.
+Chế độ occupancy và vacancy: chi tiết hay bị bỏ qua khi lắp đặt
+Ngoài công nghệ đầu dò, cảm biến hiện diện cho công trình còn có một tham số cấu hình quan trọng nhưng thường bị bỏ qua: chế độ occupancy hay vacancy.
+Ở chế độ occupancy, đèn tự động bật ngay khi cảm biến phát hiện có người và tự tắt khi phòng trống quá thời gian trễ đã cài, đây là chế độ quen thuộc nhất, phù hợp hành lang hay nhà vệ sinh. Ở chế độ vacancy, người dùng vẫn bật đèn bằng công tắc như bình thường, nhưng cảm biến chỉ đảm nhận phần tự động tắt khi phòng trống. Một số tiêu chuẩn công trình xanh quốc tế như LEED hay ASHRAE 90.1 khuyến khích dùng chế độ vacancy cho phòng làm việc và phòng học, vì cách này tránh bật đèn không cần thiết khi ánh sáng tự nhiên đã đủ, chỉ tự động lo đúng phần dễ bị quên nhất là tắt đèn. Việt Nam hiện chưa có quy định bắt buộc tương tự, nhưng nhiều công trình theo chuẩn LEED hoặc EDGE tại các thành phố lớn vẫn áp dụng logic này khi thiết kế hệ thống chiếu sáng.
+Ứng dụng cảm biến hiện diện trong công trình thương mại
+Trường học và văn phòng: tiết kiệm điện HVAC và chiếu sáng
+Phòng học và văn phòng là nơi cảm biến hiện diện phát huy tác dụng rõ nhất, vì học sinh hay nhân viên thường ngồi yên trong thời gian dài. Đèn và điều hòa chỉ hoạt động khi phòng thực sự có người, tránh tình trạng đèn sáng cả buổi dù lớp học đã tan hoặc phòng họp trống từ lâu. Cách làm này thường kết hợp với cảm biến hiện diện tích hợp ánh sáng để vừa kiểm soát hiện diện vừa tận dụng ánh sáng tự nhiên từ cửa sổ.
+Bán lẻ và cao ốc: giám sát mức sử dụng không gian theo thời gian thực
+Ở các tòa nhà văn phòng cho thuê hoặc khu bán lẻ, cảm biến hiện diện không dây giúp lắp đặt nhanh mà không cần đi lại dây điện, phù hợp khi cải tạo từng khu vực nhỏ mà không ảnh hưởng đến hoạt động chung của cả tòa nhà.
+Nên chọn cảm biến chuyển động hay cảm biến hiện diện cho công trình của bạn?
+Nguyên tắc thực tế: nơi người ở lại lâu và ít di chuyển thì chọn cảm biến hiện diện, nơi người chỉ đi ngang qua thì chọn cảm biến chuyển động thông thường sẽ tiết kiệm chi phí hơn mà vẫn đủ hiệu quả. Với các khu vực phụ như kho, cầu thang thoát hiểm hay bãi đỗ xe, cảm biến chuyển động PIR tiêu chuẩn vẫn là lựa chọn hợp lý nhất, không cần đến độ nhạy cao của cảm biến hiện diện. Nếu bạn cần tự động hóa cả bật tắt đèn theo thời gian biểu sử dụng phòng,
+cảm biến bật tắt đèn theo hiện diện người
+có hướng dẫn chi tiết hơn về cách cấu hình độ trễ phù hợp từng không gian.
+Cảm biến hiện diện nào đang có tại KNXStore
+Với công trình dùng hệ thống KNX, các module CP Electronics cho phép tích hợp trực tiếp vào ETS cùng toàn bộ hệ thống chiếu sáng và HVAC của tòa nhà. Nếu cần lắp nhanh không đi dây, dòng Lutron không dây và Sunricher Casambi phù hợp cho cải tạo từng khu vực riêng lẻ mà không ảnh hưởng đến vận hành chung.
+Với mọi công trình sử dụng cảm biến hiện diện, KNXStore có dịch vụ T&C, kỹ thuật viên khảo sát không gian thực tế, đề xuất loại phù hợp và cấu hình độ nhạy, thời gian trễ tắt đèn trước khi bàn giao.
+Cảm biến hiện diện có thực sự tiết kiệm điện hơn cảm biến chuyển động trong văn phòng không?
+Với không gian có người ngồi lâu như văn phòng hay phòng họp, có. Cảm biến chuyển động thông thường dễ tắt đèn nhầm khi người ngồi yên, khiến hệ thống phải khởi động lại nhiều lần, trong khi cảm biến hiện diện duy trì đúng trạng thái đèn theo thực tế sử dụng phòng.
 
-## Raw JSON-LD
+Cảm biến hiện diện có hay báo động giả trong không gian mở như văn phòng không?
+Có thể, vì độ nhạy cao khiến cảm biến dễ phản ứng với luồng gió điều hòa hoặc ánh sáng dao động qua cửa kính. Cần cấu hình đúng ngưỡng độ nhạy và vị trí lắp để hạn chế tình trạng này.
+
+Trường học nên dùng cảm biến hiện diện hay cảm biến chuyển động?
+Phòng học nên dùng cảm biến hiện diện vì học sinh ngồi yên trong thời gian dài. Hành lang, cầu thang và khu vực sân trường phù hợp hơn với cảm biến chuyển động thông thường, chi phí thấp hơn mà vẫn đủ hiệu quả.
+
+Cảm biến hiện diện có tích hợp được vào hệ thống BMS có sẵn không?
+Được, nếu chọn dòng có giao thức tương thích như KNX hoặc DALI-2. Cần kiểm tra hệ thống BMS hiện tại hỗ trợ giao thức nào trước khi chọn cảm biến để đảm bảo tích hợp trơn tru.
+
+Chi phí lắp đặt cảm biến hiện diện cho công trình có cao hơn cảm biến chuyển động thường không?
+Nhìn chung cao hơn do công nghệ đầu dò phức tạp hơn, nhưng phần chênh lệch này thường được bù lại qua mức tiết kiệm điện thực tế ở những không gian có người ngồi lâu. Với khu vực chỉ cần on/off đơn giản, cảm biến chuyển động thông thường vẫn là lựa chọn kinh tế hơn.
+
+## Raw MCP
 
 ```json
-[
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebPage",
-        "@id": "https://knxstore.vn/su-khac-biet-giua-cam-bien-chuyen-dong-va-hien-dien-la-gi.html#webpage",
-        "url": "https://knxstore.vn/su-khac-biet-giua-cam-bien-chuyen-dong-va-hien-dien-la-gi.html",
-        "name": "Sự khác biệt giữa cảm biến chuyển động và hiện diện là gì?",
-        "description": "Bằng cách kết hợp hoặc sử dụng một trong hai cảm biến chuyển động hoặc cảm biến hiện diện vào hệ thống nhà thông minh, bạn hoàn toàn có thể tiết kiệm năng lượng và kiểm soát hiệu suất của các hệ thống từ chiếu sáng, an ninh, v.v..",
-        "inLanguage": "vi-VN",
-        "datePublished": "2025-07-20T20:09:55+07:00",
-        "dateModified": "2025-07-20T20:09:55+07:00",
-        "isPartOf": {
-          "@id": "https://knxstore.vn/#website"
-        },
-        "publisher": {
-          "@id": "https://knxstore.vn/#organization"
-        },
-        "mainEntity": {
-          "@id": "https://knxstore.vn/su-khac-biet-giua-cam-bien-chuyen-dong-va-hien-dien-la-gi.html#article"
-        },
-        "primaryImageOfPage": {
-          "@type": "ImageObject",
-          "@id": "https://knxstore.vn/su-khac-biet-giua-cam-bien-chuyen-dong-va-hien-dien-la-gi.html#featured-image",
-          "url": "https://knxstore.vn/assets/image/post/su-khac-biet-giua-cam-bien-chuyen-dong-va-hien-dien-la-gi.jpg",
-          "contentUrl": "https://knxstore.vn/assets/image/post/su-khac-biet-giua-cam-bien-chuyen-dong-va-hien-dien-la-gi.jpg",
-          "caption": "Sự khác biệt giữa cảm biến chuyển động và hiện diện là gì?"
-        },
-        "breadcrumb": {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Trang chủ",
-              "item": "https://knxstore.vn/"
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Blogs",
-              "item": "https://knxstore.vn/blogs"
-            },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "name": "Kiến thức",
-              "item": "https://knxstore.vn/blogs/kien-thuc"
-            },
-            {
-              "@type": "ListItem",
-              "position": 4,
-              "name": "Sự khác biệt giữa cảm biến chuyển động và hiện diện là gì?",
-              "item": "https://knxstore.vn/su-khac-biet-giua-cam-bien-chuyen-dong-va-hien-dien-la-gi.html"
-            }
-          ]
-        }
-      },
-      {
-        "@type": "BlogPosting",
-        "@id": "https://knxstore.vn/su-khac-biet-giua-cam-bien-chuyen-dong-va-hien-dien-la-gi.html#article",
-        "mainEntityOfPage": {
-          "@id": "https://knxstore.vn/su-khac-biet-giua-cam-bien-chuyen-dong-va-hien-dien-la-gi.html#webpage"
-        },
-        "headline": "Sự khác biệt giữa cảm biến chuyển động và hiện diện là gì?",
-        "description": "Bằng cách kết hợp hoặc sử dụng một trong hai cảm biến chuyển động hoặc cảm biến hiện diện vào hệ thống nhà thông minh, bạn hoàn toàn có thể tiết kiệm năng lượng và kiểm soát hiệu suất của các hệ thống từ chiếu sáng, an ninh, v.v..",
-        "articleBody": "Sẽ thực sự tuyệt vời nếu bạn trở về nhà khi trời tối và đèn ở hành lang bật sáng khi bạn bước vào. Hoặc đơn giản như lúc đi vệ sinh vào ban đêm, đèn chiếu sáng tự động bật và tắt ngay lập tức khi bạn rời đi. Bằng cách kết hợp cảm biến chuyển động hoặc cảm biến hiện diện vào hệ thống nhà thông minh, bạn hoàn toàn có thể đạt được điều đó. Thế nhưng điểm khác biệt giữa hai ứng dụng này là gì và cách chúng hoạt động như thế nào?\r\n\r\nĐặc điểm nổi bật giữa cảm biến chuyển động và cảm biến hiện diện\r\n\r\nCảm biến chuyển động và cảm biến hiện diện đều có sự tương đồng về cách thức hoạt động vì chúng đo chuyển động trong một khu vực. Đặc biệt trong hệ thống chiếu sáng, thiết bị cũng giảm thời gian bật đèn, tương đương với việc tiết kiệm năng lượng và góp phần giảm lượng khí thải carbon. Tuy nhiên mỗi loại cảm biến lại mang đặc điểm khác biệt nổi bật, khiến chúng phù hợp với nhiều ứng dụng đa dạng khác nhau.\r\n\r\n\r\n\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tĐặc điểm khác biệt\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tCảm biến chuyển động\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tCảm biến hiện diện\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tCông nghệ\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tThiết bị cảm biến thông thường sử dụng công nghệ cảm biến hồng ngoại, vi sóng hoặc siêu âm để phát hiện vật thể chuyển động.\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tCảm biến hiện diện có thể sử dụng một hoặc tích hợp nhiều công nghệ như cảm biến chuyển động, cảm biến tiệm cận, cảm biến quang điện và cảm biến hình ảnh để phát hiện các đối tượng bằng cách phân tích sự thay đổi trong tần số sóng phản xạ.\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tĐộ nhạy\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tPhát hiện chuyển động trong phạm vi có những chuyển động lớn, chẳng hạn như một người bước vào phòng. Ít có khả năng đưa ra cảnh báo sai.\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tPhát hiện những thay đổi nhỏ nhất trong môi trường, chẳng hạn như nhiệt tỏa ra từ cơ thể con người hay các sóng âm có thể tạo ra khi có sự chuyển động. Có thể kích hoạt nhiều cảnh báo sai hơn so với cảm biến chuyển động.\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tHiệu suất năng lượng\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tCảm biến có thể tắt hệ thống khi vẫn có người trong phòng nhưng không di chuyển, dẫn đến khả năng khó chịu và lãng phí năng lượng khi khởi động lại hệ thống.\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tHệ thống đèn hoặc hệ thống HVAC vẫn có thể tiếp tục hoạt động ngay cả khi người đứng yên, tránh sử dụng năng lượng không cần thiết.\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tỨng dụng\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tThường được sử dụng trong các hệ thống an ninh để phát hiện những kẻ xâm nhập di chuyển xung quanh\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tPhù hợp cho các hệ thống giám sát sử dụng năng lượng và quản lý năng lượng (hệ thống chiếu sáng thông minh hoặc điều khiển HVAC)\r\n\t\t\t\r\n\t\t\r\n\t\r\n\r\n\r\nNhững ứng dụng phổ biến của cảm biến chuyển động và hiện diện\r\n\r\nCảm biến chuyển động và hiện diện có khả năng giúp tiết kiệm thời gian và làm cho những quy trình ứng dụng thiết bị thông minh trong các lĩnh vực thường ngày trở nên thuận tiện hơn nhiều. Sự linh hoạt và tính tùy chỉnh của chúng cho phép thích ứng với các yêu cầu cụ thể của không gian hoặc tình huống. Cùng KNXStore khám phá sâu hơn những ứng dụng tuyệt vời của những cảm biến này nhé.\r\n\r\nTrong hệ thống nhà thông minh và BMS\r\n\r\nTrong bối cảnh các hệ thống nhà thông minh tiên tiến, thiết bị cảm biến chuyển động và hiện diện sẽ phát huy tác dụng nhờ khả năng tự động hóa hàng loạt các tác vụ đa dạng và thiết thực. Hãy tưởng tượng rằng cảm biến chuyển động không chỉ đơn thuần là một thiết bị thông thường, mà chính là một \"người hộ vệ\" thông minh và nhạy bén. Bạn có thể sử dụng thiết bị để mở bất kỳ cửa ra vào, cổng, cửa gara, cửa sổ, cửa chớp, v.v.. hoặc chiếu sáng cho khu vực ngoài trời vào buổi tối.\r\n\r\nVới hệ thống cảm biến chuyển động của IR-TEC, mọi giải pháp về điều khiển ánh sáng cho khu vực nhà ở, thậm chí cho các tòa nhà cao cấp đều sẽ được giải quyết. Những thiết bị cảm biến của IR-TEC được thiết kế với thuật toán dimming đèn liên tục, mang lại hiệu suất điều chỉnh độ sáng mượt mà, ít nhấp nháy. Quý Khách hàng có thể tham khảo qua các sản phẩm điển hình của thương hiệu này tại KNXStore: Cảm Biến ON-OFF, Cảm Biến DIM 0-10V, Cảm Biến OS-NET.\r\n\r\n\r\n\r\nĐiều tương tự cũng áp dụng cho cảm biến hiện diện, một công cụ thông minh và linh hoạt hỗ trợ đắc lực cho hệ thống nhà thông minh. Cảm biến hiện diện có khả năng điều khiển nhiệt độ trong không gian sống theo một cách tinh tế nhất - dựa trên sự hiện diện của con người. Điều này không chỉ tạo ra sự thoải mái cho người sử dụng mà còn giúp tối ưu hóa việc sử dụng năng lượng -một yếu tố quan trọng trong thời đại hiện nay.\r\n\r\nAn ninh gia đình\r\n\r\nTrong hệ thống an ninh gia đình, cảm biến chuyển động vô cùng nhạy bén trong việc phát hiện các hoạt đông xâm nhập đáng ngờ, đồng thời đặt báo thức và gửi thông báo đi ngay khi có thay đổi. Điều này mang lại sự an tâm và yên tâm cho gia đình, vì họ có thể biết được mọi sự diễn ra trong ngôi nhà của mình. Ngoài ra, bạn cũng có thể kết hợp các loại cảm biến nhiệt độ, cảm biến ngoại vi, còi báo động, v.v.. để tạo nên một hệ thống an ninh vững chắc.\r\n\r\nNhiều nghiên cứu chỉ ra rằng những ngôi nhà có hệ thống điều khiển ánh sáng tốt sẽ ít có khả năng trở thành mục tiêu của kẻ trộm. Trong hệ thống chiếu sáng, đèn cảm biến được bổ sung thêm một lớp bảo mật bằng cách chiếu sáng khu vực bất cứ khi nào phát hiện chuyển động. Cách tiếp cận chủ động này sẽ tăng cường an ninh ngôi nhà và mang lại sự an tâm cho gia chủ.\r\n\r\n\r\n\r\nỨng dụng công nghiệp\r\n\r\nTrong môi trường công nghiệp, sử dụng các thiết bị cảm biến chuyển động sẽ đem lại lợi ích to lớn cho việc tăng cường an toàn. Các thiết bị này có khả năng phát hiện chuyển động trong khu vực nguy hiểm và kích hoạt cảnh báo, nhằm đảm bảo an ninh và tránh tai nạn không đáng có. Ngoài ra cảm biến chuyển động bật tắt đèn cũng là một loại cảm biến đáng để tham khảo trong hệ thống này.\r\n\r\nĐối với việc giám sát sự hiện diện của nhân viên trong các khu vực cụ thể, sử dụng cảm biến hiện diện là một giải pháp hiệu quả. Chúng có khả năng theo dõi và kiểm soát truy cập, đồng thời ghi lại thông tin về thời gian điểm danh của nhân viên. Điều này giúp tăng cường sự quản lý và giám sát, đồng thời đảm bảo tính chính xác và minh bạch trong quá trình làm việc.\r\n\r\nTrong môi trường bán lẻ và kinh doanh\r\n\r\nTrong môi trường bán lẻ, việc sử dụng cảm biến chuyển động không chỉ giúp người dùng theo dõi chính xác sự di chuyển của khách hàng, mà còn cung cấp những dữ liệu về hành vi của họ và đảm bảo hiệu quả tối đa trong việc bố trí cửa hàng. Về cảm biến hiện diện, sử dụng cảm biến hiện diện cũng mang đến khả năng giám sát và quản lý chính xác mức độ sử dụng phòng trong thời gian thực.\r\n\r\n\r\n\r\nCách xác định loại cảm biến phù hợp cho ứng dụng của bạn\r\n\r\nKhi đưa ra lựa chọn giữa cảm biến chuyển động và cảm biến hiện diện, bạn cần xem xét đến nhiều yếu tố liên quan nhằm đảm bảo sự phù hợp đối với ứng dụng ngoài đời. Dưới đây là những yếu tố KNXStore cho rằng chúng sẽ ảnh hưởng trực tiếp đến quyết định của bạn.\r\n\r\nMục đích sử dụng\r\n\r\nYếu tố cần được xem xét đầu tiên chính là mục đích sử dụng của cảm biến. Nếu bạn cần thiết bị có thể phát hiện những chuyển động quan trọng để kiểm soát an ninh, hay điều khiển ánh sáng tại những khu vực có nhiều chuyển động hơn như hành lang hay cầu thang, thì cảm biến chuyển động sẽ là sự lựa chọn tối ưu. Trái lại, trong các khu vực ít hoạt động di chuyển như văn phòng tại nhà, phòng khách hoặc phòng ngủ, sử dụng cảm biến hiện diện sẽ phù hợp hơn.\r\n\r\n\r\n\r\nNhờ các cảm biến miễn dịch của thú cưng của Satel, ngôi nhà vẫn được bảo vệ kể cả khi có động vật đi lại tự do trong phạm vi quét\r\n\r\nLý tưởng nhất là bạn nên thiết lập sự kết hợp giữa cảm biến chuyển động và hiện diện ở nơi chúng có hiệu quả nhất. Chẳng hạn như thiết bị Cảm Biến PIR OPAL của Satel có khả năng phát hiện chuyển động trong khu vực được bảo vệ, phù hợp sử dụng cho các khu vực có thú cưng dưới 15kg. Hoặc như Cảm Biến Hiện Diện HD 360° của Legrand rất phù hợp cho các khu vực nhỏ và kín như phòng khách, phòng ăn, phòng ngủ, văn phòng, v.v..\r\n\r\nHiệu suất năng lượng\r\n\r\nCảm biến hiện diện đóng một vai trò quan trọng trong việc tiết kiệm năng lượng bằng cách đảm bảo rằng hệ thống chiếu sáng và hệ thống điều hòa không khí (HVAC) chỉ hoạt động khi có sự hiện diện của con người trong không gian. Mặc dù cảm biến chuyển động cũng có thể đóng góp vào việc tiết kiệm năng lượng, tuy nhiên chúng thường không hiệu quả như cảm biến hiện diện vì chúng không thể phân biệt giữa không gian có người và không gian không có người một cách chính xác.\r\n\r\nCài đặt và bảo trì\r\n\r\nCả hai loại cảm biến đều yêu cầu được lắp đặt và chăm sóc định kỳ. Do đó người dùng cần xem xét kỹ mức độ phức tạp trong quá trình lắp đặt và các yêu cầu bảo trì cần thiết để có lựa chọn đúng giữa hai phương án này. Kỹ thuật viên có trình độ tại KNXStore sẽ đảm bảo vấn đề này cho dự án của bạn. Sau khi đánh giá kỹ lưỡng, chúng tôi sẽ giúp bạn chọn, cài đặt và bảo dưỡng thiết bị để Quý Khách hàng có thể an tâm hơn và tiết kiệm được nhiều thời gian và công sức đáng kể.\r\n\r\n\r\n\r\nVới khả năng phát hiện chuyển động và hiện diện, các cảm biến sẽ tự động kích hoạt các chức năng như điều chỉnh ánh sáng, quản lý nhiệt độ, hoặc thậm chí là khóa mở cửa tự động. Sự kết hợp hoàn hảo giữa công nghệ cảm biến và các tiện ích, việc bổ sung cảm biến chuyển động và hiện diện vào không gian sống sẽ tạo ra một trải nghiệm sống hiện đại và sang trọng hơn bao giờ hết.\r\n",
-        "articleSection": "Kiến thức",
-        "keywords": [],
-        "inLanguage": "vi-VN",
-        "datePublished": "2025-07-20T20:09:55+07:00",
-        "dateModified": "2025-07-20T20:09:55+07:00",
-        "url": "https://knxstore.vn/su-khac-biet-giua-cam-bien-chuyen-dong-va-hien-dien-la-gi.html",
-        "image": {
-          "@id": "https://knxstore.vn/su-khac-biet-giua-cam-bien-chuyen-dong-va-hien-dien-la-gi.html#featured-image"
-        },
-        "publisher": {
-          "@id": "https://knxstore.vn/#organization"
-        },
-        "isPartOf": {
-          "@id": "https://knxstore.vn/#website"
-        },
-        "about": {
-          "@type": "Thing",
-          "name": "Nhà thông minh",
-          "description": "Giải pháp smarthome và thiết bị thông minh"
-        },
-        "mentions": [
-          {
-            "@type": "Thing",
-            "name": "Aqara"
-          },
-          {
-            "@type": "Thing",
-            "name": "Apple Home"
-          }
-        ],
-        "contentLocation": {
-          "@type": "Country",
-          "name": "Việt Nam",
-          "identifier": "VN"
-        },
-        "locationCreated": {
-          "@type": "City",
-          "name": "TP. Hồ Chí Minh",
-          "containedInPlace": {
-            "@type": "Country",
-            "name": "Việt Nam"
-          }
-        }
-      }
-    ]
-  }
-]
+{
+  "slug": "su-khac-biet-giua-cam-bien-chuyen-dong-va-hien-dien-la-gi",
+  "title": "Cảm Biến Hiện Diện Khác Gì Cảm Biến Chuyển Động?",
+  "excerpt": "Cảm biến hiện diện và cảm biến chuyển động khác nhau thế nào, nên chọn loại nào cho trường học, văn phòng, cao ốc, bán lẻ? Tư vấn miễn phí tại KNXStore.vn.",
+  "coverImage": "/media/da3f3527396e095b994e72b9a50f8775035a9996a1b5303fadac2fd8b48b28d8.jpg",
+  "authorName": null,
+  "author": {
+    "slug": "ta-minh-vu",
+    "name": "Tạ Minh Vũ",
+    "bio": "Mình làm kỹ thuật và marketing tại KNXStore.vn,  chuyên về \nDALI-2, Casambi, Matter và hệ thống chiếu sáng thông minh \ncho công trình thực tế.\n\nNội dung trên site từ tư vấn dự án thật.",
+    "jobTitle": "System Integration & Marketing Engineer",
+    "expertiseAreas": null,
+    "certifications": null,
+    "linkedinUrl": null,
+    "facebookUrl": null,
+    "websiteUrl": null,
+    "seoDescription": "Kỹ thuật viên tại KNXStore.vn, chuyên tư vấn hệ thống DALI-2,  Casambi, Matter và chiếu sáng thông minh cho công trình thực tế  tại Việt Nam.",
+    "imageUrl": "/media/e539ffa1221ae53af726f75833373a281d088bdd6b8296697ebcc8c3ecf2326e.jpg",
+    "imageAlt": "Tạ Minh Vũ",
+    "isActive": true
+  },
+  "publishedAt": "2026-08-10T08:04:13.000Z",
+  "categories": [
+    {
+      "slug": "kien-thuc",
+      "name": "Kiến thức"
+    }
+  ],
+  "b2c": false,
+  "status": "PUBLISHED",
+  "seoTitle": "Cảm Biến Hiện Diện Khác Gì Cảm Biến Chuyển Động?",
+  "seoDescription": "Cảm biến hiện diện và cảm biến chuyển động khác nhau thế nào, nên chọn loại nào cho trường học, văn phòng, cao ốc, bán lẻ? Tư vấn miễn phí tại KNXStore.vn.",
+  "faqs": [
+    {
+      "question": "Cảm biến hiện diện có thực sự tiết kiệm điện hơn cảm biến chuyển động trong văn phòng không?",
+      "answer": "Với không gian có người ngồi lâu như văn phòng hay phòng họp, có. Cảm biến chuyển động thông thường dễ tắt đèn nhầm khi người ngồi yên, khiến hệ thống phải khởi động lại nhiều lần, trong khi cảm biến hiện diện duy trì đúng trạng thái đèn theo thực tế sử dụng phòng.",
+      "position": 0
+    },
+    {
+      "question": "Cảm biến hiện diện có hay báo động giả trong không gian mở như văn phòng không?",
+      "answer": "Có thể, vì độ nhạy cao khiến cảm biến dễ phản ứng với luồng gió điều hòa hoặc ánh sáng dao động qua cửa kính. Cần cấu hình đúng ngưỡng độ nhạy và vị trí lắp để hạn chế tình trạng này.",
+      "position": 1
+    },
+    {
+      "question": "Trường học nên dùng cảm biến hiện diện hay cảm biến chuyển động?",
+      "answer": "Phòng học nên dùng cảm biến hiện diện vì học sinh ngồi yên trong thời gian dài. Hành lang, cầu thang và khu vực sân trường phù hợp hơn với cảm biến chuyển động thông thường, chi phí thấp hơn mà vẫn đủ hiệu quả.",
+      "position": 2
+    },
+    {
+      "question": "Cảm biến hiện diện có tích hợp được vào hệ thống BMS có sẵn không?",
+      "answer": "Được, nếu chọn dòng có giao thức tương thích như KNX hoặc DALI-2. Cần kiểm tra hệ thống BMS hiện tại hỗ trợ giao thức nào trước khi chọn cảm biến để đảm bảo tích hợp trơn tru.",
+      "position": 3
+    },
+    {
+      "question": "Chi phí lắp đặt cảm biến hiện diện cho công trình có cao hơn cảm biến chuyển động thường không?",
+      "answer": "Nhìn chung cao hơn do công nghệ đầu dò phức tạp hơn, nhưng phần chênh lệch này thường được bù lại qua mức tiết kiệm điện thực tế ở những không gian có người ngồi lâu. Với khu vực chỉ cần on/off đơn giản, cảm biến chuyển động thông thường vẫn là lựa chọn kinh tế hơn.",
+      "position": 4
+    }
+  ],
+  "editedAt": null,
+  "url": "https://knxstore.vn/su-khac-biet-giua-cam-bien-chuyen-dong-va-hien-dien-la-gi.html"
+}
 ```

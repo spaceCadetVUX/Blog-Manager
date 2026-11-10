@@ -1,345 +1,198 @@
 ---
 url: "https://knxstore.vn/cam-bien-hong-ngoai-la-gi-cong-dung-va-nguyen-ly-hoat-dong.html"
-headline: "PIR sensor, cảm biến hồng ngoại là gì?"
-description: "Cảm biến hồng ngoại (Pir sensor) là gì? Nó có công dụng như thế nào? Nguyên lý hoạt động ra sao? KNXStore cùng bạn tìm hiểu những kiến thức trên thông qua bài biết dưới đây."
-title: "Cảm biến hồng ngoại là gì? Tất tần tật về Pir Sensor"
-og_site_name: "KNX Store"
-image: "https://knxstore.vn/assets/image/post/cam-bien-hong-ngoai-la-gi-cong-dung-va-nguyen-ly-hoat-dong1.jpg"
-datePublished: "2025-08-22T11:25:21+07:00"
-dateModified: "2025-08-22T11:25:21+07:00"
+headline: "PIR Sensor Là Gì? Cấu Tạo, Nguyên Lý Và Ứng Dụng 2026"
+description: "PIR sensor là gì, cấu tạo và nguyên lý hoạt động ra sao? Xem ưu nhược điểm, ứng dụng thực tế trong nhà thông minh và các dòng cảm biến PIR tại KNXStore.vn."
+image: "https://knxstore.vn/media/e2c955ac8b95a164320611a83694b6845113bb59f011dce274f43e186b04d838.jpg"
+datePublished: "2026-08-10T08:06:17.000Z"
+dateModified: "2026-08-10T08:06:17.000Z"
+author: "Tạ Minh Vũ"
+publisher: "KNXStore.vn"
 articleSection: "Cảm biến"
-word_count: 1873
-mentions: ["Aqara", "Apple Home"]
+word_count: 1713
+keywords: ["Cảm biến"]
+source: "mcp"
 breadcrumb:
   - name: "Trang chủ"
     url: "https://knxstore.vn/"
-  - name: "Blogs"
+  - name: "Tin tức"
     url: "https://knxstore.vn/blogs"
   - name: "Cảm biến"
     url: "https://knxstore.vn/blogs/cam-bien"
-  - name: "PIR sensor, cảm biến hồng ngoại là gì?"
+  - name: "PIR Sensor Là Gì? Cấu Tạo, Nguyên Lý Và Ứng Dụng 2026"
     url: "https://knxstore.vn/cam-bien-hong-ngoai-la-gi-cong-dung-va-nguyen-ly-hoat-dong.html"
-products: [{"url": "https://knxstore.vn/products/satel-cam-bien-chuyen-dong-pir-mw-pir-mw-opal", "name": "Cảm biến chuyển động ngoài trời PIR + MW Satel - OPAL", "image": "https://knxstore.vn/assets/image/product/satel-cam-bien-chuyen-dong-pir-mw-pir-mw-opal_7.jpg"}, {"url": "https://knxstore.vn/products/cp-electronics-cam-bien-hong-ngoai-gan-tran-ebdspir-prm", "name": "Cảm biến hồng ngoại gắn trần CP Electronics - EBDSPIR-PRM", "image": "https://knxstore.vn/assets/image/product/cp-electronics-cam-bien-hong-ngoai-gan-tran-ebdspir-prm_1.jpg"}, {"url": "https://knxstore.vn/products/lite-puter-cam-bien-chieu-sang", "name": "Cảm biến chiếu sáng Lite-Puter - DP-PIR02", "image": "https://knxstore.vn/assets/image/product/lite-puter-cam-bien-chieu-sang_1.jpg"}, {"url": "https://knxstore.vn/products/legrand-cam-bien-pir-gan-am-tran-knx-axolute", "name": "Cảm biến PIR gắn âm trần KNX Axolute Legrand - HD4658KNX", "image": "https://knxstore.vn/assets/image/product/legrand-cam-bien-pir-gan-am-tran-knx-axolute_3.jpg"}, {"url": "https://knxstore.vn/products/legrand-cam-bien-hien-dien-knx-pir-hd-360-gan-tran-048922", "name": "Cảm biến hiện diện KNX PIR HD 360°, gắn trần Legrand - 048922", "image": "https://knxstore.vn/assets/image/product/legrand-cam-bien-hien-dien-knx-pir-hd-360-gan-tran-048922_1.jpg"}, {"url": "https://knxstore.vn/products/legrand-cam-bien-chuyen-dong-knx-pir-tran-gia-gan-tuong-048919", "name": "Cảm biến chuyển động KNX PIR trần giả, gắn tường Legrand - 048919", "image": "https://knxstore.vn/assets/image/product/legrand-cam-bien-chuyen-dong-knx-pir-tran-gia-gan-tuong-048919_1.jpg"}, {"url": "https://knxstore.vn/products/legrand-cam-bien-chuyen-dong-knx-pir-gan-tuong-048921", "name": "Cảm biến chuyển động KNX PIR, gắn tường Legrand - 048921", "image": "https://knxstore.vn/assets/image/product/legrand-cam-bien-chuyen-dong-knx-pir-gan-tuong-048921_1.jpg"}, {"url": "https://knxstore.vn/products/satel-cam-bien-cong-nghe-kep-phat-hien-chuyen-dong-silver", "name": "Cảm biến chuyển động công nghệ kép PIR + MW Satel - SILVER", "image": "https://knxstore.vn/assets/image/product/satel-cam-bien-cong-nghe-kep-phat-hien-chuyen-dong-silver_1.jpg"}, {"url": "https://knxstore.vn/products/cp-electronics-cam-bien-hien-dien-hong-ngoai-knx-gan-tran-ebdspir-knx", "name": "Cảm biến hiện diện hồng ngoại KNX, gắn trần CP Electronics - EBDSPIR-KNX", "image": "https://knxstore.vn/assets/image/product/cp-electronics-cam-bien-hien-dien-hong-ngoai-knx-gan-tran-ebdspir-knx.jpg"}, {"url": "https://knxstore.vn/products/sunricher-cam-bien-hong-ngoai-gan-tran-dali-2-sr-9030a-pir", "name": "Cảm biến hồng ngoại gắn trần DALI-2 Sunricher - SR-DA9030A-PIR-BUS", "image": "https://knxstore.vn/assets/image/product/sunricher-cam-bien-hong-ngoai-gan-tran-dali-2-sr-9030a-pir_1.png"}, {"url": "https://knxstore.vn/products/casambi-cam-bien-hong-ngoai-gan-tran-ebdspir-cb-nn", "name": "Cảm biến hồng ngoại gắn trần Casambi DALI - EBDSPIR-CB-NN", "image": "https://knxstore.vn/assets/image/product/casambi-cam-bien-hong-ngoai-gan-tran-ebdspir-cb-nn_1.jpg"}, {"url": "https://knxstore.vn/products/casambi-cam-bien-hong-ngoai-gan-tran-ebdspir-cb-dd", "name": "Cảm biến hồng ngoại gắn trần Casambi DALI - EBDSPIR-CB-DD", "image": "https://knxstore.vn/assets/image/product/casambi-cam-bien-hong-ngoai-gan-tran-ebdspir-cb-dd_1.jpg"}]
+products: [{"url": "https://knxstore.vn/products/legrand-cam-bien-chuyen-dong-knx-pir-gan-tuong-048921", "name": "Cảm biến chuyển động KNX PIR, gắn tường Legrand - 048921"}, {"url": "https://knxstore.vn/products/legrand-cam-bien-hien-dien-knx-pir-hd-360-gan-tran-048922", "name": "Cảm biến hiện diện KNX PIR HD 360°, gắn trần Legrand - 048922"}, {"url": "https://knxstore.vn/products/cp-electronics-cam-bien-hien-dien-hong-ngoai-knx-gan-tran-ebdspir-knx", "name": "Cảm biến hiện diện hồng ngoại KNX, gắn trần CP Electronics - EBDSPIR-KNX"}, {"url": "https://knxstore.vn/products/sunricher-cam-bien-hong-ngoai-gan-tran-dali-2-sr-9030a-pir", "name": "Cảm biến hồng ngoại gắn trần DALI-2 Sunricher - SR-DA9030A-PIR-BUS"}, {"url": "https://knxstore.vn/products/cp-electronics-cam-bien-hong-ngoai-gan-tran-ebdspir-prm", "name": "Cảm biến hồng ngoại gắn trần CP Electronics - EBDSPIR-PRM"}, {"url": "https://knxstore.vn/products/lite-puter-cam-bien-chieu-sang", "name": "Cảm biến chiếu sáng Lite-Puter - DP-PIR02"}, {"url": "https://knxstore.vn/products/cam-bien-hien-dien-casambi-ip65-zhaga-dim-0-10v-sunricher-sr-cs9033a-pir-v", "name": "Cảm biến hiện diện Casambi IP65 Zhaga dim 0-10V Sunricher - SR-CS9033A-PIR-V"}]
 internal_links:
+  - url: "https://knxstore.vn/cam-bien-cua.html"
+    slug: "cam-bien-cua"
+    anchor: "cảm biến cửa"
+related_links:
   - url: "https://knxstore.vn/sensor-la-gi.html"
     slug: "sensor-la-gi"
-    anchor: "Sensor là gì? 8 loại cảm biến cho smarthome và hệ thống an ninh"
+    anchor: "Sensor là gì? 8 loại cảm biến cho nhà thông minh và hệ thống an ninh"
+    position: 1
   - url: "https://knxstore.vn/cam-bien-bat-tat-den.html"
     slug: "cam-bien-bat-tat-den"
     anchor: "Cảm biến bật tắt đèn: Phân loại và những lưu ý khi lắp đặt"
+    position: 2
   - url: "https://knxstore.vn/cong-tac-cam-bien-anh-sang.html"
     slug: "cong-tac-cam-bien-anh-sang"
-    anchor: "7 lý do nên dùng công tắc cảm biến ánh sáng cho Smarthome"
+    anchor: "Cảm Biến Hiện Diện Tích Hợp Ánh Sáng Cho Công Trình"
+    position: 3
   - url: "https://knxstore.vn/cam-bien-anh-sang.html"
     slug: "cam-bien-anh-sang"
-    anchor: "Cảm biến ánh sáng là gì? Khái niệm, nguyên lý và ứng dụng"
-  - url: "https://knxstore.vn/nut-bam-thong-minh.html"
-    slug: "nut-bam-thong-minh"
-    anchor: "Top 4 công tắc thông minh cao cấp và đáng mua nhất hiện nay"
-  - url: "https://knxstore.vn/cam-bien-khoi.html"
-    slug: "cam-bien-khoi"
-    anchor: "Cảm biến khói là gì? Hướng dẫn chọn đúng loại cho nhà ở và văn phòng"
-  - url: "https://knxstore.vn/cam-bien-cua.html"
-    slug: "cam-bien-cua"
-    anchor: "Cảm biến cửa và vai trò quan trọng trong hệ thống Smarthome"
-  - url: "https://knxstore.vn/cam-bien-os-net-irtec.html"
-    slug: "cam-bien-os-net-irtec"
-    anchor: "Tìm hiểu về cảm biến OS-NET từ IR-TEC (Phần 1)"
-  - url: "https://knxstore.vn/cam-bien-trans-tu-irtec.html"
-    slug: "cam-bien-trans-tu-irtec"
-    anchor: "Tìm hiểu về cảm biến TRANS từ IR-TEC"
-  - url: "https://knxstore.vn/cam-bien-hien-dien-anh-sang-tu-ir-tec.html"
-    slug: "cam-bien-hien-dien-anh-sang-tu-ir-tec"
-    anchor: "Tìm hiểu về cảm biến hiện diện - ánh sáng thương hiệu IR-TEC"
+    anchor: "Cảm Biến Ánh Sáng Là Gì? Vai Trò Trong Nhà Thông Minh"
+    position: 4
 ---
 
-# PIR sensor, cảm biến hồng ngoại là gì?
+# PIR Sensor Là Gì? Cấu Tạo, Nguyên Lý Và Ứng Dụng 2026
 
-> Cảm biến hồng ngoại (Pir sensor) là gì? Nó có công dụng như thế nào? Nguyên lý hoạt động ra sao? KNXStore cùng bạn tìm hiểu những kiến thức trên thông qua bài biết dưới đây.
+> PIR sensor là gì, cấu tạo và nguyên lý hoạt động ra sao? Xem ưu nhược điểm, ứng dụng thực tế trong nhà thông minh và các dòng cảm biến PIR tại KNXStore.vn.
 
 ## Article Body
 
-Bạn có bao giờ tự hỏi tại sao đèn cầu thang, cửa garage hoặc hệ thống báo động có thể tự động bật/tắt mà không cần chạm vào công tắc? Đó chính là nhờ cảm biến hồng ngoại PIR sensor (Passive Infrared Sensor).
-
-Khái niệm PIR Sensor, hay còn gọi là cảm biến hồng ngoại. PIR là từ viết tắt của Passive InfraRed sensor (bộ cảm biến thụ động dùng nguồn kích thích, nguồn kích thích ở đây là tia hồng ngoại).
-
-Cảm biến hồng ngoại PIR Sensor là gì?
-
-Cảm biến hồng ngoại thụ động (Cảm biến hồng ngoại pir sensor) là một cảm biến điện tử đo ánh sáng hồng ngoại phát ra từ các vật thể trong trường nhìn của nó. Vì vậy chúng được ứng dụng nhiều trong báo động an ninh.
-
-Xét về mặt kỹ thuật, cảm biến hồng ngoại pir sensor có thể phát hiện được nhiều mức bức xạ hồng ngoại khác nhau. Nếu nhiệt độ của vật thể tăng lên thì mức độ bức xạ sẽ tăng lên và ngược lại. Nói chung, cảm biến hồng ngoại pir sensor có thể phát hiện được sự chuyển động của con người, các loài động vật trong một phạm vi nhất định.
-
-
-
-Cấu tạo của cảm biến hồng ngoại PIR sensor
-
-Cảm biến hồng ngoại PIR sensor thông thường gồm hai phần chính:
-
-
-	Bộ phận dò: Nhận tia hồng ngoại phát ra từ vật thể.
-	Bộ phận xử lý: Khi phát hiện sự thay đổi trong mức bức xạ hồng ngoại, cảm biến sẽ kích hoạt các hành động như kéo rèm, bật đèn, kéo báo động...
-
-
-
-
-Nguyên lý hoạt động của cảm biến hồng ngoại PIR sensor
-
-Báo động của cảm biến hồng ngoại thụ động sẽ hoạt động dựa vào việc nhận bức xạ hồng ngoại của vật thể để báo động. Chúng ta đã biết, mọi vật có nhiệt độ lớn hơn 0 độ K đều phát ra ngoài không gian bức xạ của tia hồng ngoại. Nhiệt độ cơ thể người là 36-37 °C, khi máy phát hiện con người chuyển động quanh mức bức xạ hoạt động của máy thì cũng sẽ phát ra tín hiệu.
-
-Báo động hồng ngoại thụ động được chia làm hai phần gồm có phần dò và điều khiển cảnh báo. Khi bức xạ hồng ngoại của con người được chiếu đến máy dò thì nó sẽ làm thay đổi nhiệt độ để phát ra tín hiệu. Để tối ưu khoảng cách phát hiện của máy dò người ta cho dùng thêm hệ thống phản xạ quang học để làm hệ thống lấy nét cho bức xạ hồng ngoại.
-
-
-
-Ưu nhược điểm của cảm biến hồng ngoại PIR Sensor
-
-Khi đã hiểu được PIR Sensor là gì và biết được nguyên lý hoạt động của nó, chúng ta sẽ tò mò không biết nó có ưu và nhược điểm gì.
-
-Về ưu điểm
-
-
-	Ít tiêu thụ năng lượng, nên được ứng dụng làm công tắc bóng đèn, như vậy sẽ giúp tiết kiệm chi phí cho người sử dụng.
-	Lắp đặt và sử dụng dễ dàng, cách đấu công tắc cảm biến hồng ngoại cũng rất đơn giản. Công tắc cảm biến hồng ngoại phổ biến thường được dùng là Công tắc cảm biến hồng ngoại 12V và 220V.
-	Tối ưu chi phí cho người sử dụng vì nó ít tiêu hao năng lượng. Ví dụ: Nếu bạn dùng công tắc cảm biến hồng ngoại thì nó chỉ mở đèn khi có vật thể phát ra tia hồng ngoại đi qua. Cho nên, nếu bạn là người hay quên tắt thiết bị khi rời khỏi phòng thì việc lắp công tắc cảm biến cảm biến hiện diện, hoặc cảm biến hiện diện kết hợp chuyển động là vô cùng cần thiết.
-	Đem đến sự an toàn và tiện lợi cho người sử dụng. Trong trường hợp dùng công tắc cảm biến hồng ngoại thì đèn sẽ tự phát sáng nếu quét được tia hồng ngoại từ cơ thể bạn. Như vậy, bạn sẽ không còn phải trong cảnh loay hoay đi tìm công tắc mở bóng đèn mỗi khi trời tối nữa.
-	Có thể tự điều chỉnh phạm vi hoạt động của cảm biến. Sóng hồng ngoại không có khả năng đi qua vật cản nên chỉ cần bạn dùng vắt ngăn để che cảm biến. Bạn có thể chủ động cho cảm biến hoạt động trong phạm vi mà mình mong muốn.
-
-
-
-
-Về nhược điểm
-
-
-	Phạm vi hoạt động của nó khá nhỏ và có nhiều góc chết. Thông thường chỉ hoạt động trong phạm vi tối đa là 6m và góc quét là 120 độ.
-	Không có khả năng xuyên vật cản nên khi bị che khuất bởi một hoạt vật thể gì đó thiết bị sẽ không hoạt động chính xác.
-	Bị ảnh hưởng bởi điều kiện và nhiệt độ môi trường, nếu lắp ở những nơi có nhiệt độ cao thì công tắc sẽ hay hoạt động bất thường.
-	Đôi khi những chuyển động chậm của vật thể sẽ khiến thiết bị cảm biến không phát hiện được.
-
-
-
-
-So sánh cảm biến hồng ngoại PIR sensor và Microwave sensor
-
-Bảng so sánh PIR sensor và Microwave sensor
-
-Khi tìm hiểu về cảm biến chuyển động, có thể bạn thường phân vân giữa hai loại phổ biến nhất: PIR Sensor và cảm biến vi sóng (Microwave). Mỗi loại cảm biến có nguyên lý hoạt động và ưu nhược điểm riêng, tùy thuộc vào nhu cầu sử dụng. Dưới đây là bảng so sánh giúp bạn hiểu rõ hơn về sự khác biệt giữa hai loại cảm biến này.
-
-
-
-
-	
-		
-			Tiêu chí
-			PIR Sensor
-			
-			Cảm biến vi sóng (Microwave)
-			
-		
-		
-			Nguyên lý hoạt động
-			Phát hiện tia hồng ngoại từ vật thể
-			
-			Phát và nhận tín hiệu vi sóng
-			
-		
-		
-			Phạm vi hoạt động
-			3-7m
-			Lên đến 15m
-		
-		
-			Khả năng xuyên vật cản
-			Không
-			Có
-		
-		
-			Độ nhạy
-			Cao, nhưng giới hạn bởI nhiệt độ và vật cản
-			
-			Rất cao, hoạt động độc lập với nhiệt độ
-			
-		
-		
-			Tiêu thụ năng lượng
-			Thấp
-			Cao
-		
-		
-			Ứng dụng chính
-			Báo động, bật đèn tự động, nhà thông minh
-			
-			Các khu vực yêu cầu phạm vi quét rộng như an ninh ngoài trời, cần độ chính xác cao, nhiều vật cản, các hệ thống tự động hóa phức tạp
-			
-		
-	
-
-
-Mặc dù cảm biến vi sóng có nhiều ưu điểm vượt trội hơn về phạm vi hoạt động và khả năng xuyên vật cản, nhưng PIR Sensor vẫn là lựa chọn lý tưởng cho các ứng dụng trong nhà thông minh vì:
-
-
-	PIR Sensor tiêu thụ điện năng rất thấp, phù hợp với các thiết bị cần hoạt động liên tục.
-	Cảm biến PIR có độ tin cậy cao, không hề bị ảnh hưởng bởi các nhiễu điện từ như cảm biến vi sóng.
-	Ngoài ra thiết bị cũng dễ lắp đặt và tích hợp. Không yêu cầu nhiều điều kiện phức tạp khi lắp đặt, phù hợp với hầu hết các hệ thống nhà thông minh.
-
-
-
-
-Nên chọn cảm biến PIR hay cảm biến vi sóng?
-
-Khi cân nhắc giữa cảm biến PIR và cảm biến vi sóng, điều quan trọng là bạn phải xác định nhu cầu thực tế của mình. Nếu ưu tiên hàng đầu là tiết kiệm chi phí và sự gọn nhẹ, cảm biến PIR sẽ là lựa chọn phù hợp. Loại cảm biến này tiêu thụ ít năng lượng, giá thành thấp và hoạt động ổn định trong các không gian kín như hành lang, lối đi hay trước cửa nhà. Với những nhu cầu cơ bản trong sinh hoạt, PIR đáp ứng tốt và rất kinh tế.
-
-Ngược lại, nếu mục tiêu của bạn là tăng cường an ninh và cần độ nhạy cao hơn, cảm biến vi sóng sẽ mang lại hiệu quả vượt trội. Loại cảm biến này có thể phát hiện chuyển động ở khoảng cách xa và vẫn hoạt động ngay cả khi có vật cản che chắn. Tuy nhiên, độ nhạy cao đồng nghĩa với việc bạn phải cài đặt cẩn thận để tránh báo động giả, đặc biệt trong những khu vực có nhiều nguồn gây nhiễu.
-
-Cuối cùng, lựa chọn nào phù hợp hơn còn tùy thuộc vào bối cảnh sử dụng. Với nhu cầu cơ bản và không gian đơn giản, PIR là giải pháp tiết kiệm. Với những môi trường cần kiểm soát chặt chẽ và độ chính xác cao, vi sóng lại chiếm ưu thế.
-
-Tại KNXStore, bạn có thể tìm thấy cả hai dòng cảm biến này ở nhiều phiên bản khác nhau, từ thiết bị độc lập cho đến module KNX tích hợp hệ thống tự động hóa. Nhờ đó, bạn dễ dàng lựa chọn được giải pháp tối ưu nhất để vừa đảm bảo an toàn, vừa nâng cao sự tiện nghi cho ngôi nhà hay văn phòng của mình.
-
-{products:[1290,1141,1140,955,917,912,910,909,749,493,446,110,106]}
-
-Cảm biến hồng ngoại PIR sensor phù hợp với những không gian nào?
-
-Cảm biến PIR (hồng ngoại thụ động) là lựa chọn tuyệt vời cho những không gian khép kín. Chúng hoạt động tốt ở hành lang, trước cửa nhà, văn phòng hoặc lối đi, vừa giúp tự động bật đèn vừa có thể dùng làm đèn an ninh hiệu quả.
-
-Tuy nhiên, cảm biến PIR có thể bị ảnh hưởng bởi nhiệt độ môi trường, vì vậy vị trí lắp đặt rất quan trọng. Bạn nên đặt chúng ở nơi tránh ánh nắng trực tiếp hoặc thời tiết khắc nghiệt, chẳng hạn như dưới mái hiên hoặc góc khuất có mái che.
-
-Nơi lý tưởng để lắp cảm biến PIR:
-
-
-	Đèn an ninh
-	Hành lang, lối đi
-	Trước cửa nhà
-	Khu vực trong nhà, văn phòng
-
-
-
-
-Ứng dụng của PIR Sensor trong đời sống hiện đại 
-
-Có rất nhiều người quan tâm và muốn biết ứng dụng của PIR Sensor là gì. Như đã nói trên, cảm biến hồng ngoại PIR Sensor có công dụng phát hiện chuyển động vật thể có tia hồng ngoại từ đó sẽ đưa ra những báo hiệu. Dựa vào mục đích sử dụng khác nhau mà người ta sẽ thiết kế báo hiệu .
-
-Ví dụ như khi kết với với hệ thống chiếu sáng để giúp bạn mở đèn tại các khu vực cửa ra vào, cửa garage, cầu thang,...hoặc kết hợp với hệ thống mở cửa thường dùng trong các văn phòng). Khi con người đi xa thiết bị thì tia hồng ngoại không nằm trong phạm vi quét của thiết bị nữa thì đèn sẽ tự tắt, cửa sẽ tự đóng. 
-
-Tương tự như vậy, nó còn ứng dụng trong công tắc mở bóng đèn. Khi có người đến vùng quét của thiết bị đèn sẽ tự sáng, khi người đi khỏi vùng quét đèn sẽ tự động tắt đi.
-
-
-
-PIR Sensor không chỉ giúp tiết kiệm điện mà còn nâng cao sự tiện lợi và an toàn cho cuộc sống hiện đại, đóng vai trò như các loại cảm biến an ninh. Nếu bạn đang tìm hiểu về các thiết bị an ninh thông minh, đừng quên khám phá thêm tại KNXStore để chọn được sản phẩm phù hợp nhất nhé!
+Đèn hành lang tự bật sáng ngay khi bạn bước tới, hay hệ thống báo động im lặng cho đến khi có người lạ xuất hiện, phần lớn đều nhờ vào PIR sensor. PIR là viết tắt của Passive Infrared, tức cảm biến hồng ngoại thụ động, một trong những loại cảm biến chuyển động phổ biến và tiết kiệm điện nhất hiện nay. Bài viết này giải thích PIR sensor là gì, cấu tạo và nguyên lý hoạt động ra sao, ưu nhược điểm thực tế khi dùng, và cách nó được tích hợp vào hệ thống chiếu sáng, an ninh trong nhà thông minh lẫn công trình chuyên nghiệp năm 2026.
+PIR sensor là gì?
+PIR sensor, hay cảm biến hồng ngoại thụ động, là thiết bị phát hiện chuyển động bằng cách đo sự thay đổi bức xạ hồng ngoại phát ra từ cơ thể người hoặc vật thể sống trong vùng quét của nó.
+Gọi là "thụ động" vì cảm biến không tự phát tia hồng ngoại để dò tìm như radar, mà chỉ tiếp nhận bức xạ nhiệt sẵn có từ môi trường xung quanh. Mọi vật có nhiệt độ trên 0 độ Kelvin đều phát ra bức xạ hồng ngoại, và cơ thể người ở khoảng 36 đến 37 độ C tạo ra mức bức xạ đủ lớn để cảm biến nhận diện được ngay khi có chuyển động đi qua.
+Nếu bạn muốn hiểu PIR sensor nằm ở đâu trong bức tranh lớn hơn của các loại cảm biến nhà thông minh,
+cảm biến trong nhà thông minh nói chung có bài tổng quan riêng
+phân loại đầy đủ theo từng nhóm ứng dụng.
+Cấu tạo và nguyên lý hoạt động của cảm biến PIR
+Về mặt kỹ thuật, PIR sensor dùng một cảm biến hỏa điện (pyroelectric) đặt sau thấu kính Fresnel nhiều mặt. Thấu kính này chia vùng quét thành nhiều ô nhỏ, giúp cảm biến nhạy hơn với chuyển động ngang qua các ô thay vì chỉ đo nhiệt độ tĩnh của cả không gian.
+Bộ phận dò và bộ phận xử lý tín hiệu
+Cảm biến PIR gồm hai phần chính: bộ phận dò nhận bức xạ hồng ngoại qua thấu kính Fresnel, và bộ phận xử lý so sánh sự thay đổi tín hiệu theo thời gian để quyết định có kích hoạt hay không. Khi mức bức xạ thay đổi đột ngột, chẳng hạn lúc có người đi qua vùng quét, mạch xử lý gửi tín hiệu kích hoạt relay để bật đèn, mở khóa, hoặc kéo còi báo động tùy theo hệ thống đấu nối phía sau.
+Phạm vi quét và những yếu tố ảnh hưởng đến độ nhạy
+Phần lớn cảm biến PIR dân dụng có phạm vi quét từ 6 đến 12 mét với góc quét khoảng 90 đến 360 độ tùy model gắn trần hay gắn tường. Độ nhạy thực tế phụ thuộc nhiều vào chênh lệch nhiệt độ giữa vật thể và môi trường xung quanh. Đây cũng là lý do PIR hoạt động kém ổn định hơn vào những ngày nắng nóng, khi nhiệt độ không khí gần bằng nhiệt độ cơ thể người.
+Ưu và nhược điểm thực tế của cảm biến PIR
+PIR sensor được dùng phổ biến vì tiêu thụ điện năng rất thấp, giá thành hợp lý và không phát ra sóng nên không gây nhiễu cho thiết bị điện tử khác trong nhà. Lắp đặt cũng đơn giản, hầu hết chỉ cần đấu nối vào mạch chiếu sáng hoặc hệ thống báo động sẵn có.
+Đổi lại, PIR có một số hạn chế cần lưu ý trước khi lắp:
+Không xuyên qua được vật cản như kính, rèm hay tường, nên nếu bị che khuất thiết bị sẽ không phát hiện chính xác.
+Dễ bị ảnh hưởng bởi nhiệt độ môi trường, đặc biệt vào mùa hè khi chênh lệch nhiệt giữa người và không khí giảm xuống.
+Chuyển động quá chậm của vật thể đôi khi không đủ để kích hoạt cảm biến.
+Phạm vi và góc quét giới hạn hơn so với cảm biến vi sóng cùng phân khúc.
+Cảm biến PIR khác gì cảm biến vi sóng và cảm biến Dual?
+Câu hỏi này rất nhiều người thắc mắc khi bắt đầu tìm hiểu cảm biến chuyển động. Về bản chất, PIR đo bức xạ nhiệt còn cảm biến vi sóng (Microwave) phát và nhận sóng để đo chuyển động bằng hiệu ứng Doppler, nên vi sóng xuyên vật cản tốt hơn nhưng tiêu thụ điện nhiều hơn và dễ báo giả nếu không chỉnh đúng độ nhạy. Cảm biến Dual kết hợp cả hai công nghệ, chỉ báo động khi cả PIR lẫn vi sóng cùng phát hiện, giúp giảm đáng kể tình trạng báo động giả.
+Nếu bạn đang phân vân nên chọn loại nào cho không gian cụ thể của mình, cảm biến chống trộm PIR, Microwave và Dual có bài so sánh chi tiết riêng theo từng tình huống lắp đặt thực tế.
+Tiêu chí
+PIR Sensor
+Cảm biến vi sóng (Microwave)
+Nguyên lý hoạt động
+Phát hiện tia hồng ngoại từ vật thể
+Phát và nhận tín hiệu vi sóng
+Phạm vi hoạt động
+3-7m
+Lên đến 15m
+Khả năng xuyên vật cản
+Không
+Có
+Độ nhạy
+Cao, nhưng giới hạn bởI nhiệt độ và vật cản
+Rất cao, hoạt động độc lập với nhiệt độ
+Tiêu thụ năng lượng
+Thấp
+Cao
+Ứng dụng chính
+Báo động, bật đèn tự động, nhà thông minh
+Các khu vực yêu cầu phạm vi quét rộng như an ninh ngoài trời, cần độ chính xác cao, nhiều vật cản, các hệ thống tự động hóa phức tạp
+Mặc dù cảm biến vi sóng có nhiều ưu điểm vượt trội hơn về phạm vi hoạt động và khả năng xuyên vật cản, nhưng PIR Sensor vẫn là lựa chọn lý tưởng cho các ứng dụng trong nhà thông minh vì:
+PIR Sensor tiêu thụ điện năng rất thấp, phù hợp với các thiết bị cần hoạt động liên tục.
+Cảm biến PIR có độ tin cậy cao, không hề bị ảnh hưởng bởi các nhiễu điện từ như cảm biến vi sóng.
+Ngoài ra thiết bị cũng dễ lắp đặt và tích hợp. Không yêu cầu nhiều điều kiện phức tạp khi lắp đặt, phù hợp với hầu hết các hệ thống nhà thông minh.
+Ứng dụng cảm biến PIR trong nhà thông minh và công trình
+PIR sensor không chỉ dừng ở việc bật tắt một bóng đèn. Trong một hệ thống nhà thông minh hoặc công trình được thiết kế bài bản, đây là một trong những cảm biến trigger quan trọng nhất cho automation.
+Bật tắt đèn tự động theo hiện diện
+Đây là ứng dụng quen thuộc nhất: đèn hành lang, cầu thang, nhà vệ sinh tự bật khi có người và tự tắt sau một khoảng thời gian không phát hiện chuyển động. Cách làm này thường kết hợp với
+cảm biến bật tắt đèn theo hiện diện người
+để tinh chỉnh thời gian trễ và độ nhạy phù hợp với từng không gian, tránh tình trạng đèn tắt giữa chừng khi người dùng đứng yên.
+Tích hợp với hệ thống KNX, DALI-2 và Casambi
+Với công trình dùng hệ thống chiếu sáng chuyên nghiệp, cảm biến PIR thường được chọn dưới dạng module có địa chỉ riêng trên bus KNX hoặc DALI-2, cho phép cấu hình ngưỡng độ nhạy, thời gian trễ tắt đèn, và vùng quét ngay trong phần mềm ETS hoặc app điều khiển Casambi, thay vì chỉnh bằng núm vặn cơ như dòng cảm biến độc lập giá rẻ. Một số dòng còn tích hợp luôn cảm biến ánh sáng để chỉ bật đèn khi trời đủ tối, ví dụ như
+cảm biến ánh sáng kết hợp chuyển động
+đang được dùng khá phổ biến cho hành lang và bãi đỗ xe.
+Kết hợp với hệ thống báo động an ninh
+Ngoài chiếu sáng, PIR sensor còn là thiết bị đầu vào quen thuộc của hệ thống báo động chống trộm, thường lắp cùng
+cảm biến cửa
+để tạo thành lớp phát hiện kép: cửa mở kèm chuyển động trong phòng là dấu hiệu đáng tin hơn nhiều so với chỉ dựa vào một loại cảm biến duy nhất.
+Cảm biến PIR nào đang có tại KNXStore
+Nếu bạn chỉ cần một thiết bị bật tắt đèn đơn giản cho hành lang hay nhà kho, các dòng cảm biến PIR độc lập lắp nhanh, không cần cấu hình phức tạp.
+Với mọi đơn hàng cảm biến PIR, KNXStore đều có dịch vụ T&C, kỹ thuật viên đến tận nơi lắp đặt, cấu hình độ nhạy và thời gian trễ phù hợp với từng khu vực, rồi hướng dẫn bạn sử dụng trước khi bàn giao.
+PIR sensor có phát hiện được người đứng yên không?
+Không hoàn toàn. PIR chỉ phát hiện sự thay đổi bức xạ nhiệt theo thời gian, nên nếu một người đứng hoàn toàn bất động quá lâu, một số model có thể coi như không có chuyển động và tắt đèn.
 
-## Raw JSON-LD
+Cảm biến PIR có hoạt động được qua kính hoặc tường không?
+Không. Bức xạ hồng ngoại không xuyên qua được vật cản như kính, tường hay rèm dày, đây là điểm khác biệt chính so với cảm biến vi sóng có khả năng xuyên vật cản mỏng.
+
+PIR sensor hay báo động giả, nguyên nhân do đâu?
+Nguyên nhân phổ biến nhất là chênh lệch nhiệt độ đột ngột trong khu vực quét, ví dụ luồng gió nóng, ánh nắng chiếu trực tiếp, hoặc vật nuôi di chuyển trong vùng phát hiện.
+
+Cảm biến PIR có cần bảo trì định kỳ không?
+Không cần bảo trì phức tạp, nhưng nên lau bụi trên thấu kính Fresnel định kỳ vì bụi bám lâu ngày có thể làm giảm độ nhạy phát hiện.
+
+PIR sensor và cảm biến chuyển động có phải là một không?
+PIR là một loại cụ thể trong nhóm cảm biến chuyển động. Cảm biến chuyển động còn bao gồm cảm biến vi sóng và cảm biến Dual, mỗi loại dùng nguyên lý phát hiện khác nhau.
+
+## Raw MCP
 
 ```json
-[
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebPage",
-        "@id": "https://knxstore.vn/cam-bien-hong-ngoai-la-gi-cong-dung-va-nguyen-ly-hoat-dong.html#webpage",
-        "url": "https://knxstore.vn/cam-bien-hong-ngoai-la-gi-cong-dung-va-nguyen-ly-hoat-dong.html",
-        "name": "PIR sensor, cảm biến hồng ngoại là gì?",
-        "description": "Cảm biến hồng ngoại (Pir sensor) là gì? Nó có công dụng như thế nào? Nguyên lý hoạt động ra sao? KNXStore cùng bạn tìm hiểu những kiến thức trên thông qua bài biết dưới đây.",
-        "inLanguage": "vi-VN",
-        "datePublished": "2025-08-22T11:25:21+07:00",
-        "dateModified": "2025-08-22T11:25:21+07:00",
-        "isPartOf": {
-          "@id": "https://knxstore.vn/#website"
-        },
-        "publisher": {
-          "@id": "https://knxstore.vn/#organization"
-        },
-        "mainEntity": {
-          "@id": "https://knxstore.vn/cam-bien-hong-ngoai-la-gi-cong-dung-va-nguyen-ly-hoat-dong.html#article"
-        },
-        "primaryImageOfPage": {
-          "@type": "ImageObject",
-          "@id": "https://knxstore.vn/cam-bien-hong-ngoai-la-gi-cong-dung-va-nguyen-ly-hoat-dong.html#featured-image",
-          "url": "https://knxstore.vn/assets/image/post/cam-bien-hong-ngoai-la-gi-cong-dung-va-nguyen-ly-hoat-dong1.jpg",
-          "contentUrl": "https://knxstore.vn/assets/image/post/cam-bien-hong-ngoai-la-gi-cong-dung-va-nguyen-ly-hoat-dong1.jpg",
-          "caption": "PIR sensor, cảm biến hồng ngoại là gì?"
-        },
-        "breadcrumb": {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Trang chủ",
-              "item": "https://knxstore.vn/"
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Blogs",
-              "item": "https://knxstore.vn/blogs"
-            },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "name": "Cảm biến",
-              "item": "https://knxstore.vn/blogs/cam-bien"
-            },
-            {
-              "@type": "ListItem",
-              "position": 4,
-              "name": "PIR sensor, cảm biến hồng ngoại là gì?",
-              "item": "https://knxstore.vn/cam-bien-hong-ngoai-la-gi-cong-dung-va-nguyen-ly-hoat-dong.html"
-            }
-          ]
-        }
-      },
-      {
-        "@type": "BlogPosting",
-        "@id": "https://knxstore.vn/cam-bien-hong-ngoai-la-gi-cong-dung-va-nguyen-ly-hoat-dong.html#article",
-        "mainEntityOfPage": {
-          "@id": "https://knxstore.vn/cam-bien-hong-ngoai-la-gi-cong-dung-va-nguyen-ly-hoat-dong.html#webpage"
-        },
-        "headline": "PIR sensor, cảm biến hồng ngoại là gì?",
-        "description": "Cảm biến hồng ngoại (Pir sensor) là gì? Nó có công dụng như thế nào? Nguyên lý hoạt động ra sao? KNXStore cùng bạn tìm hiểu những kiến thức trên thông qua bài biết dưới đây.",
-        "articleBody": "Bạn có bao giờ tự hỏi tại sao đèn cầu thang, cửa garage hoặc hệ thống báo động có thể tự động bật/tắt mà không cần chạm vào công tắc? Đó chính là nhờ cảm biến hồng ngoại PIR sensor (Passive Infrared Sensor).\r\n\r\nKhái niệm PIR Sensor, hay còn gọi là cảm biến hồng ngoại. PIR là từ viết tắt của Passive InfraRed sensor (bộ cảm biến thụ động dùng nguồn kích thích, nguồn kích thích ở đây là tia hồng ngoại).\r\n\r\nCảm biến hồng ngoại PIR Sensor là gì?\r\n\r\nCảm biến hồng ngoại thụ động (Cảm biến hồng ngoại pir sensor) là một cảm biến điện tử đo ánh sáng hồng ngoại phát ra từ các vật thể trong trường nhìn của nó. Vì vậy chúng được ứng dụng nhiều trong báo động an ninh.\r\n\r\nXét về mặt kỹ thuật, cảm biến hồng ngoại pir sensor có thể phát hiện được nhiều mức bức xạ hồng ngoại khác nhau. Nếu nhiệt độ của vật thể tăng lên thì mức độ bức xạ sẽ tăng lên và ngược lại. Nói chung, cảm biến hồng ngoại pir sensor có thể phát hiện được sự chuyển động của con người, các loài động vật trong một phạm vi nhất định.\r\n\r\n\r\n\r\nCấu tạo của cảm biến hồng ngoại PIR sensor\r\n\r\nCảm biến hồng ngoại PIR sensor thông thường gồm hai phần chính:\r\n\r\n\r\n\tBộ phận dò: Nhận tia hồng ngoại phát ra từ vật thể.\r\n\tBộ phận xử lý: Khi phát hiện sự thay đổi trong mức bức xạ hồng ngoại, cảm biến sẽ kích hoạt các hành động như kéo rèm, bật đèn, kéo báo động...\r\n\r\n\r\n\r\n\r\nNguyên lý hoạt động của cảm biến hồng ngoại PIR sensor\r\n\r\nBáo động của cảm biến hồng ngoại thụ động sẽ hoạt động dựa vào việc nhận bức xạ hồng ngoại của vật thể để báo động. Chúng ta đã biết, mọi vật có nhiệt độ lớn hơn 0 độ K đều phát ra ngoài không gian bức xạ của tia hồng ngoại. Nhiệt độ cơ thể người là 36-37 °C, khi máy phát hiện con người chuyển động quanh mức bức xạ hoạt động của máy thì cũng sẽ phát ra tín hiệu.\r\n\r\nBáo động hồng ngoại thụ động được chia làm hai phần gồm có phần dò và điều khiển cảnh báo. Khi bức xạ hồng ngoại của con người được chiếu đến máy dò thì nó sẽ làm thay đổi nhiệt độ để phát ra tín hiệu. Để tối ưu khoảng cách phát hiện của máy dò người ta cho dùng thêm hệ thống phản xạ quang học để làm hệ thống lấy nét cho bức xạ hồng ngoại.\r\n\r\n\r\n\r\nƯu nhược điểm của cảm biến hồng ngoại PIR Sensor\r\n\r\nKhi đã hiểu được PIR Sensor là gì và biết được nguyên lý hoạt động của nó, chúng ta sẽ tò mò không biết nó có ưu và nhược điểm gì.\r\n\r\nVề ưu điểm\r\n\r\n\r\n\tÍt tiêu thụ năng lượng, nên được ứng dụng làm công tắc bóng đèn, như vậy sẽ giúp tiết kiệm chi phí cho người sử dụng.\r\n\tLắp đặt và sử dụng dễ dàng, cách đấu công tắc cảm biến hồng ngoại cũng rất đơn giản. Công tắc cảm biến hồng ngoại phổ biến thường được dùng là Công tắc cảm biến hồng ngoại 12V và 220V.\r\n\tTối ưu chi phí cho người sử dụng vì nó ít tiêu hao năng lượng. Ví dụ: Nếu bạn dùng công tắc cảm biến hồng ngoại thì nó chỉ mở đèn khi có vật thể phát ra tia hồng ngoại đi qua. Cho nên, nếu bạn là người hay quên tắt thiết bị khi rời khỏi phòng thì việc lắp công tắc cảm biến cảm biến hiện diện, hoặc cảm biến hiện diện kết hợp chuyển động là vô cùng cần thiết.\r\n\tĐem đến sự an toàn và tiện lợi cho người sử dụng. Trong trường hợp dùng công tắc cảm biến hồng ngoại thì đèn sẽ tự phát sáng nếu quét được tia hồng ngoại từ cơ thể bạn. Như vậy, bạn sẽ không còn phải trong cảnh loay hoay đi tìm công tắc mở bóng đèn mỗi khi trời tối nữa.\r\n\tCó thể tự điều chỉnh phạm vi hoạt động của cảm biến. Sóng hồng ngoại không có khả năng đi qua vật cản nên chỉ cần bạn dùng vắt ngăn để che cảm biến. Bạn có thể chủ động cho cảm biến hoạt động trong phạm vi mà mình mong muốn.\r\n\r\n\r\n\r\n\r\nVề nhược điểm\r\n\r\n\r\n\tPhạm vi hoạt động của nó khá nhỏ và có nhiều góc chết. Thông thường chỉ hoạt động trong phạm vi tối đa là 6m và góc quét là 120 độ.\r\n\tKhông có khả năng xuyên vật cản nên khi bị che khuất bởi một hoạt vật thể gì đó thiết bị sẽ không hoạt động chính xác.\r\n\tBị ảnh hưởng bởi điều kiện và nhiệt độ môi trường, nếu lắp ở những nơi có nhiệt độ cao thì công tắc sẽ hay hoạt động bất thường.\r\n\tĐôi khi những chuyển động chậm của vật thể sẽ khiến thiết bị cảm biến không phát hiện được.\r\n\r\n\r\n\r\n\r\nSo sánh cảm biến hồng ngoại PIR sensor và Microwave sensor\r\n\r\nBảng so sánh PIR sensor và Microwave sensor\r\n\r\nKhi tìm hiểu về cảm biến chuyển động, có thể bạn thường phân vân giữa hai loại phổ biến nhất: PIR Sensor và cảm biến vi sóng (Microwave). Mỗi loại cảm biến có nguyên lý hoạt động và ưu nhược điểm riêng, tùy thuộc vào nhu cầu sử dụng. Dưới đây là bảng so sánh giúp bạn hiểu rõ hơn về sự khác biệt giữa hai loại cảm biến này.\r\n\r\n\r\n\r\n\r\n\t\r\n\t\t\r\n\t\t\tTiêu chí\r\n\t\t\tPIR Sensor\r\n\t\t\t\r\n\t\t\tCảm biến vi sóng (Microwave)\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\tNguyên lý hoạt động\r\n\t\t\tPhát hiện tia hồng ngoại từ vật thể\r\n\t\t\t\r\n\t\t\tPhát và nhận tín hiệu vi sóng\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\tPhạm vi hoạt động\r\n\t\t\t3-7m\r\n\t\t\tLên đến 15m\r\n\t\t\r\n\t\t\r\n\t\t\tKhả năng xuyên vật cản\r\n\t\t\tKhông\r\n\t\t\tCó\r\n\t\t\r\n\t\t\r\n\t\t\tĐộ nhạy\r\n\t\t\tCao, nhưng giới hạn bởI nhiệt độ và vật cản\r\n\t\t\t\r\n\t\t\tRất cao, hoạt động độc lập với nhiệt độ\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\tTiêu thụ năng lượng\r\n\t\t\tThấp\r\n\t\t\tCao\r\n\t\t\r\n\t\t\r\n\t\t\tỨng dụng chính\r\n\t\t\tBáo động, bật đèn tự động, nhà thông minh\r\n\t\t\t\r\n\t\t\tCác khu vực yêu cầu phạm vi quét rộng như an ninh ngoài trời, cần độ chính xác cao, nhiều vật cản, các hệ thống tự động hóa phức tạp\r\n\t\t\t\r\n\t\t\r\n\t\r\n\r\n\r\nMặc dù cảm biến vi sóng có nhiều ưu điểm vượt trội hơn về phạm vi hoạt động và khả năng xuyên vật cản, nhưng PIR Sensor vẫn là lựa chọn lý tưởng cho các ứng dụng trong nhà thông minh vì:\r\n\r\n\r\n\tPIR Sensor tiêu thụ điện năng rất thấp, phù hợp với các thiết bị cần hoạt động liên tục.\r\n\tCảm biến PIR có độ tin cậy cao, không hề bị ảnh hưởng bởi các nhiễu điện từ như cảm biến vi sóng.\r\n\tNgoài ra thiết bị cũng dễ lắp đặt và tích hợp. Không yêu cầu nhiều điều kiện phức tạp khi lắp đặt, phù hợp với hầu hết các hệ thống nhà thông minh.\r\n\r\n\r\n\r\n\r\nNên chọn cảm biến PIR hay cảm biến vi sóng?\r\n\r\nKhi cân nhắc giữa cảm biến PIR và cảm biến vi sóng, điều quan trọng là bạn phải xác định nhu cầu thực tế của mình. Nếu ưu tiên hàng đầu là tiết kiệm chi phí và sự gọn nhẹ, cảm biến PIR sẽ là lựa chọn phù hợp. Loại cảm biến này tiêu thụ ít năng lượng, giá thành thấp và hoạt động ổn định trong các không gian kín như hành lang, lối đi hay trước cửa nhà. Với những nhu cầu cơ bản trong sinh hoạt, PIR đáp ứng tốt và rất kinh tế.\r\n\r\nNgược lại, nếu mục tiêu của bạn là tăng cường an ninh và cần độ nhạy cao hơn, cảm biến vi sóng sẽ mang lại hiệu quả vượt trội. Loại cảm biến này có thể phát hiện chuyển động ở khoảng cách xa và vẫn hoạt động ngay cả khi có vật cản che chắn. Tuy nhiên, độ nhạy cao đồng nghĩa với việc bạn phải cài đặt cẩn thận để tránh báo động giả, đặc biệt trong những khu vực có nhiều nguồn gây nhiễu.\r\n\r\nCuối cùng, lựa chọn nào phù hợp hơn còn tùy thuộc vào bối cảnh sử dụng. Với nhu cầu cơ bản và không gian đơn giản, PIR là giải pháp tiết kiệm. Với những môi trường cần kiểm soát chặt chẽ và độ chính xác cao, vi sóng lại chiếm ưu thế.\r\n\r\nTại KNXStore, bạn có thể tìm thấy cả hai dòng cảm biến này ở nhiều phiên bản khác nhau, từ thiết bị độc lập cho đến module KNX tích hợp hệ thống tự động hóa. Nhờ đó, bạn dễ dàng lựa chọn được giải pháp tối ưu nhất để vừa đảm bảo an toàn, vừa nâng cao sự tiện nghi cho ngôi nhà hay văn phòng của mình.\r\n\r\n{products:[1290,1141,1140,955,917,912,910,909,749,493,446,110,106]}\r\n\r\nCảm biến hồng ngoại PIR sensor phù hợp với những không gian nào?\r\n\r\nCảm biến PIR (hồng ngoại thụ động) là lựa chọn tuyệt vời cho những không gian khép kín. Chúng hoạt động tốt ở hành lang, trước cửa nhà, văn phòng hoặc lối đi, vừa giúp tự động bật đèn vừa có thể dùng làm đèn an ninh hiệu quả.\r\n\r\nTuy nhiên, cảm biến PIR có thể bị ảnh hưởng bởi nhiệt độ môi trường, vì vậy vị trí lắp đặt rất quan trọng. Bạn nên đặt chúng ở nơi tránh ánh nắng trực tiếp hoặc thời tiết khắc nghiệt, chẳng hạn như dưới mái hiên hoặc góc khuất có mái che.\r\n\r\nNơi lý tưởng để lắp cảm biến PIR:\r\n\r\n\r\n\tĐèn an ninh\r\n\tHành lang, lối đi\r\n\tTrước cửa nhà\r\n\tKhu vực trong nhà, văn phòng\r\n\r\n\r\n\r\n\r\nỨng dụng của PIR Sensor trong đời sống hiện đại \r\n\r\nCó rất nhiều người quan tâm và muốn biết ứng dụng của PIR Sensor là gì. Như đã nói trên, cảm biến hồng ngoại PIR Sensor có công dụng phát hiện chuyển động vật thể có tia hồng ngoại từ đó sẽ đưa ra những báo hiệu. Dựa vào mục đích sử dụng khác nhau mà người ta sẽ thiết kế báo hiệu .\r\n\r\nVí dụ như khi kết với với hệ thống chiếu sáng để giúp bạn mở đèn tại các khu vực cửa ra vào, cửa garage, cầu thang,...hoặc kết hợp với hệ thống mở cửa thường dùng trong các văn phòng). Khi con người đi xa thiết bị thì tia hồng ngoại không nằm trong phạm vi quét của thiết bị nữa thì đèn sẽ tự tắt, cửa sẽ tự đóng. \r\n\r\nTương tự như vậy, nó còn ứng dụng trong công tắc mở bóng đèn. Khi có người đến vùng quét của thiết bị đèn sẽ tự sáng, khi người đi khỏi vùng quét đèn sẽ tự động tắt đi.\r\n\r\n\r\n\r\nPIR Sensor không chỉ giúp tiết kiệm điện mà còn nâng cao sự tiện lợi và an toàn cho cuộc sống hiện đại, đóng vai trò như các loại cảm biến an ninh. Nếu bạn đang tìm hiểu về các thiết bị an ninh thông minh, đừng quên khám phá thêm tại KNXStore để chọn được sản phẩm phù hợp nhất nhé!\r\n",
-        "articleSection": "Cảm biến",
-        "keywords": [],
-        "inLanguage": "vi-VN",
-        "datePublished": "2025-08-22T11:25:21+07:00",
-        "dateModified": "2025-08-22T11:25:21+07:00",
-        "url": "https://knxstore.vn/cam-bien-hong-ngoai-la-gi-cong-dung-va-nguyen-ly-hoat-dong.html",
-        "image": {
-          "@id": "https://knxstore.vn/cam-bien-hong-ngoai-la-gi-cong-dung-va-nguyen-ly-hoat-dong.html#featured-image"
-        },
-        "publisher": {
-          "@id": "https://knxstore.vn/#organization"
-        },
-        "isPartOf": {
-          "@id": "https://knxstore.vn/#website"
-        },
-        "about": {
-          "@type": "Thing",
-          "name": "Nhà thông minh",
-          "description": "Giải pháp smarthome và thiết bị thông minh"
-        },
-        "mentions": [
-          {
-            "@type": "Thing",
-            "name": "Aqara"
-          },
-          {
-            "@type": "Thing",
-            "name": "Apple Home"
-          }
-        ],
-        "contentLocation": {
-          "@type": "Country",
-          "name": "Việt Nam",
-          "identifier": "VN"
-        },
-        "locationCreated": {
-          "@type": "City",
-          "name": "TP. Hồ Chí Minh",
-          "containedInPlace": {
-            "@type": "Country",
-            "name": "Việt Nam"
-          }
-        }
-      }
-    ]
-  }
-]
+{
+  "slug": "cam-bien-hong-ngoai-la-gi-cong-dung-va-nguyen-ly-hoat-dong",
+  "title": "PIR Sensor Là Gì? Cấu Tạo, Nguyên Lý Và Ứng Dụng 2026",
+  "excerpt": "PIR sensor là gì, cấu tạo và nguyên lý hoạt động ra sao? Xem ưu nhược điểm, ứng dụng thực tế trong nhà thông minh và các dòng cảm biến PIR tại KNXStore.vn.",
+  "coverImage": "/media/e2c955ac8b95a164320611a83694b6845113bb59f011dce274f43e186b04d838.jpg",
+  "authorName": null,
+  "author": {
+    "slug": "ta-minh-vu",
+    "name": "Tạ Minh Vũ",
+    "bio": "Mình làm kỹ thuật và marketing tại KNXStore.vn,  chuyên về \nDALI-2, Casambi, Matter và hệ thống chiếu sáng thông minh \ncho công trình thực tế.\n\nNội dung trên site từ tư vấn dự án thật.",
+    "jobTitle": "System Integration & Marketing Engineer",
+    "expertiseAreas": null,
+    "certifications": null,
+    "linkedinUrl": null,
+    "facebookUrl": null,
+    "websiteUrl": null,
+    "seoDescription": "Kỹ thuật viên tại KNXStore.vn, chuyên tư vấn hệ thống DALI-2,  Casambi, Matter và chiếu sáng thông minh cho công trình thực tế  tại Việt Nam.",
+    "imageUrl": "/media/e539ffa1221ae53af726f75833373a281d088bdd6b8296697ebcc8c3ecf2326e.jpg",
+    "imageAlt": "Tạ Minh Vũ",
+    "isActive": true
+  },
+  "publishedAt": "2026-08-10T08:06:17.000Z",
+  "categories": [
+    {
+      "slug": "cam-bien",
+      "name": "Cảm biến"
+    }
+  ],
+  "b2c": false,
+  "status": "PUBLISHED",
+  "seoTitle": "PIR Sensor Là Gì? Cấu Tạo, Nguyên Lý Và Ứng Dụng 2026",
+  "seoDescription": "PIR sensor là gì, cấu tạo và nguyên lý hoạt động ra sao? Xem ưu nhược điểm, ứng dụng thực tế trong nhà thông minh và các dòng cảm biến PIR tại KNXStore.vn.",
+  "faqs": [
+    {
+      "question": "PIR sensor có phát hiện được người đứng yên không?",
+      "answer": "Không hoàn toàn. PIR chỉ phát hiện sự thay đổi bức xạ nhiệt theo thời gian, nên nếu một người đứng hoàn toàn bất động quá lâu, một số model có thể coi như không có chuyển động và tắt đèn.",
+      "position": 0
+    },
+    {
+      "question": "Cảm biến PIR có hoạt động được qua kính hoặc tường không?",
+      "answer": "Không. Bức xạ hồng ngoại không xuyên qua được vật cản như kính, tường hay rèm dày, đây là điểm khác biệt chính so với cảm biến vi sóng có khả năng xuyên vật cản mỏng.",
+      "position": 1
+    },
+    {
+      "question": "PIR sensor hay báo động giả, nguyên nhân do đâu?",
+      "answer": "Nguyên nhân phổ biến nhất là chênh lệch nhiệt độ đột ngột trong khu vực quét, ví dụ luồng gió nóng, ánh nắng chiếu trực tiếp, hoặc vật nuôi di chuyển trong vùng phát hiện.",
+      "position": 2
+    },
+    {
+      "question": "Cảm biến PIR có cần bảo trì định kỳ không?",
+      "answer": "Không cần bảo trì phức tạp, nhưng nên lau bụi trên thấu kính Fresnel định kỳ vì bụi bám lâu ngày có thể làm giảm độ nhạy phát hiện.",
+      "position": 3
+    },
+    {
+      "question": "PIR sensor và cảm biến chuyển động có phải là một không?",
+      "answer": "PIR là một loại cụ thể trong nhóm cảm biến chuyển động. Cảm biến chuyển động còn bao gồm cảm biến vi sóng và cảm biến Dual, mỗi loại dùng nguyên lý phát hiện khác nhau.",
+      "position": 4
+    }
+  ],
+  "editedAt": null,
+  "url": "https://knxstore.vn/cam-bien-hong-ngoai-la-gi-cong-dung-va-nguyen-ly-hoat-dong.html"
+}
 ```

@@ -2,53 +2,42 @@
 url: "https://knxstore.vn/homepod-la-gi.html"
 headline: "Homepod là gì? 7 tính năng tuyệt vời Homepod đem đến cho bạn"
 description: "Homepod là gì? Homepod có ưu nhược điểm gì? Cùng tìm hiểu các tính năng tuyệt vời của homepod trong bài viết dưới đây."
-og_site_name: "KNX Store"
-image: "https://knxstore.vn/assets/image/post/homepod-la-gi.jpg"
-datePublished: "2025-03-11T15:42:44+07:00"
-dateModified: "2025-03-11T15:42:44+07:00"
+image: "https://knxstore.vn/media/85e38eb62b9fed548d0877c8ad64426f7fead1181853d7ff5fe6397624491747.jpg"
+datePublished: "2026-08-17T08:08:50.000Z"
+dateModified: "2026-08-17T08:08:50.000Z"
+author: "Tạ Minh Vũ"
+publisher: "KNXStore.vn"
 articleSection: "Kiến thức"
-word_count: 1145
-mentions: ["Aqara", "Apple Home"]
+word_count: 1573
+keywords: ["Kiến thức"]
+source: "mcp"
 breadcrumb:
   - name: "Trang chủ"
     url: "https://knxstore.vn/"
-  - name: "Blogs"
+  - name: "Tin tức"
     url: "https://knxstore.vn/blogs"
   - name: "Kiến thức"
     url: "https://knxstore.vn/blogs/kien-thuc"
   - name: "Homepod là gì? 7 tính năng tuyệt vời Homepod đem đến cho bạn"
     url: "https://knxstore.vn/homepod-la-gi.html"
-internal_links:
+products: [{"url": "https://knxstore.vn/products/loa-apple-homepod-mini", "name": "Loa Apple Homepod Mini"}]
+related_links:
+  - url: "https://knxstore.vn/giam-sat-nang-luong-trong-he-thong-knx-vi-sao-phai-do-dien-truoc-khi-tiet-kiem-dien.html"
+    slug: "giam-sat-nang-luong-trong-he-thong-knx-vi-sao-phai-do-dien-truoc-khi-tiet-kiem-dien"
+    anchor: "Giám Sát Năng Lượng Trong Hệ Thống KNX: Vì Sao Phải Đo Điện Trước Khi Tiết Kiệm Điện"
+    position: 1
   - url: "https://knxstore.vn/ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome.html"
     slug: "ic-la-gi-vai-tro-cua-ic-trong-thiet-bi-smarthome"
-    anchor: "IC là gì? Vai trò của IC trong thiết bị Smarthome"
+    anchor: "IC Là Gì? Cấu Tạo, Chức Năng Và Vai Trò Trong Smarthome"
+    position: 2
   - url: "https://knxstore.vn/nfc-la-gi-vi-sao-smarthome-hien-dai-deu-tich-hop-cong-nghe-nay.html"
     slug: "nfc-la-gi-vi-sao-smarthome-hien-dai-deu-tich-hop-cong-nghe-nay"
     anchor: "NFC là gì? Vì sao smarthome hiện đại đều tích hợp công nghệ này?"
+    position: 3
   - url: "https://knxstore.vn/spi-la-gi-ung-dung-spi-led-controller-trong-led-rgbw.html"
     slug: "spi-la-gi-ung-dung-spi-led-controller-trong-led-rgbw"
-    anchor: "SPI là gì? Ứng dụng SPI LED Controller trong LED RGBW"
-  - url: "https://knxstore.vn/10-bi-quyet-de-so-huu-mang-thread-on-dinh-muot-ma-cho-smarthome.html"
-    slug: "10-bi-quyet-de-so-huu-mang-thread-on-dinh-muot-ma-cho-smarthome"
-    anchor: "10 bí quyết để sở hữu mạng Thread ổn định, mượt mà cho Smarthome"
-  - url: "https://knxstore.vn/5-buoc-thiet-lap-nha-thong-minh-theo-chuan-matter.html"
-    slug: "5-buoc-thiet-lap-nha-thong-minh-theo-chuan-matter"
-    anchor: "5 bước thiết lập nhà thông minh theo chuẩn Matter"
-  - url: "https://knxstore.vn/faq-giai-dap-cac-cau-hoi-thuong-gap-ve-tieu-chuan-matter.html"
-    slug: "faq-giai-dap-cac-cau-hoi-thuong-gap-ve-tieu-chuan-matter"
-    anchor: "FAQ: Giải đáp các câu hỏi thường gặp về tiêu chuẩn Matter"
-  - url: "https://knxstore.vn/vai-tro-cua-aes-128-ccm-trong-bao-ve-truyen-thong-knx-ip.html"
-    slug: "vai-tro-cua-aes-128-ccm-trong-bao-ve-truyen-thong-knx-ip"
-    anchor: "AES-128 CCM là gì? Cơ chế bảo mật tối ưu cho giao thức KNX/IP"
-  - url: "https://knxstore.vn/homey-gioi-thieu-phien-ban-self-hosted-server.html"
-    slug: "homey-gioi-thieu-phien-ban-self-hosted-server"
-    anchor: "Homey giới thiệu phiên bản Self-Hosted Server"
-  - url: "https://knxstore.vn/thiet-bi-nao-tuong-thich-voi-matter.html"
-    slug: "thiet-bi-nao-tuong-thich-voi-matter"
-    anchor: "Thiết bị nào tương thích với Matter?"
-  - url: "https://knxstore.vn/vi-sao-hien-tai-chua-co-camera-an-ninh-tuong-thich-matter.html"
-    slug: "vi-sao-hien-tai-chua-co-camera-an-ninh-tuong-thich-matter"
-    anchor: "Vì sao hiện tại chưa có camera an ninh tương thích Matter?"
+    anchor: "SPI Là Gì? Ứng Dụng SPI LED Controller Trong LED RGBW"
+    position: 4
 ---
 
 # Homepod là gì? 7 tính năng tuyệt vời Homepod đem đến cho bạn
@@ -57,206 +46,131 @@ internal_links:
 
 ## Article Body
 
-Sự xuất hiện của loa thông minh vừa có khả năng phát nhạc vừa tích hợp các tính năng đa nhiệm khác đã gây sốt trong giới công nghệ trong những năm gần đây. Trong đó, Apple Homepod là một trong những sản phẩm nổi bật nhất trên thị trường hiện nay. Vậy Homepod là gì? Homepod có tính năng gì? Cùng tìm hiểu  7 tính năng tuyệt vời của Homepod trong bài viết dưới đây. 
-
-Homepod là gì?
-
-Homepod là sản phẩm loa thông minh phát triển bởi ông lớn công nghệ Apple, được ra mắt vào năm 2018. 2 năm sau đó, Apple cũng cho ra mắt sản phẩm Homepod mini. 
-
-
-
-Homepod có thiết kế dạng tròn, hình trụ và phía trên có màn cảm ứng nhỏ. Dù ra mắt sau nhưng nhờ thiết kế độc đáo với 7 loa tweet, 6 loa micro và 1 loa siêu trầm 4 inch giúp tối ưu hóa âm thành bằng giọng nói, Apple đã nhanh chóng vươn lên top những sản phẩm bán chạy nhất. 
-
-Ưu và nhược điểm của loa Homepod 
-
-Bên cạnh câu hỏi Homepod là gì thì Homepod có ưu và nhược điểm như thế nào cũng là thắc mắc của nhiều người khi. Dưới đây là một số đánh giá về loa Homepod của Apple: 
-
-Ưu điểm
-
-
-	Tích hợp các tính năng hiện đại: Homepod có thể thực hiện tin nhắn văn bản và cuộc gọi thoại từ Iphone. Đặc biệt, Homepod còn có thể sử dụng để điều khiển loa và các thiết bị homekit khác của Apple như bật tắt đèn, mở khóa, mở cửa,... 
-	m thanh của loa cực trong, rõ rệt đến từng chi tiết, vocal xuất sắc.
-	Chỉ cần có iPod từ iOS 11.2.5 trở lên hoặc Iphone là có thể cài đặt
-
-
-Nhược điểm 
-
-
-	HomePod không có cổng kết nối. Vì vậy, bạn chỉ có thể nghe nhạc qua AirPlay hoặc ra lệnh bằng giọng nói. 
-	Chưa có tính năng hỗ trợ phát stereo từ 2 loa.
-
-
-Chức năng của HomePod mà người dùng không thể bỏ lỡ
-
-Loa thông minh HomePod hay loa Homepod mini được người dùng ưu ái bởi khả năng phát nhạc trực tuyến, kết nối đồng bộ với các “anh em” khác trong nhà Táo cùng rất nhiều tính năng hiện đại khác. Trong quá trình sử dụng Apple Homepod và Apple Homepod mini, bạn không nên bỏ qua 8 chức năng tuyệt vời dưới đây: 
-
-Phát trực tiếp (Stream) nhạc từ Spotify cho HomePod
-
-Homepod có tính năng hỗ trợ hát trực tiếp (Stream) nhạc từ Spotify với thao tác đơn giản. 
-Bạn chỉ cần chọn mục Devices Available, sau đó ấn chọn Airplay & Bluetooth và chọn phòng đang có HomePod. Bên cạnh đó, bạn cũng có thể phát HomePod đồng thời với các thiết bị có hỗ trợ khác qua Airplay 2. Tuy nhiên, hãy chắc chắn rằng loa của bạn đã được thiết lập cài đặt trước đó rồi nhé! 
-
-Dùng HomePod làm loa cho máy tính Mac
-
-
-
-Tính năng tuyệt vời của Homepod mà bạn không thể bỏ qua chính là dùng Homepod làm loa cho máy tính Mac. Thao tác sử dụng rất nhanh chóng, bạn chỉ cần mở mục System Preferences trong Macbook và chọn thiết bị là HomePod cho mục Sound. Sau đó khi sử dụng các ứng dụng, bạn chỉ cần mở Airplay cho phát nhạc qua HomePod.
-
-Sử dụng HomePod làm HomeHub cho nhà thông minh Apple HomeKit
-
-Sử dụng HomePod hay Homepod mini, người dùng có thể ra lệnh điều khiển bất cứ thiết bị thông minh nào trong nhà như là bật/ tắt đèn, mở nhạc, đóng mở rèm,… Hãy dùng chiếc HomePod làm HomeHub cho căn nhà thông minh cho riêng bạn.
-
-Gửi, đọc tin nhắn và gọi điện với HomePod
-
-Nếu Iphone của bạn có hệ điều hành IOS từ 12 trở lên, khi kết nối chung mạng wifi cùng Homepod, bạn có thể thực hiện gửi, đọc tin nhắn và gọi điện thông qua trợ lý ảo Siri chỉ bằng các câu lệnh: 
-
-
-	“Hey Siri, call [tên danh bạ]" (giúp thực hiện cuộc gọi)
-	"Hey Siri, answer the phone" (giúp trả lời cuộc gọi đến).
-	“Hey Siri, hang up” (giúp tắt cuộc gọi) 
-	"Hey Siri, check my voicemail" (giúp kiểm tra tin nhắn thoại)
-	“Hey Siri, send a message to [tên danh bạ] - [nội dung tin nhắn]” (giúp gửi tin nhắn)
-	"Hey Siri, who just called?" (giúp thông báo cuộc gọi nhỡ)
-
-
-Dùng HomePod như một chuông báo động cho ngôi nhà
-
-Với Homepod, bạn có thể sử dụng như một chuông báo động rất hiệu quả. Đặc biệt, bạn có thể đặt nhiều chuông cùng lúc như chuông báo nhà bếp, chuông báo thức,... và kiểm tra lại bạn đã đặt những chuông nào qua trợ lý ảo Siri. 
-Giới hạn quyền truy cập vào HomePod
-
-Một trong những tính năng được nhiều người quan tâm đó là tính năng bảo mật của thiết bị loa thông minh. Homepod có giới hạn quyền truy cập giúp tăng khả năng an ninh cho các thiết bị và ngôi nhà của bạn. 
-
-Thao tác thực hiện rất đơn giản. Tại mục Allow speaker access -> chọn Mọi người, những người dùng hệ thống mạng hoặc những người được chia sẻ tùy theo mục đích của bạn. Bên cạnh đó, bạn cũng có thể đặt mật khẩu cho tính năng stream của Homepod. 
-
-Giới hạn quyền truy cập vào HomePod
-
-
-
-Một trong những tính năng được nhiều người quan tâm đó là tính năng bảo mật của thiết bị loa thông minh. Homepod có giới hạn quyền truy cập giúp tăng khả năng an ninh cho các thiết bị và ngôi nhà của bạn. 
-
-Thao tác thực hiện rất đơn giản. Tại mục Allow speaker access -> chọn Mọi người, những người dùng hệ thống mạng hoặc những người được chia sẻ tùy theo mục đích của bạn. Bên cạnh đó, bạn cũng có thể đặt mật khẩu cho tính năng stream của Homepod. 
-
-Làm cho HomePod tự phát nhạc khi bạn về nhà
-
-Homepod còn có khả năng tự động phát nhạc khi bạn về nhà thông qua ứng dụng Home. Sẽ thật tuyệt vời khi bạn đặt chân đến cửa nhà và nghe được bài viết yêu thích của mình phát ra từ chiếc loa thông minh phải không nào?
-
-Sản phẩm loa thông minh Homepod của Apple sở hữu những tính năng tuyệt vời không thể bỏ lỡ như hỗ trợ tin nhắn thoại và cuộc gọi, tăng tính bảo mật khi giới hạn quyền truy cập,... cùng rất nhiều tính năng khác nêu trên. Hy vọng bài viết đã giúp bạn trả lời được câu hỏi Homepod là gì và khám phá được nhiều thông tin hơn nữa về chiếc loa này.
+HomePod là gì?
+HomePod là dòng loa thông minh do Apple phát triển, ra mắt lần đầu năm 2018, tích hợp trợ lý ảo Siri và hệ điều hành riêng để phát nhạc, điều khiển nhà thông minh và tương tác bằng giọng nói. Apple sau đó ngừng bán bản HomePod đầu tiên, ra mắt HomePod mini nhỏ gọn hơn vào cuối 2020, rồi trở lại với bản HomePod thế hệ hai vào năm 2023.
+HomePod và HomePod mini khác nhau ở đâu
+HomePod bản đầy đủ có kích thước lớn hơn, nhiều loa tweeter và loa siêu trầm hơn, cho chất âm mạnh và chi tiết hơn, phù hợp người ưu tiên nghe nhạc. HomePod mini nhỏ gọn, giá thấp hơn nhiều, chất âm ở mức vừa phải nhưng lại là lựa chọn phổ biến hơn cho vai trò điều khiển nhà thông minh vì dễ mua thêm vài chiếc đặt rải rác nhiều phòng.
+Tiêu chí
+HomePod (bản đầy đủ)
+HomePod mini
+Kích thước, giá
+Lớn hơn, giá cao hơn
+Nhỏ gọn, giá thấp hơn nhiều
+Chất âm
+Mạnh, chi tiết, nhiều loa tweeter và loa siêu trầm
+Vừa phải, đủ dùng cho phòng nhỏ
+Vai trò Thread Border Router
+Có
+Có
+Phù hợp nhất khi
+Ưu tiên nghe nhạc, đặt ở phòng khách chính
+Cần đặt nhiều điểm để mở rộng vùng phủ Matter over Thread
+Đáng chú ý cho năm 2026, Apple xác nhận bản HomePod mini thế hệ mới chuyển từ chip S5 sang chip S9 kèm chip mạng N1, tích hợp trực tiếp Thread cùng Wi-Fi 7 thay vì Wi-Fi 6. Với vai trò Thread Border Router, bản mới xử lý lệnh HomeKit nhanh hơn đáng kể, còn phần xử lý hội thoại phức tạp của Siri vẫn chạy qua cloud, không xử lý trực tiếp trên thiết bị.
+Ưu và nhược điểm của loa Homepod
+HomePod đóng vai trò gì trong hệ sinh thái Matter smarthome
+Đây là vai trò quan trọng nhất của HomePod với người đang xây dựng nhà thông minh, nhưng lại ít được nhắc đến trong các bài giới thiệu sản phẩm thông thường.
+HomePod mini là Thread Border Router
+HomePod mini tích hợp sẵn chip Thread ngay từ bản đầu tiên, tự động đóng vai trò Thread Border Router khi bạn bật vai trò Home Hub trong app Home. Thread Border Router là cầu nối bắt buộc giữa mạng Thread nội bộ, nơi các thiết bị Matter over Thread giao tiếp với nhau, và mạng Wi-Fi hoặc Internet trong nhà. Thiếu Thread Border Router, đèn, cảm biến hay khóa cửa chuẩn Matter over Thread vẫn hoạt động trong mesh nội bộ nhưng không báo được trạng thái về app hoặc nhận lệnh từ xa.
+Một ví dụ thực tế: nếu bạn lắp cảm biến cửa Matter over Thread ở cửa chính nhưng nhà chưa có Thread Border Router, app Home sẽ hiện thông báo lỗi kiểu "cần có Thread Border Router" ngay khi ghép nối, dù cảm biến đó hoàn toàn đạt chuẩn Matter. Đặt một HomePod mini trong nhà và bật vai trò Home Hub là cách xử lý nhanh nhất cho lỗi này.
+HomePod là Home Hub và Matter Controller cho Apple Home
+Ngoài vai trò Thread Border Router, HomePod còn đóng vai trò Home Hub, tức trung tâm xử lý automation, lưu lịch sử cảm biến và cho phép điều khiển nhà từ xa khi bạn không có mặt tại nhà. Trong thuật ngữ Matter, vai trò này gọi là Matter Controller, thiết bị chịu trách nhiệm ghép nối và quản lý các thiết bị Matter trong hệ sinh thái Apple Home.
+Vai trò Home Hub này cũng là nền tảng cho các automation kết hợp nhiều thiết bị, ví dụ khi cảm biến cửa Matter phát hiện bạn về nhà, HomePod có thể tự bật đèn phòng khách hoặc phát nhạc yêu thích thông qua automation cấu hình sẵn trong app Home, mà không cần bạn ra lệnh bằng giọng nói.
+Nếu gia đình đang cân nhắc giữa HomePod mini, Apple TV và Nest Hub cho vai trò Thread Border Router, có thể xem so sánh chi tiết trong bài So sánh HomePod mini, Apple TV và Nest Hub khi làm Thread Border Router để chọn đúng theo hệ sinh thái đang dùng. Nếu chưa rõ Thread khác Wi-Fi hay Bluetooth ở điểm nào, có thể xem thêm bài Thread Là Gì? Giao Thức Nền Tảng Của Matter Smarthome.
+Các tính năng chính của HomePod
+Bên cạnh vai trò hạ tầng Matter, HomePod vẫn giữ các tính năng tiêu dùng quen thuộc khiến thiết bị này phổ biến trong hệ sinh thái Apple.
+HomePod phát nhạc qua AirPlay từ iPhone, Mac hoặc trực tiếp từ các dịch vụ như Spotify, và có thể phát đồng bộ nhiều phòng cùng lúc qua AirPlay 2. Thiết bị cũng dùng được làm loa ngoài cho máy tính Mac bằng cách chọn HomePod trong mục Sound của System Preferences. Qua trợ lý Siri, người dùng có thể gọi điện, đọc và gửi tin nhắn, đặt nhiều chuông báo cùng lúc, hoặc ra lệnh điều khiển đèn, rèm cửa và các thiết bị Apple Home khác chỉ bằng giọng nói. Nếu muốn hiểu rõ hơn cách Siri xử lý lệnh giọng nói và giới hạn của trợ lý ảo này, có thể xem thêm bài Apple HomeKit: Khám phá Siri và cách kết nối với Philips Hue.
+HomePod cũng dùng được như một chuông báo động cho ngôi nhà, cho phép đặt nhiều chuông cùng lúc như chuông báo thức, chuông nhắc bếp, và kiểm tra lại các chuông đã đặt qua Siri mà không cần mở điện thoại. Một tính năng nhỏ nhưng hữu ích là khả năng tự phát nhạc khi bạn về nhà, kết hợp với vị trí trên iPhone hoặc automation trong app Home, giúp trải nghiệm về nhà liền mạch hơn.
+Về bảo mật, HomePod cho phép giới hạn quyền truy cập phát nhạc theo từng nhóm người trong nhà, và có thể đặt mật khẩu riêng cho tính năng phát nhạc từ xa qua Airplay.
+HomePod có phù hợp với gia đình bạn không
+HomePod chỉ hoạt động trong hệ sinh thái Apple Home, không tương thích Google Home hoặc Amazon Alexa. Nếu gia đình dùng cả iPhone và điện thoại Android, hoặc đã đầu tư thiết bị Google Nest từ trước, HomePod sẽ không phát huy hết vai trò Home Hub vì các thiết bị Android trong nhà không điều khiển được qua Siri hay app Home.
+Ngược lại, nếu cả nhà đã dùng iPhone và muốn một Thread Border Router gọn nhẹ, dễ đặt nhiều điểm trong nhà để mở rộng vùng phủ Matter over Thread, HomePod mini là lựa chọn hợp lý hơn Apple TV về mặt chi phí và tính linh hoạt vị trí lắp đặt.
+Với dự án nhà thông minh có kết hợp cả hệ KNX chuyên nghiệp và lớp Matter cho người dùng cuối, HomePod vẫn dùng được như lớp điều khiển Apple Home phía trên, miễn là hệ KNX có bridge hỗ trợ Matter. Trường hợp này phù hợp với nhà đã có sẵn hạ tầng KNX cho chiếu sáng, rèm cửa nhưng muốn thêm lớp điều khiển bằng giọng nói qua Siri cho các phòng riêng lẻ.
+HomePod có bắt buộc phải có để dùng thiết bị Matter không?
+Không bắt buộc phải là HomePod, nhưng nhà bạn cần có ít nhất một Thread Border Router để dùng thiết bị Matter over Thread. Nếu đã dùng Apple Home, HomePod mini là một trong những lựa chọn Thread Border Router phổ biến nhất, cùng với Apple TV 4K.
 
-## Raw JSON-LD
+HomePod mini có thay được toàn bộ hệ thống điều khiển nhà thông minh không?
+Không hoàn toàn. HomePod mini đóng vai trò Home Hub và Thread Border Router, nhưng vẫn cần các thiết bị đầu cuối như công tắc, cảm biến, khóa cửa chuẩn Matter để thực sự điều khiển được ngôi nhà.
+
+Một nhà cần bao nhiêu HomePod mini để đủ vùng phủ Thread?
+Với nhà một tầng diện tích vừa phải, một HomePod mini thường đủ. Với nhà nhiều tầng hoặc có sàn bê tông cản sóng, nên đặt thêm HomePod mini ở các tầng khác để tránh điểm chết sóng Thread.
+
+HomePod có hoạt động được khi mất Internet không?
+Các lệnh điều khiển thiết bị trong nhà qua Thread vẫn hoạt động trong mạng nội bộ khi mất Internet, nhưng các tính năng cần xử lý qua cloud như Siri hội thoại phức tạp hoặc điều khiển từ xa ngoài nhà sẽ không dùng được.
+
+Có thể dùng HomePod cùng lúc với hệ thống KNX trong nhà không?
+Có, thông qua các bộ chuyển đổi (bridge) hỗ trợ Matter cho hệ KNX, cho phép các nhóm địa chỉ KNX xuất hiện trong Apple Home và điều khiển được qua Siri hoặc HomePod, mà không cần thay thế hạ tầng KNX đã lắp.
+
+HomePod và HomePod mini nghe nhạc có khác biệt lớn không?
+Có sự khác biệt rõ về chất âm. HomePod bản đầy đủ có nhiều loa tweeter và loa siêu trầm lớn hơn, cho âm trầm và chi tiết tốt hơn, còn HomePod mini gọn nhẹ nhưng chất âm ở mức vừa phải, phù hợp hơn cho vai trò điều khiển nhà thông minh đặt nhiều phòng thay vì nghe nhạc chuyên sâu.
+
+## Raw MCP
 
 ```json
-[
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebPage",
-        "@id": "https://knxstore.vn/homepod-la-gi.html#webpage",
-        "url": "https://knxstore.vn/homepod-la-gi.html",
-        "name": "Homepod là gì? 7 tính năng tuyệt vời Homepod đem đến cho bạn",
-        "description": "Homepod là gì? Homepod có ưu nhược điểm gì? Cùng tìm hiểu các tính năng tuyệt vời của homepod trong bài viết dưới đây.",
-        "inLanguage": "vi-VN",
-        "datePublished": "2025-03-11T15:42:44+07:00",
-        "dateModified": "2025-03-11T15:42:44+07:00",
-        "isPartOf": {
-          "@id": "https://knxstore.vn/#website"
-        },
-        "publisher": {
-          "@id": "https://knxstore.vn/#organization"
-        },
-        "mainEntity": {
-          "@id": "https://knxstore.vn/homepod-la-gi.html#article"
-        },
-        "primaryImageOfPage": {
-          "@type": "ImageObject",
-          "@id": "https://knxstore.vn/homepod-la-gi.html#featured-image",
-          "url": "https://knxstore.vn/assets/image/post/homepod-la-gi.jpg",
-          "contentUrl": "https://knxstore.vn/assets/image/post/homepod-la-gi.jpg",
-          "caption": "Homepod là gì? 7 tính năng tuyệt vời Homepod đem đến cho bạn"
-        },
-        "breadcrumb": {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Trang chủ",
-              "item": "https://knxstore.vn/"
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Blogs",
-              "item": "https://knxstore.vn/blogs"
-            },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "name": "Kiến thức",
-              "item": "https://knxstore.vn/blogs/kien-thuc"
-            },
-            {
-              "@type": "ListItem",
-              "position": 4,
-              "name": "Homepod là gì? 7 tính năng tuyệt vời Homepod đem đến cho bạn",
-              "item": "https://knxstore.vn/homepod-la-gi.html"
-            }
-          ]
-        }
-      },
-      {
-        "@type": "BlogPosting",
-        "@id": "https://knxstore.vn/homepod-la-gi.html#article",
-        "mainEntityOfPage": {
-          "@id": "https://knxstore.vn/homepod-la-gi.html#webpage"
-        },
-        "headline": "Homepod là gì? 7 tính năng tuyệt vời Homepod đem đến cho bạn",
-        "description": "Homepod là gì? Homepod có ưu nhược điểm gì? Cùng tìm hiểu các tính năng tuyệt vời của homepod trong bài viết dưới đây.",
-        "articleBody": "Sự xuất hiện của loa thông minh vừa có khả năng phát nhạc vừa tích hợp các tính năng đa nhiệm khác đã gây sốt trong giới công nghệ trong những năm gần đây. Trong đó, Apple Homepod là một trong những sản phẩm nổi bật nhất trên thị trường hiện nay. Vậy Homepod là gì? Homepod có tính năng gì? Cùng tìm hiểu  7 tính năng tuyệt vời của Homepod trong bài viết dưới đây. \r\n\r\nHomepod là gì?\r\n\r\nHomepod là sản phẩm loa thông minh phát triển bởi ông lớn công nghệ Apple, được ra mắt vào năm 2018. 2 năm sau đó, Apple cũng cho ra mắt sản phẩm Homepod mini. \r\n\r\n\r\n\r\nHomepod có thiết kế dạng tròn, hình trụ và phía trên có màn cảm ứng nhỏ. Dù ra mắt sau nhưng nhờ thiết kế độc đáo với 7 loa tweet, 6 loa micro và 1 loa siêu trầm 4 inch giúp tối ưu hóa âm thành bằng giọng nói, Apple đã nhanh chóng vươn lên top những sản phẩm bán chạy nhất. \r\n\r\nƯu và nhược điểm của loa Homepod \r\n\r\nBên cạnh câu hỏi Homepod là gì thì Homepod có ưu và nhược điểm như thế nào cũng là thắc mắc của nhiều người khi. Dưới đây là một số đánh giá về loa Homepod của Apple: \r\n\r\nƯu điểm\r\n\r\n\r\n\tTích hợp các tính năng hiện đại: Homepod có thể thực hiện tin nhắn văn bản và cuộc gọi thoại từ Iphone. Đặc biệt, Homepod còn có thể sử dụng để điều khiển loa và các thiết bị homekit khác của Apple như bật tắt đèn, mở khóa, mở cửa,... \r\n\tm thanh của loa cực trong, rõ rệt đến từng chi tiết, vocal xuất sắc.\r\n\tChỉ cần có iPod từ iOS 11.2.5 trở lên hoặc Iphone là có thể cài đặt\r\n\r\n\r\nNhược điểm \r\n\r\n\r\n\tHomePod không có cổng kết nối. Vì vậy, bạn chỉ có thể nghe nhạc qua AirPlay hoặc ra lệnh bằng giọng nói. \r\n\tChưa có tính năng hỗ trợ phát stereo từ 2 loa.\r\n\r\n\r\nChức năng của HomePod mà người dùng không thể bỏ lỡ\r\n\r\nLoa thông minh HomePod hay loa Homepod mini được người dùng ưu ái bởi khả năng phát nhạc trực tuyến, kết nối đồng bộ với các “anh em” khác trong nhà Táo cùng rất nhiều tính năng hiện đại khác. Trong quá trình sử dụng Apple Homepod và Apple Homepod mini, bạn không nên bỏ qua 8 chức năng tuyệt vời dưới đây: \r\n\r\nPhát trực tiếp (Stream) nhạc từ Spotify cho HomePod\r\n\r\nHomepod có tính năng hỗ trợ hát trực tiếp (Stream) nhạc từ Spotify với thao tác đơn giản. \r\nBạn chỉ cần chọn mục Devices Available, sau đó ấn chọn Airplay & Bluetooth và chọn phòng đang có HomePod. Bên cạnh đó, bạn cũng có thể phát HomePod đồng thời với các thiết bị có hỗ trợ khác qua Airplay 2. Tuy nhiên, hãy chắc chắn rằng loa của bạn đã được thiết lập cài đặt trước đó rồi nhé! \r\n\r\nDùng HomePod làm loa cho máy tính Mac\r\n\r\n\r\n\r\nTính năng tuyệt vời của Homepod mà bạn không thể bỏ qua chính là dùng Homepod làm loa cho máy tính Mac. Thao tác sử dụng rất nhanh chóng, bạn chỉ cần mở mục System Preferences trong Macbook và chọn thiết bị là HomePod cho mục Sound. Sau đó khi sử dụng các ứng dụng, bạn chỉ cần mở Airplay cho phát nhạc qua HomePod.\r\n\r\nSử dụng HomePod làm HomeHub cho nhà thông minh Apple HomeKit\r\n\r\nSử dụng HomePod hay Homepod mini, người dùng có thể ra lệnh điều khiển bất cứ thiết bị thông minh nào trong nhà như là bật/ tắt đèn, mở nhạc, đóng mở rèm,… Hãy dùng chiếc HomePod làm HomeHub cho căn nhà thông minh cho riêng bạn.\r\n\r\nGửi, đọc tin nhắn và gọi điện với HomePod\r\n\r\nNếu Iphone của bạn có hệ điều hành IOS từ 12 trở lên, khi kết nối chung mạng wifi cùng Homepod, bạn có thể thực hiện gửi, đọc tin nhắn và gọi điện thông qua trợ lý ảo Siri chỉ bằng các câu lệnh: \r\n\r\n\r\n\t“Hey Siri, call [tên danh bạ]\" (giúp thực hiện cuộc gọi)\r\n\t\"Hey Siri, answer the phone\" (giúp trả lời cuộc gọi đến).\r\n\t“Hey Siri, hang up” (giúp tắt cuộc gọi) \r\n\t\"Hey Siri, check my voicemail\" (giúp kiểm tra tin nhắn thoại)\r\n\t“Hey Siri, send a message to [tên danh bạ] - [nội dung tin nhắn]” (giúp gửi tin nhắn)\r\n\t\"Hey Siri, who just called?\" (giúp thông báo cuộc gọi nhỡ)\r\n\r\n\r\nDùng HomePod như một chuông báo động cho ngôi nhà\r\n\r\nVới Homepod, bạn có thể sử dụng như một chuông báo động rất hiệu quả. Đặc biệt, bạn có thể đặt nhiều chuông cùng lúc như chuông báo nhà bếp, chuông báo thức,... và kiểm tra lại bạn đã đặt những chuông nào qua trợ lý ảo Siri. \r\nGiới hạn quyền truy cập vào HomePod\r\n\r\nMột trong những tính năng được nhiều người quan tâm đó là tính năng bảo mật của thiết bị loa thông minh. Homepod có giới hạn quyền truy cập giúp tăng khả năng an ninh cho các thiết bị và ngôi nhà của bạn. \r\n\r\nThao tác thực hiện rất đơn giản. Tại mục Allow speaker access -> chọn Mọi người, những người dùng hệ thống mạng hoặc những người được chia sẻ tùy theo mục đích của bạn. Bên cạnh đó, bạn cũng có thể đặt mật khẩu cho tính năng stream của Homepod. \r\n\r\nGiới hạn quyền truy cập vào HomePod\r\n\r\n\r\n\r\nMột trong những tính năng được nhiều người quan tâm đó là tính năng bảo mật của thiết bị loa thông minh. Homepod có giới hạn quyền truy cập giúp tăng khả năng an ninh cho các thiết bị và ngôi nhà của bạn. \r\n\r\nThao tác thực hiện rất đơn giản. Tại mục Allow speaker access -> chọn Mọi người, những người dùng hệ thống mạng hoặc những người được chia sẻ tùy theo mục đích của bạn. Bên cạnh đó, bạn cũng có thể đặt mật khẩu cho tính năng stream của Homepod. \r\n\r\nLàm cho HomePod tự phát nhạc khi bạn về nhà\r\n\r\nHomepod còn có khả năng tự động phát nhạc khi bạn về nhà thông qua ứng dụng Home. Sẽ thật tuyệt vời khi bạn đặt chân đến cửa nhà và nghe được bài viết yêu thích của mình phát ra từ chiếc loa thông minh phải không nào?\r\n\r\nSản phẩm loa thông minh Homepod của Apple sở hữu những tính năng tuyệt vời không thể bỏ lỡ như hỗ trợ tin nhắn thoại và cuộc gọi, tăng tính bảo mật khi giới hạn quyền truy cập,... cùng rất nhiều tính năng khác nêu trên. Hy vọng bài viết đã giúp bạn trả lời được câu hỏi Homepod là gì và khám phá được nhiều thông tin hơn nữa về chiếc loa này. \r\n",
-        "articleSection": "Kiến thức",
-        "keywords": [],
-        "inLanguage": "vi-VN",
-        "datePublished": "2025-03-11T15:42:44+07:00",
-        "dateModified": "2025-03-11T15:42:44+07:00",
-        "url": "https://knxstore.vn/homepod-la-gi.html",
-        "image": {
-          "@id": "https://knxstore.vn/homepod-la-gi.html#featured-image"
-        },
-        "publisher": {
-          "@id": "https://knxstore.vn/#organization"
-        },
-        "isPartOf": {
-          "@id": "https://knxstore.vn/#website"
-        },
-        "about": {
-          "@type": "Thing",
-          "name": "Nhà thông minh",
-          "description": "Giải pháp smarthome và thiết bị thông minh"
-        },
-        "mentions": [
-          {
-            "@type": "Thing",
-            "name": "Aqara"
-          },
-          {
-            "@type": "Thing",
-            "name": "Apple Home"
-          }
-        ],
-        "contentLocation": {
-          "@type": "Country",
-          "name": "Việt Nam",
-          "identifier": "VN"
-        },
-        "locationCreated": {
-          "@type": "City",
-          "name": "TP. Hồ Chí Minh",
-          "containedInPlace": {
-            "@type": "Country",
-            "name": "Việt Nam"
-          }
-        }
-      }
-    ]
-  }
-]
+{
+  "slug": "homepod-la-gi",
+  "title": "Homepod là gì? 7 tính năng tuyệt vời Homepod đem đến cho bạn",
+  "excerpt": "Homepod là gì? Homepod có ưu nhược điểm gì? Cùng tìm hiểu các tính năng tuyệt vời của homepod trong bài viết dưới đây.",
+  "coverImage": "/media/85e38eb62b9fed548d0877c8ad64426f7fead1181853d7ff5fe6397624491747.jpg",
+  "authorName": null,
+  "author": {
+    "slug": "ta-minh-vu",
+    "name": "Tạ Minh Vũ",
+    "bio": "Mình làm kỹ thuật và marketing tại KNXStore.vn,  chuyên về \nDALI-2, Casambi, Matter và hệ thống chiếu sáng thông minh \ncho công trình thực tế.\n\nNội dung trên site từ tư vấn dự án thật.",
+    "jobTitle": "System Integration & Marketing Engineer",
+    "expertiseAreas": null,
+    "certifications": null,
+    "linkedinUrl": null,
+    "facebookUrl": null,
+    "websiteUrl": null,
+    "seoDescription": "Kỹ thuật viên tại KNXStore.vn, chuyên tư vấn hệ thống DALI-2,  Casambi, Matter và chiếu sáng thông minh cho công trình thực tế  tại Việt Nam.",
+    "imageUrl": "/media/e539ffa1221ae53af726f75833373a281d088bdd6b8296697ebcc8c3ecf2326e.jpg",
+    "imageAlt": "Tạ Minh Vũ",
+    "isActive": true
+  },
+  "publishedAt": "2026-08-17T08:08:50.000Z",
+  "categories": [
+    {
+      "slug": "kien-thuc",
+      "name": "Kiến thức"
+    }
+  ],
+  "b2c": false,
+  "status": "PUBLISHED",
+  "seoTitle": "Homepod là gì? 7 tính năng tuyệt vời Homepod đem đến cho bạn",
+  "seoDescription": "Homepod là gì? Homepod có ưu nhược điểm gì? Cùng tìm hiểu các tính năng tuyệt vời của homepod trong bài viết dưới đây.",
+  "faqs": [
+    {
+      "question": "HomePod có bắt buộc phải có để dùng thiết bị Matter không?",
+      "answer": "Không bắt buộc phải là HomePod, nhưng nhà bạn cần có ít nhất một Thread Border Router để dùng thiết bị Matter over Thread. Nếu đã dùng Apple Home, HomePod mini là một trong những lựa chọn Thread Border Router phổ biến nhất, cùng với Apple TV 4K.",
+      "position": 0
+    },
+    {
+      "question": "HomePod mini có thay được toàn bộ hệ thống điều khiển nhà thông minh không?",
+      "answer": "Không hoàn toàn. HomePod mini đóng vai trò Home Hub và Thread Border Router, nhưng vẫn cần các thiết bị đầu cuối như công tắc, cảm biến, khóa cửa chuẩn Matter để thực sự điều khiển được ngôi nhà.",
+      "position": 1
+    },
+    {
+      "question": "Một nhà cần bao nhiêu HomePod mini để đủ vùng phủ Thread?",
+      "answer": "Với nhà một tầng diện tích vừa phải, một HomePod mini thường đủ. Với nhà nhiều tầng hoặc có sàn bê tông cản sóng, nên đặt thêm HomePod mini ở các tầng khác để tránh điểm chết sóng Thread.",
+      "position": 2
+    },
+    {
+      "question": "HomePod có hoạt động được khi mất Internet không?",
+      "answer": "Các lệnh điều khiển thiết bị trong nhà qua Thread vẫn hoạt động trong mạng nội bộ khi mất Internet, nhưng các tính năng cần xử lý qua cloud như Siri hội thoại phức tạp hoặc điều khiển từ xa ngoài nhà sẽ không dùng được.",
+      "position": 3
+    },
+    {
+      "question": "Có thể dùng HomePod cùng lúc với hệ thống KNX trong nhà không?",
+      "answer": "Có, thông qua các bộ chuyển đổi (bridge) hỗ trợ Matter cho hệ KNX, cho phép các nhóm địa chỉ KNX xuất hiện trong Apple Home và điều khiển được qua Siri hoặc HomePod, mà không cần thay thế hạ tầng KNX đã lắp.",
+      "position": 4
+    },
+    {
+      "question": "HomePod và HomePod mini nghe nhạc có khác biệt lớn không?",
+      "answer": "Có sự khác biệt rõ về chất âm. HomePod bản đầy đủ có nhiều loa tweeter và loa siêu trầm lớn hơn, cho âm trầm và chi tiết tốt hơn, còn HomePod mini gọn nhẹ nhưng chất âm ở mức vừa phải, phù hợp hơn cho vai trò điều khiển nhà thông minh đặt nhiều phòng thay vì nghe nhạc chuyên sâu.",
+      "position": 5
+    }
+  ],
+  "editedAt": null,
+  "url": "https://knxstore.vn/homepod-la-gi.html"
+}
 ```

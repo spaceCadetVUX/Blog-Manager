@@ -2,53 +2,49 @@
 url: "https://knxstore.vn/cach-giao-tiep-modbus-voi-dieu-hoa-daikin-vrv-vrf-thong-qua-kac00x.html"
 headline: "Cách giao tiếp Modbus với điều hòa Daikin VRV/VRF thông qua KAC00X"
 description: "KAC00X là gateway chuyển đổi giao thức Daikin VRV/VRF sang Modbus, giúp tích hợp dễ dàng vào hệ BMS, SCADA, PLC và hệ thống nhà thông minh."
-og_site_name: "KNX Store"
-image: "https://knxstore.vn/assets/image/post/cach-giao-tiep-modbus-voi-dieu-hoa-daikin-vrv-vrf-thong-qua-kac00x.jpg"
-datePublished: "2025-11-14T10:41:36+07:00"
-dateModified: "2025-11-14T10:41:36+07:00"
+image: "https://knxstore.vn/media/b979fd69b1ccc7966aeeb55e86eb44d9018c2ddd611c55d4df18c39b2326a435.jpg"
+datePublished: "2026-08-05T01:55:24.000Z"
+dateModified: "2026-08-05T01:55:24.000Z"
+author: "Lê Võ Quốc Huy"
+publisher: "KNXStore.vn"
 articleSection: "HVAC"
-word_count: 1447
-mentions: ["Aqara", "Apple Home"]
+word_count: 1904
+keywords: ["HVAC"]
+source: "mcp"
 breadcrumb:
   - name: "Trang chủ"
     url: "https://knxstore.vn/"
-  - name: "Blogs"
+  - name: "Tin tức"
     url: "https://knxstore.vn/blogs"
   - name: "HVAC"
     url: "https://knxstore.vn/blogs/hvac"
   - name: "Cách giao tiếp Modbus với điều hòa Daikin VRV/VRF thông qua KAC00X"
     url: "https://knxstore.vn/cach-giao-tiep-modbus-voi-dieu-hoa-daikin-vrv-vrf-thong-qua-kac00x.html"
+products: [{"url": "https://knxstore.vn/products/kanonbus-bo-dieu-khien-dieu-hoa-vrv-vrf-kac001", "name": "Bộ điều khiển điều hòa VRV/VRF Kanonbus IP Router/Modbus RTU - KAC001"}, {"url": "https://knxstore.vn/products/bo-dieu-khien-dieu-hoa-knx-vrv-vrf-kanonbus-kac002", "name": "Bộ điều khiển điều hòa  VRV/VRF KNX Kanonbus - KAC002"}, {"url": "https://knxstore.vn/products/kanonbus-bo-dieu-khien-dieu-hoa-vrv-vrf-knx-kac005", "name": "Bộ điều khiển điều hòa VRV/VRF KNX Kanonbus - KAC005"}, {"url": "https://knxstore.vn/products/kanonbus-bo-dieu-khien-dieu-hoa-vrv-vrf-knx-kac008", "name": "Bộ điều khiển điều hòa KNX Kanonbus - KAC008"}]
 internal_links:
-  - url: "https://knxstore.vn/vi-sao-dieu-hoa-inverter-tiet-kiem-dien-hon-dieu-hoa-binh-thuong.html"
-    slug: "vi-sao-dieu-hoa-inverter-tiet-kiem-dien-hon-dieu-hoa-binh-thuong"
-    anchor: "Vì sao điều hòa inverter tiết kiệm điện hơn điều hoà bình thường?"
-  - url: "https://knxstore.vn/10-meo-dung-may-lanh-an-toan-cho-suc-khoe-va-tiet-kiem-dien.html"
-    slug: "10-meo-dung-may-lanh-an-toan-cho-suc-khoe-va-tiet-kiem-dien"
-    anchor: "10 mẹo dùng máy lạnh an toàn cho sức khỏe và tiết kiệm điện"
-  - url: "https://knxstore.vn/huong-dan-su-dung-thermostat-matter-wi-fi-model-81mtac01.html"
-    slug: "huong-dan-su-dung-thermostat-matter-wi-fi-model-81mtac01"
-    anchor: "Hướng dẫn sử dụng thermostat Matter Wi-Fi model 81mtac01"
-  - url: "https://knxstore.vn/chon-gateway-intesis-the-nao-cho-dung-loai-may-lanh-ban-dung.html"
-    slug: "chon-gateway-intesis-the-nao-cho-dung-loai-may-lanh-ban-dung"
-    anchor: "Chọn Gateway Intesis thế nào cho đúng loại máy lạnh bạn dùng?"
-  - url: "https://knxstore.vn/giai-phap-matter-thread-cho-dieu-hoa-da-thuong-hieu.html"
-    slug: "giai-phap-matter-thread-cho-dieu-hoa-da-thuong-hieu"
-    anchor: "Giải pháp Matter Thread cho điều hòa đa thương hiệu"
-  - url: "https://knxstore.vn/he-thong-dieu-hoa-vrv-va-vrf-la-gi.html"
-    slug: "he-thong-dieu-hoa-vrv-va-vrf-la-gi"
-    anchor: "Hệ thống điều hòa VRV/VRF là gì? Tích hợp BMS và KNX"
-  - url: "https://knxstore.vn/so-sanh-dieu-khien-dieu-hoa-intesis-coolautomation-airzone.html"
-    slug: "so-sanh-dieu-khien-dieu-hoa-intesis-coolautomation-airzone"
-    anchor: "So sánh giải pháp HVAC: Intesis, CoolAutomation, Airzone"
-  - url: "https://knxstore.vn/he-thong-hvac-xanh.html"
-    slug: "he-thong-hvac-xanh"
-    anchor: "HVAC xanh giúp công trình tiết kiệm điện và sống khỏe thế nào?"
-  - url: "https://knxstore.vn/hvac-la-gi.html"
-    slug: "hvac-la-gi"
-    anchor: "Hệ thống  HVAC là gì? Các thiết bị nào cấu thành HVAC?"
-  - url: "https://knxstore.vn/cach-tiet-kiem-dieu-hoa-trong-mua-he.html"
-    slug: "cach-tiet-kiem-dieu-hoa-trong-mua-he"
-    anchor: "15 Cách tiết kiệm điện khi dùng điều hòa vào mùa hè"
+  - url: "https://knxstore.vn/giai-phap-dieu-khien-hvac-vrv-vrf-tu-he-thong-smarthome-va-bms.html"
+    slug: "giai-phap-dieu-khien-hvac-vrv-vrf-tu-he-thong-smarthome-va-bms"
+    anchor: "Hệ thống điều khiển HVAC là gì? Giải pháp nào điều khiển VRV/VRF cho hệ thống Smarthome"
+  - url: "https://knxstore.vn/huong-dan-cap-nhat-firmware-va-main-program-kanonbus-kac005-moi-nhat-2026.html"
+    slug: "huong-dan-cap-nhat-firmware-va-main-program-kanonbus-kac005-moi-nhat-2026"
+    anchor: "hướng dẫn cập nhật firmware và Main Program Kanonbus KAC005 mới nhất 2026"
+related_links:
+  - url: "https://knxstore.vn/rcu-khach-san-cho-chu-dau-tu-va-me-phan-loai-va-cach-chon.html"
+    slug: "rcu-khach-san-cho-chu-dau-tu-va-me-phan-loai-va-cach-chon"
+    anchor: "RCU Khách Sạn Cho Chủ Đầu Tư Và ME: Phân Loại Và Cách Chọn."
+    position: 1
+  - url: "https://knxstore.vn/core-smart-home-knx-climate-gateway-tich-hop-dieu-hoa-vrf-vrv-vao-knx-voi-7-model-theo-hang.html"
+    slug: "core-smart-home-knx-climate-gateway-tich-hop-dieu-hoa-vrf-vrv-vao-knx-voi-7-model-theo-hang"
+    anchor: "Core Smart Home KNX Climate Gateway: Tích Hợp Điều Hòa VRF/VRV Vào KNX Với 7 Model Theo Hãng"
+    position: 2
+  - url: "https://knxstore.vn/smart-thermostat-la-gi-co-nen-lap-cho-may-lanh-nha-ban.html"
+    slug: "smart-thermostat-la-gi-co-nen-lap-cho-may-lanh-nha-ban"
+    anchor: "Smart Thermostat Là Gì? Có Nên Lắp Cho Máy Lạnh Nhà Bạn"
+    position: 3
+  - url: "https://knxstore.vn/dta116a51-vs-dvc-p-00-01-adapter-daikin-sang-modbus-nao-cho-du-an.html"
+    slug: "dta116a51-vs-dvc-p-00-01-adapter-daikin-sang-modbus-nao-cho-du-an"
+    anchor: "DTA116A51 vs DVC-P-00-01 Adapter Daikin Sang Modbus Nào Cho Dự Án"
+    position: 4
 ---
 
 # Cách giao tiếp Modbus với điều hòa Daikin VRV/VRF thông qua KAC00X
@@ -57,649 +53,248 @@ internal_links:
 
 ## Article Body
 
-Trong các hệ thống HVAC hiện đại, đặc biệt là điều hòa trung tâm Daikin VRV/VRF, nhu cầu tích hợp vào hệ thống điều khiển tòa nhà (BMS), SCADA hay PLC ngày càng phổ biến. Tuy nhiên, không phải dòng máy lạnh nào cũng hỗ trợ giao tiếp tiêu chuẩn mở như Modbus – vốn là chuẩn giao tiếp phổ biến trong công nghiệp.
-
-
-
-Đây chính là lý do thiết bị KAC00X ra đời. Là một bộ điều khiển trung gian thông minh, KAC00X giúp chuyển đổi giao thức gốc (HBS/XYE) của Daikin sang Modbus RTU hoặc TCP, cho phép dễ dàng đọc/ghi dữ liệu từ các hệ điều hòa VRV/VRF vào hệ thống điều khiển bên ngoài.
-
-KAC00X là gì?
-
-KAC00X là một bộ giao tiếp trung gian (gateway) do Kanontec sản xuất, được thiết kế để kết nối các hệ thống điều hòa trung tâm như Daikin VRV/VRF với các hệ điều khiển công nghiệp sử dụng giao thức Modbus RTU hoặc Modbus TCP.
-
-Thiết bị này đóng vai trò là cầu nối giúp chuyển đổi tín hiệu nội bộ của điều hòa (thường là HBS hoặc XYE) sang giao thức chuẩn để tích hợp vào hệ thống giám sát và điều khiển.
-
-
-
-Tại sao cần dùng KAC00X trong hệ Daikin VRV/VRF?
-
-Hệ điều hòa VRV/VRF của Daikin vốn sử dụng giao thức riêng (không phải Modbus). Điều này gây khó khăn nếu bạn muốn:
-
-
-	Giám sát hoặc điều khiển từ hệ thống BMS, SCADA, PLC, HMI
-	Kết nối với nhà thông minh hoặc hệ tự động hóa tòa nhà
-	Tích hợp vào hệ thống giám sát năng lượng hoặc báo lỗi tập trung
-
-
-Dòng sản phẩm KAC00X giải quyết tất cả những vấn đề trên bằng cách:
-
-
-	Chuyển đổi từ HBS/XYE sang Modbus (RTU/TCP)
-	Cho phép đọc và ghi dữ liệu như: ON/OFF, Mode, Nhiệt độ cài đặt, Tốc độ quạt, nhiệt độ phòng,…
-	Trả về mã lỗi (Error Code) để hệ thống BMS nắm bắt và cảnh báo nhanh
-	Cấu hình dễ dàng thông qua trình duyệt Web (IP mặc định: 192.168.1.232)
-	Hỗ trợ nhiều hãng: không chỉ Daikin, mà còn Mitsubishi, Toshiba, Samsung, Midea,...
-
-
-Sơ đồ kết nối Modbus RTU giữa KAC00X và Daikin VRV
-
-Để tích hợp hệ thống điều hòa trung tâm Daikin VRV/VRF vào hệ thống điều khiển như BMS, SCADA, PLC, thì việc giao tiếp thông qua chuẩn Modbus RTU là một lựa chọn hiệu quả, phổ biến và tiết kiệm chi phí.
-
-Thiết bị KAC00X đóng vai trò trung gian, giúp kết nối hai thế giới: giao thức riêng của Daikin (HBS/XYE) và Modbus tiêu chuẩn công nghiệp.
-
-
-
-Hình trên là một sơ đồ kết nối thực tế thể hiện rõ kiến trúc hệ thống.
-
-Hướng dẫn cấu hình KAC00X trên giao diện web
-
-Một trong những điểm mạnh của bộ KAC00X là khả năng cấu hình cực kỳ trực quan thông qua giao diện Web, mà không cần phần mềm chuyên dụng. Điều này giúp kỹ sư triển khai hệ thống Modbus - Daikin VRV một cách nhanh chóng và dễ dàng bảo trì.
-
-Xem ngay Video hướng dẫn cấu hình KAC00X
-
- 
-
-Danh sách các thanh ghi Modbus quan trọng từ KAC00X
-
-Sau khi cấu hình kết nối thành công, việc hiểu rõ mapping các thanh ghi (Modbus Register Mapping) trên thiết bị KAC00X là bước then chốt để giám sát và điều khiển hệ thống điều hòa Daikin VRV từ xa.
-
-Dưới đây là danh sách các thanh ghi phổ biến nhất, dùng để bật/tắt máy, chuyển chế độ, cài đặt nhiệt độ, đọc nhiệt độ phòng, trạng thái lỗi…
-
-Nguyên tắc đánh địa chỉ trên KAC00X
-
-Mỗi dàn lạnh (Indoor Unit) sẽ chiếm một cụm địa chỉ riêng, cách nhau 10 thanh ghi.
-
-Địa chỉ bắt đầu cho dàn lạnh số 1 là 40002, sau đó tăng dần:
-
-
-	Dàn lạnh số 2: 40012
-	Dàn lạnh số 3: 40022
-	...
-	Công thức chung: 40002 + (n-1) × 10
-	(n = số thứ tự của dàn lạnh)
-
-
-Bảng thanh ghi ghi điều khiển (Holding Register – 4xxxx)
-
-
-	
-		
-			
-			Tên chức năng
-			
-			
-			Thanh ghi (n=1)
-			
-			
-			Giá trị
-			
-			
-			Ghi chú
-			
-		
-		
-			
-			Bật/Tắt máy
-			
-			
-			40002
-			
-			
-			0 = Tắt
-
-			1 = Bật
-			
-			 
-		
-		
-			
-			Chế độ hoạt động
-			
-			
-			40003
-			
-			
-			0 = Auto
-
-			1 = Cool
-
-			2 = Dry
-
-			3 = Fan
-
-			4 = Heat
-			
-			 
-		
-		
-			
-			Nhiệt độ cài đặt
-			
-			
-			40004
-			
-			
-			18–30 (°C)
-			
-			
-			Đơn vị: °C
-			
-		
-		
-			
-			Tốc độ quạt
-			
-			
-			40005
-			
-			
-			0 = Auto
-
-			1 = Low
-
-			2 = Medium
-
-			3 = High
-			
-			 
-		
-		
-			
-			Hướng gió
-			
-			
-			40006
-			
-			
-			Tùy mã
-			
-			
-			Có thể không hỗ trợ trên tất cả model
-			
-		
-		
-			
-			Khóa điều khiển cục bộ
-			
-			
-			40008
-			
-			
-			0 = Không khóa
-
-			1 = Khóa remote
-			
-			
-			Chống người dùng tự ý thao tác
-			
-		
-		
-			
-			Reset lỗi
-			
-			
-			40009
-			
-			
-			1 = Reset lỗi
-			
-			
-			Ghi giá trị 1 để xóa lỗi tạm thời
-			
-		
-	
-
-
-Bảng thanh ghi đọc trạng thái (Input Register – 3xxxx)
-
-
-	
-		
-			
-			Tên trạng thái
-			
-			
-			Thanh ghi (n=1)
-			
-			
-			Đơn vị
-			
-			
-			Ghi chú
-			
-		
-		
-			
-			Trạng thái máy
-			
-			
-			30002
-			
-			
-			-
-			
-			
-			0 = OFF, 1 = ON
-			
-		
-		
-			
-			Chế độ hoạt động hiện tại
-			
-			
-			30003
-			
-			
-			-
-			
-			
-			Giá trị như phần ghi
-			
-		
-		
-			
-			Nhiệt độ phòng
-			
-			
-			30004
-			
-			
-			°C
-			
-			
-			Nhiệt độ môi trường thực tế
-			
-		
-		
-			
-			Tốc độ quạt hiện tại
-			
-			
-			30005
-			
-			
-			-
-			
-			
-			Giá trị như phần ghi
-			
-		
-		
-			
-			Mã lỗi
-			
-			
-			30006
-			
-			
-			Hex
-			
-			
-			Dạng mã A0, A3, U4,...
-			
-		
-		
-			
-			Trạng thái cảm biến
-			
-			
-			30007
-			
-			
-			-
-			
-			
-			Có thể dùng để kiểm tra hỏng sensor
-			
-		
-		
-			
-			Trạng thái kết nối
-			
-			
-			30009
-			
-			
-			-
-			
-			
-			0 = Mất kết nối, 1 = OK
-			
-		
-	
-
-
-Lưu ý: Một số model Daikin có thể không hỗ trợ đầy đủ tất cả các chức năng. Kiểm tra tài liệu kỹ thuật kèm theo thiết bị để xác nhận các tính năng khả dụng
-
-Mapping thanh ghi phản hồi lỗi (Error Code)
-
-Khi tích hợp bộ KAC00X vào hệ thống BMS qua Modbus RTU, việc đọc và giải mã mã lỗi (malfunction codes) là một tính năng quan trọng.
-
-Các lỗi được phản hồi từ dàn lạnh hoặc dàn nóng VRV/VRF sẽ được gán vào các thanh ghi nhất định, cho phép giám sát trạng thái hệ thống từ xa một cách chủ động.
-
-
-
-Lưu ý: Mã lỗi đọc từ Modbus là số thập phân (DEC), bạn cần chuyển sang hệ Hex để đối chiếu với bảng mã lỗi Daikin – ví dụ mã 148 (DEC) tương đương với HEX 94 -> U4 trong bảng lỗi.
-
-Vị trí thanh ghi phản hồi lỗi
-
-Thông thường, trong bảng Modbus của KAC00X, mã lỗi hiện tại sẽ được phản ánh ở các địa chỉ dạng Input Register (3xxxx) hoặc Holding Register (4xxxx). Một số ví dụ phổ biến:
-
-
-	
-		
-			
-			Tên thanh ghi
-			
-			
-			Địa chỉ Modbus
-			
-			
-			Loại
-			
-			
-			Định dạng
-			
-			
-			Ghi chú
-			
-		
-		
-			
-			Error Code (Indoor Unit)
-			
-			
-			30011
-			
-			
-			3x
-			
-			
-			Integer
-			
-			
-			Mã lỗi dạng Hex (ví dụ: A5, U4, H3…)
-			
-		
-		
-			
-			Error Code (Outdoor Unit)
-			
-			
-			30012
-			
-			
-			3x
-			
-			
-			Integer
-			
-			
-			Dành cho lỗi từ dàn nóng
-			
-		
-	
-
-
-Tra mã lỗi Daikin – Đối chiếu ý nghĩa
-
-
-	
-		
-			
-			Mã lỗi
-			
-			
-			Ý nghĩa chính
-			
-			
-			Loại lỗi
-			
-		
-		
-			
-			A5
-			
-			
-			Lỗi bảo vệ áp suất cao khi sưởi, đóng băng khi làm lạnh
-			
-			
-			Indoor
-			
-		
-		
-			
-			A6
-			
-			
-			Lỗi quạt dàn lạnh
-			
-			
-			Indoor
-			
-		
-		
-			
-			A9
-			
-			
-			Lỗi van tiết lưu điện tử (EEV)
-			
-			
-			Indoor
-			
-		
-		
-			
-			U4
-			
-			
-			Lỗi truyền thông giữa dàn lạnh và dàn nóng
-			
-			
-			System
-			
-		
-		
-			
-			E3
-			
-			
-			Kích hoạt công tắc áp suất cao (HPS)
-			
-			
-			Outdoor
-			
-		
-		
-			
-			E6
-			
-			
-			Quá dòng hoặc khóa máy nén tiêu chuẩn
-			
-			
-			Outdoor
-			
-		
-		
-			
-			H9
-			
-			
-			Lỗi cảm biến nhiệt độ không khí ngoài trời
-			
-			
-			Outdoor
-			
-		
-		
-			
-			L5
-			
-			
-			Quá dòng tức thời (DC) của biến tần
-			
-			
-			Outdoor
-			
-		
-	
-
-
-Việc đọc mã lỗi qua Modbus giúp:
-
-
-	Cảnh báo sớm lỗi vận hành.
-	Tích hợp hiển thị trên HMI hoặc SCADA.
-	Gửi email/sms cảnh báo khi có lỗi nghiêm trọng.
-
-
-Gợi ý cập nhật firmware và bảo trì định kỳ cho hệ thống điều hoà Daikin
-
-Để hệ thống điều hòa Daikin VRV/VRF hoạt động ổn định lâu dài trong mô hình kết nối qua Modbus – đặc biệt khi sử dụng gateway KAC00X – việc cập nhật firmware và bảo trì định kỳ là yếu tố không thể xem nhẹ.
-
-Việc này giúp khắc phục lỗi phần mềm, tối ưu khả năng tương thích và ngăn chặn những sự cố không đáng có trong hệ thống BMS.
-
-KNXStore không chỉ là đơn vị phân phối thiết bị KAC00X chính hãng mà còn:
-
-
-	Cung cấp firmware mới nhất kèm hướng dẫn cập nhật
-	Hỗ trợ kỹ thuật từ xa hoặc trực tiếp
-	Dịch vụ bảo trì định kỳ cho hệ BMS – HVAC – SCADA
-	Tư vấn mở rộng kết nối KNX, BACnet, Modbus cho các hệ nhà thông minh hoặc công trình lớn
-
-
-Bạn đang cần kiểm tra, bảo trì hoặc mở rộng kết nối cho dự án HVAC hoặc tòa nhà thông minh?
-
-Liên hệ ngay KNXStore để được tư vấn kỹ thuật chuyên sâu và giải pháp phù hợp nhất!
+Trong các hệ thống HVAC hiện đại, đặc biệt là điều hòa trung tâm Daikin VRV/VRF, nhu cầu tích hợp vào hệ thống điều khiển tòa nhà (BMS), SCADA hay PLC ngày càng phổ biến. Tuy nhiên, không phải dòng máy lạnh nào cũng hỗ trợ giao tiếp tiêu chuẩn mở như Modbus – vốn là chuẩn giao tiếp phổ biến trong công nghiệp.
+Đây chính là lý do thiết bị KAC00X ra đời. Là một bộ điều khiển trung gian thông minh, KAC00X giúp chuyển đổi giao thức gốc (HBS/XYE) của Daikin sang Modbus RTU hoặc TCP, cho phép dễ dàng đọc/ghi dữ liệu từ các hệ điều hòa VRV/VRF vào hệ thống điều khiển bên ngoài.
+KAC00X là gì?
+KAC00X là một bộ giao tiếp trung gian (gateway) do Kanontec sản xuất, được thiết kế để kết nối các hệ thống điều hòa trung tâm như Daikin VRV/VRF với các hệ điều khiển công nghiệp sử dụng giao thức Modbus RTU hoặc Modbus TCP.
+Thiết bị này đóng vai trò cầu nối giúp chuyển đổi tín hiệu nội bộ của điều hòa (thường là HBS hoặc XYE) sang giao thức chuẩn để tích hợp vào hệ thống giám sát và điều khiển. Với công trình đã có sẵn hoặc đang triển khai KNX, dòng KAC005/KAC008 trong cùng họ KAC00X còn hỗ trợ giao tiếp KNX/EIB trực tiếp (xem
+Hệ thống điều khiển HVAC là gì? Giải pháp nào điều khiển VRV/VRF cho hệ thống Smarthome
+).
+Tại sao cần dùng KAC00X trong hệ Daikin VRV/VRF?
+Hệ điều hòa VRV/VRF của Daikin vốn sử dụng giao thức riêng (không phải Modbus). Điều này gây khó khăn nếu muốn giám sát hoặc điều khiển từ hệ thống BMS, SCADA, PLC, HMI, kết nối với nhà thông minh hoặc hệ tự động hóa tòa nhà, hoặc tích hợp vào hệ thống giám sát năng lượng hoặc báo lỗi tập trung.
+Dòng sản phẩm KAC00X giải quyết các vấn đề trên bằng cách chuyển đổi từ HBS/XYE sang Modbus (RTU/TCP), cho phép đọc và ghi dữ liệu như ON/OFF, Mode, nhiệt độ cài đặt, tốc độ quạt, nhiệt độ phòng, trả về mã lỗi (Error Code) để hệ thống BMS nắm bắt và cảnh báo nhanh, cấu hình dễ dàng qua trình duyệt web (IP mặc định 192.168.1.232), và hỗ trợ nhiều hãng ngoài Daikin như Mitsubishi, Toshiba, Samsung, Midea.
+Sơ đồ kết nối Modbus RTU giữa KAC00X và Daikin VRV
+Để tích hợp hệ thống điều hòa trung tâm Daikin VRV/VRF vào hệ thống điều khiển như BMS, SCADA, PLC, thì việc giao tiếp thông qua chuẩn Modbus RTU là một lựa chọn hiệu quả, phổ biến và tiết kiệm chi phí.
+Thiết bị KAC00X đóng vai trò trung gian, giúp kết nối hai thế giới: giao thức riêng của Daikin (HBS/XYE) và Modbus tiêu chuẩn công nghiệp.
+Hình trên là một sơ đồ kết nối thực tế thể hiện rõ kiến trúc hệ thống.
+Hướng dẫn cấu hình KAC00X trên giao diện web
+Một trong những điểm mạnh của bộ KAC00X là khả năng cấu hình cực kỳ trực quan thông qua giao diện web, không cần phần mềm chuyên dụng, giúp kỹ sư triển khai hệ thống Modbus - Daikin VRV nhanh chóng và dễ bảo trì. Firmware của KAC00X cần được cập nhật định kỳ để đảm bảo các driver giao thức hoạt động ổn định, tham khảo quy trình chi tiết cho model KAC005 tại
+hướng dẫn cập nhật firmware và Main Program Kanonbus KAC005 mới nhất 2026
+.
+Xem ngay
+Video hướng dẫn cấu hình KAC00X
+Danh sách các thanh ghi Modbus quan trọng từ KAC00X
+Sau khi cấu hình kết nối thành công, việc hiểu rõ mapping các thanh ghi (Modbus Register Mapping) trên thiết bị KAC00X là bước then chốt để giám sát và điều khiển hệ thống điều hòa Daikin VRV từ xa.
+Dưới đây là danh sách các thanh ghi phổ biến nhất, dùng để bật/tắt máy, chuyển chế độ, cài đặt nhiệt độ, đọc nhiệt độ phòng, trạng thái lỗi…
+Danh sách các thanh ghi Modbus quan trọng từ KAC00X
+Sau khi cấu hình kết nối thành công, việc hiểu rõ mapping các thanh ghi (Modbus Register Mapping) trên thiết bị KAC00X là bước then chốt để giám sát và điều khiển hệ thống điều hòa Daikin VRV từ xa.
+Nguyên tắc đánh địa chỉ trên KAC00X
+Mỗi dàn lạnh (Indoor Unit) chiếm một cụm địa chỉ riêng, cách nhau 10 thanh ghi. Địa chỉ bắt đầu cho dàn lạnh số 1 là 40002, dàn lạnh số 2 là 40012, dàn lạnh số 3 là 40022, công thức chung: 40002 + (n-1) × 10, với n là số thứ tự dàn lạnh.
+Bảng thanh ghi ghi điều khiển (Holding Register – 4xxxx)
+Tên chức năng
+Thanh ghi (n=1)
+Giá trị
+Ghi chú
+Bật/Tắt máy
+40002
+0 = Tắt
+1 = Bật
+Chế độ hoạt động
+40003
+0 = Auto
+1 = Cool
+2 = Dry
+3 = Fan
+4 = Heat
+Nhiệt độ cài đặt
+40004
+18–30 (°C)
+Đơn vị: °C
+Tốc độ quạt
+40005
+0 = Auto
+1 = Low
+2 = Medium
+3 = High
+Hướng gió
+40006
+Tùy mã
+Có thể không hỗ trợ trên tất cả model
+Khóa điều khiển cục bộ
+40008
+0 = Không khóa
+1 = Khóa remote
+Chống người dùng tự ý thao tác
+Reset lỗi
+40009
+1 = Reset lỗi
+Ghi giá trị 1 để xóa lỗi tạm thời
+Bảng thanh ghi đọc trạng thái (Input Register – 3xxxx)
+Tên trạng thái
+Thanh ghi (n=1)
+Đơn vị
+Ghi chú
+Trạng thái máy
+30002
+-
+0 = OFF, 1 = ON
+Chế độ hoạt động hiện tại
+30003
+-
+Giá trị như phần ghi
+Nhiệt độ phòng
+30004
+°C
+Nhiệt độ môi trường thực tế
+Tốc độ quạt hiện tại
+30005
+-
+Giá trị như phần ghi
+Mã lỗi
+30006
+Hex
+Dạng mã A0, A3, U4,...
+Trạng thái cảm biến
+30007
+-
+Có thể dùng để kiểm tra hỏng sensor
+Trạng thái kết nối
+30009
+-
+0 = Mất kết nối, 1 = OK
+Lưu ý: Một số model Daikin có thể không hỗ trợ đầy đủ tất cả các chức năng. Kiểm tra tài liệu kỹ thuật kèm theo thiết bị để xác nhận các tính năng khả dụng
+Mapping thanh ghi phản hồi lỗi (Error Code)
+Khi tích hợp bộ KAC00X vào hệ thống BMS qua Modbus RTU, việc đọc và giải mã mã lỗi (malfunction codes) là một tính năng quan trọng.
+Các lỗi được phản hồi từ dàn lạnh hoặc dàn nóng VRV/VRF sẽ được gán vào các thanh ghi nhất định, cho phép giám sát trạng thái hệ thống từ xa một cách chủ động.
+Lưu ý: Mã lỗi đọc từ Modbus là số thập phân (DEC), bạn cần chuyển sang hệ Hex để đối chiếu với bảng mã lỗi Daikin – ví dụ mã 148 (DEC) tương đương với HEX 94 -> U4 trong bảng lỗi.
+Vị trí thanh ghi phản hồi lỗi
+Thông thường, trong bảng Modbus của KAC00X, mã lỗi hiện tại sẽ được phản ánh ở các địa chỉ dạng Input Register (3xxxx) hoặc Holding Register (4xxxx). Một số ví dụ phổ biến:
+Tên thanh ghi
+Địa chỉ Modbus
+Loại
+Định dạng
+Ghi chú
+Error Code (Indoor Unit)
+30011
+3x
+Integer
+Mã lỗi dạng Hex (ví dụ: A5, U4, H3…)
+Error Code (Outdoor Unit)
+30012
+3x
+Integer
+Dành cho lỗi từ dàn nóng
+Tra mã lỗi Daikin – Đối chiếu ý nghĩa
+Mã lỗi
+Ý nghĩa chính
+Loại lỗi
+A5
+Lỗi bảo vệ áp suất cao khi sưởi, đóng băng khi làm lạnh
+Indoor
+A6
+Lỗi quạt dàn lạnh
+Indoor
+A9
+Lỗi van tiết lưu điện tử (EEV)
+Indoor
+U4
+Lỗi truyền thông giữa dàn lạnh và dàn nóng
+System
+E3
+Kích hoạt công tắc áp suất cao (HPS)
+Outdoor
+E6
+Quá dòng hoặc khóa máy nén tiêu chuẩn
+Outdoor
+H9
+Lỗi cảm biến nhiệt độ không khí ngoài trời
+Outdoor
+L5
+Quá dòng tức thời (DC) của biến tần
+Outdoor
+Việc đọc mã lỗi qua Modbus giúp:
+Cảnh báo sớm lỗi vận hành.
+Tích hợp hiển thị trên HMI hoặc SCADA.
+Gửi email/sms cảnh báo khi có lỗi nghiêm trọng.
+Gợi ý cập nhật firmware và bảo trì định kỳ
+Để hệ thống điều hòa Daikin VRV/VRF hoạt động ổn định lâu dài trong mô hình kết nối qua Modbus, đặc biệt khi sử dụng gateway KAC00X, việc cập nhật firmware và bảo trì định kỳ là yếu tố không thể xem nhẹ, giúp khắc phục lỗi phần mềm, tối ưu khả năng tương thích và ngăn chặn sự cố không đáng có trong hệ thống BMS.
+KNXStore không chỉ là đơn vị phân phối thiết bị KAC00X chính hãng mà còn cung cấp firmware mới nhất kèm hướng dẫn cập nhật, hỗ trợ kỹ thuật từ xa hoặc trực tiếp, dịch vụ bảo trì định kỳ cho hệ BMS/HVAC/SCADA, và tư vấn mở rộng kết nối KNX, BACnet, Modbus cho các hệ nhà thông minh hoặc công trình lớn.
+Kết luận
+KAC00X biến giao thức độc quyền HBS/XYE của Daikin (và nhiều hãng khác) thành thanh ghi Modbus RTU/TCP tiêu chuẩn, cho phép BMS, SCADA hoặc PLC bất kỳ đọc/ghi trạng thái điều hòa mà không cần driver riêng cho từng hãng máy lạnh. Nắm đúng nguyên tắc đánh địa chỉ (40002 + (n-1)×10) và bảng mã lỗi là điều kiện bắt buộc trước khi lập trình logic giám sát trên BMS.
+Cần tư vấn giải pháp cho công trình của bạn? KNXStore.vn - Công ty CP Tích hợp Hệ thống Liên Minh. Địa chỉ:
+Văn phòng số SAV5-01.02, Lầu 1, Tháp 5, The Sun Avenue, 28 Mai Chí Thọ, Phường Bình Trưng, TP.HCM
+. Hotline:
+0918.918.755
+. Email:
+sales@knxstore.vn
+Thanh ghi Modbus của KAC00X áp dụng cho cả Mitsubishi, Toshiba, Samsung, Midea giống Daikin không?
+Nguyên tắc đánh địa chỉ (cụm 10 thanh ghi mỗi dàn lạnh) áp dụng chung cho toàn dòng KAC00X, nhưng một số mã lỗi và chức năng phụ (như hướng gió) có thể khác nhau giữa các hãng, cần đối chiếu tài liệu kỹ thuật riêng cho hãng máy lạnh đang tích hợp.
 
-## Raw JSON-LD
+Đọc được mã lỗi Hex nhưng không có trong bảng tra, phải làm sao?
+Bảng mã lỗi trong bài chỉ gồm các mã phổ biến nhất. Với mã lỗi không có trong bảng, cần đối chiếu tài liệu service manual chính thức của Daikin theo đúng model outdoor/indoor unit, hoặc liên hệ KNXStore để được hỗ trợ tra cứu.
+
+KAC00X đọc Input Register nhưng giá trị luôn trả về 0, nguyên nhân có thể là gì?
+Thường do sai địa chỉ Modbus slave, sai baud rate/parity giữa PLC/SCADA và KAC00X, hoặc dây kết nối HBS/XYE giữa KAC00X và dàn lạnh/dàn nóng chưa đúng. Kiểm tra trạng thái kết nối tại thanh ghi 30009 trước khi nghi ngờ lỗi ở phía Modbus.
+
+Có thể dùng KAC00X để vừa xuất Modbus vừa xuất KNX cùng lúc không?
+Với model KAC008, thiết bị hỗ trợ đồng thời cổng KNX/EIB và các giao tiếp RS485/RS232
+
+Reset lỗi qua thanh ghi 40009 có ảnh hưởng đến cấu hình đang chạy không?
+Không. Ghi giá trị 1 vào thanh ghi 40009 chỉ xóa lỗi tạm thời đang hiển thị, không thay đổi cấu hình ON/OFF, mode, hay setpoint hiện tại của dàn lạnh.
+
+## Raw MCP
 
 ```json
-[
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebPage",
-        "@id": "https://knxstore.vn/cach-giao-tiep-modbus-voi-dieu-hoa-daikin-vrv-vrf-thong-qua-kac00x.html#webpage",
-        "url": "https://knxstore.vn/cach-giao-tiep-modbus-voi-dieu-hoa-daikin-vrv-vrf-thong-qua-kac00x.html",
-        "name": "Cách giao tiếp Modbus với điều hòa Daikin VRV/VRF thông qua KAC00X",
-        "description": "KAC00X là gateway chuyển đổi giao thức Daikin VRV/VRF sang Modbus, giúp tích hợp dễ dàng vào hệ BMS, SCADA, PLC và hệ thống nhà thông minh.",
-        "inLanguage": "vi-VN",
-        "datePublished": "2025-11-14T10:41:36+07:00",
-        "dateModified": "2025-11-14T10:41:36+07:00",
-        "isPartOf": {
-          "@id": "https://knxstore.vn/#website"
-        },
-        "publisher": {
-          "@id": "https://knxstore.vn/#organization"
-        },
-        "mainEntity": {
-          "@id": "https://knxstore.vn/cach-giao-tiep-modbus-voi-dieu-hoa-daikin-vrv-vrf-thong-qua-kac00x.html#article"
-        },
-        "primaryImageOfPage": {
-          "@type": "ImageObject",
-          "@id": "https://knxstore.vn/cach-giao-tiep-modbus-voi-dieu-hoa-daikin-vrv-vrf-thong-qua-kac00x.html#featured-image",
-          "url": "https://knxstore.vn/assets/image/post/cach-giao-tiep-modbus-voi-dieu-hoa-daikin-vrv-vrf-thong-qua-kac00x.jpg",
-          "contentUrl": "https://knxstore.vn/assets/image/post/cach-giao-tiep-modbus-voi-dieu-hoa-daikin-vrv-vrf-thong-qua-kac00x.jpg",
-          "caption": "Cách giao tiếp Modbus với điều hòa Daikin VRV/VRF thông qua KAC00X"
-        },
-        "breadcrumb": {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Trang chủ",
-              "item": "https://knxstore.vn/"
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Blogs",
-              "item": "https://knxstore.vn/blogs"
-            },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "name": "HVAC",
-              "item": "https://knxstore.vn/blogs/hvac"
-            },
-            {
-              "@type": "ListItem",
-              "position": 4,
-              "name": "Cách giao tiếp Modbus với điều hòa Daikin VRV/VRF thông qua KAC00X",
-              "item": "https://knxstore.vn/cach-giao-tiep-modbus-voi-dieu-hoa-daikin-vrv-vrf-thong-qua-kac00x.html"
-            }
-          ]
-        }
-      },
-      {
-        "@type": "BlogPosting",
-        "@id": "https://knxstore.vn/cach-giao-tiep-modbus-voi-dieu-hoa-daikin-vrv-vrf-thong-qua-kac00x.html#article",
-        "mainEntityOfPage": {
-          "@id": "https://knxstore.vn/cach-giao-tiep-modbus-voi-dieu-hoa-daikin-vrv-vrf-thong-qua-kac00x.html#webpage"
-        },
-        "headline": "Cách giao tiếp Modbus với điều hòa Daikin VRV/VRF thông qua KAC00X",
-        "description": "KAC00X là gateway chuyển đổi giao thức Daikin VRV/VRF sang Modbus, giúp tích hợp dễ dàng vào hệ BMS, SCADA, PLC và hệ thống nhà thông minh.",
-        "articleBody": "Trong các hệ thống HVAC hiện đại, đặc biệt là điều hòa trung tâm Daikin VRV/VRF, nhu cầu tích hợp vào hệ thống điều khiển tòa nhà (BMS), SCADA hay PLC ngày càng phổ biến. Tuy nhiên, không phải dòng máy lạnh nào cũng hỗ trợ giao tiếp tiêu chuẩn mở như Modbus – vốn là chuẩn giao tiếp phổ biến trong công nghiệp.\r\n\r\n\r\n\r\nĐây chính là lý do thiết bị KAC00X ra đời. Là một bộ điều khiển trung gian thông minh, KAC00X giúp chuyển đổi giao thức gốc (HBS/XYE) của Daikin sang Modbus RTU hoặc TCP, cho phép dễ dàng đọc/ghi dữ liệu từ các hệ điều hòa VRV/VRF vào hệ thống điều khiển bên ngoài.\r\n\r\nKAC00X là gì?\r\n\r\nKAC00X là một bộ giao tiếp trung gian (gateway) do Kanontec sản xuất, được thiết kế để kết nối các hệ thống điều hòa trung tâm như Daikin VRV/VRF với các hệ điều khiển công nghiệp sử dụng giao thức Modbus RTU hoặc Modbus TCP.\r\n\r\nThiết bị này đóng vai trò là cầu nối giúp chuyển đổi tín hiệu nội bộ của điều hòa (thường là HBS hoặc XYE) sang giao thức chuẩn để tích hợp vào hệ thống giám sát và điều khiển.\r\n\r\n\r\n\r\nTại sao cần dùng KAC00X trong hệ Daikin VRV/VRF?\r\n\r\nHệ điều hòa VRV/VRF của Daikin vốn sử dụng giao thức riêng (không phải Modbus). Điều này gây khó khăn nếu bạn muốn:\r\n\r\n\r\n\tGiám sát hoặc điều khiển từ hệ thống BMS, SCADA, PLC, HMI\r\n\tKết nối với nhà thông minh hoặc hệ tự động hóa tòa nhà\r\n\tTích hợp vào hệ thống giám sát năng lượng hoặc báo lỗi tập trung\r\n\r\n\r\nDòng sản phẩm KAC00X giải quyết tất cả những vấn đề trên bằng cách:\r\n\r\n\r\n\tChuyển đổi từ HBS/XYE sang Modbus (RTU/TCP)\r\n\tCho phép đọc và ghi dữ liệu như: ON/OFF, Mode, Nhiệt độ cài đặt, Tốc độ quạt, nhiệt độ phòng,…\r\n\tTrả về mã lỗi (Error Code) để hệ thống BMS nắm bắt và cảnh báo nhanh\r\n\tCấu hình dễ dàng thông qua trình duyệt Web (IP mặc định: 192.168.1.232)\r\n\tHỗ trợ nhiều hãng: không chỉ Daikin, mà còn Mitsubishi, Toshiba, Samsung, Midea,...\r\n\r\n\r\nSơ đồ kết nối Modbus RTU giữa KAC00X và Daikin VRV\r\n\r\nĐể tích hợp hệ thống điều hòa trung tâm Daikin VRV/VRF vào hệ thống điều khiển như BMS, SCADA, PLC, thì việc giao tiếp thông qua chuẩn Modbus RTU là một lựa chọn hiệu quả, phổ biến và tiết kiệm chi phí.\r\n\r\nThiết bị KAC00X đóng vai trò trung gian, giúp kết nối hai thế giới: giao thức riêng của Daikin (HBS/XYE) và Modbus tiêu chuẩn công nghiệp.\r\n\r\n\r\n\r\nHình trên là một sơ đồ kết nối thực tế thể hiện rõ kiến trúc hệ thống.\r\n\r\nHướng dẫn cấu hình KAC00X trên giao diện web\r\n\r\nMột trong những điểm mạnh của bộ KAC00X là khả năng cấu hình cực kỳ trực quan thông qua giao diện Web, mà không cần phần mềm chuyên dụng. Điều này giúp kỹ sư triển khai hệ thống Modbus - Daikin VRV một cách nhanh chóng và dễ dàng bảo trì.\r\n\r\nXem ngay Video hướng dẫn cấu hình KAC00X\r\n\r\n \r\n\r\nDanh sách các thanh ghi Modbus quan trọng từ KAC00X\r\n\r\nSau khi cấu hình kết nối thành công, việc hiểu rõ mapping các thanh ghi (Modbus Register Mapping) trên thiết bị KAC00X là bước then chốt để giám sát và điều khiển hệ thống điều hòa Daikin VRV từ xa.\r\n\r\nDưới đây là danh sách các thanh ghi phổ biến nhất, dùng để bật/tắt máy, chuyển chế độ, cài đặt nhiệt độ, đọc nhiệt độ phòng, trạng thái lỗi…\r\n\r\nNguyên tắc đánh địa chỉ trên KAC00X\r\n\r\nMỗi dàn lạnh (Indoor Unit) sẽ chiếm một cụm địa chỉ riêng, cách nhau 10 thanh ghi.\r\n\r\nĐịa chỉ bắt đầu cho dàn lạnh số 1 là 40002, sau đó tăng dần:\r\n\r\n\r\n\tDàn lạnh số 2: 40012\r\n\tDàn lạnh số 3: 40022\r\n\t...\r\n\tCông thức chung: 40002 + (n-1) × 10\r\n\t(n = số thứ tự của dàn lạnh)\r\n\r\n\r\nBảng thanh ghi ghi điều khiển (Holding Register – 4xxxx)\r\n\r\n\r\n\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tTên chức năng\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tThanh ghi (n=1)\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tGiá trị\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tGhi chú\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tBật/Tắt máy\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t40002\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t0 = Tắt\r\n\r\n\t\t\t1 = Bật\r\n\t\t\t\r\n\t\t\t \r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tChế độ hoạt động\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t40003\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t0 = Auto\r\n\r\n\t\t\t1 = Cool\r\n\r\n\t\t\t2 = Dry\r\n\r\n\t\t\t3 = Fan\r\n\r\n\t\t\t4 = Heat\r\n\t\t\t\r\n\t\t\t \r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tNhiệt độ cài đặt\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t40004\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t18–30 (°C)\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tĐơn vị: °C\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tTốc độ quạt\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t40005\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t0 = Auto\r\n\r\n\t\t\t1 = Low\r\n\r\n\t\t\t2 = Medium\r\n\r\n\t\t\t3 = High\r\n\t\t\t\r\n\t\t\t \r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tHướng gió\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t40006\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tTùy mã\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tCó thể không hỗ trợ trên tất cả model\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tKhóa điều khiển cục bộ\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t40008\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t0 = Không khóa\r\n\r\n\t\t\t1 = Khóa remote\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tChống người dùng tự ý thao tác\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tReset lỗi\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t40009\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t1 = Reset lỗi\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tGhi giá trị 1 để xóa lỗi tạm thời\r\n\t\t\t\r\n\t\t\r\n\t\r\n\r\n\r\nBảng thanh ghi đọc trạng thái (Input Register – 3xxxx)\r\n\r\n\r\n\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tTên trạng thái\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tThanh ghi (n=1)\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tĐơn vị\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tGhi chú\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tTrạng thái máy\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t30002\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t-\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t0 = OFF, 1 = ON\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tChế độ hoạt động hiện tại\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t30003\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t-\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tGiá trị như phần ghi\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tNhiệt độ phòng\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t30004\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t°C\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tNhiệt độ môi trường thực tế\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tTốc độ quạt hiện tại\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t30005\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t-\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tGiá trị như phần ghi\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tMã lỗi\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t30006\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tHex\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tDạng mã A0, A3, U4,...\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tTrạng thái cảm biến\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t30007\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t-\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tCó thể dùng để kiểm tra hỏng sensor\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tTrạng thái kết nối\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t30009\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t-\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t0 = Mất kết nối, 1 = OK\r\n\t\t\t\r\n\t\t\r\n\t\r\n\r\n\r\nLưu ý: Một số model Daikin có thể không hỗ trợ đầy đủ tất cả các chức năng. Kiểm tra tài liệu kỹ thuật kèm theo thiết bị để xác nhận các tính năng khả dụng\r\n\r\nMapping thanh ghi phản hồi lỗi (Error Code)\r\n\r\nKhi tích hợp bộ KAC00X vào hệ thống BMS qua Modbus RTU, việc đọc và giải mã mã lỗi (malfunction codes) là một tính năng quan trọng.\r\n\r\nCác lỗi được phản hồi từ dàn lạnh hoặc dàn nóng VRV/VRF sẽ được gán vào các thanh ghi nhất định, cho phép giám sát trạng thái hệ thống từ xa một cách chủ động.\r\n\r\n\r\n\r\nLưu ý: Mã lỗi đọc từ Modbus là số thập phân (DEC), bạn cần chuyển sang hệ Hex để đối chiếu với bảng mã lỗi Daikin – ví dụ mã 148 (DEC) tương đương với HEX 94 -> U4 trong bảng lỗi.\r\n\r\nVị trí thanh ghi phản hồi lỗi\r\n\r\nThông thường, trong bảng Modbus của KAC00X, mã lỗi hiện tại sẽ được phản ánh ở các địa chỉ dạng Input Register (3xxxx) hoặc Holding Register (4xxxx). Một số ví dụ phổ biến:\r\n\r\n\r\n\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tTên thanh ghi\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tĐịa chỉ Modbus\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tLoại\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tĐịnh dạng\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tGhi chú\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tError Code (Indoor Unit)\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t30011\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t3x\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tInteger\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tMã lỗi dạng Hex (ví dụ: A5, U4, H3…)\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tError Code (Outdoor Unit)\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t30012\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t3x\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tInteger\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tDành cho lỗi từ dàn nóng\r\n\t\t\t\r\n\t\t\r\n\t\r\n\r\n\r\nTra mã lỗi Daikin – Đối chiếu ý nghĩa\r\n\r\n\r\n\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tMã lỗi\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tÝ nghĩa chính\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tLoại lỗi\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tA5\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tLỗi bảo vệ áp suất cao khi sưởi, đóng băng khi làm lạnh\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tIndoor\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tA6\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tLỗi quạt dàn lạnh\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tIndoor\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tA9\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tLỗi van tiết lưu điện tử (EEV)\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tIndoor\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tU4\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tLỗi truyền thông giữa dàn lạnh và dàn nóng\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tSystem\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tE3\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tKích hoạt công tắc áp suất cao (HPS)\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tOutdoor\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tE6\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tQuá dòng hoặc khóa máy nén tiêu chuẩn\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tOutdoor\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tH9\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tLỗi cảm biến nhiệt độ không khí ngoài trời\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tOutdoor\r\n\t\t\t\r\n\t\t\r\n\t\t\r\n\t\t\t\r\n\t\t\tL5\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tQuá dòng tức thời (DC) của biến tần\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tOutdoor\r\n\t\t\t\r\n\t\t\r\n\t\r\n\r\n\r\nViệc đọc mã lỗi qua Modbus giúp:\r\n\r\n\r\n\tCảnh báo sớm lỗi vận hành.\r\n\tTích hợp hiển thị trên HMI hoặc SCADA.\r\n\tGửi email/sms cảnh báo khi có lỗi nghiêm trọng.\r\n\r\n\r\nGợi ý cập nhật firmware và bảo trì định kỳ cho hệ thống điều hoà Daikin\r\n\r\nĐể hệ thống điều hòa Daikin VRV/VRF hoạt động ổn định lâu dài trong mô hình kết nối qua Modbus – đặc biệt khi sử dụng gateway KAC00X – việc cập nhật firmware và bảo trì định kỳ là yếu tố không thể xem nhẹ.\r\n\r\nViệc này giúp khắc phục lỗi phần mềm, tối ưu khả năng tương thích và ngăn chặn những sự cố không đáng có trong hệ thống BMS.\r\n\r\nKNXStore không chỉ là đơn vị phân phối thiết bị KAC00X chính hãng mà còn:\r\n\r\n\r\n\tCung cấp firmware mới nhất kèm hướng dẫn cập nhật\r\n\tHỗ trợ kỹ thuật từ xa hoặc trực tiếp\r\n\tDịch vụ bảo trì định kỳ cho hệ BMS – HVAC – SCADA\r\n\tTư vấn mở rộng kết nối KNX, BACnet, Modbus cho các hệ nhà thông minh hoặc công trình lớn\r\n\r\n\r\nBạn đang cần kiểm tra, bảo trì hoặc mở rộng kết nối cho dự án HVAC hoặc tòa nhà thông minh?\r\n\r\nLiên hệ ngay KNXStore để được tư vấn kỹ thuật chuyên sâu và giải pháp phù hợp nhất!\r\n",
-        "articleSection": "HVAC",
-        "keywords": [],
-        "inLanguage": "vi-VN",
-        "datePublished": "2025-11-14T10:41:36+07:00",
-        "dateModified": "2025-11-14T10:41:36+07:00",
-        "url": "https://knxstore.vn/cach-giao-tiep-modbus-voi-dieu-hoa-daikin-vrv-vrf-thong-qua-kac00x.html",
-        "image": {
-          "@id": "https://knxstore.vn/cach-giao-tiep-modbus-voi-dieu-hoa-daikin-vrv-vrf-thong-qua-kac00x.html#featured-image"
-        },
-        "publisher": {
-          "@id": "https://knxstore.vn/#organization"
-        },
-        "isPartOf": {
-          "@id": "https://knxstore.vn/#website"
-        },
-        "about": {
-          "@type": "Thing",
-          "name": "Nhà thông minh",
-          "description": "Giải pháp smarthome và thiết bị thông minh"
-        },
-        "mentions": [
-          {
-            "@type": "Thing",
-            "name": "Aqara"
-          },
-          {
-            "@type": "Thing",
-            "name": "Apple Home"
-          }
-        ],
-        "contentLocation": {
-          "@type": "Country",
-          "name": "Việt Nam",
-          "identifier": "VN"
-        },
-        "locationCreated": {
-          "@type": "City",
-          "name": "TP. Hồ Chí Minh",
-          "containedInPlace": {
-            "@type": "Country",
-            "name": "Việt Nam"
-          }
-        }
-      }
-    ]
-  }
-]
+{
+  "slug": "cach-giao-tiep-modbus-voi-dieu-hoa-daikin-vrv-vrf-thong-qua-kac00x",
+  "title": "Cách giao tiếp Modbus với điều hòa Daikin VRV/VRF thông qua KAC00X",
+  "excerpt": "KAC00X là gateway chuyển đổi giao thức Daikin VRV/VRF sang Modbus, giúp tích hợp dễ dàng vào hệ BMS, SCADA, PLC và hệ thống nhà thông minh.",
+  "coverImage": "/media/b979fd69b1ccc7966aeeb55e86eb44d9018c2ddd611c55d4df18c39b2326a435.jpg",
+  "authorName": null,
+  "author": {
+    "slug": "le-vo-quoc-huy",
+    "name": "Lê Võ Quốc Huy",
+    "bio": "Quốc Huy là chuyên viên tư vấn giải pháp tự động hóa tòa nhà tại KNXStore.vn, với kinh nghiệm làm việc trực tiếp cùng các System Integrator, ME Contractor và đơn vị thi công điện cơ và điện lạnh trên toàn quốc.\nHuy chuyên tư vấn và hỗ trợ kỹ thuật cho các dự án ứng dụng giao thức KNX, Casambi, DALI-2, BACnet và Modbus trong các công trình văn phòng, khách sạn, tòa nhà thương mại và khu công nghiệp.\nĐể được tư vấn dự án hoặc báo giá, bạn có thể liên hệ trực tiếp qua Zalo Hotline của KNXStore.",
+    "jobTitle": "Sales Engineer",
+    "expertiseAreas": "KNX TP / KNX IP DALI-2 Lighting Control BACnet / Modbus Integration Building Management System (BMS) M&E Project Consulting Commercial & Hospitality Automation",
+    "certifications": null,
+    "linkedinUrl": "https://www.linkedin.com/in/huy-le-vo-quoc-177ba8309/",
+    "facebookUrl": "https://www.facebook.com/levoquochuy3011",
+    "websiteUrl": "https://qhsmart.vn/",
+    "seoDescription": "Lê Võ Quốc Huy Chuyên viên tư vấn B2B tại KNXStore.vn. Hỗ trợ System Integrator & ME Contractor triển khai KNX, Casambi, DALI-2, BACnet cho tòa nhà thương mại tại Việt Nam.",
+    "imageUrl": "/media/97b725830514056a9de009c65ee513e0dfc89b8e538adb71b25533ed7c766777.jpg",
+    "imageAlt": "Lê Võ Quốc Huy",
+    "isActive": true
+  },
+  "publishedAt": "2026-08-05T01:55:24.000Z",
+  "categories": [
+    {
+      "slug": "hvac",
+      "name": "HVAC"
+    }
+  ],
+  "b2c": false,
+  "status": "PUBLISHED",
+  "seoTitle": "Cách giao tiếp Modbus với điều hòa Daikin VRV/VRF thông qua KAC00X",
+  "seoDescription": "KAC00X là gateway chuyển đổi giao thức Daikin VRV/VRF sang Modbus, giúp tích hợp dễ dàng vào hệ BMS, SCADA, PLC và hệ thống nhà thông minh.",
+  "faqs": [
+    {
+      "question": "Thanh ghi Modbus của KAC00X áp dụng cho cả Mitsubishi, Toshiba, Samsung, Midea giống Daikin không?",
+      "answer": "Nguyên tắc đánh địa chỉ (cụm 10 thanh ghi mỗi dàn lạnh) áp dụng chung cho toàn dòng KAC00X, nhưng một số mã lỗi và chức năng phụ (như hướng gió) có thể khác nhau giữa các hãng, cần đối chiếu tài liệu kỹ thuật riêng cho hãng máy lạnh đang tích hợp.",
+      "position": 0
+    },
+    {
+      "question": "Đọc được mã lỗi Hex nhưng không có trong bảng tra, phải làm sao?",
+      "answer": "Bảng mã lỗi trong bài chỉ gồm các mã phổ biến nhất. Với mã lỗi không có trong bảng, cần đối chiếu tài liệu service manual chính thức của Daikin theo đúng model outdoor/indoor unit, hoặc liên hệ KNXStore để được hỗ trợ tra cứu.",
+      "position": 1
+    },
+    {
+      "question": "KAC00X đọc Input Register nhưng giá trị luôn trả về 0, nguyên nhân có thể là gì?",
+      "answer": "Thường do sai địa chỉ Modbus slave, sai baud rate/parity giữa PLC/SCADA và KAC00X, hoặc dây kết nối HBS/XYE giữa KAC00X và dàn lạnh/dàn nóng chưa đúng. Kiểm tra trạng thái kết nối tại thanh ghi 30009 trước khi nghi ngờ lỗi ở phía Modbus.",
+      "position": 2
+    },
+    {
+      "question": "Có thể dùng KAC00X để vừa xuất Modbus vừa xuất KNX cùng lúc không?",
+      "answer": "Với model KAC008, thiết bị hỗ trợ đồng thời cổng KNX/EIB và các giao tiếp RS485/RS232",
+      "position": 3
+    },
+    {
+      "question": "Reset lỗi qua thanh ghi 40009 có ảnh hưởng đến cấu hình đang chạy không?",
+      "answer": "Không. Ghi giá trị 1 vào thanh ghi 40009 chỉ xóa lỗi tạm thời đang hiển thị, không thay đổi cấu hình ON/OFF, mode, hay setpoint hiện tại của dàn lạnh.",
+      "position": 4
+    }
+  ],
+  "editedAt": null,
+  "url": "https://knxstore.vn/cach-giao-tiep-modbus-voi-dieu-hoa-daikin-vrv-vrf-thong-qua-kac00x.html"
+}
 ```

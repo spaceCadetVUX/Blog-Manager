@@ -3,66 +3,42 @@ url: "https://knxstore.vn/chieu-sang-benh-vien-chuan-giup-benh-nhan-phuc-hoi-nha
 headline: "Chiếu sáng bệnh viện đúng chuẩn giúp bệnh nhân phục hồi nhanh hơn!"
 description: "Chiếu sáng trong bệnh viện đúng chuẩn sẽ giúp tối ưu công suất vận hành bệnh viện và nâng cao sức khỏe, giúp bệnh nhân phục hồi nhanh hơn. Tìm hiểu thêm trong case study sau đây!"
 title: "Chiếu sáng bệnh viện chuẩn giúp bệnh nhân phục hồi nhanh hơn!"
-og_site_name: "KNX Store"
-image: "https://knxstore.vn/assets/image/post/chieu-sang-benh-vien-chuan-giup-benh-nhan-phuc-hoi-nhanh-hon4.jpg"
-datePublished: "2025-03-13T15:01:23+07:00"
-dateModified: "2025-03-13T15:01:23+07:00"
+image: "https://knxstore.vn/media/28e0c1151331c514bda91c9fb39b0d2bcf1e7c68a5f1bdbaaa8b9a2360397afb.jpg"
+datePublished: "2026-08-12T06:26:29.000Z"
+dateModified: "2026-08-12T06:26:29.000Z"
+author: "Lê Võ Quốc Huy"
+publisher: "KNXStore.vn"
 articleSection: "Chiếu sáng"
-word_count: 1591
-keywords: ["chieu-sang-benh-vien-casambi"]
-mentions: ["Aqara", "Apple Home"]
+word_count: 2140
+keywords: ["Chiếu sáng"]
+source: "mcp"
 breadcrumb:
   - name: "Trang chủ"
     url: "https://knxstore.vn/"
-  - name: "Blogs"
+  - name: "Tin tức"
     url: "https://knxstore.vn/blogs"
   - name: "Chiếu sáng"
     url: "https://knxstore.vn/blogs/chieu-sang"
   - name: "Chiếu sáng bệnh viện đúng chuẩn giúp bệnh nhân phục hồi nhanh hơn!"
     url: "https://knxstore.vn/chieu-sang-benh-vien-chuan-giup-benh-nhan-phuc-hoi-nhanh-hon.html"
-internal_links:
-  - url: "https://knxstore.vn/nang-cap-he-thong-chieu-sang-de-dang-voi-casambi-wireless-dali.html"
-    slug: "nang-cap-he-thong-chieu-sang-de-dang-voi-casambi-wireless-dali"
-    anchor: "Nâng cấp, cải tạo, thiết kế hệ thống chiếu sáng không dây cùng Casambi mà không cần dây dẫn phức tạp"
-  - url: "https://knxstore.vn/cong-trinh-xanh.html"
-    slug: "cong-trinh-xanh"
-    anchor: "Tìm hiểu về công trình xanh Leed Gold"
-  - url: "https://knxstore.vn/casambi-case-study-cach-mang-chieu-sang-tai-magnolia-park.html"
-    slug: "casambi-case-study-cach-mang-chieu-sang-tai-magnolia-park"
-    anchor: "Dự án chiếu sáng ngoài trời tại công viên Magnolia Park châu Âu"
-  - url: "https://knxstore.vn/giai-phap-nang-cap-trai-nghiem-he-thong-chieu-sang-khach-san.html"
-    slug: "giai-phap-nang-cap-trai-nghiem-he-thong-chieu-sang-khach-san"
-    anchor: "Phương án nâng cấp trải nghiệm chiếu sáng tại khách sạn"
+products: [{"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-chieu-sang-rgbw-tunable-white-bluetooth-cbu-pwm4", "name": "CBU-PWM4-LR - Bộ điều khiển chiếu sáng RGBW & tunable white Bluetooth Casambi"}, {"url": "https://knxstore.vn/products/casambi-cam-bien-hong-ngoai-khu-vuc-tran-cao-ebdhs-b-mb-cb-dd", "name": "Cảm biến hồng ngoại trần cao Casambi DALI M20 - EBDHS-B-MB-CB-DD"}, {"url": "https://knxstore.vn/products/casambi-cam-bien-hong-ngoai-khu-vuc-tran-cao-ebdhs-b-cb-dd", "name": "Cảm biến hồng ngoại trần cao Casambi DALI M64 - EBDHS-B-CB-DD"}, {"url": "https://knxstore.vn/products/bo-dieu-khien-32-dia-chi-driver-dali-master-salvador-casambi-sal-1032", "name": "SAL-1032 - Bộ điều khiển DALI Master 32 địa chỉ Bluetooth Casambi Salvador"}, {"url": "https://knxstore.vn/products/bo-dieu-khien-16-dia-chi-driver-dali-master-salvador-casambi-sal-1016", "name": "SAL-1016 - Bộ điều khiển DALI Master 16 địa chỉ Bluetooth Casambi Salvador"}, {"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-dali-cbu-da-1p", "name": "CBU-DA-1P - Bộ điều khiển DALI Casambi Olfer"}, {"url": "https://knxstore.vn/products/casambi-bo-dieu-khien-2-kenh-0-10v-dali-bluetooth-cbu-a2d", "name": "CBU-A2D - Bộ điều khiển 2 kênh DALI và 0-10V Bluetooth Casambi"}, {"url": "https://knxstore.vn/products/bo-module-nut-nhan-casambi-4-kenh-olfer-cbu-4p", "name": "CBU-4P - Bộ module nút nhấn Casambi 4 kênh Olfer"}, {"url": "https://knxstore.vn/products/casambi-cong-tac-dieu-khien-casambi-d1", "name": "Công tắc điều khiển 6 phím không dây Casambi Siqitech D1-CB01"}, {"url": "https://knxstore.vn/products/casambi-cong-tac-dieu-khien-khong-day-xpress", "name": "Xpress - Công tắc điều khiển không dây Casambi"}, {"url": "https://knxstore.vn/products/kanonbus-bo-dieu-khien-knx-dali-gateway-kts0-dali", "name": "Bộ điều khiển KNX DALI gateway Kanonbus - KTS0-DALI"}, {"url": "https://knxstore.vn/products/sunricher-bo-dieu-khien-dali-iot-gateway-sr-gw-tda", "name": "Bộ điều khiển DALI IoT Gateway Sunricher - SR-GW-TDA"}, {"url": "https://knxstore.vn/products/atios-knx-bridge-ho-tro-apple-homekit-ade-kd", "name": "Bộ chuyển đổi KNX Matter Apple Homekit và Google Home, KNX DALI 2.0 Atios - ADE-KD"}, {"url": "https://knxstore.vn/products/atios-smartcore-ho-tro-apple-homekit-ade-r12", "name": "Bộ điều khiển trung tâm Matter, DALI 2.0 và 12 đầu vào/ra Atios Smartcore - ADE-R12-1.6"}]
+related_links:
+  - url: "https://knxstore.vn/mo-rong-dali-2-ra-dimmer-triac-relay-dmx-va-modbus-tcp.html"
+    slug: "mo-rong-dali-2-ra-dimmer-triac-relay-dmx-va-modbus-tcp"
+    anchor: "Mở Rộng DALI-2 Ra Dimmer Triac, Relay, DMX Và Modbus TCP"
+    position: 1
   - url: "https://knxstore.vn/casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap.html"
     slug: "casambi-khong-ket-noi-homekit-mtb10-matter-bridge-la-giai-phap"
     anchor: "Casambi không kết nối HomeKit? MTB10 Matter Bridge là giải pháp"
+    position: 2
   - url: "https://knxstore.vn/nfc-trong-he-thong-chieu-sang-thong-minh-hoat-dong-nhu-the-nao.html"
     slug: "nfc-trong-he-thong-chieu-sang-thong-minh-hoat-dong-nhu-the-nao"
     anchor: "NFC có được sử dụng trong hệ thống chiếu sáng thông minh không?"
+    position: 3
   - url: "https://knxstore.vn/thiet-ke-he-chieu-sang-dali-mo-rong-bang-casambi-se-nhu-the-nao.html"
     slug: "thiet-ke-he-chieu-sang-dali-mo-rong-bang-casambi-se-nhu-the-nao"
     anchor: "Thiết kế hệ chiếu sáng DALI mở rộng bằng Casambi sẽ như thế nào?"
-  - url: "https://knxstore.vn/casambi-case-study-chieu-sang-dali-trong-cong-trinh-di-san-giardino-palazzo-pfanner.html"
-    slug: "casambi-case-study-chieu-sang-dali-trong-cong-trinh-di-san-giardino-palazzo-pfanner"
-    anchor: "Casambi Case Study | Chiếu sáng DALI trong công trình di sản Giardino Palazzo Pfanner"
-  - url: "https://knxstore.vn/casambi-case-study-chieu-sang-khong-gian-showroom-blum-experience-center.html"
-    slug: "casambi-case-study-chieu-sang-khong-gian-showroom-blum-experience-center"
-    anchor: "Casambi Case Study | Chiếu sáng không gian showroom Blum Experience Center"
-  - url: "https://knxstore.vn/cct-la-gi-trong-chieu-sang.html"
-    slug: "cct-la-gi-trong-chieu-sang"
-    anchor: "CCT là gì trong chiếu sáng?"
-  - url: "https://knxstore.vn/chi-so-ugr-la-gi.html"
-    slug: "chi-so-ugr-la-gi"
-    anchor: "Chỉ số UGR là gì"
-  - url: "https://knxstore.vn/su-khac-biet-giua-cong-nghe-dmx512-va-spi-la-gi.html"
-    slug: "su-khac-biet-giua-cong-nghe-dmx512-va-spi-la-gi"
-    anchor: "LED Dây Pixel SPI vs DMX512 Khác Nhau Thế Nào?"
-  - url: "https://knxstore.vn/6-loai-cam-bien-quan-trong-trong-he-thong-chieu-sang-thong-minh.html"
-    slug: "6-loai-cam-bien-quan-trong-trong-he-thong-chieu-sang-thong-minh"
-    anchor: "6 loại cảm biến quan trọng trong hệ thống chiếu sáng thông minh"
-  - url: "https://knxstore.vn/vi-sao-tinh-tuong-tac-quyet-dinh-hieu-qua-cua-he-thong-chieu-sang-thong-minh.html"
-    slug: "vi-sao-tinh-tuong-tac-quyet-dinh-hieu-qua-cua-he-thong-chieu-sang-thong-minh"
-    anchor: "Vì sao tính tương tác quyết định hiệu quả của hệ thống chiếu sáng thông minh?"
+    position: 4
 ---
 
 # Chiếu sáng bệnh viện đúng chuẩn giúp bệnh nhân phục hồi nhanh hơn!
@@ -71,246 +47,151 @@ internal_links:
 
 ## Article Body
 
-Chiếu sáng trong bệnh viện là một yếu tố quan trọng ảnh hưởng đến chất lượng chăm sóc y tế, sức khỏe bệnh nhân và hiệu suất làm việc của nhân viên y tế.
-
-Tại Bệnh viện Ulster (Belfast, Bắc Ireland, Vương quốc Anh), hệ thống chiếu sáng Casambi đã được triển khai để mang lại một môi trường thân thiện, thoải mái và tiết kiệm năng lượng. Vậy ứng dụng chiếu sáng thông minh trong bệnh viện hoạt động như thế nào? Những tiêu chuẩn chiếu sáng cần tuân thủ để tối ưu hệ thống chiếu sáng y tế? Hãy cùng tìm hiểu trong bài viết dưới đây!
-
-Chiếu sáng trong bệnh viện ảnh hưởng thế nào đến quá trình hồi phục của bệnh nhân?
-
-Ngay từ đầu hệ thống chiếu sáng nên thiết kế theo hướng hỗ trợ sức khỏe bệnh nhân
-
-Ánh sáng có sức ảnh hưởng trực tiếp đến tâm lý và quá trình hồi phục của bệnh nhân. Trong dự án tại Bệnh viện Ulster, hệ thống chiếu sáng Casambi được thiết kế sao cho mang lại cảm giác thoải mái, dễ chịu, đồng thời giúp bệnh nhân giảm căng thẳng và hỗ trợ giấc ngủ.
-
-
-
-Nhiều bệnh nhân cảm thấy căng thẳng và lo lắng khi nằm viện, đặc biệt là trong những môi trường có ánh sáng quá mạnh hoặc thiếu tự nhiên. Vì vậy, hệ thống chiếu sáng Casambi được thiết kế để:
-
-
-	Giảm bớt cảm giác căng thẳng trong bệnh viện, mang lại không gian ấm áp, thân thiện hơn giống như khách sạn.
-	Điều chỉnh cường độ ánh sáng linh hoạt theo từng khu vực, phù hợp với từng thời điểm trong ngày để tránh gây chói mắt hoặc quá tối.
-
-
-Bên cạnh đó, một trong những tính năng quan trọng của hệ thống chiếu sáng bệnh viện hiện đại là khả năng tích hợp cảm biến thông minh, giúp tự động điều chỉnh ánh sáng theo nhu cầu thực tế:
-
-
-	Với các thiết bị cảm biến ánh sáng, hệ thống ánh sáng sẽ tự động điều chỉnh độ sáng trong phòng dựa trên lượng ánh sáng tự nhiên bên ngoài.
-
-
-
-	Cảm biến chuyển động "out of bed" sẽ gửi cảnh báo đến y tá nếu có bệnh nhân rời khỏi giường vào ban đêm. Điều này hết sức đảm bảo an toàn đối với các bệnh nhân cao tuổi hoặc người có nguy cơ té ngã.
-
-
-
-
-Nhiều nghiên cứu cũng cho rằng, các bệnh nhân tiếp xúc với ánh sáng đồng bộ theo nhịp sinh học (HCL - Human Centric Lighting) có thể giảm tới 40% thời gian nằm viện. Do đó hệ thống chiếu sáng Casambi tại Ulster được lập trình để mô phỏng chu kỳ tự nhiên của ánh sáng mặt trời. Mục địch là để hỗ trợ giấc ngủ và cải thiện đồng hồ sinh học của bệnh nhân bằng cách mô phỏng chu kỳ ánh sáng ngày và đêm.
-
-HCL (Human Centric Lighting) là một giải pháp chiếu sáng lấy con người làm trung tâm, giúp điều chỉnh ánh sáng nhân tạo theo nhịp sinh học tự nhiên của con người (còn gọi là nhịp sinh học Circadian). Hệ thống HCL mô phỏng ánh sáng mặt trời bằng cách điều chỉnh cường độ và nhiệt độ màu theo từng thời điểm trong ngày, giúp cơ thể sản sinh hormone một cách tự nhiên.
-
-Vậy giải pháp chiếu sáng Casambi là gì?
-
-Casambi - Công nghệ không dây BLE (Bluetooth Low Energy) 
-
-Hệ thống Casambi sử dụng mạng Bluetooth Mesh, giúp kết nối & điều khiển toàn bộ hệ thống chiếu sáng bệnh viện mà không cần dây cáp phức tạp.
-
->> Xem thêm: Nâng cấp, cải tạo, thiết kế hệ thống chiếu sáng không dây cùng Casambi mà không cần dây dẫn phức tạp
-
-Tại dự án bệnh viện Ulster, hơn 9000 thiết bị chiếu sáng được điều khiển từ xa bằng Casambi App. Điều này đã tạo nên mạng lưới thông minh giúp con người quản lý dễ dàng từ điện thoại, máy tính bảng, hoặc hệ thống quản lý tòa nhà BMS.
-
-
-
-Hệ thống tự động hóa & kiểm soát linh hoạt
-
-Với công nghệ Casambi, không gian trong bệnh viện có thể tùy chỉnh như sau:
-
-
-	Tự động điều chỉnh ánh sáng theo khu vực, giúp tối ưu mức độ chiếu sáng trong phòng bệnh, hành lang và khu vực kỹ thuật.
-	Trạm y tá có thể điều khiển ánh sáng phòng bệnh nhân từ xa, hỗ trợ tốt hơn trong các tình huống khẩn cấp.
-	Chiếu sáng ngoại cảnh được lập trình theo chu kỳ mặt trời (Sunrise/Sunset), giảm tiêu thụ điện khi không cần thiết.
-
-
-Dễ dàng mở rộng & nâng cấp hệ thống
-
-Công nghệ Casambi có một đặc quyền rất lớn dành cho các nhà thiết kế chiếu sáng, đó là không phụ thuộc vào bất kỳ một nhà sản xuất đèn cố định nào. Thay vào đó, công nghệ này có thể tích hợp với nhiều loại thiết bị chiếu sáng trên thị trường.
-
-Ngoài ra hệ thống Casambi cũng không yêu cầu hệ thống dây dẫn cố định, điều này giúp bệnh viện dễ dàng nâng cấp và mở rộng hoặc thay đổi bố cục chiếu sáng mà không cần tiêu tốn chi phí, thời gian sửa chữa quá nhiều hoặc thay đổi hạ tầng chiếu sáng hiện có.
-
-
-
-Lợi ích mà bệnh viện có được khi tích hợp hệ thống chiếu sáng Casambi
-
-Tích hợp cảm biến Casambi và điều chỉnh ánh sáng theo thời gian thực
-
-
-	Hệ thống chiếu sáng Casambi có thể giúp tiết kiệm đến 70% năng lượng so với hệ thống truyền thống nhờ điều chỉnh độ sáng theo nhu cầu thực tế.
-	Cảm biến tự động tắt đèn khi không có người sử dụng, giảm lãng phí điện năng.
-
-
-Casambi cung cấp hệ thống chiếu sáng khẩn cấp & giám sát từ xa
-
-
-	Tự kiểm tra lỗi định kỳ, giúp giảm chi phí bảo trì & đảm bảo hệ thống hoạt động ổn định.
-	Giám sát từ xa thông qua ứng dụng, không cần nhân viện kiểm tra thủ công từng điểm đèn.
-
-
-
-	Thu thập dữ liệu tiêu thụ điện năng, thời gian hoạt động của thiết bị, giúp quản lý bệnh viện đưa ra quyết định tiết kiệm chi phí hợp lý.
-
-
-Nhờ công nghệ chiếu sáng thông minh Casambi, bệnh viện có thể cắt giảm đáng kể chi phí vận hành, đồng thời nâng cao trải nghiệm của cả bệnh nhân lẫn nhân viên y tế.
-
-Tiêu chuẩn chiếu sáng bệnh viện cần tuân thủ
-
-
-
-Bệnh viện là môi trường đặc thù, vì vậy hệ thống chiếu sáng bệnh viện cần đáp ứng các tiêu chuẩn nghiêm ngặt về độ rọi, nhiệt độ màu và khả năng điều chỉnh ánh sáng (Tiêu chuẩn chiếu sáng bệnh viện theo EN 12464-1 & LEED). Một số tiêu chuẩn quan trọng bao gồm:
-
-
-	Phòng bệnh nhân: Độ rọi 300 - 500 lux, có thể điều chỉnh theo nhu cầu.
-	Hành lang & khu vực chung: Độ rọi 100 - 200 lux, đảm bảo an toàn cho di chuyển.
-	Phòng phẫu thuật: Độ rọi 1000 - 5000 lux, ánh sáng chính xác, không gây chói.
-	Trạm y tá & phòng kỹ thuật: Độ rọi 300 - 500 lux, giúp làm việc hiệu quả.
-
-
-Ngoài ra chứng nhận LEED là một tiêu chuẩn quốc tế về xây dựng bền vững, không chỉ giúp bệnh viện giảm chi phí vận hành mà còn tối ưu hóa hiệu suất vận hành, giảm tác động đến môi trường và nâng cao chất lượng chăm sóc sức khỏe. Với sự phát triển của công nghệ chiếu sáng thông minh như Casambi, bệnh viện có thể dễ dàng đạt tiêu chuẩn LEED mà không cần thay đổi cấu trúc lớn.
-
-
-
->> Tham khảo thêm: Tìm hiểu về công trình xanh Leed Gold
-
-Dự án tại Bệnh viện Ulster chính là một minh chứng cho thấy hệ thống chiếu sáng Casambi có thể tạo ra một môi trường y tế tốt hơn, giúp bệnh nhân phục hồi nhanh hơn và đội ngũ y tế làm việc hiệu quả hơn.
-
->>Có thể bạn quan tâm:
-
-Dự án chiếu sáng ngoài trời tại công viên Magnolia Park châu Âu
-
-Phương án nâng cấp trải nghiệm chiếu sáng tại khách sạn
-
-KNXStore – Đơn vị phân phối chính hãng Casambi tại Việt Nam trong lĩnh vực chiếu sáng bệnh viện
-
-KNXStore tự hào là nhà phân phối chính thức của Casambi tại Việt Nam, mang đến giải pháp chiếu sáng thông minh, linh hoạt và tiết kiệm năng lượng cho nhiều lĩnh vực, trong đó có hệ thống chiếu sáng bệnh viện.
-
-Chúng tôi hiểu rằng mỗi bệnh viện có những yêu cầu đặc thù về chiếu sáng, từ đảm bảo môi trường hỗ trợ sức khỏe bệnh nhân, nâng cao hiệu suất làm việc của nhân viên y tế, đến tối ưu hóa chi phí vận hành. Với công nghệ Casambi, KNXStore mang đến giải pháp chiếu sáng hiện đại, giúp bệnh viện cải thiện trải nghiệm chăm sóc sức khỏe, đồng thời đáp ứng các tiêu chuẩn về tiết kiệm năng lượng và công trình xanh.
-
-Nếu bạn đang tìm kiếm một hệ thống chiếu sáng thông minh cho bệnh viện, giúp nâng cao chất lượng môi trường y tế và tối ưu vận hành, hãy liên hệ ngay với KNXStore.vn để được tư vấn giải pháp phù hợp nhất nhé!
+Ánh sáng trong bệnh viện không đơn thuần là yếu tố thẩm mỹ - nó ảnh hưởng trực tiếp đến tốc độ hồi phục của bệnh nhân, độ chính xác của nhân viên y tế và chi phí vận hành của cả tòa nhà. Bài viết này phân tích case study thực tế tại Ulster Hospital (Belfast, Vương quốc Anh) - một trong những dự án chiếu sáng y tế lớn nhất dùng công nghệ Casambi, đối chiếu với tiêu chuẩn độ rọi EN 12464-1 cho từng khu vực, và đề xuất giải pháp thiết bị cụ thể cho bệnh viện, phòng khám tại Việt Nam.
+Ánh Sáng Ảnh Hưởng Đến Quá Trình Hồi Phục Của Bệnh Nhân Như Thế Nào
+Theo nghiên cứu được Casambi tổng hợp trong tài liệu chuyên ngành y tế, việc tiếp xúc đủ ánh sáng tự nhiên trong quá trình điều trị có thể giúp giảm thời gian nằm viện trung bình (ALOS) tới 40%. Cơ chế đằng sau là ánh sáng đồng bộ theo nhịp sinh học (Human-Centric Lighting - HCL): hệ thống điều chỉnh cường độ và nhiệt độ màu ánh sáng theo từng thời điểm trong ngày, mô phỏng chu kỳ ánh sáng mặt trời tự nhiên, giúp cơ thể bệnh nhân duy trì đồng hồ sinh học và sản sinh hormone đúng nhịp.
+Ngoài tác động đến sức khỏe, ánh sáng đồng bộ theo ca làm việc cũng ảnh hưởng đến nhân viên y tế trực 24/7 - nhóm đối tượng thường xuyên bị xáo trộn nhịp sinh học do ca đêm. Một hệ thống chiếu sáng thông minh cho phép điều chỉnh riêng theo khu vực và theo thời điểm, thay vì áp một mức sáng cố định cho toàn bộ tòa nhà suốt ngày đêm.
+Case Study Thực Tế: Ulster Hospital, Belfast
+Ulster Hospital Acute Services Block là tòa nhà 8 tầng, diện tích sàn hơn 31.000m², do đơn vị tư vấn chiếu sáng Cundall thiết kế, sử dụng luminaire ERCO và commissioning bởi Chroma Lighting. Yêu cầu đầu bài từ South Eastern Health and Social Care Trust là một giải pháp không dây, thay đổi được chiến lược chiếu sáng mà ít gây xáo trộn đến bệnh nhân, đồng thời tạo cảm giác như khách sạn hơn là phòng khám lâm sàng truyền thống.
+Hệ thống Casambi được triển khai trên hơn 9.000 node thiết bị, bao phủ toàn bộ tòa nhà: phòng bệnh nhân, trạm y tá, hành lang, phòng kỹ thuật, văn phòng và toàn bộ chiếu sáng ngoại thất quanh chu vi và trên mái. Trong phòng bệnh nhân, cảm biến theo dõi "out of bed movement" cảnh báo y tá khi bệnh nhân ra khỏi giường, kết hợp với cảm biến ánh sáng ban ngày để tự động điều chỉnh độ sáng. Đèn phòng bệnh cũng có thể được điều khiển từ trạm y tá trong tình huống khẩn cấp, còn bộ điều khiển cầm tay tại đầu giường cho phép bệnh nhân chọn cảnh sáng phù hợp cho việc đọc sách hoặc xem TV.
+Về mặt triển khai, toàn bộ luminaire được ứng dụng Casambi tự động phát hiện và ghép nối vào mạng, lập trình trực quan qua tablet - giúp quá trình commissioning một tòa nhà quy mô lớn diễn ra nhanh và không phụ thuộc vào một hãng đèn cố định.
+Tiêu Chuẩn Độ Rọi Chiếu Sáng Bệnh Viện Theo EN 12464-1
+EN 12464-1:2021 (phần mở rộng cho khu vực chăm sóc y tế) quy định độ rọi tối thiểu cho hơn 30 loại không gian trong bệnh viện. Một số mức tham chiếu quan trọng khi thiết kế hoặc audit hệ thống chiếu sáng hiện có:
+Khu vực
+Độ rọi khuyến nghị
+Ghi chú
+Phòng bệnh nhân (chung)
+100 lux
+CRI ≥ 90
+Phòng bệnh nhân (đọc sách/khám)
+300 lux
+Điều chỉnh được theo nhu cầu bệnh nhân
+Phòng bệnh nhân (ban đêm)
+5 lux
+Ánh sáng dịu, tránh làm gián đoạn giấc ngủ
+Hành lang (ban ngày)
+200 lux
+UGR ≤ 22
+Hành lang (ban đêm)
+50 - 100 lux
+3.000 - 4.000K
+Phòng khám (chung/tác vụ)
+500 / 1.000 lux
+UGR ≤ 19, CRI ≥ 90
+Phòng phẫu thuật (chung)
+Tối thiểu 1.000 lux
+-
+Phòng phẫu thuật (trường mổ)
+10.000 - 100.000 lux
+Đèn mổ chuyên dụng, không tính vào hệ chiếu sáng thường
+Điểm khó khi vận hành theo bảng này là mỗi khu vực cần một dải độ rọi khác nhau tại các thời điểm khác nhau trong ngày, trong khi hệ thống dây cứng truyền thống chỉ đặt được một mức cố định cho mỗi mạch. Đây chính là lý do hệ thống dimming theo cụm như Casambi phù hợp với bệnh viện hơn hệ chiếu sáng on/off truyền thống.
+Giải Pháp Casambi Cho Từng Khu Vực Bệnh Viện
+Với phòng bệnh nhân cần thay đổi nhiệt độ màu theo thời gian trong ngày để hỗ trợ HCL, bộ điều khiển CBU-PWM4-LR cho phép dimming và tunable white trên cùng một module, đủ để mô phỏng ánh sáng ấm vào tối và ánh sáng trung tính vào ban ngày như tại Ulster Hospital. Với hành lang và khu vực chung cần tự động tắt/mở theo hiện diện để tiết kiệm điện mà không ảnh hưởng đến độ rọi an toàn ban đêm, cảm biến hồng ngoại trần cao Casambi DALI của CP Electronics (M20 hoặc M64 tùy diện tích cần phủ) phù hợp cho hành lang rộng hoặc khu vực trần cao như sảnh chờ.
+Với các bệnh viện cải tạo đã có sẵn hạ tầng DALI có dây từ trước, không cần thay toàn bộ hệ thống để chuyển sang Casambi. Bộ điều khiển DALI Master Salvador SAL-1032 hoặc SAL-1016 kết nối trực tiếp vào bus DALI hiện có, đưa cả cụm đèn DALI có dây vào mesh Casambi để quản lý qua app - đúng theo mô hình hybrid DALI/wireless mà Casambi khuyến nghị cho các dự án y tế cải tạo.
+Cảm Biến An Toàn Và Điều Khiển Tại Đầu Giường
+Để tái tạo tính năng điều khiển từ trạm y tá và bộ điều khiển cầm tay tại đầu giường như tại Ulster Hospital, cần hai vai trò thiết bị khác nhau trong cùng mesh. Ở ngõ ra, CBU-DA-1P gắn trực tiếp vào driver DALI đơn kênh của đèn phòng bệnh để đưa đèn đó vào một Group Casambi; với phòng cần điều khiển riêng 2 kênh sáng (ví dụ đèn tổng và đèn đọc sách trên cùng bảng mạch), CBU-A2D xử lý được cả hai kênh DALI/0-10V trên một module duy nhất. Ở ngõ vào, các thiết bị nút nhấn như CBU-4P, công tắc xoay Siqitech D1-CB01 (6 phím) hoặc Xpress không tham gia vào Group mà được cấu hình (link) để kích hoạt scene hoặc điều khiển trực tiếp Group đó - phù hợp lắp tại đầu giường (Xpress, D1-CB01 dạng nút nhấn nhỏ gọn) hoặc trạm y tá (CBU-4P dạng module 4 kênh cho nhiều phòng).
+Nói cách khác, thiết bị ngõ ra quyết định đèn nào sáng/tắt/độ sáng bao nhiêu, còn thiết bị ngõ vào chỉ là công cụ gửi lệnh đến đúng Group đã tạo từ trước - hai loại thiết bị liên kết với nhau qua cấu hình scene/group trong app Casambi, không phải cùng nằm trong một group như những thiết bị chiếu sáng cùng loại. Từ đó, y tá có thể bật/tắt hoặc chỉnh sáng phòng bệnh nhân từ xa qua app, còn bệnh nhân tự chọn cảnh sáng đọc sách hoặc xem TV bằng phím bấm tại giường - không cần hệ thống điều khiển tập trung phức tạp hay đấu dây tín hiệu riêng giữa các phòng.
+Casambi cũng công bố hệ thống đã được kiểm chứng hoạt động ổn định cạnh các thiết bị y tế nhạy cảm như máy MRI, CT, X-Ray và siêu âm - yếu tố quan trọng khi lắp đặt thiết bị không dây trong khu vực chẩn đoán hình ảnh.
+Tích Hợp Với Hệ BMS/KNX Có Dây Sẵn Có
+Không phải bệnh viện nào cũng chọn Casambi làm lớp điều khiển chính - nhiều công trình đã đầu tư hệ BMS/KNX trung tâm và chỉ cần đưa chiếu sáng DALI vào cùng hệ giám sát đó. Gateway KTS0-DALI của Kanonbus chuyển đổi giữa bus KNX và bus DALI, cho phép trạm điều khiển KNX trung tâm đọc/ghi trạng thái đèn DALI trong phòng bệnh và hành lang. Với hạ tầng cần thêm một tầng IoT/giám sát từ xa trên nền DALI hiện có, gateway SR-GW-TDA của Sunricher đóng vai trò tương tự ở quy mô nhỏ hơn.
+Với các dự án muốn tích hợp cả chiếu sáng, điều hòa và an ninh vào một giao diện Matter/Apple Home/Google Home duy nhất, bộ chuyển đổi ADE-KD của Atios cầu nối KNX DALI 2.0 sang Matter, còn Smartcore ADE-R12-1.6 đóng vai trò bộ điều khiển trung tâm hỗ trợ Matter, DALI 2.0 và 12 ngõ vào/ra - phù hợp cho khối nhà kỹ thuật hoặc khu hành chính của bệnh viện cần giám sát tập trung nhiều hệ thống cùng lúc.
+Tiết Kiệm Năng Lượng Và Giám Sát Vận Hành Từ Xa
+Kết hợp hiệu suất LED với dimming theo hiện diện và ánh sáng ban ngày, Casambi công bố mức tiết kiệm năng lượng chiếu sáng có thể lên đến 70% so với hệ thống truyền thống không điều chỉnh. Phần tiết kiệm này đến từ việc tắt đèn tự động ở khu vực không có người, giảm sáng vào giờ ít qua lại và tận dụng ánh sáng tự nhiên vào ban ngày.
+Ngoài tiết kiệm điện, hệ thống còn hỗ trợ kiểm tra lỗi định kỳ và giám sát tình trạng thiết bị từ xa qua app, thay cho việc nhân viên kỹ thuật phải kiểm tra thủ công từng điểm đèn trong tòa nhà nhiều tầng. Với hệ thống chiếu sáng khẩn cấp, tính năng kiểm tra tự động (automated emergency testing) giúp bệnh viện đáp ứng yêu cầu kiểm định định kỳ mà không phải ngắt điện thử nghiệm thủ công trên toàn tuyến.
+Kết Luận
+Chiếu sáng bệnh viện đúng chuẩn EN 12464-1 đòi hỏi độ rọi khác nhau cho từng khu vực và từng thời điểm trong ngày - điều khó đạt được với hệ dây cứng cố định. Case study tại Ulster Hospital cho thấy hệ thống Casambi có thể đáp ứng cả yêu cầu tiêu chuẩn, an toàn bệnh nhân (cảm biến out-of-bed, điều khiển từ trạm y tá) và hiệu quả vận hành (tiết kiệm năng lượng, giám sát từ xa) trên quy mô hàng nghìn điểm đèn.
+Cần tư vấn giải pháp cho công trình của bạn? KNXStore.vn - Công ty CP Tích hợp Hệ thống Liên Minh. Địa chỉ:
+Văn phòng số SAV5-01.02, Lầu 1, Tháp 5, The Sun Avenue, 28 Mai Chí Thọ, Phường Bình Trưng, TP.HCM
+. Hotline:
+0918.918.755
+. Email:
+sales@knxstore.vn
+Casambi có ảnh hưởng đến thiết bị y tế như máy MRI hoặc máy siêu âm không?
+Không. Casambi công bố hệ thống đã được kiểm chứng hoạt động ổn định cạnh các thiết bị y tế nhạy cảm như MRI, CT, X-Ray và siêu âm, nhờ hoạt động trên băng tần Bluetooth Low Energy công suất thấp.
 
-## Raw JSON-LD
+Bệnh viện đã có hệ thống DALI có dây có cần thay toàn bộ để dùng Casambi không?
+Không cần. Bộ điều khiển DALI Master Salvador (SAL-1032, SAL-1016) kết nối trực tiếp vào bus DALI hiện có, đưa cụm đèn có dây vào mesh Casambi mà không cần đấu lại dây tín hiệu.
+
+HCL (Human-Centric Lighting) trong bệnh viện hoạt động như thế nào?
+Hệ thống tự động thay đổi nhiệt độ màu và cường độ ánh sáng theo thời điểm trong ngày, mô phỏng chu kỳ ánh sáng mặt trời tự nhiên để hỗ trợ đồng hồ sinh học và giấc ngủ của bệnh nhân.
+
+Cảm biến "out of bed" hoạt động ra sao?
+Cảm biến phát hiện khi bệnh nhân rời khỏi giường vào ban đêm và gửi cảnh báo đến trạm y tá, giúp phát hiện sớm nguy cơ té ngã ở bệnh nhân cao tuổi hoặc người có nguy cơ.
+
+Độ rọi tiêu chuẩn cho phòng bệnh nhân là bao nhiêu?
+Theo EN 12464-1:2021, phòng bệnh nhân cần 100 lux cho hoạt động chung, 300 lux khi đọc sách hoặc khám, và giảm xuống khoảng 5 lux vào ban đêm để không làm gián đoạn giấc ngủ.
+
+Casambi giúp tiết kiệm bao nhiêu năng lượng chiếu sáng trong bệnh viện?
+Theo công bố của Casambi, kết hợp hiệu suất LED với dimming theo hiện diện và ánh sáng ngày có thể giảm tiêu thụ năng lượng chiếu sáng tới 70% so với hệ thống truyền thống.
+
+## Raw MCP
 
 ```json
-[
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebPage",
-        "@id": "https://knxstore.vn/chieu-sang-benh-vien-chuan-giup-benh-nhan-phuc-hoi-nhanh-hon.html#webpage",
-        "url": "https://knxstore.vn/chieu-sang-benh-vien-chuan-giup-benh-nhan-phuc-hoi-nhanh-hon.html",
-        "name": "Chiếu sáng bệnh viện đúng chuẩn giúp bệnh nhân phục hồi nhanh hơn!",
-        "description": "Chiếu sáng trong bệnh viện đúng chuẩn sẽ giúp tối ưu công suất vận hành bệnh viện và nâng cao sức khỏe, giúp bệnh nhân phục hồi nhanh hơn. Tìm hiểu thêm trong case study sau đây!",
-        "inLanguage": "vi-VN",
-        "datePublished": "2025-03-13T15:01:23+07:00",
-        "dateModified": "2025-03-13T15:01:23+07:00",
-        "isPartOf": {
-          "@id": "https://knxstore.vn/#website"
-        },
-        "publisher": {
-          "@id": "https://knxstore.vn/#organization"
-        },
-        "mainEntity": {
-          "@id": "https://knxstore.vn/chieu-sang-benh-vien-chuan-giup-benh-nhan-phuc-hoi-nhanh-hon.html#article"
-        },
-        "primaryImageOfPage": {
-          "@type": "ImageObject",
-          "@id": "https://knxstore.vn/chieu-sang-benh-vien-chuan-giup-benh-nhan-phuc-hoi-nhanh-hon.html#featured-image",
-          "url": "https://knxstore.vn/assets/image/post/chieu-sang-benh-vien-chuan-giup-benh-nhan-phuc-hoi-nhanh-hon4.jpg",
-          "contentUrl": "https://knxstore.vn/assets/image/post/chieu-sang-benh-vien-chuan-giup-benh-nhan-phuc-hoi-nhanh-hon4.jpg",
-          "caption": "Chiếu sáng bệnh viện đúng chuẩn giúp bệnh nhân phục hồi nhanh hơn!"
-        },
-        "breadcrumb": {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Trang chủ",
-              "item": "https://knxstore.vn/"
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Blogs",
-              "item": "https://knxstore.vn/blogs"
-            },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "name": "Chiếu sáng",
-              "item": "https://knxstore.vn/blogs/chieu-sang"
-            },
-            {
-              "@type": "ListItem",
-              "position": 4,
-              "name": "Chiếu sáng bệnh viện đúng chuẩn giúp bệnh nhân phục hồi nhanh hơn!",
-              "item": "https://knxstore.vn/chieu-sang-benh-vien-chuan-giup-benh-nhan-phuc-hoi-nhanh-hon.html"
-            }
-          ]
-        }
-      },
-      {
-        "@type": "BlogPosting",
-        "@id": "https://knxstore.vn/chieu-sang-benh-vien-chuan-giup-benh-nhan-phuc-hoi-nhanh-hon.html#article",
-        "mainEntityOfPage": {
-          "@id": "https://knxstore.vn/chieu-sang-benh-vien-chuan-giup-benh-nhan-phuc-hoi-nhanh-hon.html#webpage"
-        },
-        "headline": "Chiếu sáng bệnh viện đúng chuẩn giúp bệnh nhân phục hồi nhanh hơn!",
-        "description": "Chiếu sáng trong bệnh viện đúng chuẩn sẽ giúp tối ưu công suất vận hành bệnh viện và nâng cao sức khỏe, giúp bệnh nhân phục hồi nhanh hơn. Tìm hiểu thêm trong case study sau đây!",
-        "articleBody": "Chiếu sáng trong bệnh viện là một yếu tố quan trọng ảnh hưởng đến chất lượng chăm sóc y tế, sức khỏe bệnh nhân và hiệu suất làm việc của nhân viên y tế.\r\n\r\nTại Bệnh viện Ulster (Belfast, Bắc Ireland, Vương quốc Anh), hệ thống chiếu sáng Casambi đã được triển khai để mang lại một môi trường thân thiện, thoải mái và tiết kiệm năng lượng. Vậy ứng dụng chiếu sáng thông minh trong bệnh viện hoạt động như thế nào? Những tiêu chuẩn chiếu sáng cần tuân thủ để tối ưu hệ thống chiếu sáng y tế? Hãy cùng tìm hiểu trong bài viết dưới đây!\r\n\r\nChiếu sáng trong bệnh viện ảnh hưởng thế nào đến quá trình hồi phục của bệnh nhân?\r\n\r\nNgay từ đầu hệ thống chiếu sáng nên thiết kế theo hướng hỗ trợ sức khỏe bệnh nhân\r\n\r\nÁnh sáng có sức ảnh hưởng trực tiếp đến tâm lý và quá trình hồi phục của bệnh nhân. Trong dự án tại Bệnh viện Ulster, hệ thống chiếu sáng Casambi được thiết kế sao cho mang lại cảm giác thoải mái, dễ chịu, đồng thời giúp bệnh nhân giảm căng thẳng và hỗ trợ giấc ngủ.\r\n\r\n\r\n\r\nNhiều bệnh nhân cảm thấy căng thẳng và lo lắng khi nằm viện, đặc biệt là trong những môi trường có ánh sáng quá mạnh hoặc thiếu tự nhiên. Vì vậy, hệ thống chiếu sáng Casambi được thiết kế để:\r\n\r\n\r\n\tGiảm bớt cảm giác căng thẳng trong bệnh viện, mang lại không gian ấm áp, thân thiện hơn giống như khách sạn.\r\n\tĐiều chỉnh cường độ ánh sáng linh hoạt theo từng khu vực, phù hợp với từng thời điểm trong ngày để tránh gây chói mắt hoặc quá tối.\r\n\r\n\r\nBên cạnh đó, một trong những tính năng quan trọng của hệ thống chiếu sáng bệnh viện hiện đại là khả năng tích hợp cảm biến thông minh, giúp tự động điều chỉnh ánh sáng theo nhu cầu thực tế:\r\n\r\n\r\n\tVới các thiết bị cảm biến ánh sáng, hệ thống ánh sáng sẽ tự động điều chỉnh độ sáng trong phòng dựa trên lượng ánh sáng tự nhiên bên ngoài.\r\n\r\n\r\n\r\n\tCảm biến chuyển động \"out of bed\" sẽ gửi cảnh báo đến y tá nếu có bệnh nhân rời khỏi giường vào ban đêm. Điều này hết sức đảm bảo an toàn đối với các bệnh nhân cao tuổi hoặc người có nguy cơ té ngã.\r\n\r\n\r\n\r\n\r\nNhiều nghiên cứu cũng cho rằng, các bệnh nhân tiếp xúc với ánh sáng đồng bộ theo nhịp sinh học (HCL - Human Centric Lighting) có thể giảm tới 40% thời gian nằm viện. Do đó hệ thống chiếu sáng Casambi tại Ulster được lập trình để mô phỏng chu kỳ tự nhiên của ánh sáng mặt trời. Mục địch là để hỗ trợ giấc ngủ và cải thiện đồng hồ sinh học của bệnh nhân bằng cách mô phỏng chu kỳ ánh sáng ngày và đêm.\r\n\r\nHCL (Human Centric Lighting) là một giải pháp chiếu sáng lấy con người làm trung tâm, giúp điều chỉnh ánh sáng nhân tạo theo nhịp sinh học tự nhiên của con người (còn gọi là nhịp sinh học Circadian). Hệ thống HCL mô phỏng ánh sáng mặt trời bằng cách điều chỉnh cường độ và nhiệt độ màu theo từng thời điểm trong ngày, giúp cơ thể sản sinh hormone một cách tự nhiên.\r\n\r\nVậy giải pháp chiếu sáng Casambi là gì?\r\n\r\nCasambi - Công nghệ không dây BLE (Bluetooth Low Energy) \r\n\r\nHệ thống Casambi sử dụng mạng Bluetooth Mesh, giúp kết nối & điều khiển toàn bộ hệ thống chiếu sáng bệnh viện mà không cần dây cáp phức tạp.\r\n\r\n>> Xem thêm: Nâng cấp, cải tạo, thiết kế hệ thống chiếu sáng không dây cùng Casambi mà không cần dây dẫn phức tạp\r\n\r\nTại dự án bệnh viện Ulster, hơn 9000 thiết bị chiếu sáng được điều khiển từ xa bằng Casambi App. Điều này đã tạo nên mạng lưới thông minh giúp con người quản lý dễ dàng từ điện thoại, máy tính bảng, hoặc hệ thống quản lý tòa nhà BMS.\r\n\r\n\r\n\r\nHệ thống tự động hóa & kiểm soát linh hoạt\r\n\r\nVới công nghệ Casambi, không gian trong bệnh viện có thể tùy chỉnh như sau:\r\n\r\n\r\n\tTự động điều chỉnh ánh sáng theo khu vực, giúp tối ưu mức độ chiếu sáng trong phòng bệnh, hành lang và khu vực kỹ thuật.\r\n\tTrạm y tá có thể điều khiển ánh sáng phòng bệnh nhân từ xa, hỗ trợ tốt hơn trong các tình huống khẩn cấp.\r\n\tChiếu sáng ngoại cảnh được lập trình theo chu kỳ mặt trời (Sunrise/Sunset), giảm tiêu thụ điện khi không cần thiết.\r\n\r\n\r\nDễ dàng mở rộng & nâng cấp hệ thống\r\n\r\nCông nghệ Casambi có một đặc quyền rất lớn dành cho các nhà thiết kế chiếu sáng, đó là không phụ thuộc vào bất kỳ một nhà sản xuất đèn cố định nào. Thay vào đó, công nghệ này có thể tích hợp với nhiều loại thiết bị chiếu sáng trên thị trường.\r\n\r\nNgoài ra hệ thống Casambi cũng không yêu cầu hệ thống dây dẫn cố định, điều này giúp bệnh viện dễ dàng nâng cấp và mở rộng hoặc thay đổi bố cục chiếu sáng mà không cần tiêu tốn chi phí, thời gian sửa chữa quá nhiều hoặc thay đổi hạ tầng chiếu sáng hiện có.\r\n\r\n\r\n\r\nLợi ích mà bệnh viện có được khi tích hợp hệ thống chiếu sáng Casambi\r\n\r\nTích hợp cảm biến Casambi và điều chỉnh ánh sáng theo thời gian thực\r\n\r\n\r\n\tHệ thống chiếu sáng Casambi có thể giúp tiết kiệm đến 70% năng lượng so với hệ thống truyền thống nhờ điều chỉnh độ sáng theo nhu cầu thực tế.\r\n\tCảm biến tự động tắt đèn khi không có người sử dụng, giảm lãng phí điện năng.\r\n\r\n\r\nCasambi cung cấp hệ thống chiếu sáng khẩn cấp & giám sát từ xa\r\n\r\n\r\n\tTự kiểm tra lỗi định kỳ, giúp giảm chi phí bảo trì & đảm bảo hệ thống hoạt động ổn định.\r\n\tGiám sát từ xa thông qua ứng dụng, không cần nhân viện kiểm tra thủ công từng điểm đèn.\r\n\r\n\r\n\r\n\tThu thập dữ liệu tiêu thụ điện năng, thời gian hoạt động của thiết bị, giúp quản lý bệnh viện đưa ra quyết định tiết kiệm chi phí hợp lý.\r\n\r\n\r\nNhờ công nghệ chiếu sáng thông minh Casambi, bệnh viện có thể cắt giảm đáng kể chi phí vận hành, đồng thời nâng cao trải nghiệm của cả bệnh nhân lẫn nhân viên y tế.\r\n\r\nTiêu chuẩn chiếu sáng bệnh viện cần tuân thủ\r\n\r\n\r\n\r\nBệnh viện là môi trường đặc thù, vì vậy hệ thống chiếu sáng bệnh viện cần đáp ứng các tiêu chuẩn nghiêm ngặt về độ rọi, nhiệt độ màu và khả năng điều chỉnh ánh sáng (Tiêu chuẩn chiếu sáng bệnh viện theo EN 12464-1 & LEED). Một số tiêu chuẩn quan trọng bao gồm:\r\n\r\n\r\n\tPhòng bệnh nhân: Độ rọi 300 - 500 lux, có thể điều chỉnh theo nhu cầu.\r\n\tHành lang & khu vực chung: Độ rọi 100 - 200 lux, đảm bảo an toàn cho di chuyển.\r\n\tPhòng phẫu thuật: Độ rọi 1000 - 5000 lux, ánh sáng chính xác, không gây chói.\r\n\tTrạm y tá & phòng kỹ thuật: Độ rọi 300 - 500 lux, giúp làm việc hiệu quả.\r\n\r\n\r\nNgoài ra chứng nhận LEED là một tiêu chuẩn quốc tế về xây dựng bền vững, không chỉ giúp bệnh viện giảm chi phí vận hành mà còn tối ưu hóa hiệu suất vận hành, giảm tác động đến môi trường và nâng cao chất lượng chăm sóc sức khỏe. Với sự phát triển của công nghệ chiếu sáng thông minh như Casambi, bệnh viện có thể dễ dàng đạt tiêu chuẩn LEED mà không cần thay đổi cấu trúc lớn.\r\n\r\n\r\n\r\n>> Tham khảo thêm: Tìm hiểu về công trình xanh Leed Gold\r\n\r\nDự án tại Bệnh viện Ulster chính là một minh chứng cho thấy hệ thống chiếu sáng Casambi có thể tạo ra một môi trường y tế tốt hơn, giúp bệnh nhân phục hồi nhanh hơn và đội ngũ y tế làm việc hiệu quả hơn.\r\n\r\n>>Có thể bạn quan tâm:\r\n\r\nDự án chiếu sáng ngoài trời tại công viên Magnolia Park châu Âu\r\n\r\nPhương án nâng cấp trải nghiệm chiếu sáng tại khách sạn\r\n\r\nKNXStore – Đơn vị phân phối chính hãng Casambi tại Việt Nam trong lĩnh vực chiếu sáng bệnh viện\r\n\r\nKNXStore tự hào là nhà phân phối chính thức của Casambi tại Việt Nam, mang đến giải pháp chiếu sáng thông minh, linh hoạt và tiết kiệm năng lượng cho nhiều lĩnh vực, trong đó có hệ thống chiếu sáng bệnh viện.\r\n\r\nChúng tôi hiểu rằng mỗi bệnh viện có những yêu cầu đặc thù về chiếu sáng, từ đảm bảo môi trường hỗ trợ sức khỏe bệnh nhân, nâng cao hiệu suất làm việc của nhân viên y tế, đến tối ưu hóa chi phí vận hành. Với công nghệ Casambi, KNXStore mang đến giải pháp chiếu sáng hiện đại, giúp bệnh viện cải thiện trải nghiệm chăm sóc sức khỏe, đồng thời đáp ứng các tiêu chuẩn về tiết kiệm năng lượng và công trình xanh.\r\n\r\nNếu bạn đang tìm kiếm một hệ thống chiếu sáng thông minh cho bệnh viện, giúp nâng cao chất lượng môi trường y tế và tối ưu vận hành, hãy liên hệ ngay với KNXStore.vn để được tư vấn giải pháp phù hợp nhất nhé!\r\n",
-        "articleSection": "Chiếu sáng",
-        "keywords": [
-          "chieu-sang-benh-vien-casambi"
-        ],
-        "inLanguage": "vi-VN",
-        "datePublished": "2025-03-13T15:01:23+07:00",
-        "dateModified": "2025-03-13T15:01:23+07:00",
-        "url": "https://knxstore.vn/chieu-sang-benh-vien-chuan-giup-benh-nhan-phuc-hoi-nhanh-hon.html",
-        "image": {
-          "@id": "https://knxstore.vn/chieu-sang-benh-vien-chuan-giup-benh-nhan-phuc-hoi-nhanh-hon.html#featured-image"
-        },
-        "publisher": {
-          "@id": "https://knxstore.vn/#organization"
-        },
-        "isPartOf": {
-          "@id": "https://knxstore.vn/#website"
-        },
-        "about": {
-          "@type": "Thing",
-          "name": "Nhà thông minh",
-          "description": "Giải pháp smarthome và thiết bị thông minh"
-        },
-        "mentions": [
-          {
-            "@type": "Thing",
-            "name": "Aqara"
-          },
-          {
-            "@type": "Thing",
-            "name": "Apple Home"
-          }
-        ],
-        "contentLocation": {
-          "@type": "Country",
-          "name": "Việt Nam",
-          "identifier": "VN"
-        },
-        "locationCreated": {
-          "@type": "City",
-          "name": "TP. Hồ Chí Minh",
-          "containedInPlace": {
-            "@type": "Country",
-            "name": "Việt Nam"
-          }
-        }
-      }
-    ]
-  }
-]
+{
+  "slug": "chieu-sang-benh-vien-chuan-giup-benh-nhan-phuc-hoi-nhanh-hon",
+  "title": "Chiếu sáng bệnh viện đúng chuẩn giúp bệnh nhân phục hồi nhanh hơn!",
+  "excerpt": "Chiếu sáng trong bệnh viện đúng chuẩn sẽ giúp tối ưu công suất vận hành bệnh viện và nâng cao sức khỏe, giúp bệnh nhân phục hồi nhanh hơn. Tìm hiểu thêm trong case study sau đây!",
+  "coverImage": "/media/28e0c1151331c514bda91c9fb39b0d2bcf1e7c68a5f1bdbaaa8b9a2360397afb.jpg",
+  "authorName": null,
+  "author": {
+    "slug": "le-vo-quoc-huy",
+    "name": "Lê Võ Quốc Huy",
+    "bio": "Quốc Huy là chuyên viên tư vấn giải pháp tự động hóa tòa nhà tại KNXStore.vn, với kinh nghiệm làm việc trực tiếp cùng các System Integrator, ME Contractor và đơn vị thi công điện cơ và điện lạnh trên toàn quốc.\nHuy chuyên tư vấn và hỗ trợ kỹ thuật cho các dự án ứng dụng giao thức KNX, Casambi, DALI-2, BACnet và Modbus trong các công trình văn phòng, khách sạn, tòa nhà thương mại và khu công nghiệp.\nĐể được tư vấn dự án hoặc báo giá, bạn có thể liên hệ trực tiếp qua Zalo Hotline của KNXStore.",
+    "jobTitle": "Sales Engineer",
+    "expertiseAreas": "KNX TP / KNX IP DALI-2 Lighting Control BACnet / Modbus Integration Building Management System (BMS) M&E Project Consulting Commercial & Hospitality Automation",
+    "certifications": null,
+    "linkedinUrl": "https://www.linkedin.com/in/huy-le-vo-quoc-177ba8309/",
+    "facebookUrl": "https://www.facebook.com/levoquochuy3011",
+    "websiteUrl": "https://qhsmart.vn/",
+    "seoDescription": "Lê Võ Quốc Huy Chuyên viên tư vấn B2B tại KNXStore.vn. Hỗ trợ System Integrator & ME Contractor triển khai KNX, Casambi, DALI-2, BACnet cho tòa nhà thương mại tại Việt Nam.",
+    "imageUrl": "/media/97b725830514056a9de009c65ee513e0dfc89b8e538adb71b25533ed7c766777.jpg",
+    "imageAlt": "Lê Võ Quốc Huy",
+    "isActive": true
+  },
+  "publishedAt": "2026-08-12T06:26:29.000Z",
+  "categories": [
+    {
+      "slug": "chieu-sang",
+      "name": "Chiếu sáng"
+    }
+  ],
+  "b2c": false,
+  "status": "PUBLISHED",
+  "seoTitle": "Chiếu sáng bệnh viện chuẩn giúp bệnh nhân phục hồi nhanh hơn!",
+  "seoDescription": "Chiếu sáng trong bệnh viện đúng chuẩn sẽ giúp tối ưu công suất vận hành bệnh viện và nâng cao sức khỏe, giúp bệnh nhân phục hồi nhanh hơn. Tìm hiểu thêm trong case study sau đây!",
+  "faqs": [
+    {
+      "question": "Casambi có ảnh hưởng đến thiết bị y tế như máy MRI hoặc máy siêu âm không?",
+      "answer": "Không. Casambi công bố hệ thống đã được kiểm chứng hoạt động ổn định cạnh các thiết bị y tế nhạy cảm như MRI, CT, X-Ray và siêu âm, nhờ hoạt động trên băng tần Bluetooth Low Energy công suất thấp.",
+      "position": 0
+    },
+    {
+      "question": "Bệnh viện đã có hệ thống DALI có dây có cần thay toàn bộ để dùng Casambi không?",
+      "answer": "Không cần. Bộ điều khiển DALI Master Salvador (SAL-1032, SAL-1016) kết nối trực tiếp vào bus DALI hiện có, đưa cụm đèn có dây vào mesh Casambi mà không cần đấu lại dây tín hiệu.",
+      "position": 1
+    },
+    {
+      "question": "HCL (Human-Centric Lighting) trong bệnh viện hoạt động như thế nào?",
+      "answer": "Hệ thống tự động thay đổi nhiệt độ màu và cường độ ánh sáng theo thời điểm trong ngày, mô phỏng chu kỳ ánh sáng mặt trời tự nhiên để hỗ trợ đồng hồ sinh học và giấc ngủ của bệnh nhân.",
+      "position": 2
+    },
+    {
+      "question": "Cảm biến \"out of bed\" hoạt động ra sao?",
+      "answer": "Cảm biến phát hiện khi bệnh nhân rời khỏi giường vào ban đêm và gửi cảnh báo đến trạm y tá, giúp phát hiện sớm nguy cơ té ngã ở bệnh nhân cao tuổi hoặc người có nguy cơ.",
+      "position": 3
+    },
+    {
+      "question": "Độ rọi tiêu chuẩn cho phòng bệnh nhân là bao nhiêu?",
+      "answer": "Theo EN 12464-1:2021, phòng bệnh nhân cần 100 lux cho hoạt động chung, 300 lux khi đọc sách hoặc khám, và giảm xuống khoảng 5 lux vào ban đêm để không làm gián đoạn giấc ngủ.",
+      "position": 4
+    },
+    {
+      "question": "Casambi giúp tiết kiệm bao nhiêu năng lượng chiếu sáng trong bệnh viện?",
+      "answer": "Theo công bố của Casambi, kết hợp hiệu suất LED với dimming theo hiện diện và ánh sáng ngày có thể giảm tiêu thụ năng lượng chiếu sáng tới 70% so với hệ thống truyền thống.",
+      "position": 5
+    }
+  ],
+  "editedAt": null,
+  "url": "https://knxstore.vn/chieu-sang-benh-vien-chuan-giup-benh-nhan-phuc-hoi-nhanh-hon.html"
+}
 ```
