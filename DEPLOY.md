@@ -41,12 +41,21 @@ cd blogpost
 Tạo file `/var/www/blogpost/.env`:
 
 ```env
-APP_PASSWORD=knxstore@2026
+# Mật khẩu đăng nhập giao diện/API — tự đặt, KHÔNG dùng mật khẩu mẫu
+APP_PASSWORD=<doi-mat-khau-nay>
+
+# BẮT BUỘC: API của KNXStore (MCP). Thiếu thì crawl bài, đồng bộ sản phẩm,
+# đồng bộ bundle và trang xem toàn văn bài sẽ không chạy (lỗi 401/502).
+KNX_MCP_URL=https://api.knxstore.vn/api/mcp
+KNX_MCP_TOKEN=<token Bearer của KNXStore, dạng knx_...>
+
+# Tuỳ chọn (tính năng AI)
 ANTHROPIC_API_KEY=sk-ant-...
 OPENAI_API_KEY=sk-...
 ```
 
-> **Lưu ý:** File `.env` KHÔNG được commit lên git. Tạo tay trên server.
+> **Lưu ý:** File `.env` KHÔNG được commit lên git (đã có trong `.gitignore`; mẫu ở `.env.example`). Tạo tay trên server.
+> Hướng dẫn đầy đủ về internal link, sản phẩm và hai tính năng cập nhật: [`docs/INTERNAL_LINKS_AND_PRODUCTS.md`](docs/INTERNAL_LINKS_AND_PRODUCTS.md).
 
 ---
 
@@ -199,7 +208,7 @@ sudo systemctl restart blog-api
 
 ## Checklist trước khi go-live
 
-- [ ] `.env` có `APP_PASSWORD`, `ANTHROPIC_API_KEY`
+- [ ] `.env` có `APP_PASSWORD`, `KNX_MCP_URL`, `KNX_MCP_TOKEN` (bắt buộc), `ANTHROPIC_API_KEY` (tuỳ chọn)
 - [ ] Backend chạy ở `127.0.0.1:8000` (không expose ra ngoài)
 - [ ] `nginx -t` không lỗi
 - [ ] HTTPS hoạt động
